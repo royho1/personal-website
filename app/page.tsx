@@ -9,8 +9,16 @@ const navLinks = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
+  { label: "Hobbies", href: "#hobbies" },
   { label: "Contact", href: "#contact" },
 ] as const;
+
+/** Add hobby images under `public/hobbies/` and list them here (width/height = pixel size of each file). */
+const hobbyPhotos: { src: string; alt: string; width: number; height: number }[] =
+  [
+    // Example after adding files:
+    // { src: "/hobbies/hiking.jpg", alt: "Hiking", width: 1600, height: 1200 },
+  ];
 
 const skills = [
   "Python",
@@ -244,6 +252,116 @@ export default function Home() {
                     </p>
                   </article>
                 ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="experience"
+          className="border-t border-neutral-200/80 bg-neutral-50/50"
+          aria-labelledby="experience-heading"
+        >
+          <div className="mx-auto max-w-3xl px-6 py-20 md:px-8 md:py-28">
+            <h2
+              id="experience-heading"
+              className="text-2xl font-semibold tracking-tight text-neutral-900 md:text-3xl"
+            >
+              Experience
+            </h2>
+            <div className="mt-10 space-y-6 text-base leading-relaxed text-neutral-600 md:text-lg">
+              <p>
+                I&apos;m early in my career and focused on data analytics and data
+                engineering. I&apos;m eager to apply what I&apos;ve learned through
+                coursework and projects in a full-time role.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="hobbies"
+          className="border-t border-neutral-200/80"
+          aria-labelledby="hobbies-heading"
+        >
+          <div className="mx-auto max-w-5xl px-6 py-20 md:px-8 md:py-28">
+            <h2
+              id="hobbies-heading"
+              className="text-2xl font-semibold tracking-tight text-neutral-900 md:text-3xl"
+            >
+              Hobbies
+            </h2>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-600 md:text-lg">
+              Outside of work I enjoy exploring the Bay Area, staying active, and
+              spending time with friends and family.
+            </p>
+            {hobbyPhotos.length > 0 ? (
+              <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {hobbyPhotos.map((photo, index) => (
+                  <figure
+                    key={`${photo.src}-${index}`}
+                    className="overflow-hidden rounded-xl bg-neutral-100 shadow-sm ring-1 ring-neutral-900/5"
+                  >
+                    <div className="relative aspect-[4/3] w-full">
+                      <Image
+                        src={photo.src}
+                        alt={photo.alt}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </div>
+                  </figure>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        </section>
+
+        <section
+          id="contact"
+          className="border-t border-neutral-200/80 bg-neutral-50/50"
+          aria-labelledby="contact-heading"
+        >
+          <div className="mx-auto max-w-2xl px-6 py-20 md:px-8 md:py-28">
+            <h2
+              id="contact-heading"
+              className="text-center text-2xl font-semibold tracking-tight text-neutral-900 md:text-3xl"
+            >
+              Contact
+            </h2>
+            <div className="mt-12 rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm shadow-neutral-900/5 ring-1 ring-neutral-900/5 md:p-10">
+              <p className="text-center text-2xl font-semibold tracking-tight text-neutral-900 md:text-3xl">
+                Roy Ho
+              </p>
+              <p className="mt-3 text-center text-base text-neutral-600 md:text-lg">
+                San Francisco, CA
+              </p>
+              <p className="mt-6 text-center">
+                <a
+                  href="tel:+14157418955"
+                  className="text-lg font-medium text-neutral-900 underline decoration-neutral-300 underline-offset-4 transition-colors hover:decoration-neutral-900"
+                >
+                  415-741-8955
+                </a>
+              </p>
+              <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center sm:gap-4">
+                <a
+                  href="https://www.linkedin.com/in/royho1/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-lg border border-neutral-300 bg-white px-6 py-3 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-50"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="https://github.com/royho1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-lg bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-800"
+                >
+                  GitHub
+                </a>
               </div>
             </div>
           </div>
