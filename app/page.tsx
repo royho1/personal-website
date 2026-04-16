@@ -8,6 +8,7 @@ const profileImageHeight = 1123;
 
 /** PDF lives in `public/` (served from site root). */
 const resumePdfPath = "/Roy_Ho_Resume.pdf";
+const jaikeLogoSrc = "/experience/JAIKE.png";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -21,11 +22,13 @@ const navLinks = [
 /** Add hobby images under `public/hobbies/` and list them here (width/height = pixel size of each file). */
 const hobbyPhotos: { src: string; alt: string; width: number; height: number }[] =
   [
-    // Example after adding files:
-    // { src: "/hobbies/hiking.jpg", alt: "Hiking", width: 1600, height: 1200 },
+    { src: "/hobbies/photo1.jpg", alt: "Hobby photo 1", width: 4284, height: 5712 },
+    { src: "/hobbies/photo2.jpeg", alt: "Hobby photo 2", width: 1179, height: 1452 },
+    { src: "/hobbies/photo3.jpeg", alt: "Hobby photo 3", width: 1179, height: 1454 },
+    { src: "/hobbies/photo4.jpeg", alt: "Hobby photo 4", width: 1179, height: 1450 },
+    { src: "/hobbies/photo5.jpeg", alt: "Hobby photo 5", width: 1179, height: 1557 },
+    { src: "/hobbies/photo6.jpeg", alt: "Hobby photo 6", width: 1536, height: 2049 },
   ];
-
-const hobbyPhotoSlots = 6;
 
 const skills = [
   "Python",
@@ -64,20 +67,52 @@ const featuredProjects = [
 
 const additionalProjects = [
   {
-    name: "Retail Sales Forecast",
-    description: "Time-series forecasting with seasonality and error analysis.",
+    name: "Portuguese Wine Type and Quality Prediction",
+    description:
+      "Classified red vs. white wines and predicted quality ratings using logistic regression, LDA, and PCA on chemical properties.",
+    tech: "Python, scikit-learn, PCA",
   },
   {
-    name: "Customer Segmentation",
-    description: "Clustering and profiling from transactional behavior data.",
+    name: "InvestorAI",
+    description:
+      "Stock market analysis platform with real-time news scraping, regression-based price predictions, and interactive data visualizations.",
+    tech: "Python, scikit-learn, Highcharts",
   },
   {
-    name: "A/B Test Analysis",
-    description: "Hypothesis testing and lift estimates for product experiments.",
+    name: "NBA Player Performance Prediction",
+    description:
+      "Predicted 5th-season NBA player performance using regression and classification models on historical stats and draft data.",
+    tech: "Python, Random Forest, Gradient Boosting",
   },
   {
-    name: "ETL Pipeline Script",
-    description: "Automated cleaning and loading from APIs into analysis-ready tables.",
+    name: "Analyzing Movie Reviews Across Genres",
+    description:
+      "Scraped and compared IMDb audience reviews with professional critic reviews using sentiment analysis and NLP models.",
+    tech: "Python, Selenium, VADER, RoBERTa",
+  },
+  {
+    name: "Drake Time Series Analysis",
+    description:
+      "Forecasted Drake's popularity trends using 14 years of Google Trends data with ARMA and ARIMA models.",
+    tech: "R, forecast, ggplot2",
+  },
+  {
+    name: "NBA Player Salary Analysis",
+    description:
+      "Analyzed the relationship between player performance metrics and salary structures using regression and clustering.",
+    tech: "R, tidyverse, ggplot2",
+  },
+  {
+    name: "Socioeconomic Predictors of Crime Rates",
+    description:
+      "Modeled the relationship between poverty, unemployment, and crime rates using multiple linear regression and model selection.",
+    tech: "R, ANOVA, AIC/BIC",
+  },
+  {
+    name: "Graph-Based Shortest Path Analysis (Six Degrees of Kevin Bacon)",
+    description:
+      "Built a graph traversal algorithm to compute degrees of separation between actors through shared movie appearances.",
+    tech: "Python, BFS, Graph Algorithms",
   },
 ] as const;
 
@@ -117,13 +152,13 @@ export default function Home() {
         >
           <div className="grid grid-cols-1 items-center gap-14 md:grid-cols-2 md:gap-16 lg:gap-20">
             <div className="flex justify-center md:justify-start">
-              <div className="w-full max-w-sm overflow-hidden rounded-2xl bg-sky-200/80 shadow-lg shadow-sky-900/10 ring-1 ring-sky-300/40">
+              <div className="group w-full max-w-sm overflow-hidden rounded-2xl bg-sky-200/80 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
                 <Image
                   src={profileImageSrc}
                   alt="Roy Ho"
                   width={profileImageWidth}
                   height={profileImageHeight}
-                  className="h-auto w-full"
+                  className="block h-auto w-full transition-transform duration-500 group-hover:scale-[1.01]"
                   sizes="(max-width: 768px) 100vw, 384px"
                   priority
                 />
@@ -143,8 +178,8 @@ export default function Home() {
                 </p>
               </div>
               <p className="max-w-lg text-base leading-relaxed text-slate-600 md:text-lg">
-                I build data-driven solutions using Python, SQL, and machine
-                learning.
+                I build data-driven solutions using Python, SQL, R, Excel, and
+                Machine Learning.
               </p>
               <div className="max-w-lg space-y-2 text-sm text-slate-500">
                 <p>
@@ -253,7 +288,7 @@ export default function Home() {
           className="border-t border-sky-200/80 bg-white/55"
           aria-labelledby="projects-heading"
         >
-          <div className="mx-auto max-w-5xl px-6 py-20 md:px-8 md:py-28">
+          <div className="mx-auto max-w-6xl px-6 py-20 md:px-8 md:py-28">
             <h2
               id="projects-heading"
               className="inline-block w-max max-w-full cursor-default text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl"
@@ -263,9 +298,13 @@ export default function Home() {
 
             <div className="mt-12 grid gap-8 md:grid-cols-3">
               {featuredProjects.map((project) => (
-                <article
+                <a
                   key={project.title}
-                  className="flex flex-col rounded-xl border border-sky-200 bg-white p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-300/25"
+                  href={project.githubHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${project.title} on GitHub`}
+                  className="group flex h-full flex-col rounded-xl border border-sky-200 bg-white p-6 text-left shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
                 >
                   <h3 className="text-lg font-semibold text-sky-950">
                     {project.title}
@@ -274,31 +313,42 @@ export default function Home() {
                     {project.description}
                   </p>
                   <p className="mt-4 text-xs text-slate-500">{project.tech}</p>
-                  <a
-                    href={project.githubHref}
-                    className="mt-5 inline-flex text-sm font-medium text-sky-700 underline decoration-sky-300 underline-offset-4 transition-colors hover:text-sky-900 hover:decoration-sky-600"
-                  >
+                  <span className="mt-5 inline-flex text-sm font-medium text-sky-700 underline decoration-sky-300 underline-offset-4 transition-colors group-hover:text-sky-900 group-hover:decoration-sky-600">
                     GitHub
-                  </a>
-                </article>
+                  </span>
+                </a>
               ))}
             </div>
 
             <div className="mt-16">
-              <h3 className="text-sm font-medium uppercase tracking-wide text-slate-500">
-                Additional projects
-              </h3>
+              <div className="flex items-center gap-3">
+                <h3 className="text-sm font-medium uppercase tracking-wide text-slate-500">
+                  Additional projects
+                </h3>
+                <a
+                  href="https://github.com/royho1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Roy Ho GitHub profile"
+                  className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-900"
+                >
+                  <FaGithub className="h-6 w-6" aria-hidden />
+                </a>
+              </div>
               <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {additionalProjects.map((project) => (
                   <article
                     key={project.name}
-                    className="rounded-lg border border-sky-200 bg-sky-50/90 p-4 ring-1 ring-sky-300/25"
+                    className="group rounded-lg border border-sky-200 bg-sky-50/90 p-4 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
                   >
                     <h4 className="text-sm font-semibold text-sky-950">
                       {project.name}
                     </h4>
                     <p className="mt-2 text-xs leading-relaxed text-slate-600">
                       {project.description}
+                    </p>
+                    <p className="mt-3 text-[11px] font-medium text-slate-500">
+                      {project.tech}
                     </p>
                   </article>
                 ))}
@@ -312,19 +362,59 @@ export default function Home() {
           className="border-t border-sky-200/80 bg-sky-100/45"
           aria-labelledby="experience-heading"
         >
-          <div className="mx-auto max-w-3xl px-6 py-20 md:px-8 md:py-28">
+          <div className="mx-auto max-w-5xl px-6 py-20 md:px-8 md:py-28">
             <h2
               id="experience-heading"
               className="inline-block w-max max-w-full cursor-default text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl"
             >
               Experience
             </h2>
-            <div className="mt-10 space-y-6 text-base leading-relaxed text-slate-600 md:text-lg">
-              <p>
-                I&apos;m early in my career and focused on data analytics and data
-                engineering. I&apos;m eager to apply what I&apos;ve learned through
-                coursework and projects in a full-time role.
-              </p>
+            <div className="mt-10 rounded-2xl border border-sky-200 bg-white/90 p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-300/25 md:p-8">
+              <div className="grid items-start gap-8 md:grid-cols-[minmax(260px,320px)_minmax(0,1fr)] md:gap-10">
+                <div className="group relative min-h-[18rem] w-full overflow-hidden rounded-2xl border border-sky-200 bg-white p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/70 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:min-h-[26rem] md:p-8">
+                  <Image
+                    src={jaikeLogoSrc}
+                    alt="JAIKE logo"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                    sizes="(max-width: 768px) 100vw, 320px"
+                  />
+                </div>
+
+                <div>
+                  <h3 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+                    JAIKE
+                  </h3>
+                  <p className="mt-2 text-base font-medium leading-snug text-slate-900 md:text-lg">
+                    Journal of Artificial Intelligence and Knowledge Engineering
+                  </p>
+                  <h4 className="mt-3 text-lg font-semibold tracking-tight text-slate-900 md:text-xl">
+                    Artificial Intelligence Researcher
+                  </h4>
+                  <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-slate-900 marker:text-slate-900 md:text-base">
+                    <li>
+                      Conducted research on LLM-based automation, focusing on
+                      API-driven system design, agent orchestration frameworks,
+                      and productivity applications across research, coding, and
+                      enterprise workflows.
+                    </li>
+                    <li>
+                      Authored a 25-page research paper on LLM-based automation
+                      and agent architectures, synthesizing peer-reviewed and
+                      industry research on API integration, architectural design
+                      patterns, system limitations, and responsible deployment;
+                      submitted for journal publication.
+                    </li>
+                    <li>
+                      Served as a peer reviewer for JAIKE, evaluating research
+                      on retrieval methods in large language models, reasoning
+                      performance in extended tasks, and large-scale model
+                      architectures for methodological rigor and evaluation
+                      quality.
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -341,7 +431,7 @@ export default function Home() {
             >
               Let&apos;s Connect!
             </h2>
-            <div className="mt-12 rounded-2xl border border-sky-200 bg-white p-8 shadow-sm shadow-sky-900/10 ring-1 ring-sky-300/25 md:p-10">
+            <div className="group mt-12 rounded-2xl border border-sky-200 bg-white p-8 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:p-10">
               <p className="text-center text-2xl font-semibold tracking-tight text-sky-950 md:text-3xl">
                 Roy Ho
               </p>
@@ -443,34 +533,22 @@ export default function Home() {
               poker. I also love keeping up with fashion and
               music.
             </p>
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {Array.from({ length: hobbyPhotoSlots }).map((_, index) => {
-                const photo = hobbyPhotos[index];
-                return (
-                  <figure
-                    key={photo ? `${photo.src}-${index}` : `hobby-slot-${index}`}
-                    className="overflow-hidden rounded-xl bg-sky-100/60 shadow-sm ring-1 ring-sky-300/25"
-                  >
-                    <div className="relative aspect-[4/3] w-full">
-                      {photo ? (
-                        <Image
-                          src={photo.src}
-                          alt={photo.alt}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        />
-                      ) : (
-                        <div
-                          className="flex h-full min-h-[10rem] w-full items-center justify-center bg-gradient-to-br from-sky-100/80 to-sky-200/40 ring-1 ring-inset ring-sky-300/30"
-                          aria-label="Photo placeholder"
-                          role="img"
-                        />
-                      )}
-                    </div>
-                  </figure>
-                );
-              })}
+            <div className="mt-12 grid items-start gap-7 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+              {hobbyPhotos.map((photo, index) => (
+                <figure
+                  key={`${photo.src}-${index}`}
+                  className="group self-start overflow-hidden rounded-2xl shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    width={photo.width}
+                    height={photo.height}
+                    className="block h-auto w-full object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </figure>
+              ))}
             </div>
           </div>
         </section>
