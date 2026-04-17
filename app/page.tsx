@@ -9,6 +9,7 @@ const profileImageHeight = 1123;
 /** PDF lives in `public/` (served from site root). */
 const resumePdfPath = "/Roy_Ho_Resume.pdf";
 const jaikeLogoSrc = "/experience/JAIKE.png";
+const ucDavisLogoSrc = "/experience/about/UC_Davis_Logo.png";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -147,10 +148,10 @@ export default function Home() {
 
       <main>
         <section
-          className="mx-auto max-w-5xl px-6 py-16 md:px-8 md:py-24 lg:py-32"
+          className="bg-white"
           aria-labelledby="hero-heading"
         >
-          <div className="grid grid-cols-1 items-center gap-14 md:grid-cols-2 md:gap-16 lg:gap-20">
+          <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-14 px-6 py-16 md:grid-cols-2 md:gap-16 md:px-8 md:py-24 lg:gap-20 lg:py-32">
             <div className="flex justify-center md:justify-start">
               <div className="group w-full max-w-sm overflow-hidden rounded-2xl bg-sky-200/80 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
                 <Image
@@ -167,12 +168,24 @@ export default function Home() {
 
             <div className="space-y-6 md:space-y-8">
               <div className="space-y-3 md:space-y-4">
-                <h1
-                  id="hero-heading"
-                  className="text-4xl font-bold tracking-tight text-sky-950 md:text-5xl lg:text-6xl"
-                >
-                  Roy Ho
-                </h1>
+                <div className="flex flex-wrap items-center gap-x-10 gap-y-3 leading-none">
+                  <h1
+                    id="hero-heading"
+                    className="text-4xl font-bold leading-none tracking-tight text-sky-950 md:text-5xl lg:text-6xl"
+                  >
+                    Roy Ho
+                  </h1>
+                  <span
+                    className="inline-flex translate-y-1.5 items-center gap-2 self-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium leading-none text-emerald-700 shadow-sm shadow-emerald-900/10"
+                    aria-label="Availability status"
+                  >
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                    </span>
+                    Available for opportunities
+                  </span>
+                </div>
                 <p className="text-lg text-sky-800/90 md:text-xl">
                   UC Davis Graduate
                 </p>
@@ -181,7 +194,7 @@ export default function Home() {
                 I build data-driven solutions using Python, SQL, R, Excel, and
                 Machine Learning.
               </p>
-              <div className="max-w-lg space-y-2 text-sm text-slate-500">
+              <div className="max-w-lg space-y-2 text-base text-slate-500 md:text-lg">
                 <p>
                   <span className="text-slate-400">Email: </span>
                   <a
@@ -245,7 +258,7 @@ export default function Home() {
 
         <section
           id="about"
-          className="border-t border-sky-200/80 bg-sky-100/45"
+          className="border-t border-sky-200/80 bg-sky-100"
           aria-labelledby="about-heading"
         >
           <div className="mx-auto max-w-3xl px-6 py-20 text-center md:px-8 md:py-28">
@@ -268,8 +281,18 @@ export default function Home() {
                 engineering.
               </p>
             </div>
+            <div className="mt-10 flex justify-center">
+              <Image
+                src={ucDavisLogoSrc}
+                alt="UC Davis"
+                width={3840}
+                height={2160}
+                className="h-auto w-full max-w-[400px]"
+                sizes="400px"
+              />
+            </div>
             <ul
-              className="mt-12 flex flex-wrap items-center justify-center gap-3"
+              className="mt-10 flex flex-wrap items-center justify-center gap-3"
               aria-label="Skills"
             >
               {skills.map((skill) => (
@@ -285,7 +308,7 @@ export default function Home() {
 
         <section
           id="projects"
-          className="border-t border-sky-200/80 bg-white/55"
+          className="border-t border-sky-200/80 bg-white"
           aria-labelledby="projects-heading"
         >
           <div className="mx-auto max-w-6xl px-6 py-20 md:px-8 md:py-28">
@@ -359,7 +382,7 @@ export default function Home() {
 
         <section
           id="experience"
-          className="border-t border-sky-200/80 bg-sky-100/45"
+          className="border-t border-sky-200/80 bg-sky-100"
           aria-labelledby="experience-heading"
         >
           <div className="mx-auto max-w-5xl px-6 py-20 md:px-8 md:py-28">
@@ -421,7 +444,7 @@ export default function Home() {
 
         <section
           id="contact"
-          className="border-t border-sky-200/80 bg-sky-100/45"
+          className="border-t border-sky-200/80 bg-sky-100"
           aria-labelledby="contact-heading"
         >
           <div className="mx-auto max-w-2xl px-6 py-20 md:px-8 md:py-28">
@@ -480,7 +503,7 @@ export default function Home() {
 
         <section
           id="resume"
-          className="border-t border-sky-200/80 bg-white/40"
+          className="border-t border-sky-200/80 bg-white"
           aria-labelledby="resume-heading"
         >
           <div className="mx-auto max-w-3xl px-6 py-20 text-center md:px-8 md:py-28">
@@ -518,17 +541,17 @@ export default function Home() {
 
         <section
           id="hobbies"
-          className="border-t border-sky-200/80 bg-sky-50/25"
+          className="border-t border-sky-200/80 bg-sky-50"
           aria-labelledby="hobbies-heading"
         >
-          <div className="mx-auto max-w-5xl px-6 py-20 md:px-8 md:py-28">
+          <div className="mx-auto max-w-5xl px-6 py-20 text-center md:px-8 md:py-28">
             <h2
               id="hobbies-heading"
-              className="inline-block w-max max-w-full cursor-default text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl"
+              className="mx-auto inline-block w-max max-w-full cursor-default text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl"
             >
               Hobbies
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg">
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg">
               Outside of work, I enjoy thrifting, bass fishing, spending time outdoors, and
               poker. I also love keeping up with fashion and
               music.
