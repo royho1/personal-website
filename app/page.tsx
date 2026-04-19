@@ -241,13 +241,13 @@ export default function Home() {
               <div className="flex flex-wrap gap-4 pt-1">
                 <a
                   href="#projects"
-                  className="inline-flex items-center justify-center rounded-lg bg-sky-600 px-6 py-3 text-sm font-medium text-white shadow-sm shadow-sky-600/25 transition-colors hover:bg-sky-700"
+                  className="inline-flex items-center justify-center rounded-lg bg-sky-600 px-7 py-3 text-base font-medium text-white shadow-sm shadow-sky-600/25 transition-colors hover:bg-sky-700"
                 >
                   View Projects
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex items-center justify-center rounded-lg border border-sky-300 bg-white/90 px-6 py-3 text-sm font-medium text-sky-950 transition-colors hover:bg-sky-50"
+                  className="inline-flex items-center justify-center rounded-lg border border-sky-300 bg-white/90 px-7 py-3 text-base font-medium text-sky-950 transition-colors hover:bg-sky-50"
                 >
                   Contact Me
                 </a>
