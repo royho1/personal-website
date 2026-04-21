@@ -55,7 +55,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="border-t border-sky-200/80 bg-sky-100"
+      className="border-t border-sky-200/80 bg-sky-100 dark:border-slate-800 dark:bg-slate-900"
       aria-labelledby="about-heading"
     >
       <motion.div
@@ -68,7 +68,7 @@ export default function AboutSection() {
         <motion.h2
           id="about-heading"
           variants={itemVariants}
-          className="mx-auto block w-max max-w-full cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl"
+          className="mx-auto block w-max max-w-full cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"
         >
           About
         </motion.h2>
@@ -77,16 +77,16 @@ export default function AboutSection() {
           <div className="space-y-8">
             <motion.div
               variants={itemVariants}
-              className="space-y-6 text-base leading-relaxed text-slate-900 md:text-lg"
+              className="space-y-6 text-base leading-relaxed text-slate-900 md:text-lg dark:text-slate-200"
             >
               <p>
                 Hi, my name is Roy Ho, and I am a recent UC Davis graduate with
                 a Bachelor&apos;s degree in{" "}
-                <span className="font-semibold text-sky-800">
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
                   Statistical Data Science
                 </span>{" "}
                 and a minor in{" "}
-                <span className="font-semibold text-sky-800">
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
                   Computer Science
                 </span>
                 .
@@ -94,15 +94,15 @@ export default function AboutSection() {
               <p>
                 I&apos;m interested in building data-driven solutions using
                 Python, R, SQL, and Excel, with a focus on{" "}
-                <span className="font-semibold text-sky-800">
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
                   machine learning
                 </span>
                 . I&apos;m currently pursuing roles in{" "}
-                <span className="font-semibold text-sky-800">
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
                   data analytics
                 </span>{" "}
                 and{" "}
-                <span className="font-semibold text-sky-800">
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
                   data engineering
                 </span>
                 .
@@ -116,12 +116,12 @@ export default function AboutSection() {
               {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-xl border border-sky-200 bg-white p-4 text-center shadow-sm shadow-sky-200/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:shadow-sky-300/30"
+                  className="rounded-xl border border-sky-200 bg-white p-4 text-center shadow-sm shadow-sky-200/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:shadow-sky-300/30 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/30 dark:hover:shadow-black/50"
                 >
-                  <div className="text-2xl font-bold text-sky-900 md:text-3xl">
+                  <div className="text-2xl font-bold text-sky-900 md:text-3xl dark:text-sky-200">
                     {stat.value}
                   </div>
-                  <div className="mt-1 text-[0.7rem] font-medium uppercase tracking-wide text-slate-500 sm:text-xs">
+                  <div className="mt-1 text-[0.7rem] font-medium uppercase tracking-wide text-slate-500 sm:text-xs dark:text-slate-400">
                     {stat.label}
                   </div>
                 </div>
@@ -130,13 +130,13 @@ export default function AboutSection() {
           </div>
 
           <motion.div variants={itemVariants}>
-            <h3 className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-slate-500 sm:text-sm">
+            <h3 className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-slate-500 sm:text-sm dark:text-slate-400">
               Core Skills
             </h3>
             <ul className="grid grid-cols-2 gap-3" aria-label="Skills">
               {skillsWithIcons.map(({ name, Icon, color }) => (
                 <li key={name}>
-                  <span className="flex cursor-default items-center gap-3 rounded-xl border border-sky-200 bg-white px-4 py-3 text-sm font-medium text-sky-900 shadow-sm shadow-sky-200/30 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-sky-300 hover:bg-sky-50 hover:shadow-md hover:shadow-sky-300/30">
+                  <span className="flex cursor-default items-center gap-3 rounded-xl border border-sky-200 bg-white px-4 py-3 text-sm font-medium text-sky-900 shadow-sm shadow-sky-200/30 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-sky-300 hover:bg-sky-50 hover:shadow-md hover:shadow-sky-300/30 dark:border-slate-700 dark:bg-slate-800/70 dark:text-sky-100 dark:shadow-black/30 dark:hover:border-slate-600 dark:hover:bg-slate-700/70 dark:hover:shadow-black/50">
                     <Icon className={`h-5 w-5 shrink-0 ${color}`} aria-hidden />
                     <span className="truncate">{name}</span>
                   </span>

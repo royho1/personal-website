@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { FaChevronDown, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, type Variants } from "framer-motion";
+import type { MouseEvent } from "react";
 
 const profileImageSrc = "/picture.jpeg";
 const profileImageWidth = 799;
@@ -94,23 +95,81 @@ function Typewriter({ text }: { text: string }) {
       <span aria-hidden>{text.slice(0, count)}</span>
       <span
         aria-hidden
-        className="ml-0.5 inline-block h-[1em] w-[2px] translate-y-[0.15em] bg-sky-800 align-middle transition-opacity duration-150"
+        className="ml-0.5 inline-block h-[1em] w-[2px] translate-y-[0.15em] bg-sky-800 align-middle transition-opacity duration-150 dark:bg-sky-300"
         style={{ opacity: cursorActive && cursorOn ? 1 : 0 }}
       />
     </span>
   );
 }
 
+/**
+ * Small celebratory burst fired from a specific point on the page. Imported
+ * lazily so `canvas-confetti` (which touches the DOM at module load) is
+ * never pulled in during server rendering.
+ */
+async function fireConfettiFrom(originX: number, originY: number) {
+  const mod = await import("canvas-confetti");
+  const confetti = mod.default;
+  const defaults = {
+    origin: { x: originX, y: originY },
+    spread: 70,
+    ticks: 200,
+    gravity: 0.9,
+    scalar: 0.9,
+    colors: ["#38bdf8", "#0ea5e9", "#22c55e", "#fde047", "#f472b6"],
+  };
+
+  // Two quick bursts so the celebration feels a bit more alive.
+  confetti({ ...defaults, particleCount: 90, startVelocity: 55 });
+  confetti({
+    ...defaults,
+    particleCount: 50,
+    startVelocity: 35,
+    spread: 110,
+    scalar: 0.75,
+  });
+}
+
+function AvailabilityBadge() {
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    // Let the browser handle the smooth #contact scroll via the anchor; we
+    // just layer on the confetti burst from the badge's own position.
+    const rect = event.currentTarget.getBoundingClientRect();
+    const originX = (rect.left + rect.width / 2) / window.innerWidth;
+    const originY = (rect.top + rect.height / 2) / window.innerHeight;
+    void fireConfettiFrom(originX, originY);
+  };
+
+  return (
+    <motion.a
+      variants={itemVariants}
+      href="#contact"
+      onClick={handleClick}
+      aria-label="Available for opportunities — jump to contact"
+      className="inline-flex translate-y-1.5 cursor-pointer items-center gap-2 self-center rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 text-[13px] font-medium leading-none text-emerald-700 shadow-sm shadow-emerald-900/10 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-100 hover:shadow-md hover:shadow-emerald-900/10 dark:border-emerald-500/40 dark:bg-emerald-500/10 dark:text-emerald-300 dark:shadow-emerald-950/40 dark:hover:border-emerald-400/70 dark:hover:bg-emerald-500/20"
+    >
+      <span className="relative flex h-2.5 w-2.5">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+      </span>
+      Available for opportunities
+    </motion.a>
+  );
+}
+
 export default function HeroSection() {
   return (
-    <section className="bg-white" aria-labelledby="hero-heading">
+    <section
+      className="bg-white dark:bg-slate-950"
+      aria-labelledby="hero-heading"
+    >
       <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-14 px-6 pb-8 pt-16 md:grid-cols-2 md:gap-16 md:px-8 md:pb-10 md:pt-24 lg:gap-20 lg:pt-32">
         <div className="flex justify-center md:justify-start">
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: EASE }}
-            className="group w-full max-w-sm overflow-hidden rounded-2xl bg-sky-200/80 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+            className="group w-full max-w-sm overflow-hidden rounded-2xl bg-sky-200/80 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-slate-800/60 dark:shadow-black/40 dark:ring-slate-700"
           >
             <Image
               src={profileImageSrc}
@@ -135,26 +194,15 @@ export default function HeroSection() {
               <motion.h1
                 id="hero-heading"
                 variants={itemVariants}
-                className="text-4xl font-bold leading-none tracking-tight text-sky-950 md:text-5xl lg:text-6xl"
+                className="text-4xl font-bold leading-none tracking-tight text-sky-950 md:text-5xl lg:text-6xl dark:text-sky-100"
               >
                 Roy Ho
               </motion.h1>
-              <motion.a
-                variants={itemVariants}
-                href="#contact"
-                aria-label="Available for opportunities — jump to contact"
-                className="inline-flex translate-y-1.5 items-center gap-2 self-center rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 text-[13px] font-medium leading-none text-emerald-700 shadow-sm shadow-emerald-900/10 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-100 hover:shadow-md hover:shadow-emerald-900/10"
-              >
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                </span>
-                Available for opportunities
-              </motion.a>
+              <AvailabilityBadge />
             </div>
             <motion.p
               variants={itemVariants}
-              className="text-lg text-sky-800/90 md:text-xl"
+              className="text-lg text-sky-800/90 md:text-xl dark:text-sky-300"
             >
               UC Davis Graduate
             </motion.p>
@@ -162,36 +210,36 @@ export default function HeroSection() {
 
           <motion.p
             variants={itemVariants}
-            className="min-h-[3.25rem] max-w-lg text-base leading-relaxed text-slate-600 md:min-h-[3.75rem] md:text-lg"
+            className="min-h-[3.25rem] max-w-lg text-base leading-relaxed text-slate-600 md:min-h-[3.75rem] md:text-lg dark:text-slate-300"
           >
             <Typewriter text={tagline} />
           </motion.p>
 
           <motion.div
             variants={itemVariants}
-            className="max-w-lg space-y-2 text-base text-slate-500 md:text-lg"
+            className="max-w-lg space-y-2 text-base text-slate-500 md:text-lg dark:text-slate-400"
           >
             <p>
-              <span className="text-slate-400">Email: </span>
+              <span className="text-slate-400 dark:text-slate-500">Email: </span>
               <a
                 href="mailto:royho346@gmail.com"
-                className="text-slate-500 transition-colors hover:text-sky-800"
+                className="text-slate-500 transition-colors hover:text-sky-800 dark:text-slate-300 dark:hover:text-sky-300"
               >
                 royho346@gmail.com
               </a>
             </p>
             <p>
-              <span className="text-slate-400">Phone: </span>
+              <span className="text-slate-400 dark:text-slate-500">Phone: </span>
               <a
                 href="tel:+14157418955"
-                className="text-slate-500 transition-colors hover:text-sky-800"
+                className="text-slate-500 transition-colors hover:text-sky-800 dark:text-slate-300 dark:hover:text-sky-300"
               >
                 415-741-8955
               </a>
             </p>
             <p>
-              <span className="text-slate-400">Location: </span>
-              Davis, CA | San Francisco, CA
+              <span className="text-slate-400 dark:text-slate-500">Location: </span>
+              <span className="dark:text-slate-300">Davis, CA | San Francisco, CA</span>
             </p>
           </motion.div>
 
@@ -201,7 +249,7 @@ export default function HeroSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn profile"
-              className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-800"
+              className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-800 dark:text-slate-400 dark:hover:text-sky-300"
             >
               <FaLinkedin className="h-7 w-7" aria-hidden />
             </a>
@@ -210,7 +258,7 @@ export default function HeroSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub profile"
-              className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-800"
+              className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-800 dark:text-slate-400 dark:hover:text-sky-300"
             >
               <FaGithub className="h-7 w-7" aria-hidden />
             </a>
@@ -222,13 +270,13 @@ export default function HeroSection() {
           >
             <a
               href="#projects"
-              className="inline-flex items-center justify-center rounded-lg bg-sky-600 px-7 py-3 text-base font-medium text-white shadow-sm shadow-sky-600/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-700 hover:shadow-md hover:shadow-sky-600/30"
+              className="inline-flex items-center justify-center rounded-lg bg-sky-600 px-7 py-3 text-base font-medium text-white shadow-sm shadow-sky-600/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-700 hover:shadow-md hover:shadow-sky-600/30 dark:bg-sky-500 dark:shadow-sky-950/40 dark:hover:bg-sky-400"
             >
               View Projects
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center justify-center rounded-lg border border-sky-300 bg-white/90 px-7 py-3 text-base font-medium text-sky-950 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-50 hover:shadow-md hover:shadow-sky-300/30"
+              className="inline-flex items-center justify-center rounded-lg border border-sky-300 bg-white/90 px-7 py-3 text-base font-medium text-sky-950 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-50 hover:shadow-md hover:shadow-sky-300/30 dark:border-slate-700 dark:bg-slate-900/70 dark:text-sky-200 dark:hover:bg-slate-800"
             >
               Contact Me
             </a>
@@ -240,7 +288,7 @@ export default function HeroSection() {
         <a
           href="#about"
           aria-label="Scroll to explore"
-          className="group flex flex-col items-center gap-2 text-slate-500 transition-colors hover:text-sky-800"
+          className="group flex flex-col items-center gap-2 text-slate-500 transition-colors hover:text-sky-800 dark:text-slate-400 dark:hover:text-sky-300"
         >
           <span className="flex animate-bounce flex-col items-center gap-2 [animation-duration:1.8s]">
             <span className="text-xs font-medium uppercase tracking-[0.2em] md:text-sm">

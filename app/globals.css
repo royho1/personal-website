@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Enable Tailwind v4 `dark:` variants via an explicit `dark` class on the
+ * root element. The ThemeProvider toggles `.dark` on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
@@ -8,6 +12,24 @@ html {
 :root {
   --background: #f0f9ff;
   --foreground: #0f172a;
+  --body-gradient: linear-gradient(
+    165deg,
+    #e0f2fe 0%,
+    #f0f9ff 28%,
+    #ffffff 52%,
+    #f0f9ff 100%
+  );
+}
+
+.dark {
+  --background: #0b1220;
+  --foreground: #e2e8f0;
+  --body-gradient: linear-gradient(
+    165deg,
+    #050a17 0%,
+    #0b1220 40%,
+    #0f172a 100%
+  );
 }
 
 @theme inline {
@@ -72,18 +94,35 @@ html {
 }
 
 body {
-  background: linear-gradient(
-    165deg,
-    #e0f2fe 0%,
-    #f0f9ff 28%,
-    #ffffff 52%,
-    #f0f9ff 100%
-  );
+  background: var(--body-gradient);
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
+  transition:
+    background 500ms ease,
+    color 500ms ease;
 }
 
 ::selection {
   background: rgb(125 211 252 / 0.45);
   color: #0c4a6e;
+}
+
+.dark ::selection {
+  background: rgb(56 189 248 / 0.35);
+  color: #e0f2fe;
+}
+
+/* Smooth color/background transitions across the whole site when the
+ * theme changes. Individual components can opt out via `transition-none`. */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 500ms ease,
+    border-color 500ms ease,
+    color 500ms ease,
+    fill 500ms ease,
+    stroke 500ms ease,
+    box-shadow 500ms ease;
 }
