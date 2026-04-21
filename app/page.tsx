@@ -1,25 +1,18 @@
 import Image from "next/image";
-import { FaChevronDown, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { HeartPulse, Star } from "lucide-react";
 import AboutSection from "./components/AboutSection";
-
-const profileImageSrc = "/picture.jpeg";
-/** Intrinsic size of `public/picture.jpeg` — update if you replace the file. */
-const profileImageWidth = 799;
-const profileImageHeight = 1123;
+import BackToTop from "./components/BackToTop";
+import DrowsyEyeIcon from "./components/DrowsyEyeIcon";
+import FadeInSection from "./components/FadeInSection";
+import Footer from "./components/Footer";
+import HeroSection from "./components/HeroSection";
+import NavBar from "./components/NavBar";
 
 /** PDF lives in `public/` (served from site root). */
 const resumePdfPath = "/Roy_Ho_Resume.pdf";
 const jaikeLogoSrc = "/experience/JAIKE.png";
 const techSprintLogoSrc = "/experience/TechSprint.png";
-
-const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Contact", href: "#contact" },
-  { label: "Resume", href: "#resume" },
-  { label: "Hobbies", href: "#hobbies" },
-] as const;
 
 /** Add hobby images under `public/hobbies/` and list them here (width/height = pixel size of each file). */
 const hobbyPhotos: { src: string; alt: string; width: number; height: number }[] =
@@ -32,13 +25,28 @@ const hobbyPhotos: { src: string; alt: string; width: number; height: number }[]
     { src: "/hobbies/photo6.jpeg", alt: "Hobby photo 6", width: 1536, height: 2049 },
   ];
 
-const featuredProjects = [
+type FeaturedProjectIconVariant = "eye" | "bars" | "heart";
+
+type FeaturedProject = {
+  title: string;
+  description: string;
+  tech: string;
+  githubHref: string;
+  iconVariant: FeaturedProjectIconVariant;
+  gradient: string;
+  award?: string;
+};
+
+const featuredProjects: FeaturedProject[] = [
   {
     title: "Drowsy Driver Detection",
     description:
       "Built a real-time drowsiness detection system using computer vision techniques and a CNN model trained on eye-state data.",
     tech: "Python, OpenCV, CNN",
     githubHref: "https://github.com/royho1/drowsy-driver-detection",
+    iconVariant: "eye",
+    gradient: "from-sky-100 via-white to-cyan-100",
+    award: "Award Winner: Best Execution",
   },
   {
     title: "Job Analytics Dashboard",
@@ -46,6 +54,8 @@ const featuredProjects = [
       "Built a dashboard to analyze job market trends, including salaries, skills, and geographic differences across roles.",
     tech: "Python, Data Visualization",
     githubHref: "https://github.com/royho1/job-market-analysis-dashboard",
+    iconVariant: "bars",
+    gradient: "from-emerald-100 via-white to-sky-100",
   },
   {
     title: "Heart Stroke Risk Prediction",
@@ -53,8 +63,41 @@ const featuredProjects = [
       "Machine learning model to predict stroke risk from healthcare data, with preprocessing, training, and an interactive Streamlit app.",
     tech: "Python, scikit-learn, Streamlit",
     githubHref: "https://github.com/royho1/heart-stroke-risk-prediction",
+    iconVariant: "heart",
+    gradient: "from-rose-100 via-white to-sky-100",
   },
-] as const;
+];
+
+function AnimatedProjectIcon({
+  variant,
+}: {
+  variant: FeaturedProjectIconVariant;
+}) {
+  if (variant === "bars") {
+    return (
+      <div
+        className="flex h-14 w-14 items-end justify-center gap-1 text-emerald-600"
+        aria-hidden
+      >
+        <span className="h-6 w-3 origin-bottom rounded-sm bg-current animate-bar-grow-1" />
+        <span className="h-12 w-3 origin-bottom rounded-sm bg-current animate-bar-grow-2" />
+        <span className="h-9 w-3 origin-bottom rounded-sm bg-current animate-bar-grow-3" />
+      </div>
+    );
+  }
+
+  if (variant === "heart") {
+    return (
+      <HeartPulse
+        className="h-14 w-14 origin-center text-rose-600 animate-heartbeat"
+        strokeWidth={1.75}
+        aria-hidden
+      />
+    );
+  }
+
+  return <DrowsyEyeIcon />;
+}
 
 const additionalProjects = [
   {
@@ -110,159 +153,15 @@ const additionalProjects = [
 export default function Home() {
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-sky-200/80 bg-sky-50/90 backdrop-blur-md">
-        <nav
-          className="mx-auto flex max-w-5xl items-center justify-between gap-8 px-6 py-5 md:px-8"
-          aria-label="Primary"
-        >
-          <a
-            href="#"
-            className="text-base font-semibold tracking-tight text-sky-950"
-          >
-            Roy Ho
-          </a>
-          <ul className="flex flex-wrap items-center justify-end gap-6 text-sm text-slate-600 md:gap-8">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="inline-block origin-center font-medium text-slate-600 transition-all duration-200 ease-out hover:scale-105 hover:font-bold hover:text-sky-900"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </header>
+      <NavBar />
 
       <main>
-        <section
-          className="bg-white"
-          aria-labelledby="hero-heading"
-        >
-          <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-14 px-6 pb-8 pt-16 md:grid-cols-2 md:gap-16 md:px-8 md:pb-10 md:pt-24 lg:gap-20 lg:pt-32">
-            <div className="flex justify-center md:justify-start">
-              <div className="group w-full max-w-sm overflow-hidden rounded-2xl bg-sky-200/80 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                <Image
-                  src={profileImageSrc}
-                  alt="Roy Ho"
-                  width={profileImageWidth}
-                  height={profileImageHeight}
-                  className="block h-auto w-full transition-transform duration-500 group-hover:scale-[1.01]"
-                  sizes="(max-width: 768px) 100vw, 384px"
-                  priority
-                />
-              </div>
-            </div>
-
-            <div className="space-y-6 md:space-y-8">
-              <div className="space-y-3 md:space-y-4">
-                <div className="flex flex-wrap items-center gap-x-10 gap-y-3 leading-none">
-                  <h1
-                    id="hero-heading"
-                    className="text-4xl font-bold leading-none tracking-tight text-sky-950 md:text-5xl lg:text-6xl"
-                  >
-                    Roy Ho
-                  </h1>
-                  <span
-                    className="inline-flex translate-y-1.5 items-center gap-2 self-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium leading-none text-emerald-700 shadow-sm shadow-emerald-900/10"
-                    aria-label="Availability status"
-                  >
-                    <span className="relative flex h-2.5 w-2.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                    </span>
-                    Available for opportunities
-                  </span>
-                </div>
-                <p className="text-lg text-sky-800/90 md:text-xl">
-                  UC Davis Graduate
-                </p>
-              </div>
-              <p className="max-w-lg text-base leading-relaxed text-slate-600 md:text-lg">
-                I build data-driven solutions using Python, SQL, R, Excel, and
-                Machine Learning.
-              </p>
-              <div className="max-w-lg space-y-2 text-base text-slate-500 md:text-lg">
-                <p>
-                  <span className="text-slate-400">Email: </span>
-                  <a
-                    href="mailto:royho346@gmail.com"
-                    className="text-slate-500 transition-colors hover:text-sky-800"
-                  >
-                    royho346@gmail.com
-                  </a>
-                </p>
-                <p>
-                  <span className="text-slate-400">Phone: </span>
-                  <a
-                    href="tel:+14157418955"
-                    className="text-slate-500 transition-colors hover:text-sky-800"
-                  >
-                    415-741-8955
-                  </a>
-                </p>
-                <p>
-                  <span className="text-slate-400">Location: </span>
-                  Davis, CA | San Francisco, CA
-                </p>
-              </div>
-              <div className="flex gap-9">
-                <a
-                  href="https://www.linkedin.com/in/royho1/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn profile"
-                  className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-800"
-                >
-                  <FaLinkedin className="h-7 w-7" aria-hidden />
-                </a>
-                <a
-                  href="https://github.com/royho1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub profile"
-                  className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-800"
-                >
-                  <FaGithub className="h-7 w-7" aria-hidden />
-                </a>
-              </div>
-              <div className="flex flex-wrap gap-4 pt-1">
-                <a
-                  href="#projects"
-                  className="inline-flex items-center justify-center rounded-lg bg-sky-600 px-7 py-3 text-base font-medium text-white shadow-sm shadow-sky-600/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-700 hover:shadow-md hover:shadow-sky-600/30"
-                >
-                  View Projects
-                </a>
-                <a
-                  href="#contact"
-                  className="inline-flex items-center justify-center rounded-lg border border-sky-300 bg-white/90 px-7 py-3 text-base font-medium text-sky-950 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-50 hover:shadow-md hover:shadow-sky-300/30"
-                >
-                  Contact Me
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-center pb-6 pt-10 md:pb-8 md:pt-16">
-            <a
-              href="#about"
-              aria-label="Scroll to explore"
-              className="group flex flex-col items-center gap-2 text-slate-500 transition-colors hover:text-sky-800"
-            >
-              <span className="flex animate-bounce flex-col items-center gap-2 [animation-duration:1.8s]">
-                <span className="text-xs font-medium uppercase tracking-[0.2em] md:text-sm">
-                  Scroll to explore
-                </span>
-                <FaChevronDown className="h-5 w-5" aria-hidden />
-              </span>
-            </a>
-          </div>
-        </section>
+        <HeroSection />
 
         <AboutSection />
 
-        <section
+        <FadeInSection
+          as="section"
           id="projects"
           className="border-t border-sky-200/80 bg-white"
           aria-labelledby="projects-heading"
@@ -283,18 +182,38 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${project.title} on GitHub`}
-                  className="group flex h-full flex-col rounded-xl border border-sky-200 bg-white p-6 text-left shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-sky-200 bg-white text-left shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
                 >
-                  <h3 className="text-lg font-semibold text-sky-950">
-                    {project.title}
-                  </h3>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600">
-                    {project.description}
-                  </p>
-                  <p className="mt-4 text-xs text-slate-500">{project.tech}</p>
-                  <span className="mt-5 inline-flex text-sm font-medium text-sky-700 underline decoration-sky-300 underline-offset-4 transition-colors group-hover:text-sky-900 group-hover:decoration-sky-600">
-                    GitHub
-                  </span>
+                  {project.award && (
+                    <span className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1 rounded-full border border-amber-300 bg-amber-50/95 px-2 py-0.5 text-[10px] font-semibold text-amber-800 shadow-sm shadow-amber-900/10 backdrop-blur-sm">
+                      <Star
+                        className="h-3 w-3 fill-amber-400 text-amber-500"
+                        aria-hidden
+                      />
+                      {project.award}
+                    </span>
+                  )}
+
+                  <div
+                    className={`flex h-28 w-full items-center justify-center bg-gradient-to-br ${project.gradient}`}
+                  >
+                    <AnimatedProjectIcon variant={project.iconVariant} />
+                  </div>
+
+                  <div className="flex flex-1 flex-col p-6">
+                    <h3 className="text-lg font-semibold text-sky-950">
+                      {project.title}
+                    </h3>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600">
+                      {project.description}
+                    </p>
+                    <p className="mt-4 text-xs text-slate-500">
+                      {project.tech}
+                    </p>
+                    <span className="mt-5 inline-flex text-sm font-medium text-sky-700 underline decoration-sky-300 underline-offset-4 transition-colors group-hover:text-sky-900 group-hover:decoration-sky-600">
+                      GitHub
+                    </span>
+                  </div>
                 </a>
               ))}
             </div>
@@ -334,9 +253,10 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </FadeInSection>
 
-        <section
+        <FadeInSection
+          as="section"
           id="experience"
           className="border-t border-sky-200/80 bg-sky-100"
           aria-labelledby="experience-heading"
@@ -446,9 +366,10 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </FadeInSection>
 
-        <section
+        <FadeInSection
+          as="section"
           id="contact"
           className="border-t border-sky-200/80 bg-sky-100"
           aria-labelledby="contact-heading"
@@ -505,9 +426,10 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </FadeInSection>
 
-        <section
+        <FadeInSection
+          as="section"
           id="resume"
           className="border-t border-sky-200/80 bg-white"
           aria-labelledby="resume-heading"
@@ -543,9 +465,10 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </FadeInSection>
 
-        <section
+        <FadeInSection
+          as="section"
           id="hobbies"
           className="border-t border-sky-200/80 bg-sky-50"
           aria-labelledby="hobbies-heading"
@@ -580,8 +503,11 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </section>
+        </FadeInSection>
       </main>
+
+      <Footer />
+      <BackToTop />
     </>
   );
 }

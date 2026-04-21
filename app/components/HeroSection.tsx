@@ -1,0 +1,255 @@
+"use client";
+
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { FaChevronDown, FaGithub, FaLinkedin } from "react-icons/fa";
+import { motion, type Variants } from "framer-motion";
+
+const profileImageSrc = "/picture.jpeg";
+const profileImageWidth = 799;
+const profileImageHeight = 1123;
+
+const tagline =
+  "I build data-driven solutions using Python, SQL, R, Excel, and Machine Learning.";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const containerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: EASE },
+  },
+};
+
+/**
+ * Rough moment (ms) the tagline becomes visible so the typewriter
+ * can start shortly after it slides in. Matches the container
+ * delayChildren + staggerChildren * taglineIndex (0.1 + 0.15 * 3 = 0.55s),
+ * with a small cushion so the typing begins once the line is readable.
+ */
+const TAGLINE_TYPE_DELAY_MS = 700;
+const TYPE_INTERVAL_MS = 32;
+const CURSOR_BLINK_MS = 500;
+const CURSOR_LINGER_MS = 3500;
+
+function Typewriter({ text }: { text: string }) {
+  const [count, setCount] = useState(0);
+  const [cursorActive, setCursorActive] = useState(true);
+  const [cursorOn, setCursorOn] = useState(true);
+  const textRef = useRef(text);
+  textRef.current = text;
+
+  useEffect(() => {
+    let intervalId: ReturnType<typeof setInterval> | null = null;
+    const startId = setTimeout(() => {
+      intervalId = setInterval(() => {
+        setCount((prev) => {
+          if (prev >= textRef.current.length) {
+            if (intervalId) clearInterval(intervalId);
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, TYPE_INTERVAL_MS);
+    }, TAGLINE_TYPE_DELAY_MS);
+
+    return () => {
+      clearTimeout(startId);
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (count < text.length) return;
+    const hideId = setTimeout(() => setCursorActive(false), CURSOR_LINGER_MS);
+    return () => clearTimeout(hideId);
+  }, [count, text.length]);
+
+  useEffect(() => {
+    if (!cursorActive) {
+      setCursorOn(false);
+      return;
+    }
+    const blinkId = setInterval(
+      () => setCursorOn((on) => !on),
+      CURSOR_BLINK_MS,
+    );
+    return () => clearInterval(blinkId);
+  }, [cursorActive]);
+
+  return (
+    <span aria-label={text}>
+      <span aria-hidden>{text.slice(0, count)}</span>
+      <span
+        aria-hidden
+        className="ml-0.5 inline-block h-[1em] w-[2px] translate-y-[0.15em] bg-sky-800 align-middle transition-opacity duration-150"
+        style={{ opacity: cursorActive && cursorOn ? 1 : 0 }}
+      />
+    </span>
+  );
+}
+
+export default function HeroSection() {
+  return (
+    <section className="bg-white" aria-labelledby="hero-heading">
+      <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-14 px-6 pb-8 pt-16 md:grid-cols-2 md:gap-16 md:px-8 md:pb-10 md:pt-24 lg:gap-20 lg:pt-32">
+        <div className="flex justify-center md:justify-start">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: EASE }}
+            className="group w-full max-w-sm overflow-hidden rounded-2xl bg-sky-200/80 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+          >
+            <Image
+              src={profileImageSrc}
+              alt="Roy Ho"
+              width={profileImageWidth}
+              height={profileImageHeight}
+              className="block h-auto w-full transition-transform duration-500 group-hover:scale-[1.01]"
+              sizes="(max-width: 768px) 100vw, 384px"
+              priority
+            />
+          </motion.div>
+        </div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="space-y-6 md:space-y-8"
+        >
+          <div className="space-y-3 md:space-y-4">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-3 leading-none">
+              <motion.h1
+                id="hero-heading"
+                variants={itemVariants}
+                className="text-4xl font-bold leading-none tracking-tight text-sky-950 md:text-5xl lg:text-6xl"
+              >
+                Roy Ho
+              </motion.h1>
+              <motion.a
+                variants={itemVariants}
+                href="#contact"
+                aria-label="Available for opportunities — jump to contact"
+                className="inline-flex translate-y-1.5 items-center gap-2 self-center rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 text-[13px] font-medium leading-none text-emerald-700 shadow-sm shadow-emerald-900/10 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-100 hover:shadow-md hover:shadow-emerald-900/10"
+              >
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                </span>
+                Available for opportunities
+              </motion.a>
+            </div>
+            <motion.p
+              variants={itemVariants}
+              className="text-lg text-sky-800/90 md:text-xl"
+            >
+              UC Davis Graduate
+            </motion.p>
+          </div>
+
+          <motion.p
+            variants={itemVariants}
+            className="min-h-[3.25rem] max-w-lg text-base leading-relaxed text-slate-600 md:min-h-[3.75rem] md:text-lg"
+          >
+            <Typewriter text={tagline} />
+          </motion.p>
+
+          <motion.div
+            variants={itemVariants}
+            className="max-w-lg space-y-2 text-base text-slate-500 md:text-lg"
+          >
+            <p>
+              <span className="text-slate-400">Email: </span>
+              <a
+                href="mailto:royho346@gmail.com"
+                className="text-slate-500 transition-colors hover:text-sky-800"
+              >
+                royho346@gmail.com
+              </a>
+            </p>
+            <p>
+              <span className="text-slate-400">Phone: </span>
+              <a
+                href="tel:+14157418955"
+                className="text-slate-500 transition-colors hover:text-sky-800"
+              >
+                415-741-8955
+              </a>
+            </p>
+            <p>
+              <span className="text-slate-400">Location: </span>
+              Davis, CA | San Francisco, CA
+            </p>
+          </motion.div>
+
+          <motion.div variants={itemVariants} className="flex gap-9">
+            <a
+              href="https://www.linkedin.com/in/royho1/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-800"
+            >
+              <FaLinkedin className="h-7 w-7" aria-hidden />
+            </a>
+            <a
+              href="https://github.com/royho1"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
+              className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-800"
+            >
+              <FaGithub className="h-7 w-7" aria-hidden />
+            </a>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-wrap gap-4 pt-1"
+          >
+            <a
+              href="#projects"
+              className="inline-flex items-center justify-center rounded-lg bg-sky-600 px-7 py-3 text-base font-medium text-white shadow-sm shadow-sky-600/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-700 hover:shadow-md hover:shadow-sky-600/30"
+            >
+              View Projects
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center rounded-lg border border-sky-300 bg-white/90 px-7 py-3 text-base font-medium text-sky-950 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-50 hover:shadow-md hover:shadow-sky-300/30"
+            >
+              Contact Me
+            </a>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      <div className="flex justify-center pb-6 pt-10 md:pb-8 md:pt-16">
+        <a
+          href="#about"
+          aria-label="Scroll to explore"
+          className="group flex flex-col items-center gap-2 text-slate-500 transition-colors hover:text-sky-800"
+        >
+          <span className="flex animate-bounce flex-col items-center gap-2 [animation-duration:1.8s]">
+            <span className="text-xs font-medium uppercase tracking-[0.2em] md:text-sm">
+              Scroll to explore
+            </span>
+            <FaChevronDown className="h-5 w-5" aria-hidden />
+          </span>
+        </a>
+      </div>
+    </section>
+  );
+}
