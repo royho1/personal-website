@@ -167,12 +167,23 @@ export default function Home() {
           aria-labelledby="projects-heading"
         >
           <div className="mx-auto max-w-6xl px-6 py-20 md:px-8 md:py-28">
-            <h2
-              id="projects-heading"
-              className="mx-auto block w-max max-w-full cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl"
-            >
-              Projects
-            </h2>
+            <div className="flex items-center justify-center gap-3">
+              <h2
+                id="projects-heading"
+                className="cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl"
+              >
+                Projects
+              </h2>
+              <a
+                href="https://github.com/royho1"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Roy Ho GitHub profile"
+                className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-900"
+              >
+                <FaGithub className="h-7 w-7" aria-hidden />
+              </a>
+            </div>
 
             <div className="mt-12 grid gap-8 md:grid-cols-3">
               {featuredProjects.map((project) => (
