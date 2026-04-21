@@ -10,6 +10,7 @@ const profileImageHeight = 1123;
 /** PDF lives in `public/` (served from site root). */
 const resumePdfPath = "/Roy_Ho_Resume.pdf";
 const jaikeLogoSrc = "/experience/JAIKE.png";
+const techSprintLogoSrc = "/experience/TechSprint.png";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -249,13 +250,12 @@ export default function Home() {
               aria-label="Scroll to explore"
               className="group flex flex-col items-center gap-2 text-slate-500 transition-colors hover:text-sky-800"
             >
-              <span className="text-xs font-medium uppercase tracking-[0.2em] md:text-sm">
-                Scroll to explore
+              <span className="flex animate-bounce flex-col items-center gap-2 [animation-duration:1.8s]">
+                <span className="text-xs font-medium uppercase tracking-[0.2em] md:text-sm">
+                  Scroll to explore
+                </span>
+                <FaChevronDown className="h-5 w-5" aria-hidden />
               </span>
-              <FaChevronDown
-                className="h-5 w-5 animate-bounce [animation-duration:1.8s] group-hover:text-sky-800"
-                aria-hidden
-              />
             </a>
           </div>
         </section>
@@ -348,50 +348,100 @@ export default function Home() {
             >
               Experience
             </h2>
-            <div className="mt-10 rounded-2xl border border-sky-200 bg-white/90 p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-300/25 md:p-8">
-              <div className="grid items-start gap-8 md:grid-cols-[minmax(260px,320px)_minmax(0,1fr)] md:gap-10">
-                <div className="group relative min-h-[18rem] w-full overflow-hidden rounded-2xl border border-sky-200 bg-white p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/70 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:min-h-[26rem] md:p-8">
-                  <Image
-                    src={jaikeLogoSrc}
-                    alt="JAIKE logo"
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-                    sizes="(max-width: 768px) 100vw, 320px"
-                  />
-                </div>
+            <div className="mt-10 space-y-8">
+              <div className="rounded-2xl border border-sky-200 bg-white/90 p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-300/25 md:p-8">
+                <div className="grid items-start gap-8 md:grid-cols-[minmax(260px,320px)_minmax(0,1fr)] md:gap-10">
+                  <div className="group relative min-h-[18rem] w-full overflow-hidden rounded-2xl border border-sky-200 bg-white p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/70 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:min-h-[26rem] md:p-8">
+                    <Image
+                      src={jaikeLogoSrc}
+                      alt="JAIKE logo"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                      sizes="(max-width: 768px) 100vw, 320px"
+                    />
+                  </div>
 
-                <div>
-                  <h3 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
-                    JAIKE
-                  </h3>
-                  <p className="mt-2 text-base font-medium leading-snug text-slate-900 md:text-lg">
-                    Journal of Artificial Intelligence and Knowledge Engineering
-                  </p>
-                  <h4 className="mt-3 text-lg font-semibold tracking-tight text-slate-900 md:text-xl">
-                    Artificial Intelligence Researcher
-                  </h4>
-                  <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-slate-900 marker:text-slate-900 md:text-base">
-                    <li>
-                      Conducted research on LLM-based automation, focusing on
-                      API-driven system design, agent orchestration frameworks,
-                      and productivity applications across research, coding, and
-                      enterprise workflows.
-                    </li>
-                    <li>
-                      Authored a 25-page research paper on LLM-based automation
-                      and agent architectures, synthesizing peer-reviewed and
-                      industry research on API integration, architectural design
-                      patterns, system limitations, and responsible deployment;
-                      submitted for journal publication.
-                    </li>
-                    <li>
-                      Served as a peer reviewer for JAIKE, evaluating research
-                      on retrieval methods in large language models, reasoning
-                      performance in extended tasks, and large-scale model
-                      architectures for methodological rigor and evaluation
-                      quality.
-                    </li>
-                  </ul>
+                  <div>
+                    <h3 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+                      JAIKE
+                    </h3>
+                    <p className="mt-1 text-sm leading-snug text-slate-500 md:text-base">
+                      Journal of Artificial Intelligence and Knowledge Engineering
+                    </p>
+                    <p className="mt-2 text-sm font-medium uppercase tracking-[0.15em] text-sky-800 md:text-base">
+                      January 2025 &ndash; Present
+                    </p>
+                    <h4 className="mt-3 text-lg font-semibold tracking-tight text-slate-900 md:text-xl">
+                      Artificial Intelligence Researcher
+                    </h4>
+                    <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-slate-900 marker:text-slate-900 md:text-base">
+                      <li>
+                        Conducted research on LLM-based automation, focusing on
+                        API-driven system design, agent orchestration frameworks,
+                        and productivity applications across research, coding, and
+                        enterprise workflows.
+                      </li>
+                      <li>
+                        Authored a 25-page research paper on LLM-based automation
+                        and agent architectures, synthesizing peer-reviewed and
+                        industry research on API integration, architectural design
+                        patterns, system limitations, and responsible deployment;
+                        submitted for journal publication.
+                      </li>
+                      <li>
+                        Served as a peer reviewer for JAIKE, evaluating research
+                        on retrieval methods in large language models, reasoning
+                        performance in extended tasks, and large-scale model
+                        architectures for methodological rigor and evaluation
+                        quality.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-sky-200 bg-white/90 p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-300/25 md:p-8">
+                <div className="grid items-start gap-8 md:grid-cols-[minmax(260px,320px)_minmax(0,1fr)] md:gap-10">
+                  <div className="group relative min-h-[18rem] w-full overflow-hidden rounded-2xl border border-sky-100 bg-white shadow-sm shadow-sky-900/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:min-h-[26rem]">
+                    <Image
+                      src={techSprintLogoSrc}
+                      alt="TechSprint Innovators logo"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                      sizes="(max-width: 768px) 100vw, 320px"
+                    />
+                  </div>
+
+                  <div>
+                    <h3 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+                      TechSprint Innovators
+                    </h3>
+                    <p className="mt-2 text-sm font-medium uppercase tracking-[0.15em] text-sky-800 md:text-base">
+                      March 2024 &ndash; September 2025
+                    </p>
+                    <h4 className="mt-3 text-lg font-semibold tracking-tight text-slate-900 md:text-xl">
+                      Head of Data Engineering
+                    </h4>
+                    <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-slate-900 marker:text-slate-900 md:text-base">
+                      <li>
+                        Built a multi-factor stock screening model using
+                        fundamental, technical, and NLP-based sentiment features
+                        (FinBERT).
+                      </li>
+                      <li>
+                        Developed and evaluated a supervised classification model
+                        in scikit-learn to predict price appreciation, performing
+                        feature selection, model tuning, and performance
+                        validation on historical market data.
+                      </li>
+                      <li>
+                        Engineered and automated a daily ETL data pipeline
+                        (Python, yfinance, Alpaca API) running on a Raspberry Pi
+                        to filter equities, generate structured CSV outputs, and
+                        deliver real-time investment signals via Discord webhook.
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
