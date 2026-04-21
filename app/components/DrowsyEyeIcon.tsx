@@ -49,45 +49,51 @@ type ZConfig = {
   driftY: number[];
 };
 
-// Classic cartoon sleep-Z's: each Z pops in just above-right of the closed eye,
-// drifts diagonally up-and-right while growing from ~12px to ~24px, then fades.
-// All three share the same text-2xl base size (24px at scale 1.0) and scale
-// from ~0.5 → ~1.0 via the keyframes below. Starting anchors sit inside the
-// 80px eye box and drift distances are chosen so every Z stays inside the
-// 112px card banner (banner top is ~16px above the container top).
+// Clean 3-Z sleep sequence.
+//
+// Rules for each Z:
+//   - pops in just to the right of the closed eye (eye ends at container x ≈ 70)
+//   - drifts diagonally up-and-right into the banner's empty top-right area
+//   - grows monotonically from ~12px → ~24px (scale 0.5 → 1.0) — NEVER shrinks
+//   - fades in at the start, fades out at the end
+//   - after fading out, freezes at its final transform (held, invisible) for
+//     the rest of the 8s cycle — no return-to-origin animation, no scale-down
+//
+// Timing is non-overlapping with a short 0.15s gap between Z's. After Z3's
+// fade-out at 5.05s, no Z is visible again until the next cycle.
 const zs: ZConfig[] = [
   {
     sizeClass: "text-2xl",
     colorClass: "text-sky-500",
-    positionClass: "top-8 right-3",
+    positionClass: "top-7 left-[74px]",
     start: t(2.5),
-    peakIn: t(2.9),
-    peakOut: t(3.5),
-    end: t(3.8),
-    driftX: [0, 0, 6, 14, 20, 20],
-    driftY: [0, 0, -8, -16, -22, -22],
+    peakIn: t(2.7),
+    peakOut: t(3.05),
+    end: t(3.25),
+    driftX: [0, 0, 9, 20, 30, 30],
+    driftY: [0, 0, -7, -15, -22, -22],
   },
   {
     sizeClass: "text-2xl",
     colorClass: "text-sky-600",
-    positionClass: "top-10 right-2",
-    start: t(3.0),
-    peakIn: t(3.4),
-    peakOut: t(4.0),
-    end: t(4.3),
-    driftX: [0, 0, 7, 16, 24, 24],
+    positionClass: "top-9 left-[78px]",
+    start: t(3.4),
+    peakIn: t(3.6),
+    peakOut: t(3.95),
+    end: t(4.15),
+    driftX: [0, 0, 11, 23, 34, 34],
     driftY: [0, 0, -9, -18, -26, -26],
   },
   {
     sizeClass: "text-2xl",
     colorClass: "text-sky-400",
-    positionClass: "top-9 right-4",
-    start: t(3.5),
-    peakIn: t(3.9),
-    peakOut: t(4.5),
-    end: t(4.8),
-    driftX: [0, 0, 5, 12, 18, 18],
-    driftY: [0, 0, -7, -15, -21, -21],
+    positionClass: "top-8 left-[72px]",
+    start: t(4.3),
+    peakIn: t(4.5),
+    peakOut: t(4.85),
+    end: t(5.05),
+    driftX: [0, 0, 8, 17, 26, 26],
+    driftY: [0, 0, -6, -13, -20, -20],
   },
 ];
 
@@ -200,6 +206,10 @@ export default function DrowsyEyeIcon() {
             opacity: [0, 0, 1, 1, 0, 0],
             x: z.driftX,
             y: z.driftY,
+            // Scale only grows (0.5 → 1.0) and holds at 1.0 for the rest of
+            // the cycle — never shrinks back. The Z is invisible past `end`,
+            // so the snap back to initial at the next cycle boundary isn't
+            // visible.
             scale: [0.5, 0.5, 0.65, 0.88, 1.0, 1.0],
           }}
           transition={{
