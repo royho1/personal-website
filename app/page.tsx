@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaChevronDown, FaGithub, FaLinkedin } from "react-icons/fa";
+import AboutSection from "./components/AboutSection";
 
 const profileImageSrc = "/picture.jpeg";
 /** Intrinsic size of `public/picture.jpeg` — update if you replace the file. */
@@ -9,7 +10,6 @@ const profileImageHeight = 1123;
 /** PDF lives in `public/` (served from site root). */
 const resumePdfPath = "/Roy_Ho_Resume.pdf";
 const jaikeLogoSrc = "/experience/JAIKE.png";
-const ucDavisLogoSrc = "/experience/about/UC_Davis_Logo.png";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -30,17 +30,6 @@ const hobbyPhotos: { src: string; alt: string; width: number; height: number }[]
     { src: "/hobbies/photo5.jpeg", alt: "Hobby photo 5", width: 1179, height: 1557 },
     { src: "/hobbies/photo6.jpeg", alt: "Hobby photo 6", width: 1536, height: 2049 },
   ];
-
-const skills = [
-  "Python",
-  "SQL",
-  "Excel",
-  "R",
-  "Pandas",
-  "Scikit-learn",
-  "Data Visualization",
-  "Machine Learning",
-] as const;
 
 const featuredProjects = [
   {
@@ -151,7 +140,7 @@ export default function Home() {
           className="bg-white"
           aria-labelledby="hero-heading"
         >
-          <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-14 px-6 py-16 md:grid-cols-2 md:gap-16 md:px-8 md:py-24 lg:gap-20 lg:py-32">
+          <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-14 px-6 pb-8 pt-16 md:grid-cols-2 md:gap-16 md:px-8 md:pb-10 md:pt-24 lg:gap-20 lg:pt-32">
             <div className="flex justify-center md:justify-start">
               <div className="group w-full max-w-sm overflow-hidden rounded-2xl bg-sky-200/80 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
                 <Image
@@ -254,57 +243,24 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
-
-        <section
-          id="about"
-          className="border-t border-sky-200/80 bg-sky-100"
-          aria-labelledby="about-heading"
-        >
-          <div className="mx-auto max-w-3xl px-6 py-20 text-center md:px-8 md:py-28">
-            <h2
-              id="about-heading"
-              className="inline-block w-max max-w-full cursor-default text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl"
+          <div className="flex justify-center pb-6 pt-10 md:pb-8 md:pt-16">
+            <a
+              href="#about"
+              aria-label="Scroll to explore"
+              className="group flex flex-col items-center gap-2 text-slate-500 transition-colors hover:text-sky-800"
             >
-              About
-            </h2>
-            <div className="mt-10 space-y-6 text-left text-base leading-relaxed text-slate-600 md:text-lg">
-              <p>
-                Hi, my name is Roy Ho, and I am a recent UC Davis graduate with
-                a Bachelor&apos;s degree in Statistical Data Science and a minor
-                in Computer Science.
-              </p>
-              <p>
-                I&apos;m interested in building data-driven solutions using
-                Python, R, SQL, and Excel, with a focus on machine learning.
-                I&apos;m currently pursuing roles in data analytics and data
-                engineering.
-              </p>
-            </div>
-            <div className="mt-10 flex justify-center">
-              <Image
-                src={ucDavisLogoSrc}
-                alt="UC Davis"
-                width={3840}
-                height={2160}
-                className="h-auto w-full max-w-[400px]"
-                sizes="400px"
+              <span className="text-xs font-medium uppercase tracking-[0.2em] md:text-sm">
+                Scroll to explore
+              </span>
+              <FaChevronDown
+                className="h-5 w-5 animate-bounce [animation-duration:1.8s] group-hover:text-sky-800"
+                aria-hidden
               />
-            </div>
-            <ul
-              className="mt-10 flex flex-wrap items-center justify-center gap-3"
-              aria-label="Skills"
-            >
-              {skills.map((skill) => (
-                <li key={skill}>
-                  <span className="inline-block cursor-default rounded-full border border-sky-200 bg-white px-4 py-1.5 text-sm text-sky-900 shadow-sm shadow-sky-200/30 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:border-sky-300 hover:shadow-md hover:shadow-sky-300/30">
-                    {skill}
-                  </span>
-                </li>
-              ))}
-            </ul>
+            </a>
           </div>
         </section>
+
+        <AboutSection />
 
         <section
           id="projects"
@@ -314,7 +270,7 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-6 py-20 md:px-8 md:py-28">
             <h2
               id="projects-heading"
-              className="inline-block w-max max-w-full cursor-default text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl"
+              className="mx-auto block w-max max-w-full cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl"
             >
               Projects
             </h2>
@@ -344,7 +300,7 @@ export default function Home() {
             </div>
 
             <div className="mt-16">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center gap-3">
                 <h3 className="text-sm font-medium uppercase tracking-wide text-slate-500">
                   Additional projects
                 </h3>
@@ -388,7 +344,7 @@ export default function Home() {
           <div className="mx-auto max-w-5xl px-6 py-20 md:px-8 md:py-28">
             <h2
               id="experience-heading"
-              className="inline-block w-max max-w-full cursor-default text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl"
+              className="mx-auto block w-max max-w-full cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl"
             >
               Experience
             </h2>
@@ -450,7 +406,7 @@ export default function Home() {
           <div className="mx-auto max-w-2xl px-6 py-20 md:px-8 md:py-28">
             <h2
               id="contact-heading"
-              className="mx-auto inline-block w-max max-w-full cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl"
+              className="mx-auto block w-max max-w-full cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl"
             >
               Let&apos;s Connect!
             </h2>
