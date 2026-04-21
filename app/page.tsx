@@ -241,13 +241,13 @@ export default function Home() {
               <div className="flex flex-wrap gap-4 pt-1">
                 <a
                   href="#projects"
-                  className="inline-flex items-center justify-center rounded-lg bg-sky-600 px-7 py-3 text-base font-medium text-white shadow-sm shadow-sky-600/25 transition-colors hover:bg-sky-700"
+                  className="inline-flex items-center justify-center rounded-lg bg-sky-600 px-7 py-3 text-base font-medium text-white shadow-sm shadow-sky-600/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-700 hover:shadow-md hover:shadow-sky-600/30"
                 >
                   View Projects
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex items-center justify-center rounded-lg border border-sky-300 bg-white/90 px-7 py-3 text-base font-medium text-sky-950 transition-colors hover:bg-sky-50"
+                  className="inline-flex items-center justify-center rounded-lg border border-sky-300 bg-white/90 px-7 py-3 text-base font-medium text-sky-950 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-50 hover:shadow-md hover:shadow-sky-300/30"
                 >
                   Contact Me
                 </a>
@@ -297,7 +297,7 @@ export default function Home() {
             >
               {skills.map((skill) => (
                 <li key={skill}>
-                  <span className="inline-block rounded-full border border-sky-200 bg-white px-4 py-1.5 text-sm text-sky-900 shadow-sm shadow-sky-200/30">
+                  <span className="inline-block cursor-default rounded-full border border-sky-200 bg-white px-4 py-1.5 text-sm text-sky-900 shadow-sm shadow-sky-200/30 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:border-sky-300 hover:shadow-md hover:shadow-sky-300/30">
                     {skill}
                   </span>
                 </li>
