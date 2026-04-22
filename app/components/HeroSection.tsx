@@ -219,6 +219,15 @@ export default function HeroSection() {
             <Typewriter text={tagline} />
           </motion.p>
 
+          <motion.p
+            variants={itemVariants}
+            className="max-w-lg text-sm leading-relaxed text-slate-600 md:text-base dark:text-slate-300"
+          >
+            <span className="font-semibold text-sky-950 dark:text-sky-100">Currently:</span>{" "}
+            Seeking full-time Data Analyst / Data Engineer roles while
+            building an SF Restaurant Safety Map.
+          </motion.p>
+
           <motion.div
             variants={itemVariants}
             className="max-w-lg space-y-2 text-base text-slate-500 md:text-lg dark:text-slate-400"
