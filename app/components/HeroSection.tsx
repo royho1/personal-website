@@ -165,16 +165,25 @@ export default function HeroSection() {
     >
       <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-14 px-6 pb-8 pt-16 md:grid-cols-2 md:gap-16 md:px-8 md:pb-10 md:pt-24 lg:gap-20 lg:pt-32">
         <div className="flex justify-center md:justify-start">
-          <div className="group w-full max-w-sm overflow-hidden rounded-2xl bg-sky-200/80 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-slate-800/60 dark:shadow-black/40 dark:ring-slate-700">
-            <Image
-              src={profileImageSrc}
-              alt="Roy Ho"
-              width={profileImageWidth}
-              height={profileImageHeight}
-              className="block h-auto w-full transition-transform duration-500 group-hover:scale-[1.01]"
-              sizes="(max-width: 768px) 100vw, 384px"
-              priority
+          <div className="relative w-full max-w-sm">
+            {/* Soft static halo behind the photo. Sits below the photo via
+             * DOM order (painted first) and blurs outwards so only the
+             * edges catch the light. */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -inset-4 rounded-[1.75rem] bg-sky-400 opacity-20 blur-2xl dark:bg-sky-500 dark:opacity-25"
             />
+            <div className="group relative overflow-hidden rounded-2xl bg-sky-200/80 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-slate-800/60 dark:shadow-black/40 dark:ring-slate-700">
+              <Image
+                src={profileImageSrc}
+                alt="Roy Ho"
+                width={profileImageWidth}
+                height={profileImageHeight}
+                className="block h-auto w-full transition-transform duration-500 group-hover:scale-[1.01]"
+                sizes="(max-width: 768px) 100vw, 384px"
+                priority
+              />
+            </div>
           </div>
         </div>
 
