@@ -42,6 +42,7 @@ html {
   --animate-bar-grow-1: bar-grow-1 2.4s ease-in-out infinite;
   --animate-bar-grow-2: bar-grow-2 2.4s ease-in-out infinite 0.3s;
   --animate-bar-grow-3: bar-grow-3 2.4s ease-in-out infinite 0.6s;
+  --animate-bounce-soft: bounce-soft 2.8s ease-in-out infinite;
 }
 
 @keyframes heartbeat {
@@ -90,6 +91,19 @@ html {
   }
   50% {
     transform: scaleY(1.05);
+  }
+}
+
+/* Gentle vertical bounce used by the Let's Connect heading. Soft
+ * ease-in-out so the motion feels like a slow hover rather than
+ * an aggressive spring. */
+@keyframes bounce-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
   }
 }
 

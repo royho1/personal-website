@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import HeroSection from "./components/HeroSection";
 import NavBar from "./components/NavBar";
 import ProjectsSection from "./components/ProjectsSection";
+import Sparkles from "./components/Sparkles";
 
 /** PDF lives in `public/` (served from site root). */
 const resumePdfPath = "/Roy_Ho_Resume.pdf";
@@ -158,12 +159,13 @@ export default function Home() {
           <div className="mx-auto max-w-2xl px-6 py-20 md:px-8 md:py-28">
             <h2
               id="contact-heading"
-              className="mx-auto block w-max max-w-full cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"
+              className="mx-auto block w-max max-w-full animate-bounce-soft cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"
             >
               Let&apos;s Connect!
             </h2>
-            <div className="group mt-12 rounded-2xl border border-sky-200 bg-white p-8 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:p-10 dark:border-slate-700 dark:bg-slate-800/80 dark:shadow-black/40 dark:ring-slate-700/50">
-              <p className="text-center text-2xl font-semibold tracking-tight text-sky-950 md:text-3xl dark:text-sky-100">
+            <div className="group relative mt-12 rounded-2xl border border-sky-200 bg-white p-8 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:p-10 dark:border-slate-700 dark:bg-slate-800/80 dark:shadow-black/40 dark:ring-slate-700/50">
+              <Sparkles count={3} bleed={36} sizeRange={[32, 48]} />
+              <p className="relative text-center text-2xl font-semibold tracking-tight text-sky-950 md:text-3xl dark:text-sky-100">
                 Roy Ho
               </p>
               <p className="mt-3 text-center text-base text-slate-600 md:text-lg dark:text-slate-300">
