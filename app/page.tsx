@@ -159,7 +159,7 @@ export default function Home() {
           <div className="mx-auto max-w-2xl px-6 py-20 md:px-8 md:py-28">
             <h2
               id="contact-heading"
-              className="mx-auto block w-max max-w-full animate-bounce-soft cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"
+              className="mx-auto block w-max max-w-full cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"
             >
               Let&apos;s Connect!
             </h2>
