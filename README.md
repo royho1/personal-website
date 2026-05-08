@@ -128,6 +128,6 @@ Deployed on [Vercel](https://vercel.com) at [royho-career.com](https://royho-car
 
 ## Contact
 
-- **Email:** royho346@gmail.com
+- **Email:** royho.career@gmail.com
 - **GitHub:** [royho1](https://github.com/royho1)
 - **LinkedIn:** See the site footer

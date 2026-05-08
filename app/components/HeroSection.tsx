@@ -226,10 +226,10 @@ export default function HeroSection() {
             <p>
               <span className="text-slate-400 dark:text-slate-500">Email: </span>
               <a
-                href="mailto:royho346@gmail.com"
+                href="mailto:royho.career@gmail.com"
                 className="text-slate-500 transition-colors hover:text-sky-800 dark:text-slate-300 dark:hover:text-sky-300"
               >
-                royho346@gmail.com
+                royho.career@gmail.com
               </a>
             </p>
             <p>

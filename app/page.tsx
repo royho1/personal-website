@@ -173,10 +173,10 @@ export default function Home() {
               </p>
               <p className="mt-3 text-center text-base md:text-lg">
                 <a
-                  href="mailto:royho346@gmail.com"
+                  href="mailto:royho.career@gmail.com"
                   className="text-slate-600 transition-colors hover:text-sky-950 hover:underline dark:text-slate-300 dark:hover:text-sky-200"
                 >
-                  royho346@gmail.com
+                  royho.career@gmail.com
                 </a>
               </p>
               <p className="mt-6 text-center">
