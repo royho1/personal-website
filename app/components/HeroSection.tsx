@@ -165,7 +165,7 @@ export default function HeroSection() {
     >
       <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-14 px-6 pb-8 pt-16 md:grid-cols-2 md:gap-16 md:px-8 md:pb-10 md:pt-24 lg:gap-20 lg:pt-32">
         <div className="flex justify-center md:justify-start">
-          <div className="relative w-full max-w-sm">
+          <div className="relative w-full max-w-[26.5rem]">
             {/* Soft static halo behind the photo. Sits below the photo via
              * DOM order (painted first) and blurs outwards so only the
              * edges catch the light. */}
@@ -180,7 +180,7 @@ export default function HeroSection() {
                 width={profileImageWidth}
                 height={profileImageHeight}
                 className="block h-auto w-full transition-transform duration-500 group-hover:scale-[1.01]"
-                sizes="(max-width: 768px) 100vw, 384px"
+                sizes="(max-width: 768px) 100vw, 424px"
                 priority
               />
             </div>
@@ -219,6 +219,12 @@ export default function HeroSection() {
             <Typewriter text={tagline} />
           </motion.p>
 
+          <motion.div
+            variants={itemVariants}
+            aria-hidden
+            className="max-w-lg border-t border-sky-300 dark:border-slate-700"
+          />
+
           <motion.p
             variants={itemVariants}
             className="max-w-lg text-sm leading-relaxed text-slate-600 md:text-base dark:text-slate-300"
@@ -227,6 +233,12 @@ export default function HeroSection() {
             Seeking full-time Data Analyst / Data Engineer roles while
             building an SF Restaurant Safety Map.
           </motion.p>
+
+          <motion.div
+            variants={itemVariants}
+            aria-hidden
+            className="max-w-lg border-t border-sky-300 dark:border-slate-700"
+          />
 
           <motion.div
             variants={itemVariants}
