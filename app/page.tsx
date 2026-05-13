@@ -179,14 +179,6 @@ export default function Home() {
                   royho.career@gmail.com
                 </a>
               </p>
-              <p className="mt-6 text-center">
-                <a
-                  href="tel:+14157418955"
-                  className="text-lg font-medium text-sky-950 underline decoration-sky-300 underline-offset-4 transition-colors hover:decoration-sky-800 dark:text-sky-100 dark:decoration-sky-600 dark:hover:decoration-sky-300"
-                >
-                  415-741-8955
-                </a>
-              </p>
               <div className="mt-10 flex justify-center gap-10">
                 <a
                   href="https://www.linkedin.com/in/royho1/"

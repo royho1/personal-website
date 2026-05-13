@@ -254,15 +254,6 @@ export default function HeroSection() {
               </a>
             </p>
             <p>
-              <span className="text-slate-400 dark:text-slate-500">Phone: </span>
-              <a
-                href="tel:+14157418955"
-                className="text-slate-500 transition-colors hover:text-sky-800 dark:text-slate-300 dark:hover:text-sky-300"
-              >
-                415-741-8955
-              </a>
-            </p>
-            <p>
               <span className="text-slate-400 dark:text-slate-500">Location: </span>
               <span className="dark:text-slate-300">Davis, CA | San Francisco, CA</span>
             </p>
