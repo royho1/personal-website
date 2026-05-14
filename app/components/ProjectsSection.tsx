@@ -66,17 +66,15 @@ type AdditionalProject = {
   description: string;
   tech: string;
   tags: Tag[];
-  inProgress?: boolean;
 };
 
 const additionalProjects: AdditionalProject[] = [
   {
     name: "SF Restaurant Safety Map",
     description:
-      "Building an interactive map of SF restaurant health inspections using public data, SQL, and data visualization.",
+      "Built an interactive map of SF restaurant health inspections using public data, SQL, and data visualization.",
     tech: "Python, SQL, Data Visualization",
     tags: ["Python", "Data Visualization"],
-    inProgress: true,
   },
   {
     name: "Portuguese Wine Type and Quality Prediction",
@@ -343,16 +341,7 @@ export default function ProjectsSection() {
                   exit="exit"
                   className="group relative overflow-hidden rounded-lg border border-sky-200 bg-sky-50/90 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50"
                 >
-                  <div className="flex min-h-10 w-full flex-col justify-center bg-gradient-to-br from-sky-100 via-white to-cyan-100 px-4 py-2 dark:opacity-95">
-                    {project.inProgress && (
-                      <span className="mb-1.5 inline-flex items-center gap-2 self-center rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 text-[13px] font-medium leading-none text-emerald-700 shadow-sm shadow-emerald-900/10 dark:border-emerald-500/40 dark:bg-emerald-500/10 dark:text-emerald-300 dark:shadow-emerald-950/40">
-                        <span className="relative flex h-2.5 w-2.5">
-                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                        </span>
-                        In Progress...
-                      </span>
-                    )}
+                  <div className="flex min-h-10 w-full flex-col justify-center bg-gradient-to-br from-sky-100 via-white to-cyan-100 px-4 py-2 dark:from-slate-800 dark:via-slate-900 dark:to-sky-950">
                     <h4 className="text-sm font-semibold leading-snug text-sky-950 dark:text-sky-100">
                       {project.name}
                     </h4>

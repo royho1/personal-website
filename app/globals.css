@@ -93,6 +93,36 @@ html {
   }
 }
 
+/* Resume “Download resume” CTA — soft sky glow pulse (opacity only so hover
+ * scale on the same layer stays smooth). Dark theme uses a stronger range. */
+@keyframes resume-cta-glow-opacity-light {
+  0%,
+  100% {
+    opacity: 0.34;
+  }
+  50% {
+    opacity: 0.58;
+  }
+}
+
+@keyframes resume-cta-glow-opacity-dark {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.88;
+  }
+}
+
+.resume-cta-glow-breathe {
+  animation: resume-cta-glow-opacity-light 2.5s ease-in-out infinite;
+}
+
+.dark .resume-cta-glow-breathe {
+  animation: resume-cta-glow-opacity-dark 2.5s ease-in-out infinite;
+}
+
 body {
   background: var(--body-gradient);
   color: var(--foreground);
