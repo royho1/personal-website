@@ -7,10 +7,9 @@ import Footer from "./components/Footer";
 import HeroSection from "./components/HeroSection";
 import NavBar from "./components/NavBar";
 import ProjectsSection from "./components/ProjectsSection";
+import ResumeSection from "./components/ResumeSection";
 import Sparkles from "./components/Sparkles";
 
-/** PDF lives in `public/` (served from site root). */
-const resumePdfPath = "/Roy_Ho_Resume.pdf";
 const jaikeLogoSrc = "/experience/JAIKE.png";
 const techSprintLogoSrc = "/experience/TechSprint.png";
 
@@ -191,6 +190,8 @@ export default function Home() {
           </div>
         </FadeInSection>
 
+        <ResumeSection />
+
         <FadeInSection
           as="section"
           id="contact"
@@ -239,51 +240,6 @@ export default function Home() {
                 >
                   <FaGithub className="h-8 w-8" aria-hidden />
                 </a>
-              </div>
-            </div>
-          </div>
-        </FadeInSection>
-
-        <FadeInSection
-          as="section"
-          id="resume"
-          className="border-t border-sky-200/80 bg-white dark:border-slate-800 dark:bg-slate-950"
-          aria-labelledby="resume-heading"
-        >
-          <div className="mx-auto max-w-3xl px-6 py-20 text-center md:px-8 md:py-28">
-            <h2
-              id="resume-heading"
-              className="inline-block w-max max-w-full cursor-default text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"
-            >
-              Resume
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-slate-600 md:text-lg dark:text-slate-300">
-              Download a PDF of my experience, education, and skills.
-            </p>
-            <span className="group relative mt-8 inline-flex">
-              <span
-                aria-hidden
-                className="resume-cta-glow-breathe pointer-events-none absolute -inset-4 z-0 rounded-xl bg-sky-400/45 blur-2xl transition-transform duration-300 ease-out will-change-[opacity,transform] group-hover:scale-110 dark:bg-sky-400/55"
-              />
-              <a
-                href={resumePdfPath}
-                download
-                className="relative z-10 inline-flex items-center justify-center rounded-lg bg-sky-600 px-6 py-3 text-sm font-medium text-white shadow-sm shadow-sky-600/25 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-sky-700 hover:shadow-[0_10px_36px_-8px_rgb(14_165_233/0.38),0_4px_20px_-6px_rgb(56_189_248/0.22)] dark:bg-sky-500 dark:shadow-sky-950/40 dark:hover:-translate-y-0.5 dark:hover:bg-sky-400 dark:hover:shadow-[0_12px_44px_-6px_rgb(56_189_248/0.42),0_6px_28px_-4px_rgb(125_211_252/0.2)]"
-              >
-                Download resume
-              </a>
-            </span>
-            <div className="mt-12 w-full">
-              <p className="mb-4 text-center text-sm font-medium text-slate-500 dark:text-slate-400">
-                Preview
-              </p>
-              <div className="overflow-hidden rounded-xl border border-sky-200 bg-sky-100/50 shadow-sm ring-1 ring-sky-300/25 dark:border-slate-700 dark:bg-slate-800/50 dark:ring-slate-700/50">
-                <iframe
-                  title="Roy Ho resume PDF preview"
-                  src={resumePdfPath}
-                  className="h-[min(85vh,56rem)] w-full border-0"
-                  loading="lazy"
-                />
               </div>
             </div>
           </div>

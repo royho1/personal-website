@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
@@ -12,12 +13,12 @@ import {
 } from "./projectsFilterBus";
 
 const navLinks = [
-  { label: "About", href: "#about", id: "about" },
-  { label: "Projects", href: "#projects", id: "projects" },
-  { label: "Experience", href: "#experience", id: "experience" },
-  { label: "Contact", href: "#contact", id: "contact" },
-  { label: "Resume", href: "#resume", id: "resume" },
-  { label: "Hobbies", href: "#hobbies", id: "hobbies" },
+  { label: "About", href: "/#about", id: "about" },
+  { label: "Projects", href: "/#projects", id: "projects" },
+  { label: "Experience", href: "/#experience", id: "experience" },
+  { label: "Contact", href: "/#contact", id: "contact" },
+  { label: "Resume", href: "/resume", id: "resume" },
+  { label: "Hobbies", href: "/#hobbies", id: "hobbies" },
 ] as const;
 
 /** Shared base classes for the top-level nav link text so the Projects
@@ -92,7 +93,7 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
     >
       <div className="flex items-center gap-1">
         <a
-          href="#projects"
+          href="/#projects"
           aria-current={isActive ? "page" : undefined}
           onClick={() => emitProjectsFilter("All")}
           className={navLinkClasses(isActive)}
@@ -138,7 +139,7 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
                 return (
                   <li key={option} role="none">
                     <a
-                      href="#projects"
+                      href="/#projects"
                       role="menuitem"
                       onClick={() => chooseFilter(option)}
                       className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${
@@ -168,6 +169,7 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
 
 export default function NavBar() {
   const [activeId, setActiveId] = useState<string>("");
+  const pathname = usePathname();
 
   useEffect(() => {
     const sections = navLinks
@@ -195,7 +197,7 @@ export default function NavBar() {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-sky-200/80 bg-sky-50/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/80">
@@ -204,7 +206,7 @@ export default function NavBar() {
         aria-label="Primary"
       >
         <a
-          href="#"
+          href="/"
           className="text-base font-semibold tracking-tight text-sky-950 dark:text-sky-100"
         >
           Roy Ho
