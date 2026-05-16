@@ -298,7 +298,7 @@ export default function Home() {
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg dark:text-slate-300">
               Outside of work, I enjoy thrifting, bass fishing, spending time outdoors, and
-              poker. I also love keeping up with fashion and
+              playing poker. I also love keeping up with fashion and
               music.
             </p>
             <div className="mt-12 grid items-start gap-7 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
