@@ -15,15 +15,56 @@ const jaikeLogoSrc = "/experience/JAIKE.png";
 const techSprintLogoSrc = "/experience/TechSprint.png";
 
 /** Add hobby images under `public/hobbies/` and list them here (width/height = pixel size of each file). */
-const hobbyPhotos: { src: string; alt: string; width: number; height: number }[] =
-  [
-    { src: "/hobbies/photo1.jpg", alt: "Hobby photo 1", width: 4284, height: 5712 },
-    { src: "/hobbies/photo2.jpeg", alt: "Hobby photo 2", width: 1179, height: 1452 },
-    { src: "/hobbies/photo3.jpeg", alt: "Hobby photo 3", width: 1179, height: 1454 },
-    { src: "/hobbies/photo4.jpeg", alt: "Hobby photo 4", width: 1179, height: 1450 },
-    { src: "/hobbies/photo5.jpeg", alt: "Hobby photo 5", width: 1179, height: 1557 },
-    { src: "/hobbies/photo6.jpeg", alt: "Hobby photo 6", width: 1536, height: 2049 },
-  ];
+const hobbyPhotos: {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  caption: string;
+}[] = [
+  {
+    src: "/hobbies/photo1.jpg",
+    alt: "Horse",
+    width: 4284,
+    height: 5712,
+    caption: "Horse!",
+  },
+  {
+    src: "/hobbies/photo2.jpeg",
+    alt: "Wake surfing on Clear Lake, CA",
+    width: 1179,
+    height: 1452,
+    caption: "Wake Surfing: Clear Lake, CA",
+  },
+  {
+    src: "/hobbies/photo3.jpeg",
+    alt: "Formal event at Lake Tahoe, CA",
+    width: 1179,
+    height: 1454,
+    caption: "Formal Event: Lake Tahoe, CA",
+  },
+  {
+    src: "/hobbies/photo4.jpeg",
+    alt: "Bass fishing at Lake Lagunitas, CA",
+    width: 1179,
+    height: 1450,
+    caption: "Bass Fishing: Lake Lagunitas, CA",
+  },
+  {
+    src: "/hobbies/photo5.jpeg",
+    alt: "Baker Beach in San Francisco, CA",
+    width: 1179,
+    height: 1557,
+    caption: "Baker Beach: San Francisco, CA",
+  },
+  {
+    src: "/hobbies/photo6.jpeg",
+    alt: "Yosemite National Park",
+    width: 1536,
+    height: 2049,
+    caption: "Yosemite National Park",
+  },
+];
 
 export default function Home() {
   return (
@@ -264,7 +305,7 @@ export default function Home() {
               {hobbyPhotos.map((photo, index) => (
                 <figure
                   key={`${photo.src}-${index}`}
-                  className="group self-start overflow-hidden rounded-2xl shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:shadow-black/40 dark:ring-slate-700/60"
+                  className="group flex flex-col self-start overflow-hidden rounded-2xl bg-white shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/60"
                 >
                   <Image
                     src={photo.src}
@@ -274,6 +315,9 @@ export default function Home() {
                     className="block h-auto w-full object-contain transition-transform duration-500 group-hover:scale-[1.01]"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
+                  <figcaption className="px-4 py-3 text-center text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400">
+                    {photo.caption}
+                  </figcaption>
                 </figure>
               ))}
             </div>
