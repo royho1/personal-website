@@ -190,8 +190,6 @@ export default function Home() {
           </div>
         </FadeInSection>
 
-        <ResumeSection />
-
         <FadeInSection
           as="section"
           id="contact"
@@ -244,6 +242,8 @@ export default function Home() {
             </div>
           </div>
         </FadeInSection>
+
+        <ResumeSection />
 
         <FadeInSection
           as="section"
