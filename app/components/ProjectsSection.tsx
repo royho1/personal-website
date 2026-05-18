@@ -144,7 +144,7 @@ function MapPinDropIcon() {
 
   const pin = (
     <MapPin
-      className="h-14 w-14 text-teal-600 dark:text-teal-400"
+      className="h-14 w-14 text-emerald-500 dark:text-emerald-400"
       strokeWidth={1.75}
       aria-hidden
     />
