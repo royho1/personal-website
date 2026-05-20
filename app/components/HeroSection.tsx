@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { FaChevronDown, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, type Variants } from "framer-motion";
+import { Mail, MapPin } from "lucide-react";
 import type { MouseEvent } from "react";
 
 const profileImageSrc = "/picture.jpeg";
@@ -221,41 +222,43 @@ export default function HeroSection() {
 
           <motion.div
             variants={itemVariants}
-            aria-hidden
-            className="max-w-lg border-t border-sky-300 dark:border-slate-700"
-          />
-
-          <motion.p
-            variants={itemVariants}
-            className="max-w-lg text-sm leading-relaxed text-slate-600 md:text-base dark:text-slate-300"
+            className="max-w-lg rounded-lg border-l-4 border-sky-600 bg-sky-50/95 px-4 py-3.5 shadow-sm shadow-sky-900/5 ring-1 ring-sky-200/70 dark:border-sky-400 dark:bg-slate-800/90 dark:shadow-black/20 dark:ring-slate-600/50"
           >
-            <span className="font-semibold text-sky-950 dark:text-sky-100">Currently:</span>{" "}
-            Seeking full-time Data Analyst / Data Engineer roles while
-            building an SF Restaurant Safety Map.
-          </motion.p>
-
-          <motion.div
-            variants={itemVariants}
-            aria-hidden
-            className="max-w-lg border-t border-sky-300 dark:border-slate-700"
-          />
+            <p className="text-sm font-medium leading-relaxed text-slate-900 md:text-base dark:text-slate-100">
+              <span className="font-semibold text-sky-950 dark:text-sky-100">Currently:</span>{" "}
+              Seeking full-time Data Analyst / Data Engineer roles while
+              building an SF Restaurant Safety Map.
+            </p>
+          </motion.div>
 
           <motion.div
             variants={itemVariants}
             className="max-w-lg space-y-2 text-base text-slate-500 md:text-lg dark:text-slate-400"
           >
-            <p>
-              <span className="text-slate-400 dark:text-slate-500">Email: </span>
+            <p className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
+              <Mail
+                className="h-[1em] w-[1em] shrink-0 text-current"
+                strokeWidth={2}
+                aria-hidden
+              />
+              <span className="text-slate-400 dark:text-slate-500">Email:</span>{" "}
               <a
                 href="mailto:royho.career@gmail.com"
-                className="text-slate-500 transition-colors hover:text-sky-800 dark:text-slate-300 dark:hover:text-sky-300"
+                className="cursor-pointer text-sky-600 underline underline-offset-2 transition-colors hover:text-sky-800 dark:text-sky-400 dark:hover:text-sky-300"
               >
                 royho.career@gmail.com
               </a>
             </p>
-            <p>
-              <span className="text-slate-400 dark:text-slate-500">Location: </span>
-              <span className="dark:text-slate-300">Davis, CA | San Francisco, CA</span>
+            <p className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
+              <MapPin
+                className="h-[1em] w-[1em] shrink-0 text-current"
+                strokeWidth={2}
+                aria-hidden
+              />
+              <span className="text-slate-400 dark:text-slate-500">Location:</span>{" "}
+              <span className="text-slate-600 dark:text-slate-300">
+                Davis, CA | San Francisco, CA
+              </span>
             </p>
           </motion.div>
 
@@ -289,6 +292,12 @@ export default function HeroSection() {
               className="inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-sky-600 px-7 py-3 text-base font-medium text-white shadow-sm shadow-sky-600/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-700 hover:shadow-md hover:shadow-sky-600/30 dark:bg-sky-500 dark:shadow-sky-950/40 dark:hover:bg-sky-400"
             >
               View Projects
+            </a>
+            <a
+              href="#resume"
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-sky-600 px-7 py-3 text-base font-medium text-white shadow-sm shadow-sky-600/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-700 hover:shadow-md hover:shadow-sky-600/30 dark:bg-sky-500 dark:shadow-sky-950/40 dark:hover:bg-sky-400"
+            >
+              Resume
             </a>
             <a
               href="#experience"
