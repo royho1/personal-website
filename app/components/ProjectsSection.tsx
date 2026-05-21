@@ -1,8 +1,13 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { AnimatePresence, motion, type Variants } from "framer-motion";
-import { HeartPulse, Star } from "lucide-react";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
+import { HeartPulse, MapPin, Star } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import DrowsyEyeIcon from "./DrowsyEyeIcon";
 import FadeInSection from "./FadeInSection";
@@ -14,7 +19,7 @@ import {
   type Tag,
 } from "./projectsFilterBus";
 
-type FeaturedProjectIconVariant = "eye" | "bars" | "heart";
+type FeaturedProjectIconVariant = "eye" | "bars" | "heart" | "mapPin";
 
 type FeaturedProject = {
   title: string;
@@ -29,15 +34,14 @@ type FeaturedProject = {
 
 const featuredProjects: FeaturedProject[] = [
   {
-    title: "Drowsy Driver Detection",
+    title: "SF Restaurant Safety Map",
     description:
-      "Built a real-time drowsiness detection system using computer vision techniques and a CNN model trained on eye-state data.",
-    tech: "Python, OpenCV, CNN",
-    githubHref: "https://github.com/royho1/drowsy-driver-detection",
-    iconVariant: "eye",
-    gradient: "from-sky-100 via-white to-cyan-100",
-    award: "Award Winner: Best Execution",
-    tags: ["Python", "Machine Learning"],
+      "Built an interactive map of 5,500+ San Francisco restaurant health inspections using public DataSF data, an ETL pipeline into a SQLite schema, a Flask REST API, and a React + Mapbox frontend for search, filters, and inspection details.",
+    tech: "Python, SQL, Flask, React, Mapbox, ETL",
+    githubHref: "https://github.com/royho1/sf-restaurant-safety-map",
+    iconVariant: "mapPin",
+    gradient: "from-teal-100 via-white to-cyan-100",
+    tags: ["Python", "Data Visualization"],
   },
   {
     title: "Job Analytics Dashboard",
@@ -50,13 +54,14 @@ const featuredProjects: FeaturedProject[] = [
     tags: ["Python", "NLP", "Data Visualization", "Machine Learning"],
   },
   {
-    title: "Heart Stroke Risk Prediction",
+    title: "Drowsy Driver Detection",
     description:
-      "Machine learning model to predict stroke risk from healthcare data, with preprocessing, training, and an interactive Streamlit app.",
-    tech: "Python, scikit-learn, Streamlit",
-    githubHref: "https://github.com/royho1/heart-stroke-risk-prediction",
-    iconVariant: "heart",
-    gradient: "from-rose-100 via-white to-sky-100",
+      "Built a real-time drowsiness detection system using computer vision techniques and a CNN model trained on eye-state data.",
+    tech: "Python, OpenCV, CNN",
+    githubHref: "https://github.com/royho1/drowsy-driver-detection",
+    iconVariant: "eye",
+    gradient: "from-sky-100 via-white to-cyan-100",
+    award: "Award Winner: Best Execution",
     tags: ["Python", "Machine Learning"],
   },
 ];
@@ -70,11 +75,11 @@ type AdditionalProject = {
 
 const additionalProjects: AdditionalProject[] = [
   {
-    name: "SF Restaurant Safety Map",
+    name: "Heart Stroke Risk Prediction",
     description:
-      "Built an interactive map of SF restaurant health inspections using public data, SQL, and data visualization.",
-    tech: "Python, SQL, Data Visualization",
-    tags: ["Python", "Data Visualization"],
+      "Machine learning model to predict stroke risk from healthcare data, with preprocessing, training, and an interactive Streamlit app.",
+    tech: "Python, scikit-learn, Streamlit",
+    tags: ["Python", "Machine Learning"],
   },
   {
     name: "Portuguese Wine Type and Quality Prediction",
@@ -134,6 +139,37 @@ const additionalProjects: AdditionalProject[] = [
   },
 ];
 
+function MapPinDropIcon() {
+  const prefersReducedMotion = useReducedMotion();
+
+  const pin = (
+    <MapPin
+      className="h-14 w-14 text-teal-600 dark:text-teal-400"
+      strokeWidth={1.75}
+      aria-hidden
+    />
+  );
+
+  if (prefersReducedMotion) {
+    return pin;
+  }
+
+  return (
+    <motion.div
+      aria-hidden
+      animate={{ y: [0, 0, -7, 0] }}
+      transition={{
+        duration: 2.2,
+        times: [0, 0.72, 0.86, 1],
+        ease: "easeInOut",
+        repeat: Infinity,
+      }}
+    >
+      {pin}
+    </motion.div>
+  );
+}
+
 function AnimatedProjectIcon({
   variant,
 }: {
@@ -142,7 +178,7 @@ function AnimatedProjectIcon({
   if (variant === "bars") {
     return (
       <div
-        className="flex h-14 w-14 items-end justify-center gap-1 text-emerald-600 dark:text-emerald-400"
+        className="flex h-14 w-14 items-end justify-center gap-1 text-sky-600 dark:text-sky-400"
         aria-hidden
       >
         <span className="h-6 w-3 origin-bottom rounded-sm bg-current animate-bar-grow-1" />
@@ -160,6 +196,10 @@ function AnimatedProjectIcon({
         aria-hidden
       />
     );
+  }
+
+  if (variant === "mapPin") {
+    return <MapPinDropIcon />;
   }
 
   return <DrowsyEyeIcon />;
@@ -223,7 +263,7 @@ export default function ProjectsSection() {
             id="projects-heading"
             className="cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"
           >
-            Projects
+            Featured Projects
           </h2>
           <a
             href="https://github.com/royho1"
@@ -316,8 +356,8 @@ export default function ProjectsSection() {
 
         <div className="mt-16">
           <div className="flex items-center justify-center gap-3">
-            <h3 className="text-sm font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
-              Additional projects
+            <h3 className="cursor-default text-center text-xl font-semibold tracking-tight text-sky-950 md:text-2xl dark:text-sky-100">
+              Additional Projects
             </h3>
             <a
               href="https://github.com/royho1"
