@@ -209,7 +209,7 @@ export default function HeroSection() {
               variants={itemVariants}
               className="text-lg text-sky-800/90 md:text-xl dark:text-sky-300"
             >
-              UC Davis Graduate
+              UC Davis Graduate | B.S. Statistical Data Science, Minor in Computer Science
             </motion.p>
           </div>
 
