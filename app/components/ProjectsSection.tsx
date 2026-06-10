@@ -41,7 +41,7 @@ const featuredProjects: FeaturedProject[] = [
     githubHref: "https://github.com/royho1/sf-restaurant-safety-map",
     iconVariant: "mapPin",
     gradient: "from-teal-100 via-white to-cyan-100",
-    tags: ["Python", "Data Visualization"],
+    tags: ["Python", "SQL", "Data Visualization"],
   },
   {
     title: "Job Analytics Dashboard",

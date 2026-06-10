@@ -8,6 +8,7 @@ import {
   FaDatabase,
   FaFileExcel,
 } from "react-icons/fa";
+import { IoLogoTableau } from "react-icons/io5";
 import {
   SiPandas,
   SiPython,
@@ -17,9 +18,20 @@ import {
 
 type IconType = ComponentType<SVGProps<SVGSVGElement>>;
 
+/** Power BI brand mark — not bundled in react-icons@5.6.0 (no SiPowerbi). */
+function SiPowerBiIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
+      <path d="M4 20V4h3.5v16H4zm5.25-4V8h3.5v8h-3.5zm5.25-3V11h3.5v6h-3.5zm5.25-2V13H23v5h-3.25z" />
+    </svg>
+  );
+}
+
 const skillsWithIcons: { name: string; Icon: IconType; color: string }[] = [
   { name: "Python", Icon: SiPython, color: "text-[#3776AB]" },
   { name: "SQL", Icon: FaDatabase, color: "text-sky-700" },
+  { name: "Tableau", Icon: IoLogoTableau, color: "text-[#E97627]" },
+  { name: "Power BI", Icon: SiPowerBiIcon, color: "text-[#F2C811]" },
   { name: "Excel", Icon: FaFileExcel, color: "text-[#217346]" },
   { name: "R", Icon: SiR, color: "text-[#276DC3]" },
   { name: "Pandas", Icon: SiPandas, color: "text-[#150458]" },
