@@ -190,6 +190,49 @@ export default function Home() {
           </div>
         </FadeInSection>
 
+        <ResumeSection />
+
+        <FadeInSection
+          as="section"
+          id="hobbies"
+          className="border-t border-sky-200/80 bg-sky-50 dark:border-slate-800 dark:bg-slate-900/80"
+          aria-labelledby="hobbies-heading"
+        >
+          <div className="mx-auto max-w-5xl px-6 py-20 text-center md:px-8 md:py-28">
+            <h2
+              id="hobbies-heading"
+              className="mx-auto inline-block w-max max-w-full cursor-default text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"
+            >
+              Hobbies
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg dark:text-slate-300">
+              Outside of work, I enjoy thrifting, bass fishing, spending time outdoors, and
+              playing poker. I also love keeping up with fashion and
+              music.
+            </p>
+            <div className="mt-12 grid items-start gap-7 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+              {hobbyPhotos.map((photo, index) => (
+                <figure
+                  key={`${photo.src}-${index}`}
+                  className="group flex flex-col self-start overflow-hidden rounded-2xl bg-white shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/60"
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    width={photo.width}
+                    height={photo.height}
+                    className="block h-auto w-full object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  <figcaption className="px-4 py-3 text-center text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400">
+                    {photo.caption}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </FadeInSection>
+
         <FadeInSection
           as="section"
           id="contact"
@@ -239,49 +282,6 @@ export default function Home() {
                   <FaGithub className="h-8 w-8" aria-hidden />
                 </a>
               </div>
-            </div>
-          </div>
-        </FadeInSection>
-
-        <ResumeSection />
-
-        <FadeInSection
-          as="section"
-          id="hobbies"
-          className="border-t border-sky-200/80 bg-sky-50 dark:border-slate-800 dark:bg-slate-900/80"
-          aria-labelledby="hobbies-heading"
-        >
-          <div className="mx-auto max-w-5xl px-6 py-20 text-center md:px-8 md:py-28">
-            <h2
-              id="hobbies-heading"
-              className="mx-auto inline-block w-max max-w-full cursor-default text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"
-            >
-              Hobbies
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg dark:text-slate-300">
-              Outside of work, I enjoy thrifting, bass fishing, spending time outdoors, and
-              playing poker. I also love keeping up with fashion and
-              music.
-            </p>
-            <div className="mt-12 grid items-start gap-7 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-              {hobbyPhotos.map((photo, index) => (
-                <figure
-                  key={`${photo.src}-${index}`}
-                  className="group flex flex-col self-start overflow-hidden rounded-2xl bg-white shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/60"
-                >
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    width={photo.width}
-                    height={photo.height}
-                    className="block h-auto w-full object-contain transition-transform duration-500 group-hover:scale-[1.01]"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                  <figcaption className="px-4 py-3 text-center text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400">
-                    {photo.caption}
-                  </figcaption>
-                </figure>
-              ))}
             </div>
           </div>
         </FadeInSection>
