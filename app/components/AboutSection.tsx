@@ -133,7 +133,7 @@ export default function AboutSection() {
                   <div className="text-2xl font-bold text-sky-900 md:text-3xl dark:text-sky-200">
                     {stat.value}
                   </div>
-                  <div className="mt-1 text-[0.7rem] font-medium uppercase tracking-wide text-slate-500 sm:text-xs dark:text-slate-400">
+                  <div className="mt-1 text-[0.7rem] font-medium uppercase tracking-wide text-sky-800 sm:text-xs dark:text-sky-300">
                     {stat.label}
                   </div>
                 </div>

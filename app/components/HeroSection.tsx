@@ -270,7 +270,7 @@ export default function HeroSection() {
               aria-label="LinkedIn profile"
               className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-800 dark:text-slate-400 dark:hover:text-sky-300"
             >
-              <FaLinkedin className="h-7 w-7" aria-hidden />
+              <FaLinkedin className="h-7 w-7 text-[#0A66C2]" aria-hidden />
             </a>
             <a
               href="https://github.com/royho1"
@@ -279,7 +279,7 @@ export default function HeroSection() {
               aria-label="GitHub profile"
               className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-800 dark:text-slate-400 dark:hover:text-sky-300"
             >
-              <FaGithub className="h-7 w-7" aria-hidden />
+              <FaGithub className="h-7 w-7 text-[#181717] dark:text-white" aria-hidden />
             </a>
           </motion.div>
 

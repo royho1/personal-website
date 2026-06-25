@@ -282,7 +282,7 @@ export default function ProjectsSection() {
             aria-label="Roy Ho GitHub profile"
             className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-900 dark:text-slate-400 dark:hover:text-sky-300"
           >
-            <FaGithub className="h-7 w-7" aria-hidden />
+            <FaGithub className="h-7 w-7 text-[#181717] dark:text-white" aria-hidden />
           </a>
         </div>
 
@@ -376,7 +376,7 @@ export default function ProjectsSection() {
               aria-label="Roy Ho GitHub profile"
               className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-900 dark:text-slate-400 dark:hover:text-sky-300"
             >
-              <FaGithub className="h-6 w-6" aria-hidden />
+              <FaGithub className="h-6 w-6 text-[#181717] dark:text-white" aria-hidden />
             </a>
           </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
