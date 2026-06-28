@@ -10,6 +10,7 @@
 export const FILTERS = [
   "All",
   "Python",
+  "SQL",
   "R",
   "Machine Learning",
   "NLP",
