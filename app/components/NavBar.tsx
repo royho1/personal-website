@@ -16,9 +16,9 @@ const navLinks = [
   { label: "About", href: "/#about", id: "about" },
   { label: "Projects", href: "/#projects", id: "projects" },
   { label: "Experience", href: "/#experience", id: "experience" },
-  { label: "Contact", href: "/#contact", id: "contact" },
   { label: "Resume", href: "/#resume", id: "resume" },
   { label: "Hobbies", href: "/#hobbies", id: "hobbies" },
+  { label: "Contact", href: "/#contact", id: "contact" },
 ] as const;
 
 /** Shared base classes for the top-level nav link text so the Projects
