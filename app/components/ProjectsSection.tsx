@@ -71,6 +71,7 @@ type AdditionalProject = {
   description: string;
   tech: string;
   tags: Tag[];
+  githubHref?: string;
 };
 
 const additionalProjects: AdditionalProject[] = [
@@ -80,6 +81,7 @@ const additionalProjects: AdditionalProject[] = [
       "Machine learning model to predict stroke risk from healthcare data, with preprocessing, training, and an interactive Streamlit app.",
     tech: "Python, scikit-learn, Streamlit",
     tags: ["Python", "Machine Learning"],
+    githubHref: "https://github.com/royho1/heart-stroke-risk-prediction",
   },
   {
     name: "Portuguese Wine Type and Quality Prediction",
@@ -87,6 +89,7 @@ const additionalProjects: AdditionalProject[] = [
       "Classified red vs. white wines and predicted quality ratings using logistic regression, LDA, and PCA on chemical properties.",
     tech: "Python, scikit-learn, PCA",
     tags: ["Python", "Machine Learning"],
+    githubHref: "https://github.com/royho1/wine-quality-classification",
   },
   {
     name: "Stock Trading Algorithm",
@@ -101,6 +104,7 @@ const additionalProjects: AdditionalProject[] = [
       "Predicted 5th-season NBA player performance using regression and classification models on historical stats and draft data.",
     tech: "Python, Random Forest, Gradient Boosting",
     tags: ["Python", "Machine Learning"],
+    githubHref: "https://github.com/royho1/nba-player-prediction",
   },
   {
     name: "Analyzing Movie Reviews Across Genres",
@@ -108,6 +112,7 @@ const additionalProjects: AdditionalProject[] = [
       "Scraped and compared IMDb audience reviews with professional critic reviews using sentiment analysis and NLP models.",
     tech: "Python, Selenium, VADER, RoBERTa",
     tags: ["Python", "NLP", "Machine Learning", "Data Visualization"],
+    githubHref: "https://github.com/royho1/movie-reviews-analysis",
   },
   {
     name: "Drake Time Series Analysis",
@@ -115,6 +120,7 @@ const additionalProjects: AdditionalProject[] = [
       "Forecasted Drake's popularity trends using 14 years of Google Trends data with ARMA and ARIMA models.",
     tech: "R, forecast, ggplot2",
     tags: ["R", "Data Visualization"],
+    githubHref: "https://github.com/royho1/drake-time-series-project",
   },
   {
     name: "NBA Player Salary Analysis",
@@ -122,6 +128,7 @@ const additionalProjects: AdditionalProject[] = [
       "Analyzed the relationship between player performance metrics and salary structures using regression and clustering.",
     tech: "R, tidyverse, ggplot2",
     tags: ["R", "Data Visualization", "Machine Learning"],
+    githubHref: "https://github.com/royho1/nba-salary-analysis",
   },
   {
     name: "Socioeconomic Predictors of Crime Rates",
@@ -129,6 +136,8 @@ const additionalProjects: AdditionalProject[] = [
       "Modeled the relationship between poverty, unemployment, and crime rates using multiple linear regression and model selection.",
     tech: "R, ANOVA, AIC/BIC",
     tags: ["R", "Data Visualization"],
+    githubHref:
+      "https://github.com/royho1/socioeconomic-predictors-of-crime-rates",
   },
   {
     name: "Graph-Based Shortest Path Analysis (Six Degrees of Kevin Bacon)",
@@ -136,6 +145,7 @@ const additionalProjects: AdditionalProject[] = [
       "Built a graph traversal algorithm to compute degrees of separation between actors through shared movie appearances.",
     tech: "Python, BFS, Graph Algorithms",
     tags: ["Python"],
+    githubHref: "https://github.com/royho1/six-degrees-kevin-bacon",
   },
 ];
 
@@ -371,31 +381,67 @@ export default function ProjectsSection() {
           </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <AnimatePresence mode="popLayout">
-              {visibleAdditional.map((project) => (
-                <motion.article
-                  key={project.name}
-                  layout
-                  variants={cardVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  className="group relative overflow-hidden rounded-lg border border-sky-200 bg-sky-50/90 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50"
-                >
-                  <div className="flex min-h-10 w-full flex-col justify-center bg-gradient-to-br from-sky-100 via-white to-cyan-100 px-4 py-2 dark:from-slate-800 dark:via-slate-900 dark:to-sky-950">
-                    <h4 className="text-sm font-semibold leading-snug text-sky-950 dark:text-sky-100">
-                      {project.name}
-                    </h4>
-                  </div>
-                  <div className="p-4">
-                    <p className="text-xs leading-relaxed text-slate-600 dark:text-slate-300">
-                      {project.description}
-                    </p>
-                    <p className="mt-3 text-[11px] font-medium text-slate-500 dark:text-slate-400">
-                      {project.tech}
-                    </p>
-                  </div>
-                </motion.article>
-              ))}
+              {visibleAdditional.map((project) => {
+                const additionalCardClassName =
+                  "group relative flex h-full flex-col overflow-hidden rounded-lg border border-sky-200 bg-sky-50/90 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50";
+                const cardContent = (
+                  <>
+                    <div className="flex min-h-10 w-full flex-col justify-center bg-gradient-to-br from-sky-100 via-white to-cyan-100 px-4 py-2 dark:from-slate-800 dark:via-slate-900 dark:to-sky-950">
+                      <h4 className="text-sm font-semibold leading-snug text-sky-950 dark:text-sky-100">
+                        {project.name}
+                      </h4>
+                    </div>
+                    <div className="flex flex-1 flex-col p-4">
+                      <p className="flex-1 text-xs leading-relaxed text-slate-600 dark:text-slate-300">
+                        {project.description}
+                      </p>
+                      <p className="mt-3 text-[11px] font-medium text-slate-500 dark:text-slate-400">
+                        {project.tech}
+                      </p>
+                      {project.githubHref && (
+                        <span className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-medium text-sky-700 transition-colors group-hover:text-sky-900 dark:text-sky-300 dark:group-hover:text-sky-200">
+                          <FaGithub className="h-3.5 w-3.5" aria-hidden />
+                          View on GitHub
+                        </span>
+                      )}
+                    </div>
+                  </>
+                );
+
+                if (project.githubHref) {
+                  return (
+                    <motion.a
+                      key={project.name}
+                      layout
+                      variants={cardVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      href={project.githubHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${project.name} on GitHub`}
+                      className={`${additionalCardClassName} block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500`}
+                    >
+                      {cardContent}
+                    </motion.a>
+                  );
+                }
+
+                return (
+                  <motion.article
+                    key={project.name}
+                    layout
+                    variants={cardVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    className={additionalCardClassName}
+                  >
+                    {cardContent}
+                  </motion.article>
+                );
+              })}
             </AnimatePresence>
           </div>
         </div>
