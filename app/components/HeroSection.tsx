@@ -227,7 +227,7 @@ export default function HeroSection() {
             <p className="text-sm font-medium leading-relaxed text-slate-900 md:text-base dark:text-slate-100">
               <span className="font-semibold text-sky-950 dark:text-sky-100">Currently:</span>{" "}
               Seeking full-time Data Analyst / Data Engineer roles while
-              building an SF Restaurant Safety Map.
+              building Solstice, a shoe resale analyzing platform.
             </p>
           </motion.div>
 
