@@ -12,6 +12,7 @@ import Sparkles from "./components/Sparkles";
 
 const jaikeLogoSrc = "/experience/JAIKE.png";
 const techSprintLogoSrc = "/experience/TechSprint.png";
+const aiscLogoSrc = "/experience/AISC.jpg";
 
 /** Add hobby images under `public/hobbies/` and list them here (width/height = pixel size of each file). */
 const hobbyPhotos: {
@@ -181,6 +182,52 @@ export default function Home() {
                         (Python, yfinance, Alpaca API) running on a Raspberry Pi
                         to filter equities, generate structured CSV outputs, and
                         deliver real-time investment signals via Discord webhook.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-sky-200 bg-white/90 p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-300/25 md:p-8 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50">
+                <div className="grid items-start gap-8 md:grid-cols-[minmax(260px,320px)_minmax(0,1fr)] md:gap-10">
+                  <div className="group relative min-h-[18rem] w-full overflow-hidden rounded-2xl border border-sky-200 bg-white p-10 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/70 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:min-h-[26rem] md:p-14 dark:border-slate-700 dark:bg-slate-100 dark:shadow-black/40 dark:ring-slate-700/50">
+                    <Image
+                      src={aiscLogoSrc}
+                      alt="AI Student Collective logo"
+                      fill
+                      className="object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                      sizes="(max-width: 768px) 100vw, 320px"
+                    />
+                  </div>
+
+                  <div>
+                    <h3 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl dark:text-sky-100">
+                      AISC
+                    </h3>
+                    <p className="mt-1 text-sm leading-snug text-slate-500 md:text-base dark:text-slate-400">
+                      AI Student Collective
+                    </p>
+                    <p className="mt-2 text-sm font-medium uppercase tracking-[0.15em] text-sky-800 md:text-base dark:text-sky-300">
+                      September 2024 &ndash; April 2025
+                    </p>
+                    <h4 className="mt-3 text-lg font-semibold tracking-tight text-slate-900 md:text-xl dark:text-slate-100">
+                      General Member
+                    </h4>
+                    <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-slate-900 marker:text-slate-900 md:text-base dark:text-slate-300 dark:marker:text-slate-500">
+                      <li>
+                        Built machine learning models for stroke risk prediction
+                        and real-time drowsy driver detection within structured
+                        project cycles.
+                      </li>
+                      <li>
+                        Performed data preprocessing, feature engineering, model
+                        development, evaluation, and project presentations.
+                      </li>
+                      <li>
+                        Worked within quarter-long sprint cycles with defined
+                        milestones, code reviews, and final project demos,
+                        following structured machine learning development
+                        workflows from ideation to deployment.
                       </li>
                     </ul>
                   </div>
