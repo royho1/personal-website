@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { FaChevronDown, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, type Variants } from "framer-motion";
-import { Mail, MapPin } from "lucide-react";
+import { Clock, Mail, MapPin } from "lucide-react";
 import type { MouseEvent } from "react";
 
 const profileImageSrc = "/picture.jpeg";
@@ -225,6 +225,11 @@ export default function HeroSection() {
             className="max-w-lg rounded-lg border-l-4 border-sky-600 bg-sky-50/95 px-4 py-3.5 shadow-sm shadow-sky-900/5 ring-1 ring-sky-200/70 dark:border-sky-400 dark:bg-slate-800/90 dark:shadow-black/20 dark:ring-slate-600/50"
           >
             <p className="text-sm font-medium leading-relaxed text-slate-900 md:text-base dark:text-slate-100">
+              <Clock
+                className="inline-block h-[1em] w-[1em] align-[-0.125em] mr-1.5 text-current"
+                strokeWidth={2}
+                aria-hidden
+              />
               <span className="font-semibold text-sky-950 dark:text-sky-100">Currently:</span>{" "}
               Seeking full-time Data Analyst / Data Engineer roles while
               building Solstice, a shoe resale analyzing platform.
