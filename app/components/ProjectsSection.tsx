@@ -355,8 +355,9 @@ export default function ProjectsSection() {
                   <p className="mt-4 text-xs text-slate-500 dark:text-slate-400">
                     {project.tech}
                   </p>
-                  <span className="mt-5 inline-flex text-sm font-medium text-sky-700 underline decoration-sky-300 underline-offset-4 transition-colors group-hover:text-sky-900 group-hover:decoration-sky-600 dark:text-sky-300 dark:decoration-sky-700 dark:group-hover:text-sky-200 dark:group-hover:decoration-sky-400">
-                    GitHub
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-sky-700 transition-colors group-hover:text-sky-900 dark:text-sky-300 dark:group-hover:text-sky-200">
+                    <FaGithub className="h-4 w-4" aria-hidden />
+                    View on GitHub
                   </span>
                 </div>
               </motion.a>
