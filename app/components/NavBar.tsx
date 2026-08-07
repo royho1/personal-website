@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Fragment } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
@@ -176,7 +177,10 @@ export default function NavBar() {
       .map(({ id }) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
 
-    if (sections.length === 0) return;
+    if (sections.length === 0) {
+      setActiveId("");
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -215,23 +219,42 @@ export default function NavBar() {
           <ul className="flex flex-wrap items-center justify-end gap-6 text-sm text-slate-600 md:gap-8 dark:text-slate-300">
             {navLinks.map((link) => {
               const isActive = activeId === link.id;
-              if (link.id === "projects") {
-                return (
+              const item =
+                link.id === "projects" ? (
                   <ProjectsNavItem key={link.href} isActive={isActive} />
+                ) : (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      aria-current={isActive ? "page" : undefined}
+                      className={navLinkClasses(isActive)}
+                    >
+                      {link.label}
+                      <ActiveUnderline isActive={isActive} />
+                    </a>
+                  </li>
+                );
+
+              if (link.id === "about") {
+                const isAskActive = pathname === "/ask";
+                return (
+                  <Fragment key={link.href}>
+                    {item}
+                    <li>
+                      <Link
+                        href="/ask"
+                        aria-current={isAskActive ? "page" : undefined}
+                        className={navLinkClasses(isAskActive)}
+                      >
+                        Ask About Roy
+                        <ActiveUnderline isActive={isAskActive} />
+                      </Link>
+                    </li>
+                  </Fragment>
                 );
               }
-              return (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    aria-current={isActive ? "page" : undefined}
-                    className={navLinkClasses(isActive)}
-                  >
-                    {link.label}
-                    <ActiveUnderline isActive={isActive} />
-                  </a>
-                </li>
-              );
+
+              return item;
             })}
           </ul>
           <ThemeToggle />

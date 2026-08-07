@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Ho;Roy;;;
+FN:Roy Ho
+TITLE:Data Analyst
+EMAIL;TYPE=INTERNET,PREF:royho.career@gmail.com
+URL:https://royho-career.com
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/royho1/
+X-SOCIALPROFILE;TYPE=github:https://github.com/royho1
+ADR;TYPE=HOME:;;;San Francisco;CA;;USA
+NOTE:UC Davis graduate. B.S. Statistical Data Science, Minor in Computer Science. Python, SQL, R, and machine learning.
+END:VCARD
