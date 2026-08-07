@@ -3,18 +3,24 @@ import { ATLAS_KNOWLEDGE } from "@/app/lib/atlasKnowledge";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
-// Per-serverless-instance rate limit store. Resets on cold start, which is
-// acceptable at this traffic level.
+// In-memory per-IP rate limit store. Resets on serverless cold start, so this
+// is a soft guard only. For stronger guarantees across instances, use a
+// persistent store such as Upstash Redis.
 const rateLimitByIp = new Map<string, { count: number; resetAt: number }>();
 
-const RATE_LIMIT = 15;
+const RATE_LIMIT = 20;
 const RATE_WINDOW_MS = 60 * 60 * 1000;
+const MAX_HISTORY_MESSAGES = 10;
+// Soft cap so a single reply cannot run away with tokens/cost.
+const MAX_OUTPUT_TOKENS = 700;
+// Cap only incoming user messages so pasted job descriptions fit.
+const MAX_USER_MESSAGE_CHARS = 4000;
 
 // Swapping to "claude-haiku-4-5-20251001" is the cheaper fallback option;
 // it is a one-line change.
 const MODEL = "claude-sonnet-5";
 
-const SYSTEM_PROMPT = `You are Atlas, the AI assistant on Roy Ho's personal portfolio website.
+const SYSTEM_PROMPT_BASE = `You are Atlas, the AI assistant on Roy Ho's personal portfolio website.
 
 Answer using ONLY the knowledge base provided below. Never invent, guess, or extrapolate facts about Roy's experience, employers, skills, education, or projects.
 
@@ -26,17 +32,47 @@ The light personal details (favorite food, color, show, movie, birthday) are fun
 
 Refuse off-topic requests politely and briefly. You are not a general-purpose assistant. Do not write code, do homework, or answer trivia unrelated to Roy.
 
+SKEPTICAL OR ADVERSARIAL QUESTIONS: If a visitor frames a question against Roy — for example "why shouldn't I hire Roy," "what are his weaknesses," or similar — do not argue against him, invent weaknesses, or become defensive about gaps in what you know. Briefly note that you can only speak to Roy's actual background. Redirect to what his experience does cover. Suggest that the best way to evaluate fit is to talk to Roy directly at royho.career@gmail.com. Stay confident and matter-of-fact, not apologetic. Do not add an AI disclaimer.
+
 Speak about Roy in the third person. Be warm, concise, and specific. Two to four sentences for most answers. Use concrete details from the knowledge base rather than vague praise.
 
 Never claim Roy has skills or experience beyond what is listed. Never state or imply a salary expectation, an availability date, or an opinion on a specific employer.
 
 FORMATTING: Respond in plain conversational prose only. Never use markdown. No asterisks for bold or italics, no numbered or bulleted lists, no headers, no markdown link syntax. Write URLs bare, as https://github.com/royho1, and only when the visitor asks where to find something.
 
+STYLE: Write in natural, readable prose. Prefer two or three shorter sentences over one long sentence chained together with commas. Vary sentence length. Do not stack multiple lists inside a single sentence.
+
 LENGTH: Keep answers to two to four sentences. This is a hard limit. If a full answer would run longer, give the most relevant part and offer to go deeper on a specific piece. Do not summarize Roy's entire background when the question is narrow.
 
 PROJECTS VERSUS EXPERIENCE: The Projects section and the Experience section are different things. When a visitor asks about projects, answer from the Projects section. When they ask about work, roles, or jobs, answer from the Experience section. The one exception is the Stock Trading Algorithm, which is the same body of work as the TechSprint role.
 
 ${ATLAS_KNOWLEDGE}`;
+
+function formatToday(date: Date): string {
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "America/Los_Angeles",
+  });
+}
+
+// Static instructions + knowledge base are identical every request and marked
+// cache_control ephemeral. Today's date changes daily, so it must sit in a
+// separate uncached block after the cached content or it would bust the cache.
+function buildSystemBlocks(today: string) {
+  return [
+    {
+      type: "text" as const,
+      text: SYSTEM_PROMPT_BASE,
+      cache_control: { type: "ephemeral" as const },
+    },
+    {
+      type: "text" as const,
+      text: `Today's date is ${today}. Use this as the current date when reasoning about durations, tenure, or whether a role is current.`,
+    },
+  ];
+}
 
 export async function POST(request: Request) {
   try {
@@ -82,20 +118,36 @@ export async function POST(request: Request) {
         message === null ||
         (message.role !== "user" && message.role !== "assistant") ||
         typeof message.content !== "string" ||
-        message.content.length === 0 ||
-        message.content.length > 500
+        message.content.length === 0
       ) {
         return NextResponse.json(
           {
             error:
-              "Each message must have a valid role and a non-empty content string of 500 characters or fewer.",
+              "Each message must have a valid role and a non-empty content string.",
+          },
+          { status: 400 },
+        );
+      }
+
+      // Cap only user input; do not truncate — ask for a shorter paste instead.
+      if (
+        message.role === "user" &&
+        message.content.length > MAX_USER_MESSAGE_CHARS
+      ) {
+        return NextResponse.json(
+          {
+            error:
+              "That message is too long. Please paste a shorter version, or just the key requirements.",
           },
           { status: 400 },
         );
       }
     }
 
-    const validatedMessages = (messages as ChatMessage[]).slice(-10);
+    // Bound history so long conversations cannot grow the payload unbounded.
+    const validatedMessages = (messages as ChatMessage[]).slice(
+      -MAX_HISTORY_MESSAGES,
+    );
 
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
@@ -106,6 +158,9 @@ export async function POST(request: Request) {
       );
     }
 
+    const today = formatToday(new Date());
+    const system = buildSystemBlocks(today);
+
     const upstream = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
@@ -115,17 +170,22 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         model: MODEL,
-        max_tokens: 700,
-        system: SYSTEM_PROMPT,
+        max_tokens: MAX_OUTPUT_TOKENS,
+        system,
         messages: validatedMessages,
       }),
     });
 
     if (!upstream.ok) {
+      // Log the real upstream failure (credits, outages, etc.) but never
+      // expose raw Anthropic errors to the visitor.
       const errorBody = await upstream.text();
       console.error("Anthropic API error", upstream.status, errorBody);
       return NextResponse.json(
-        { error: "Something went wrong. Please try again later." },
+        {
+          error:
+            "Atlas is temporarily unavailable. Please try again later, or email royho.career@gmail.com.",
+        },
         { status: 502 },
       );
     }

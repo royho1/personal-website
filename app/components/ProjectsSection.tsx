@@ -11,6 +11,7 @@ import { HeartPulse, MapPin, Star } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import DrowsyEyeIcon from "./DrowsyEyeIcon";
 import FadeInSection from "./FadeInSection";
+import StatusBadge from "./StatusBadge";
 import {
   FILTERS,
   emitProjectsFilter,
@@ -36,7 +37,7 @@ const featuredProjects: FeaturedProject[] = [
   {
     title: "SF Restaurant Safety Map",
     description:
-      "Built an interactive map of 5,500+ San Francisco restaurant health inspections using public DataSF data, an ETL pipeline into a SQLite schema, a Flask REST API, and a React + Mapbox frontend for search, filters, and inspection details.",
+      "Built an interactive map of 26,000+ health inspections across 6,200+ San Francisco restaurants using public DataSF data, an ETL pipeline into a SQLite schema, a Flask REST API, and a React + Mapbox frontend for search, filters, and inspection details.",
     tech: "Python, SQL, Flask, React, Mapbox, ETL",
     githubHref: "https://github.com/royho1/sf-restaurant-safety-map",
     iconVariant: "mapPin",
@@ -44,10 +45,10 @@ const featuredProjects: FeaturedProject[] = [
     tags: ["Python", "SQL", "Data Visualization"],
   },
   {
-    title: "Job Analytics Dashboard",
+    title: "Job Market Analytics Dashboard",
     description:
-      "Built a dashboard to analyze job market trends, including salaries, skills, and geographic differences across roles.",
-    tech: "Python, Data Visualization",
+      "Team-built dashboard analyzing 9,000+ tech job postings for salary, skill, and geographic trends. Contributed the scraping layer and a TF-IDF resume matching engine.",
+    tech: "Python, Flask, scikit-learn, TF-IDF, Selenium",
     githubHref: "https://github.com/royho1/job-market-analysis-dashboard",
     iconVariant: "bars",
     gradient: "from-emerald-100 via-white to-sky-100",
@@ -56,8 +57,8 @@ const featuredProjects: FeaturedProject[] = [
   {
     title: "Drowsy Driver Detection",
     description:
-      "Built a real-time drowsiness detection system using computer vision techniques and a CNN model trained on eye-state data.",
-    tech: "Python, OpenCV, CNN",
+      "Built a real-time drowsiness detection system using dlib facial landmarks and Eye Aspect Ratio thresholding, with a scikit-learn classifier on the Kaggle MRL dataset and a live OpenCV alert.",
+    tech: "Python, OpenCV, dlib, scikit-learn",
     githubHref: "https://github.com/royho1/drowsy-driver-detection",
     iconVariant: "eye",
     gradient: "from-sky-100 via-white to-cyan-100",
@@ -72,9 +73,18 @@ type AdditionalProject = {
   tech: string;
   tags: Tag[];
   githubHref?: string;
+  status?: string;
 };
 
 const additionalProjects: AdditionalProject[] = [
+  {
+    name: "Solstice",
+    description:
+      "Sneaker resale analyzer that runs a 4B-parameter vision model fully on-device to identify shoes from photos and grade their condition, with a FastAPI and PostgreSQL backend tracking market prices over time.",
+    tech: "Python, FastAPI, PostgreSQL, React, TypeScript",
+    tags: ["Python", "SQL", "Machine Learning"],
+    status: "In Progress",
+  },
   {
     name: "Heart Stroke Risk Prediction",
     description:
@@ -86,7 +96,7 @@ const additionalProjects: AdditionalProject[] = [
   {
     name: "Portuguese Wine Type and Quality Prediction",
     description:
-      "Classified red vs. white wines and predicted quality ratings using logistic regression, LDA, and PCA on chemical properties.",
+      "Classified red vs. white wines at 98.3% accuracy and predicted quality ratings using logistic regression, LDA, MANOVA, and PCA on chemical properties.",
     tech: "Python, scikit-learn, PCA",
     tags: ["Python", "Machine Learning"],
     githubHref: "https://github.com/royho1/wine-quality-classification",
@@ -109,7 +119,7 @@ const additionalProjects: AdditionalProject[] = [
   {
     name: "Analyzing Movie Reviews Across Genres",
     description:
-      "Scraped and compared IMDb audience reviews with professional critic reviews using sentiment analysis and NLP models.",
+      "Compared IMDb audience reviews against professional critic reviews across five genres. Built the critic rating extraction pipeline and fit a RoBERTa sentiment classifier that outperformed the VADER baseline.",
     tech: "Python, Selenium, VADER, RoBERTa",
     tags: ["Python", "NLP", "Machine Learning", "Data Visualization"],
     githubHref: "https://github.com/royho1/movie-reviews-analysis",
@@ -387,6 +397,11 @@ export default function ProjectsSection() {
                   "group relative flex h-full flex-col overflow-hidden rounded-lg border border-sky-200 bg-sky-50/90 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50";
                 const cardContent = (
                   <>
+                    {project.status && (
+                      <StatusBadge className="absolute bottom-3 right-3 z-10">
+                        {project.status}
+                      </StatusBadge>
+                    )}
                     <div className="flex min-h-10 w-full flex-col justify-center bg-gradient-to-br from-sky-100 via-white to-cyan-100 px-4 py-2 dark:from-slate-800 dark:via-slate-900 dark:to-sky-950">
                       <h4 className="text-sm font-semibold leading-snug text-sky-950 dark:text-sky-100">
                         {project.name}
@@ -399,12 +414,16 @@ export default function ProjectsSection() {
                       <p className="mt-3 text-[11px] font-medium text-slate-500 dark:text-slate-400">
                         {project.tech}
                       </p>
-                      {project.githubHref && (
-                        <span className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-medium text-sky-700 transition-colors group-hover:text-sky-900 dark:text-sky-300 dark:group-hover:text-sky-200">
-                          <FaGithub className="h-3.5 w-3.5" aria-hidden />
-                          View on GitHub
-                        </span>
-                      )}
+                      {/* Reserve footer height so cards without a GitHub link
+                          stay aligned with neighbors that have one. */}
+                      <div className="mt-3 flex min-h-[1.25rem] items-center">
+                        {project.githubHref ? (
+                          <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-sky-700 transition-colors group-hover:text-sky-900 dark:text-sky-300 dark:group-hover:text-sky-200">
+                            <FaGithub className="h-3.5 w-3.5" aria-hidden />
+                            View on GitHub
+                          </span>
+                        ) : null}
+                      </div>
                     </div>
                   </>
                 );

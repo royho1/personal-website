@@ -7,13 +7,13 @@ import AtlasDog from "./AtlasDog";
 
 export const ASSISTANT_NAME = "Atlas";
 
-type ChatMessage = { role: "user" | "assistant"; content: string };
+type ChatMessage = { id: string; role: "user" | "assistant"; content: string };
 
 const SUGGESTIONS = [
   "What's Roy's experience with SQL and Python?",
   "Tell me about Solstice.",
-  "What did Roy study at UC Davis?",
-  "Is Roy a good fit for a data engineer role?",
+  "Is Roy a good fit for a data analyst role?",
+  "What does Roy do outside of work?",
 ] as const;
 
 const AVATAR_PX = 34;
@@ -45,6 +45,9 @@ export default function AtlasChat() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const isLoadingRef = useRef(false);
+  const messageIdRef = useRef(0);
+  const messagesRef = useRef<ChatMessage[]>([]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -52,22 +55,36 @@ export default function AtlasChat() {
 
   const sendMessage = async (rawText: string) => {
     const content = rawText.trim();
-    if (!content || isLoading) return;
+    if (!content || isLoadingRef.current) return;
 
-    const updatedMessages: ChatMessage[] = [
-      ...messages,
-      { role: "user", content },
-    ];
-    setMessages(updatedMessages);
+    isLoadingRef.current = true;
+    setIsLoading(true);
     setInput("");
     setError(null);
-    setIsLoading(true);
+
+    const userMessage: ChatMessage = {
+      id: `msg-${++messageIdRef.current}`,
+      role: "user",
+      content,
+    };
+
+    // Build the next history locally from the ref (always current), not from
+    // a possibly-stale render closure or a deferred setState updater.
+    const nextMessages = [...messagesRef.current, userMessage];
+    messagesRef.current = nextMessages;
+    setMessages(nextMessages);
+
+    const payload = nextMessages
+      .filter((message) => message.content.trim().length > 0)
+      .map(({ role, content: text }) => ({ role, content: text }));
+
+    console.log("[AtlasChat] outgoing payload", payload);
 
     try {
       const response = await fetch("/api/atlas", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ messages: updatedMessages }),
+        body: JSON.stringify({ messages: payload }),
       });
 
       const data = (await response.json()) as {
@@ -82,13 +99,24 @@ export default function AtlasChat() {
         return;
       }
 
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: data.reply ?? "" },
-      ]);
+      const reply = (data.reply ?? "").trim();
+      if (!reply) {
+        setError("Something went wrong. Please try again later.");
+        return;
+      }
+
+      const assistantMessage: ChatMessage = {
+        id: `msg-${++messageIdRef.current}`,
+        role: "assistant",
+        content: reply,
+      };
+      const withReply = [...messagesRef.current, assistantMessage];
+      messagesRef.current = withReply;
+      setMessages(withReply);
     } catch {
       setError("Something went wrong. Please try again later.");
     } finally {
+      isLoadingRef.current = false;
       setIsLoading(false);
     }
   };
@@ -108,10 +136,50 @@ export default function AtlasChat() {
         <div className="flex-1 space-y-4 overflow-y-auto px-4 py-5 sm:px-6">
           {messages.length === 0 && !isLoading ? (
             <div className="flex h-full flex-col items-center justify-center gap-6 px-2 text-center">
-              <AtlasDog size={96} />
-              <p className="max-w-md text-base leading-relaxed text-slate-600 dark:text-slate-300">
-                Ask me anything about Roy&apos;s background, projects, or
-                experience.
+              <div
+                className="relative z-10 mx-auto w-full max-w-sm rounded-2xl border border-[var(--bubble-border)] bg-[var(--bubble-fill)] px-4 py-3 text-sm leading-relaxed text-slate-600 shadow-sm shadow-sky-900/5 sm:text-base dark:text-slate-300 dark:shadow-black/20 [--bubble-fill:rgb(240_249_255/0.9)] [--bubble-border:rgb(186_230_253/0.8)] dark:[--bubble-fill:rgb(30_41_59/0.4)] dark:[--bubble-border:rgb(71_85_105)]"
+              >
+                <p className="relative z-10">
+                  Ask me anything about Roy&apos;s background, projects, or
+                  experience.
+                </p>
+                {/* Slim curved comic tail — anchored ~60%, tip over Atlas */}
+                <svg
+                  aria-hidden
+                  viewBox="0 0 40 16"
+                  width="40"
+                  height="16"
+                  overflow="visible"
+                  className="pointer-events-none absolute left-[60%] top-full z-0 -translate-x-[75%]"
+                >
+                  <path
+                    d="M 26 0
+                       C 24 4, 19 8, 14 12
+                       C 11 14, 9 15, 8 15.5
+                       C 12 13, 22 7, 30 3
+                       C 32 1.5, 33 0.5, 34 0
+                       Z"
+                    fill="var(--bubble-fill)"
+                  />
+                  <path
+                    d="M 26 0
+                       C 24 4, 19 8, 14 12
+                       C 11 14, 9 15, 8 15.5
+                       C 12 13, 22 7, 30 3
+                       C 32 1.5, 33 0.5, 34 0"
+                    fill="none"
+                    stroke="var(--bubble-border)"
+                    strokeWidth="1.25"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+              <div className="relative z-20">
+                <AtlasDog size={96} pettable />
+              </div>
+              <p className="text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+                Feel free to pet Atlas!
               </p>
               <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
                 {SUGGESTIONS.map((suggestion) => (
@@ -133,7 +201,7 @@ export default function AtlasChat() {
                 if (message.role === "user") {
                   return (
                     <motion.div
-                      key={`${message.role}-${index}`}
+                      key={message.id}
                       initial={{ opacity: 0, y: 14 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.35, ease: "easeOut" }}
@@ -151,7 +219,7 @@ export default function AtlasChat() {
 
                 return (
                   <motion.div
-                    key={`${message.role}-${index}`}
+                    key={message.id}
                     initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.35, ease: "easeOut" }}

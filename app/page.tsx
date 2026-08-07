@@ -230,8 +230,8 @@ export default function Home() {
               </h2>
             </div>
             <p className="mt-4 text-base leading-relaxed text-slate-600 md:text-lg dark:text-slate-300">
-              Atlas is Roy&apos;s AI assistant. Ask it anything you&apos;d want
-              to know about his background, projects, or experience before
+              Atlas is my AI assistant. Ask it anything you&apos;d want
+              to know about my background, projects, or experience before
               reaching out.
             </p>
             <div className="mt-8 flex justify-center">
