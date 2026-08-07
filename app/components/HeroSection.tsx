@@ -1,15 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { FaChevronDown, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, type Variants } from "framer-motion";
 import { Clock, Mail, MapPin } from "lucide-react";
 import type { MouseEvent } from "react";
+import AtlasDog from "./AtlasDog";
+import StatusBadge from "./StatusBadge";
 
 const profileImageSrc = "/picture.jpeg";
 const profileImageWidth = 799;
 const profileImageHeight = 1123;
+
+const primaryCtaClassName =
+  "inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-sky-600 px-7 py-3 text-base font-medium text-white shadow-sm shadow-sky-600/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-700 hover:shadow-md hover:shadow-sky-600/30 dark:bg-sky-500 dark:shadow-sky-950/40 dark:hover:bg-sky-400";
 
 const tagline =
   "I build data-driven solutions using Python, SQL, R, Excel, and Machine Learning.";
@@ -147,13 +153,11 @@ function AvailabilityBadge() {
       href="#contact"
       onClick={handleClick}
       aria-label="Available for opportunities — jump to contact"
-      className="inline-flex translate-y-1.5 cursor-pointer items-center gap-2 self-center rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 text-[13px] font-medium leading-none text-emerald-700 shadow-sm shadow-emerald-900/10 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-100 hover:shadow-md hover:shadow-emerald-900/10 dark:border-emerald-500/40 dark:bg-emerald-500/10 dark:text-emerald-300 dark:shadow-emerald-950/40 dark:hover:border-emerald-400/70 dark:hover:bg-emerald-500/20"
+      className="self-center translate-y-1.5"
     >
-      <span className="relative flex h-2.5 w-2.5">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
-      </span>
-      Available for opportunities
+      <StatusBadge className="cursor-pointer transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-100 hover:shadow-md hover:shadow-emerald-900/10 dark:hover:border-emerald-400/70 dark:hover:bg-emerald-500/20">
+        Available for opportunities
+      </StatusBadge>
     </motion.a>
   );
 }
@@ -232,7 +236,7 @@ export default function HeroSection() {
               />
               <span className="font-semibold text-sky-950 dark:text-sky-100">Currently:</span>{" "}
               Seeking full-time Data Analyst / Data Engineer roles while
-              building Solstice, a shoe resale analyzing platform.
+              building Solstice, a sneaker resale analyzer.
             </p>
           </motion.div>
 
@@ -262,7 +266,7 @@ export default function HeroSection() {
               />
               <span className="text-slate-400 dark:text-slate-500">Location:</span>{" "}
               <span className="text-slate-600 dark:text-slate-300">
-                Davis, CA | San Francisco, CA
+                San Francisco, CA
               </span>
             </p>
           </motion.div>
@@ -290,32 +294,33 @@ export default function HeroSection() {
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-nowrap gap-4 pt-1"
+            className="flex flex-col items-start gap-8 pt-1"
           >
-            <a
-              href="#projects"
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-sky-600 px-7 py-3 text-base font-medium text-white shadow-sm shadow-sky-600/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-700 hover:shadow-md hover:shadow-sky-600/30 dark:bg-sky-500 dark:shadow-sky-950/40 dark:hover:bg-sky-400"
+            <div className="flex flex-nowrap gap-4">
+              <a href="#resume" className={primaryCtaClassName}>
+                Resume
+              </a>
+              <a href="#projects" className={primaryCtaClassName}>
+                View Projects
+              </a>
+              <a href="#experience" className={primaryCtaClassName}>
+                View Experience
+              </a>
+              <a href="#contact" className={primaryCtaClassName}>
+                Contact Me
+              </a>
+            </div>
+            <Link
+              href="/ask"
+              className="group inline-flex max-w-full items-center gap-3 rounded-xl bg-sky-50/80 px-3.5 py-2 text-left text-sm leading-snug text-slate-600 shadow-sm shadow-sky-900/5 ring-1 ring-sky-200/90 transition-colors duration-200 hover:bg-sky-100/90 hover:text-sky-950 hover:ring-sky-300 dark:bg-slate-800/50 dark:text-slate-300 dark:shadow-black/20 dark:ring-slate-700 dark:hover:bg-slate-800/80 dark:hover:text-sky-100 dark:hover:ring-slate-600"
             >
-              View Projects
-            </a>
-            <a
-              href="#resume"
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-sky-600 px-7 py-3 text-base font-medium text-white shadow-sm shadow-sky-600/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-700 hover:shadow-md hover:shadow-sky-600/30 dark:bg-sky-500 dark:shadow-sky-950/40 dark:hover:bg-sky-400"
-            >
-              Resume
-            </a>
-            <a
-              href="#experience"
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-sky-600 px-7 py-3 text-base font-medium text-white shadow-sm shadow-sky-600/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-700 hover:shadow-md hover:shadow-sky-600/30 dark:bg-sky-500 dark:shadow-sky-950/40 dark:hover:bg-sky-400"
-            >
-              View Experience
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-lg border border-sky-300 bg-white/90 px-7 py-3 text-base font-medium text-sky-950 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-50 hover:shadow-md hover:shadow-sky-300/30 dark:border-slate-700 dark:bg-slate-900/70 dark:text-sky-200 dark:hover:bg-slate-800"
-            >
-              Contact Me
-            </a>
+              <span className="shrink-0 transition-transform duration-200 ease-out group-hover:scale-110">
+                <AtlasDog size={40} />
+              </span>
+              <span className="min-w-0">
+                Got a question? Ask Atlas, my AI assistant.
+              </span>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

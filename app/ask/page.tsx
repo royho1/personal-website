@@ -32,7 +32,7 @@ export default function AskPage() {
               </h1>
             </div>
             <p className="mt-4 text-base leading-relaxed text-slate-600 md:text-lg dark:text-slate-300">
-              Roy&apos;s AI assistant. Ask about his background, projects, or
+              My AI assistant. Ask about my background, projects, or
               experience.
             </p>
             <AtlasChat />
