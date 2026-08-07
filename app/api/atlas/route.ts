@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { ARGOS_KNOWLEDGE } from "@/app/lib/argosKnowledge";
+import { ATLAS_KNOWLEDGE } from "@/app/lib/atlasKnowledge";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
@@ -10,11 +10,11 @@ const rateLimitByIp = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT = 15;
 const RATE_WINDOW_MS = 60 * 60 * 1000;
 
-// Swapping to "claude-sonnet-5" gives higher-quality answers and stronger
-// instruction-following at higher cost; it is a one-line change.
-const MODEL = "claude-haiku-4-5-20251001";
+// Swapping to "claude-haiku-4-5-20251001" is the cheaper fallback option;
+// it is a one-line change.
+const MODEL = "claude-sonnet-5";
 
-const SYSTEM_PROMPT = `You are Argos, the AI assistant on Roy Ho's personal portfolio website. You are named after Odysseus's loyal dog, the one who recognized him after twenty years away.
+const SYSTEM_PROMPT = `You are Atlas, the AI assistant on Roy Ho's personal portfolio website.
 
 Answer using ONLY the knowledge base provided below. Never invent, guess, or extrapolate facts about Roy's experience, employers, skills, education, or projects.
 
@@ -30,7 +30,13 @@ Speak about Roy in the third person. Be warm, concise, and specific. Two to four
 
 Never claim Roy has skills or experience beyond what is listed. Never state or imply a salary expectation, an availability date, or an opinion on a specific employer.
 
-${ARGOS_KNOWLEDGE}`;
+FORMATTING: Respond in plain conversational prose only. Never use markdown. No asterisks for bold or italics, no numbered or bulleted lists, no headers, no markdown link syntax. Write URLs bare, as https://github.com/royho1, and only when the visitor asks where to find something.
+
+LENGTH: Keep answers to two to four sentences. This is a hard limit. If a full answer would run longer, give the most relevant part and offer to go deeper on a specific piece. Do not summarize Roy's entire background when the question is narrow.
+
+PROJECTS VERSUS EXPERIENCE: The Projects section and the Experience section are different things. When a visitor asks about projects, answer from the Projects section. When they ask about work, roles, or jobs, answer from the Experience section. The one exception is the Stock Trading Algorithm, which is the same body of work as the TechSprint role.
+
+${ATLAS_KNOWLEDGE}`;
 
 export async function POST(request: Request) {
   try {
@@ -134,7 +140,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ reply });
   } catch (error) {
-    console.error("Argos route error", error);
+    console.error("Atlas route error", error);
     return NextResponse.json(
       { error: "Something went wrong. Please try again later." },
       { status: 500 },

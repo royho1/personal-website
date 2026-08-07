@@ -1,9 +1,9 @@
 /**
- * Injected into the Argos system prompt as the single source of truth
+ * Injected into the Atlas system prompt as the single source of truth
  * for answering questions about Roy Ho. Update this string whenever
  * site content changes.
  */
-export const ARGOS_KNOWLEDGE = `
+export const ATLAS_KNOWLEDGE = `
 ## Basics
 
 - Name: Roy Ho

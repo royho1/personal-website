@@ -1,7 +1,9 @@
 import Image from "next/image";
-import { Mail, MapPin } from "lucide-react";
+import Link from "next/link";
+import { ContactRound, Mail, MapPin, MessageCircle } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import AboutSection from "./components/AboutSection";
+import AtlasDog from "./components/AtlasDog";
 import BackToTop from "./components/BackToTop";
 import FadeInSection from "./components/FadeInSection";
 import Footer from "./components/Footer";
@@ -213,6 +215,43 @@ export default function Home() {
 
         <FadeInSection
           as="section"
+          id="ask-atlas"
+          className="border-t border-sky-200/80 bg-white dark:border-slate-800 dark:bg-slate-950"
+          aria-labelledby="ask-atlas-heading"
+        >
+          <div className="mx-auto max-w-2xl px-6 py-20 text-center md:px-8 md:py-28">
+            <div className="mx-auto flex w-max max-w-full items-center justify-center gap-2.5">
+              <AtlasDog size={44} />
+              <h2
+                id="ask-atlas-heading"
+                className="cursor-default text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"
+              >
+                Ask Atlas
+              </h2>
+            </div>
+            <p className="mt-4 text-base leading-relaxed text-slate-600 md:text-lg dark:text-slate-300">
+              Atlas is Roy&apos;s AI assistant. Ask it anything you&apos;d want
+              to know about his background, projects, or experience before
+              reaching out.
+            </p>
+            <div className="mt-8 flex justify-center">
+              <Link
+                href="/ask"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-sky-600 px-7 py-3 text-base font-medium text-white shadow-sm shadow-sky-600/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-700 hover:shadow-md hover:shadow-sky-600/30 dark:bg-sky-500 dark:shadow-sky-950/40 dark:hover:bg-sky-400"
+              >
+                <MessageCircle
+                  className="h-[1em] w-[1em] shrink-0 text-current"
+                  strokeWidth={2}
+                  aria-hidden
+                />
+                Ask Atlas
+              </Link>
+            </div>
+          </div>
+        </FadeInSection>
+
+        <FadeInSection
+          as="section"
           id="contact"
           className="border-t border-sky-200/80 bg-sky-100 dark:border-slate-800 dark:bg-slate-900"
           aria-labelledby="contact-heading"
@@ -268,6 +307,20 @@ export default function Home() {
                   className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-950 dark:text-slate-400 dark:hover:text-sky-300"
                 >
                   <FaGithub className="h-8 w-8 text-[#181717] dark:text-white" aria-hidden />
+                </a>
+              </div>
+              <div className="mt-8 flex justify-center">
+                <a
+                  href="/roy-ho.vcf"
+                  download="roy-ho.vcf"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-sky-300 bg-white/90 px-7 py-3 text-base font-medium text-sky-950 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-50 hover:shadow-md hover:shadow-sky-300/30 dark:border-slate-700 dark:bg-slate-900/70 dark:text-sky-200 dark:hover:bg-slate-800"
+                >
+                  <ContactRound
+                    className="h-[1em] w-[1em] shrink-0 text-current"
+                    strokeWidth={2}
+                    aria-hidden
+                  />
+                  Save Contact Card
                 </a>
               </div>
             </div>
