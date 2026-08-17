@@ -37,6 +37,7 @@ html {
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-handwriting: var(--font-caveat), "Bradley Hand", "Segoe Script", cursive;
 
   --animate-heartbeat: heartbeat 1.6s ease-in-out infinite;
   --animate-bar-grow-1: bar-grow-1 2.4s ease-in-out infinite;

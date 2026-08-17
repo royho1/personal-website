@@ -59,6 +59,10 @@ const hobbyPhotos: {
  * every render (a random angle would change on each pass and break hydration). */
 const TILTS = [-2, 1.5, -1, 2, -1.5, 1];
 
+/** Caption tilt, kept separate from the card tilt so the writing sits slightly
+ * off-axis from the print like a hand-lettered label. */
+const CAPTION_TILTS = [1.4, -1.7, 0.9, -2, 1.6, -0.8];
+
 export default function HobbyGallery() {
   const prefersReducedMotion = useReducedMotion();
 
@@ -66,6 +70,7 @@ export default function HobbyGallery() {
     <div className="mt-12 grid items-start gap-7 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
       {hobbyPhotos.map((photo, index) => {
         const tilt = TILTS[index % TILTS.length];
+        const captionTilt = CAPTION_TILTS[index % CAPTION_TILTS.length];
 
         return (
           <motion.figure
@@ -104,7 +109,10 @@ export default function HobbyGallery() {
               className="block h-auto w-full rounded-sm object-contain"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
-            <figcaption className="px-2 pb-5 pt-4 text-center text-sm font-medium tracking-tight text-slate-500 dark:text-slate-600">
+            <figcaption
+              className="px-2 pb-5 pt-4 text-center font-handwriting text-[1.47rem] font-semibold tracking-wide text-[#262626]"
+              style={{ transform: `rotate(${captionTilt}deg)` }}
+            >
               {photo.caption}
             </figcaption>
           </motion.figure>
