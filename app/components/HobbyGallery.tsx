@@ -27,10 +27,10 @@ const hobbyPhotos: {
   },
   {
     src: "/hobbies/photo3.jpeg",
-    alt: "Formal event at Lake Tahoe, CA",
+    alt: "Lake Tahoe, CA",
     width: 1179,
     height: 1454,
-    caption: "Formal Event: Lake Tahoe, CA",
+    caption: "Lake Tahoe, CA",
   },
   {
     src: "/hobbies/photo4.jpeg",
