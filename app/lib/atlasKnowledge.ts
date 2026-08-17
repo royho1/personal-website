@@ -149,7 +149,13 @@ Roy has been using Python for about four years, starting in college and continui
 
 ## Hobbies
 
-Outside of work, Roy enjoys thrifting, bass fishing, spending time outdoors, and playing poker. He's also big into fashion. Music is a constant for him, with Drake, Malcolm Todd, Steve Lacy, and Baby Keem among his favorites. He follows Bay Area sports, rooting for the Warriors, Giants, and 49ers.
+Outside of work, Roy enjoys thrifting, bass fishing, spending time outdoors, and playing golf. He's also big into fashion. Music is a constant for him, with Drake, Malcolm Todd, Steve Lacy, and Baby Keem among his favorites. He follows Bay Area sports, rooting for the Warriors, Giants, and 49ers.
+
+Roy is active and plays a lot of sports. He runs and works out regularly, and plays pickleball, spikeball, basketball, and golf.
+
+He also loves coffee chats and meeting new people, and is always happy to connect with someone new over coffee.
+
+Roy plays poker too. Treat this as a fun aside rather than a headline: mention it if the visitor asks about card games, poker specifically, or what else Roy is into beyond the usual list, but leave it out of a general answer about his hobbies.
 
 ## Personal
 
