@@ -5,6 +5,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import AboutSection from "./components/AboutSection";
 import AtlasDog from "./components/AtlasDog";
 import BackToTop from "./components/BackToTop";
+import ContactCard from "./components/ContactCard";
 import FadeInSection from "./components/FadeInSection";
 import Footer from "./components/Footer";
 import HeroSection from "./components/HeroSection";
@@ -263,7 +264,7 @@ export default function Home() {
             >
               Let&apos;s Connect!
             </h2>
-            <div className="group relative mt-12 rounded-2xl border border-sky-200 bg-white p-8 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:p-10 dark:border-slate-700 dark:bg-slate-800/80 dark:shadow-black/40 dark:ring-slate-700/50">
+            <ContactCard>
               <Sparkles count={3} bleed={36} sizeRange={[32, 48]} />
               <p className="relative text-center text-2xl font-semibold tracking-tight text-sky-950 md:text-3xl dark:text-sky-100">
                 Roy Ho
@@ -323,7 +324,7 @@ export default function Home() {
                   Save Contact Card
                 </a>
               </div>
-            </div>
+            </ContactCard>
           </div>
         </FadeInSection>
       </main>
