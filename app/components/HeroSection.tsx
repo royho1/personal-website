@@ -7,6 +7,7 @@ import { FaChevronDown, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, type Variants } from "framer-motion";
 import { Clock, Mail, MapPin } from "lucide-react";
 import type { MouseEvent } from "react";
+import { fireConfettiFromElement } from "../lib/confetti";
 import AtlasDog from "./AtlasDog";
 import StatusBadge from "./StatusBadge";
 
@@ -109,42 +110,11 @@ function Typewriter({ text }: { text: string }) {
   );
 }
 
-/**
- * Small celebratory burst fired from a specific point on the page. Imported
- * lazily so `canvas-confetti` (which touches the DOM at module load) is
- * never pulled in during server rendering.
- */
-async function fireConfettiFrom(originX: number, originY: number) {
-  const mod = await import("canvas-confetti");
-  const confetti = mod.default;
-  const defaults = {
-    origin: { x: originX, y: originY },
-    spread: 70,
-    ticks: 200,
-    gravity: 0.9,
-    scalar: 0.9,
-    colors: ["#38bdf8", "#0ea5e9", "#22c55e", "#fde047", "#f472b6"],
-  };
-
-  // Two quick bursts so the celebration feels a bit more alive.
-  confetti({ ...defaults, particleCount: 90, startVelocity: 55 });
-  confetti({
-    ...defaults,
-    particleCount: 50,
-    startVelocity: 35,
-    spread: 110,
-    scalar: 0.75,
-  });
-}
-
 function AvailabilityBadge() {
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     // Let the browser handle the smooth #contact scroll via the anchor; we
     // just layer on the confetti burst from the badge's own position.
-    const rect = event.currentTarget.getBoundingClientRect();
-    const originX = (rect.left + rect.width / 2) / window.innerWidth;
-    const originY = (rect.top + rect.height / 2) / window.innerHeight;
-    void fireConfettiFrom(originX, originY);
+    fireConfettiFromElement(event.currentTarget);
   };
 
   return (
