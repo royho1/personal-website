@@ -206,7 +206,7 @@ export default function Home() {
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg dark:text-slate-300">
               Outside of work, I enjoy thrifting, bass fishing, spending time outdoors, and
-              playing poker. I also love keeping up with fashion and
+              playing golf. I also love keeping up with fashion and
               music.
             </p>
             <HobbyGallery />
