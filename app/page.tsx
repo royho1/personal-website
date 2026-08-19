@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ContactRound, Mail, MapPin, MessageCircle } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { MessageCircle } from "lucide-react";
 import AboutSection from "./components/AboutSection";
 import AtlasDog from "./components/AtlasDog";
 import BackToTop from "./components/BackToTop";
@@ -13,7 +12,6 @@ import HobbyGallery from "./components/HobbyGallery";
 import NavBar from "./components/NavBar";
 import ProjectsSection from "./components/ProjectsSection";
 import ResumeSection from "./components/ResumeSection";
-import Sparkles from "./components/Sparkles";
 
 const jaikeLogoSrc = "/experience/JAIKE.png";
 const techSprintLogoSrc = "/experience/TechSprint.png";
@@ -264,67 +262,7 @@ export default function Home() {
             >
               Let&apos;s Connect!
             </h2>
-            <ContactCard>
-              <Sparkles count={3} bleed={36} sizeRange={[32, 48]} />
-              <p className="relative text-center text-2xl font-semibold tracking-tight text-sky-950 md:text-3xl dark:text-sky-100">
-                Roy Ho
-              </p>
-              <p className="mt-3 flex items-center justify-center gap-2 text-base text-slate-600 md:text-lg dark:text-slate-300">
-                <MapPin
-                  className="h-[1em] w-[1em] shrink-0 text-current"
-                  strokeWidth={2}
-                  aria-hidden
-                />
-                San Francisco, CA
-              </p>
-              <p className="mt-3 flex items-center justify-center gap-2 text-base md:text-lg">
-                <Mail
-                  className="h-[1em] w-[1em] shrink-0 text-current"
-                  strokeWidth={2}
-                  aria-hidden
-                />
-                <a
-                  href="mailto:royho.career@gmail.com"
-                  className="text-slate-600 transition-colors hover:text-sky-950 hover:underline dark:text-slate-300 dark:hover:text-sky-200"
-                >
-                  royho.career@gmail.com
-                </a>
-              </p>
-              <div className="mt-10 flex justify-center gap-10">
-                <a
-                  href="https://www.linkedin.com/in/royho1/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn profile"
-                  className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-950 dark:text-slate-400 dark:hover:text-sky-300"
-                >
-                  <FaLinkedin className="h-8 w-8 text-[#0A66C2]" aria-hidden />
-                </a>
-                <a
-                  href="https://github.com/royho1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub profile"
-                  className="text-slate-500 transition-all duration-200 hover:scale-110 hover:text-sky-950 dark:text-slate-400 dark:hover:text-sky-300"
-                >
-                  <FaGithub className="h-8 w-8 text-[#181717] dark:text-white" aria-hidden />
-                </a>
-              </div>
-              <div className="mt-8 flex justify-center">
-                <a
-                  href="/roy-ho.vcf"
-                  download="roy-ho.vcf"
-                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-sky-300 bg-white/90 px-7 py-3 text-base font-medium text-sky-950 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:bg-sky-50 hover:shadow-md hover:shadow-sky-300/30 dark:border-slate-700 dark:bg-slate-900/70 dark:text-sky-200 dark:hover:bg-slate-800"
-                >
-                  <ContactRound
-                    className="h-[1em] w-[1em] shrink-0 text-current"
-                    strokeWidth={2}
-                    aria-hidden
-                  />
-                  Save Contact Card
-                </a>
-              </div>
-            </ContactCard>
+            <ContactCard />
           </div>
         </FadeInSection>
       </main>
