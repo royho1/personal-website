@@ -1,6 +1,6 @@
 # Roy Ho — Personal Website
 
-A portfolio site for Roy Ho, a UC Davis graduate in Statistical Data Science, showcasing projects across data analytics, machine learning, and data engineering. Built with Next.js and designed with a sky-blue theme, full dark mode, and a focus on small, polished interactions.
+My portfolio site — a UC Davis graduate in Statistical Data Science, showcasing my projects across data analytics, machine learning, and data engineering. Built with Next.js and designed with a sky-blue theme, full dark mode, and a focus on small, polished interactions.
 
 **Live site:** [royho-career.com](https://royho-career.com) (deployed on Vercel)
 
@@ -130,4 +130,4 @@ Deployed on [Vercel](https://vercel.com) at [royho-career.com](https://royho-car
 
 - **Email:** royho.career@gmail.com
 - **GitHub:** [royho1](https://github.com/royho1)
-- **LinkedIn:** See the site footer
+- **LinkedIn:** [linkedin.com/in/royho1](https://www.linkedin.com/in/royho1/)
