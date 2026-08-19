@@ -275,7 +275,7 @@ export default function Home() {
                   strokeWidth={2}
                   aria-hidden
                 />
-                Davis, CA | San Francisco, CA
+                San Francisco, CA
               </p>
               <p className="mt-3 flex items-center justify-center gap-2 text-base md:text-lg">
                 <Mail
