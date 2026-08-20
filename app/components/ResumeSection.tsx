@@ -55,7 +55,7 @@ export default function ResumeSection({
             </a>
           </span>
           <a href={resumePdfPath} download className={secondaryResumeBtn}>
-            Download Resume
+            Download Resume PDF
           </a>
         </div>
 
