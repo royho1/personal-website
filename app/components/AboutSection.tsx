@@ -10,9 +10,14 @@ import {
 } from "react-icons/fa";
 import { IoLogoTableau } from "react-icons/io5";
 import {
+  SiDocker,
+  SiFlask,
+  SiGit,
   SiPandas,
   SiPython,
+  SiPytorch,
   SiR,
+  SiReact,
   SiScikitlearn,
 } from "react-icons/si";
 
@@ -36,14 +41,19 @@ const skillsWithIcons: { name: string; Icon: IconType; color: string }[] = [
   { name: "R", Icon: SiR, color: "text-[#276DC3]" },
   { name: "Pandas", Icon: SiPandas, color: "text-[#150458]" },
   { name: "Scikit-learn", Icon: SiScikitlearn, color: "text-[#F7931E]" },
+  { name: "Docker", Icon: SiDocker, color: "text-[#2496ED]" },
+  { name: "Git", Icon: SiGit, color: "text-[#F05032]" },
+  { name: "Flask", Icon: SiFlask, color: "text-slate-800 dark:text-slate-200" },
+  { name: "React", Icon: SiReact, color: "text-[#61DAFB]" },
+  { name: "PyTorch", Icon: SiPytorch, color: "text-[#EE4C2C]" },
   { name: "Data Visualization", Icon: FaChartLine, color: "text-sky-700" },
   { name: "Machine Learning", Icon: FaBrain, color: "text-sky-700" },
 ];
 
 const stats = [
   { label: "Projects", value: "13+" },
-  { label: "Core Tools", value: "8+" },
-  { label: "Page AI Research Paper", value: "25" },
+  { label: "Core Tools", value: `${skillsWithIcons.length}+` },
+  { label: "Page AI Research Paper", value: "29" },
 ];
 
 const containerVariants: Variants = {
@@ -118,6 +128,30 @@ export default function AboutSection() {
                   data engineering
                 </span>
                 .
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="rounded-xl border border-sky-200 bg-white p-5 shadow-sm shadow-sky-200/30 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/30"
+            >
+              <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500 sm:text-sm dark:text-slate-400">
+                Education
+              </h3>
+              <p className="mt-3 text-base font-semibold text-sky-950 dark:text-sky-100">
+                University of California, Davis
+              </p>
+              <p className="mt-1 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                B.S. Statistical Data Science, Minor in Computer Science
+              </p>
+              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                September 2022 to March 2026
+              </p>
+              <p className="mt-4 border-t border-sky-100 pt-4 text-sm leading-relaxed text-slate-700 dark:border-slate-700 dark:text-slate-300">
+                <span className="font-semibold text-sky-900 dark:text-sky-200">
+                  Certification:
+                </span>{" "}
+                NVIDIA, Fundamentals of Deep Learning, October 2025
               </p>
             </motion.div>
 

@@ -37,8 +37,8 @@ const featuredProjects: FeaturedProject[] = [
   {
     title: "SF Restaurant Safety Map",
     description:
-      "Built an interactive map of 26,000+ health inspections across 6,200+ San Francisco restaurants using public DataSF data, an ETL pipeline into a SQLite schema, a Flask REST API, and a React + Mapbox frontend for search, filters, and inspection details.",
-    tech: "Python, SQL, Flask, React, Mapbox, ETL",
+      "Full-stack web app mapping 20,000+ health inspections across 7,700+ San Francisco restaurants from the DataSF public feed. A Python ETL pipeline (pandas, geopy) normalizes inspection records into a 3-table SQLite schema with cached geocoding, served through a 7-endpoint Flask REST API to a React and Mapbox frontend with debounced search, neighborhood typeahead, geolocation-based Near Me centering, and an Insights panel surfacing per-neighborhood rankings via SQL window functions. API and frontend are containerized with Docker Compose using a multi-stage Node-to-nginx build.",
+    tech: "Python, SQL, Flask, React, Mapbox, ETL, Docker, SQLite",
     githubHref: "https://github.com/royho1/sf-restaurant-safety-map",
     iconVariant: "mapPin",
     gradient: "from-teal-100 via-white to-cyan-100",
@@ -47,8 +47,8 @@ const featuredProjects: FeaturedProject[] = [
   {
     title: "Job Market Analytics Dashboard",
     description:
-      "Team-built dashboard analyzing 9,000+ tech job postings for salary, skill, and geographic trends. Contributed the scraping layer and a TF-IDF resume matching engine.",
-    tech: "Python, Flask, scikit-learn, TF-IDF, Selenium",
+      "Group capstone dashboard analyzing the tech job market. Owned the data acquisition layer, writing JobSpy and Selenium scrapers that collected 23,000+ job posting records across seven role families in CA, NY, and TX, deduplicated to 6,800+ unique postings from 2,300+ companies. Built the resume-to-job matching engine as a weighted ranking model combining TF-IDF cosine similarity, skill overlap against a 366-term taxonomy, and an experience-proximity bonus, plus eligibility pre-filters that stripped senior-level titles and regex-extracted required years of experience to drop postings above the candidate's level.",
+    tech: "Python, Flask, scikit-learn, TF-IDF, Selenium, JobSpy",
     githubHref: "https://github.com/royho1/job-market-analysis-dashboard",
     iconVariant: "bars",
     gradient: "from-emerald-100 via-white to-sky-100",
@@ -57,8 +57,8 @@ const featuredProjects: FeaturedProject[] = [
   {
     title: "Drowsy Driver Detection",
     description:
-      "Built a real-time drowsiness detection system using dlib facial landmarks and Eye Aspect Ratio thresholding, with a scikit-learn classifier on the Kaggle MRL dataset and a live OpenCV alert.",
-    tech: "Python, OpenCV, dlib, scikit-learn",
+      "Real-time drowsiness detection system, awarded Best Execution for the AISC Winter 2025 cycle. Owned the eye-state detection layer, computing Eye Aspect Ratio from dlib's 68-point facial landmark model and frontal face detector via scipy Euclidean distance, flagging drowsiness when EAR held below a 0.25 threshold across 20 consecutive frames. Integrated into an OpenCV pipeline with grayscale preprocessing, convex hull eye overlays, a pygame audio alert, and graceful failure handling when model assets are missing.",
+    tech: "Python, OpenCV, dlib, scipy, pygame",
     githubHref: "https://github.com/royho1/drowsy-driver-detection",
     iconVariant: "eye",
     gradient: "from-sky-100 via-white to-cyan-100",
@@ -80,7 +80,7 @@ const additionalProjects: AdditionalProject[] = [
   {
     name: "Solstice",
     description:
-      "Sneaker resale analyzer that runs a 4B-parameter vision model fully on-device to identify shoes from photos and grade their condition, with a FastAPI and PostgreSQL backend tracking market prices over time.",
+      "Sneaker resale analytics tool that identifies shoes from photos, grades condition, and tracks resale market prices over time. Currently in design and early build.",
     tech: "Python, FastAPI, PostgreSQL, React, TypeScript",
     tags: ["Python", "SQL", "Machine Learning"],
     status: "In Progress",
