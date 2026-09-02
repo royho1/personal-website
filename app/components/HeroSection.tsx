@@ -204,9 +204,8 @@ export default function HeroSection() {
                 strokeWidth={2}
                 aria-hidden
               />
-              <span className="font-semibold text-sky-950 dark:text-sky-100">Currently:</span>{" "}
-              Seeking full-time Data Analyst / Data Engineer roles while
-              building Solstice, a sneaker resale analyzer.
+              Available immediately for full-time roles in data, analytics, and
+              engineering.
             </p>
           </motion.div>
 

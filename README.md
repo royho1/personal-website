@@ -32,7 +32,7 @@ Sections: Hero • About • Projects • Experience • Resume • Let's Connec
 - Smooth scrolling with scroll padding to account for the header
 
 ### About
-- Two-column layout: paragraph highlights + stat cards (`11+ Projects`, `8+ Core Tools`, `25 Page AI Research Paper`)
+- Two-column layout: paragraph highlights + stat cards (`13+ Projects`, `15+ Core Tools`, `29 Page AI Research Paper`)
 - Eight core skill tags with Lucide/brand icons and hover lift
 - Scroll-triggered fade-in/slide-up via Framer Motion
 

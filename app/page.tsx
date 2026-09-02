@@ -70,20 +70,20 @@ export default function Home() {
                     </h4>
                     <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-slate-900 marker:text-slate-900 md:text-base dark:text-slate-300 dark:marker:text-slate-500">
                       <li>
-                        Conducted research on LLM-based automation, focusing on
+                        Conducted research on LLM-based automation covering
                         API-driven system design, agent orchestration frameworks,
-                        and productivity applications across research, coding, and
-                        enterprise workflows.
+                        retrieval-augmented generation (RAG), and a consolidated
+                        threat model spanning prompt injection, data leakage, and
+                        unintended action execution.
                       </li>
                       <li>
-                        Authored a 25-page research paper on LLM-based automation
-                        and agent architectures, synthesizing peer-reviewed and
-                        industry research on API integration, architectural design
-                        patterns, system limitations, and responsible deployment;
-                        submitted for journal publication.
+                        First-authored a 29-page, 36-source review introducing a
+                        two-axis framework for LLM agent autonomy and oversight,
+                        plus a cost model pricing oversight against productivity
+                        gains; revise-and-resubmit with publication recommended.
                       </li>
                       <li>
-                        Served as a peer reviewer for JAIKE, evaluating research
+                        Served as a peer reviewer for JAIKE, evaluating submissions
                         on retrieval methods in large language models, reasoning
                         performance in extended tasks, and large-scale model
                         architectures for methodological rigor and evaluation

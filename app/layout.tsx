@@ -19,9 +19,9 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "Roy Ho | Data Analyst",
+  title: "Roy Ho | Data and Analytics",
   description:
-    "Data analyst and UC Davis graduate building data-driven solutions with Python, SQL, and machine learning.",
+    "UC Davis graduate in Statistical Data Science building data pipelines, dashboards, and full-stack analytics tools with Python, SQL, and machine learning.",
 };
 
 export default function RootLayout({

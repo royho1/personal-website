@@ -10,19 +10,21 @@ export const ATLAS_KNOWLEDGE = `
 - UC Davis graduate with a B.S. in Statistical Data Science and a minor in Computer Science
 - Currently based in San Francisco, CA, and planning to stay there for the time being
 - Could see himself living in San Diego, New York, or Texas further down the road
-- Currently seeking full-time Data Analyst / Data Engineer roles while building Solstice (in progress, 2026), a sneaker resale analyzer
+- Available immediately for full-time roles in data, analytics, and engineering
 - Interested in building data-driven solutions using Python, R, SQL, and Excel, with a focus on machine learning
-- Stats: 13+ Projects, 8+ Core Tools, 25 Page AI Research Paper
+- Stats: 13+ Projects, 15+ Core Tools, 29 Page AI Research Paper
+- Certification: NVIDIA, Fundamentals of Deep Learning, October 2025
 
 ## Current Focus
 
-Right now Roy is splitting his time between three things: building Solstice, a sneaker resale analyzer (see Projects); maintaining and improving this portfolio site; and preparing for interviews for data analyst and data engineer roles.
+Right now Roy is available immediately for full-time roles in data, analytics, and engineering. He is also building Solstice, a sneaker resale analytics tool (in progress; see Projects), and maintaining this portfolio site.
 
 ## Education
 
 - St. Cecilia School — grades K through 8
 - Lowell High School, San Francisco, CA
-- University of California, Davis — B.S. Statistical Data Science, Minor in Computer Science
+- University of California, Davis — B.S. Statistical Data Science, Minor in Computer Science, September 2022 to March 2026
+- Certification: NVIDIA, Fundamentals of Deep Learning, October 2025
 - Resume PDF available at /Roy_Ho_Resume.pdf (view or download experience, education, and skills)
 
 ## Experience
@@ -30,9 +32,9 @@ Right now Roy is splitting his time between three things: building Solstice, a s
 ### JAIKE (Journal of Artificial Intelligence and Knowledge Engineering)
 - Dates: January 2025 – Present
 - Title: Artificial Intelligence Researcher
-- Conducted research on LLM-based automation, focusing on API-driven system design, agent orchestration frameworks, and productivity applications across research, coding, and enterprise workflows.
-- Authored a 25-page research paper on LLM-based automation and agent architectures, synthesizing peer-reviewed and industry research on API integration, architectural design patterns, system limitations, and responsible deployment; submitted for journal publication.
-- Served as a peer reviewer for JAIKE, evaluating research on retrieval methods in large language models, reasoning performance in extended tasks, and large-scale model architectures for methodological rigor and evaluation quality.
+- Conducted research on LLM-based automation covering API-driven system design, agent orchestration frameworks, retrieval-augmented generation (RAG), and a consolidated threat model spanning prompt injection, data leakage, and unintended action execution.
+- First-authored a 29-page, 36-source review introducing a two-axis framework for LLM agent autonomy and oversight, plus a cost model pricing oversight against productivity gains; revise-and-resubmit with publication recommended.
+- Served as a peer reviewer for JAIKE, evaluating submissions on retrieval methods in large language models, reasoning performance in extended tasks, and large-scale model architectures for methodological rigor and evaluation quality.
 
 ### TechSprint Innovators
 - Dates: March 2024 – September 2025
@@ -53,15 +55,8 @@ Right now Roy is splitting his time between three things: building Solstice, a s
 ### Featured Projects
 
 **Solstice** (in progress, 2026)
-- A sneaker resale analyzer. Upload photos of a pair, a 4B-parameter vision model running entirely on-device identifies the shoe and grades its condition, and the app tracks that pair's market value over time. No external AI API is used for the vision work.
-- Backend is an async FastAPI service with 24 REST endpoints over an 8-table PostgreSQL schema managed with Alembic migrations. The schema deliberately separates raw per-observation marketplace data from daily rollups, so chart queries stay fast and price history stays stable as listings expire. An APScheduler job refreshes prices daily and backfills runs missed while the machine was asleep.
-- The React and TypeScript dashboard uses Recharts for price trend charts, portfolio value tracking, and a per-marketplace payout comparison modeling eBay, StockX, and GOAT fee structures.
-- Identification runs as three separate passes: a visual identify pass, an OCR pass that reads the style code off the size tag, and a condition pass that scores flaws on a 1 to 10 scale mapped to reseller grades. The style code is the load-bearing part. A 4B model cannot tell an original Jordan 1 Chicago from a reissue since they look identical in photos and the price gap is enormous, so a successful tag read overrides the visual guess. Anything under 0.85 confidence is shown as a guess to confirm rather than stated as fact, and a pass with no usable photo is skipped and says so instead of emitting a default.
-- The pricing side keeps asking prices and sold prices in separate columns, separate chart series, and always labels which basis an estimate used. Blending them produces a number that looks authoritative and describes nothing. Sold data is not freely available (eBay's Marketplace Insights API is closed to new developers, StockX is approval-gated), so sold comps come from manual entry while eBay's free Browse API supplies active listings.
-- 77 tests, all mocked, concentrated on the failure modes that are easy to miss: the asking-versus-sold rule and the eBay client. Roy validated the suite by reintroducing the original bugs and confirming the tests caught them, on the reasoning that a test which only passes on correct code proves nothing.
-- Performance work on an 8 GB machine: disabling Qwen3-VL's default thinking mode cut calls from about 25 seconds to 2.6. A benchmark that looked like a clean image-resolution effect (401s, 112s, 22s, 21s) turned out to be four byte-identical requests, with the real variable being whether the 3.3 GB model was resident in memory or had been paged out.
-- Current state: photo analysis, pair tracking, comps, and price estimates all work. Dashboard and trends views are next. The eBay client is written and tested against mocked responses but has not yet made a live call.
-- Tech: Python/FastAPI backend with Postgres and Alembic, React + Vite frontend with Tailwind v4, and Qwen3-VL 4B running locally through Ollama.
+- Sneaker resale analytics tool that identifies shoes from photos, grades condition, and tracks resale market prices over time. Currently in design and early build.
+- Tech: Python, FastAPI, PostgreSQL, React, TypeScript
 
 **Personal Portfolio Website**
 - This site (royho-career.com). Fully responsive portfolio built with Next.js 16, React 19, TypeScript, and Tailwind CSS 4.
@@ -72,26 +67,25 @@ Right now Roy is splitting his time between three things: building Solstice, a s
 - GitHub: https://github.com/royho1/personal-website
 
 **SF Restaurant Safety Map**
-- Interactive map of 26,000+ San Francisco health inspections across 6,200+ restaurants, built on the city's public DataSF inspection feed. React and Vite frontend with Mapbox GL JS, Flask REST API, SQLite backend.
-- Data is normalized into a three-table schema (restaurants, inspections, violations) with foreign keys. Each restaurant's latest scored inspection is pulled with a SQL window function rather than a subquery. Six API endpoints cover restaurant search, inspection history, citywide score distribution, and a per-ZIP drilldown showing the highest and lowest scoring restaurants in an area.
-- The data pipeline fetches, cleans, and loads in three stages. Addresses missing coordinates from DataSF are backfilled through OpenStreetMap's Nominatim geocoder, rate-limited to one request per second per their usage policy and cached including confirmed misses, so a first run takes about an hour and re-runs finish in seconds.
-- Frontend features debounced typeahead search, ZIP-mode search that flies to a ZIP centroid, geolocation-based "Near Me" centering, score-band filters, a Pins/Heatmap/Off layer toggle, and score-colored map pins.
-- Roy also wrote a security review into the README covering SQL injection surface, CORS configuration, Flask debug mode, and Mapbox token exposure.
+- Full-stack web app mapping 20,000+ health inspections across 7,700+ San Francisco restaurants from the DataSF public feed (current 2024-present feed; not the retired DataSF dataset).
+- A Python ETL pipeline (pandas, geopy) normalizes inspection records into a 3-table SQLite schema with cached geocoding, served through a 7-endpoint Flask REST API to a React and Mapbox frontend with debounced search, neighborhood typeahead, geolocation-based Near Me centering, and an Insights panel surfacing per-neighborhood rankings via SQL window functions.
+- API and frontend are containerized with Docker Compose using a multi-stage Node-to-nginx build.
 - Solo project.
-- Tech: Python, Flask, SQLite, SQL, React, Vite, Mapbox GL JS, pandas, geopy
+- Tech: Python, SQL, Flask, React, Mapbox, ETL, Docker, SQLite
 - GitHub: https://github.com/royho1/sf-restaurant-safety-map
 
 **Job Market Analytics Dashboard**
-- Full-stack dashboard analyzing tech job market trends across 9,000+ postings in California, New York, and Texas: salary distributions by location and title, in-demand skills by role, and posting volume over time.
-- Team project from a UC Davis STA160 group. Roy's contributions were the data collection layer, scraping postings with JobSpy and Selenium, and the resume matching engine, a content-based recommender scoring a resume against job postings using TF-IDF vectorization and cosine similarity, which improved match accuracy from 30% to 60%.
-- Full team stack: Flask, pandas, NumPy, spaCy for skill extraction, scikit-learn, Plotly.js, Bootstrap, deployed on Render.
-- Tech: Python, Flask, scikit-learn, TF-IDF, Selenium, spaCy
+- Group capstone dashboard analyzing the tech job market. Roy owned the data acquisition layer, writing JobSpy and Selenium scrapers that collected 23,000+ job posting records across seven role families in CA, NY, and TX, deduplicated to 6,800+ unique postings from 2,300+ companies.
+- Built the resume-to-job matching engine as a weighted ranking model combining TF-IDF cosine similarity, skill overlap against a 366-term taxonomy, and an experience-proximity bonus, plus eligibility pre-filters that stripped senior-level titles and regex-extracted required years of experience to drop postings above the candidate's level.
+- Tech: Python, Flask, scikit-learn, TF-IDF, Selenium, JobSpy
 - GitHub: https://github.com/royho1/job-market-analysis-dashboard
 
 **Drowsy Driver Detection**
-- Real-time driver drowsiness detection from a live webcam feed. Detection is built on dlib's 68-point facial landmark model, computing Eye Aspect Ratio with scipy and flagging drowsiness when EAR holds below a 0.25 threshold across 20 consecutive frames, with mouth landmark tracking to catch yawning. A scikit-learn classifier trained on the Kaggle MRL eye-state dataset supplements the threshold logic, integrated into a live OpenCV feed with a pygame audio alert.
-- Five-person team project through the AI Student Collective (AISC), awarded Best Execution for the Winter 2025 cycle.
-- Tech: Python, OpenCV, dlib, scikit-learn, scipy, imutils
+- Real-time drowsiness detection system, awarded Best Execution for the AISC Winter 2025 cycle.
+- Roy owned the eye-state detection layer, computing Eye Aspect Ratio from dlib's 68-point facial landmark model and frontal face detector via scipy Euclidean distance, flagging drowsiness when EAR held below a 0.25 threshold across 20 consecutive frames.
+- Integrated into an OpenCV pipeline with grayscale preprocessing, convex hull eye overlays, a pygame audio alert, and graceful failure handling when model assets are missing.
+- Five-person team project through the AI Student Collective (AISC).
+- Tech: Python, OpenCV, dlib, scipy, pygame
 - GitHub: https://github.com/royho1/drowsy-driver-detection
 
 ### Additional Projects
@@ -143,7 +137,7 @@ Right now Roy is splitting his time between three things: building Solstice, a s
 
 ## Skills
 
-Python, SQL, Tableau, Power BI, Excel, R, Pandas, Scikit-learn, Data Visualization, Machine Learning
+Python, SQL, Tableau, Power BI, Excel, R, Pandas, Scikit-learn, Docker, Git, Flask, React, PyTorch, Data Visualization, Machine Learning
 
 Roy has been using Python for about four years, starting in college and continuing through his projects and professional work. He has been using SQL for about two years. He is still actively deepening both, and applies them in current work like Solstice and the SF Restaurant Safety Map.
 
