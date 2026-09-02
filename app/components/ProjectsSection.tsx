@@ -37,7 +37,7 @@ const featuredProjects: FeaturedProject[] = [
   {
     title: "SF Restaurant Safety Map",
     description:
-      "Full-stack web app mapping 20,000+ health inspections across 7,700+ San Francisco restaurants from the DataSF public feed. A Python ETL pipeline (pandas, geopy) normalizes inspection records into a 3-table SQLite schema with cached geocoding, served through a 7-endpoint Flask REST API to a React and Mapbox frontend with debounced search, neighborhood typeahead, geolocation-based Near Me centering, and an Insights panel surfacing per-neighborhood rankings via SQL window functions. API and frontend are containerized with Docker Compose using a multi-stage Node-to-nginx build.",
+      "Full-stack map of 20,000+ health inspections across 7,700+ San Francisco restaurants from the DataSF feed, with a Python ETL pipeline into SQLite, a Flask REST API, and a React + Mapbox frontend for search, filters, and inspection details.",
     tech: "Python, SQL, Flask, React, Mapbox, ETL, Docker, SQLite",
     githubHref: "https://github.com/royho1/sf-restaurant-safety-map",
     iconVariant: "mapPin",
@@ -47,7 +47,7 @@ const featuredProjects: FeaturedProject[] = [
   {
     title: "Job Market Analytics Dashboard",
     description:
-      "Group capstone dashboard analyzing the tech job market. Owned the data acquisition layer, writing JobSpy and Selenium scrapers that collected 23,000+ job posting records across seven role families in CA, NY, and TX, deduplicated to 6,800+ unique postings from 2,300+ companies. Built the resume-to-job matching engine as a weighted ranking model combining TF-IDF cosine similarity, skill overlap against a 366-term taxonomy, and an experience-proximity bonus, plus eligibility pre-filters that stripped senior-level titles and regex-extracted required years of experience to drop postings above the candidate's level.",
+      "Group capstone dashboard analyzing 23,000+ job posting records, deduplicated to 6,800+ unique postings from 2,300+ companies. Owned the JobSpy and Selenium scrapers and a TF-IDF resume matching engine.",
     tech: "Python, Flask, scikit-learn, TF-IDF, Selenium, JobSpy",
     githubHref: "https://github.com/royho1/job-market-analysis-dashboard",
     iconVariant: "bars",
@@ -57,7 +57,7 @@ const featuredProjects: FeaturedProject[] = [
   {
     title: "Drowsy Driver Detection",
     description:
-      "Real-time drowsiness detection system, awarded Best Execution for the AISC Winter 2025 cycle. Owned the eye-state detection layer, computing Eye Aspect Ratio from dlib's 68-point facial landmark model and frontal face detector via scipy Euclidean distance, flagging drowsiness when EAR held below a 0.25 threshold across 20 consecutive frames. Integrated into an OpenCV pipeline with grayscale preprocessing, convex hull eye overlays, a pygame audio alert, and graceful failure handling when model assets are missing.",
+      "Built a real-time drowsiness detection system using dlib facial landmarks and Eye Aspect Ratio thresholding, with an OpenCV pipeline and a pygame audio alert.",
     tech: "Python, OpenCV, dlib, scipy, pygame",
     githubHref: "https://github.com/royho1/drowsy-driver-detection",
     iconVariant: "eye",
