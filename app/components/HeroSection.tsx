@@ -204,8 +204,9 @@ export default function HeroSection() {
                 strokeWidth={2}
                 aria-hidden
               />
-              Available immediately for full-time roles in data, analytics, and
-              engineering.
+              Currently looking for Analyst or Engineering roles in the Bay
+              Area while finishing a first-authored AI research paper and
+              building side projects.
             </p>
           </motion.div>
 
@@ -263,31 +264,26 @@ export default function HeroSection() {
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-col items-start gap-8 pt-1"
+            className="flex w-full flex-col items-start gap-8 pt-1"
           >
-            <div className="flex flex-nowrap gap-4">
-              <a href="#resume" className={primaryCtaClassName}>
-                Resume
-              </a>
+            <div className="flex flex-wrap gap-4">
               <a href="#projects" className={primaryCtaClassName}>
                 View Projects
               </a>
-              <a href="#experience" className={primaryCtaClassName}>
-                View Experience
-              </a>
-              <a href="#contact" className={primaryCtaClassName}>
-                Contact Me
+              <a href="#resume" className={primaryCtaClassName}>
+                Resume
               </a>
             </div>
             <Link
               href="/ask"
-              className="group inline-flex max-w-full items-center gap-3 rounded-xl bg-sky-50/80 px-3.5 py-2 text-left text-sm leading-snug text-slate-600 shadow-sm shadow-sky-900/5 ring-1 ring-sky-200/90 transition-colors duration-200 hover:bg-sky-100/90 hover:text-sky-950 hover:ring-sky-300 dark:bg-slate-800/50 dark:text-slate-300 dark:shadow-black/20 dark:ring-slate-700 dark:hover:bg-slate-800/80 dark:hover:text-sky-100 dark:hover:ring-slate-600"
+              aria-label="Ask Atlas"
+              className="group inline-flex items-center gap-2.5 text-sky-800 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:text-sky-950 dark:text-sky-300 dark:hover:text-sky-100"
             >
               <span className="shrink-0 transition-transform duration-200 ease-out group-hover:scale-110">
-                <AtlasDog size={40} />
+                <AtlasDog size={68} />
               </span>
-              <span className="min-w-0">
-                Got a question? Ask Atlas, my AI assistant.
+              <span className="font-handwriting -rotate-2 text-2xl leading-none tracking-wide md:text-[1.7rem]">
+                Ask Atlas!
               </span>
             </Link>
           </motion.div>
