@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { FaChevronDown, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, type Variants } from "framer-motion";
 import { Clock, Mail, MapPin } from "lucide-react";
@@ -39,8 +39,6 @@ const itemVariants: Variants = {
 };
 
 export default function HeroSection() {
-  const router = useRouter();
-
   return (
     <section
       className="bg-white dark:bg-slate-950"
@@ -190,17 +188,16 @@ export default function HeroSection() {
                 Resume
               </a>
             </div>
-            <button
-              type="button"
+            <Link
+              href="/ask"
               aria-label="Ask Atlas"
-              onClick={() => router.push("/ask")}
               className="group inline-flex cursor-pointer items-center gap-2.5 border-0 bg-transparent p-0 text-sky-700 transition-all duration-200 ease-out hover:scale-105 hover:opacity-85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:text-sky-300"
             >
               <AtlasDog size={44} className="shrink-0" />
               <span className="font-handwriting -rotate-2 text-2xl leading-none tracking-wide text-sky-700 dark:text-sky-300">
                 Ask Atlas!
               </span>
-            </button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

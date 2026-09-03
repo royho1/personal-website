@@ -50,6 +50,8 @@ export default function ProjectModal({
 }: ProjectModalProps) {
   const titleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
   const prefersReducedMotion = useReducedMotion();
   const open = project !== null;
   const media = project?.media ?? [];
@@ -77,60 +79,106 @@ export default function ProjectModal({
     goToMedia((mediaIndex + 1) % media.length, 1);
   }, [goToMedia, media.length, mediaIndex]);
 
+  const onCloseRef = useRef(onClose);
+  const onPrevRef = useRef(onPrev);
+  const onNextRef = useRef(onNext);
+  const showPrevMediaRef = useRef(showPrevMedia);
+  const showNextMediaRef = useRef(showNextMedia);
+  const hasMediaCarouselRef = useRef(hasMediaCarousel);
+  const canNavigateProjectsRef = useRef(canNavigateProjects);
+
+  onCloseRef.current = onClose;
+  onPrevRef.current = onPrev;
+  onNextRef.current = onNext;
+  showPrevMediaRef.current = showPrevMedia;
+  showNextMediaRef.current = showNextMedia;
+  hasMediaCarouselRef.current = hasMediaCarousel;
+  canNavigateProjectsRef.current = canNavigateProjects;
+
   useEffect(() => {
     setMediaIndex(0);
     setSlideDirection(1);
   }, [project?.title]);
 
+  // Lock scroll and move focus into the dialog only when it opens/closes.
   useEffect(() => {
     if (!open) return;
+
+    previouslyFocusedRef.current =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     closeRef.current?.focus();
 
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose();
-        return;
-      }
-      if (hasMediaCarousel) {
-        if (event.key === "ArrowLeft") {
-          event.preventDefault();
-          showPrevMedia();
-          return;
-        }
-        if (event.key === "ArrowRight") {
-          event.preventDefault();
-          showNextMedia();
-          return;
-        }
-      }
-      if (!canNavigateProjects) return;
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        onPrev?.();
-      } else if (event.key === "ArrowRight") {
-        event.preventDefault();
-        onNext?.();
-      }
-    };
-    window.addEventListener("keydown", onKeyDown);
-
     return () => {
       document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKeyDown);
+      previouslyFocusedRef.current?.focus?.();
+      previouslyFocusedRef.current = null;
     };
-  }, [
-    open,
-    onClose,
-    onPrev,
-    onNext,
-    canNavigateProjects,
-    hasMediaCarousel,
-    showPrevMedia,
-    showNextMedia,
-  ]);
+  }, [open]);
+
+  // Keyboard handling uses refs so media slide changes do not rebind listeners
+  // or steal focus back to the close button.
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        onCloseRef.current();
+        return;
+      }
+
+      if (event.key === "Tab" && dialogRef.current) {
+        const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        const active = document.activeElement;
+        if (event.shiftKey && active === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && active === last) {
+          event.preventDefault();
+          first.focus();
+        }
+        return;
+      }
+
+      const isLeft = event.key === "ArrowLeft";
+      const isRight = event.key === "ArrowRight";
+      if (!isLeft && !isRight) return;
+
+      // Shift+arrows always move between projects when available.
+      if (event.shiftKey && canNavigateProjectsRef.current) {
+        event.preventDefault();
+        if (isLeft) onPrevRef.current?.();
+        else onNextRef.current?.();
+        return;
+      }
+
+      if (hasMediaCarouselRef.current) {
+        event.preventDefault();
+        if (isLeft) showPrevMediaRef.current();
+        else showNextMediaRef.current();
+        return;
+      }
+
+      if (canNavigateProjectsRef.current) {
+        event.preventDefault();
+        if (isLeft) onPrevRef.current?.();
+        else onNextRef.current?.();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   const navButtonClassName =
     "absolute top-1/2 z-20 inline-flex h-9 w-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-sky-200/90 bg-white/90 text-slate-700 shadow-sm backdrop-blur-sm transition-colors hover:border-sky-400 hover:bg-sky-100 hover:text-sky-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:border-slate-500 dark:bg-slate-900/90 dark:text-slate-200 dark:hover:border-sky-400 dark:hover:bg-slate-800 dark:hover:text-sky-100 sm:h-10 sm:w-10";
@@ -155,12 +203,9 @@ export default function ProjectModal({
       : null);
 
   const showMediaNav = hasMediaCarousel;
-  const counterLabel =
-    media.length > 0
-      ? `${mediaIndex + 1} / ${media.length}`
-      : canNavigateProjects && position != null && total != null
-        ? `${position} / ${total}`
-        : null;
+  const counterLabel = hasMediaCarousel
+    ? `${mediaIndex + 1} / ${media.length}`
+    : null;
 
   const slideVariants = {
     enter: (direction: number) => ({
@@ -181,7 +226,7 @@ export default function ProjectModal({
     <AnimatePresence>
       {project && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-end justify-center p-3 sm:items-center sm:p-4"
+          className="fixed inset-0 z-[60] flex items-end justify-center p-3 sm:items-center sm:p-4"
           initial={prefersReducedMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={prefersReducedMotion ? undefined : { opacity: 0 }}
@@ -195,6 +240,7 @@ export default function ProjectModal({
           />
 
           <motion.div
+            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
@@ -269,8 +315,8 @@ export default function ProjectModal({
             </header>
 
             {/* Image */}
-            <div className="relative max-h-[35vh] w-full shrink-0 overflow-hidden bg-sky-50 dark:bg-slate-800 sm:max-h-[45vh]">
-              <div className="relative h-[35vh] w-full sm:h-[45vh]">
+            <div className="relative max-h-[35vh] w-full shrink min-h-0 overflow-hidden bg-sky-50 dark:bg-slate-800 sm:max-h-[45vh]">
+              <div className="relative aspect-[16/10] max-h-[35vh] w-full sm:max-h-[45vh]">
                 <AnimatePresence
                   mode="wait"
                   initial={false}
@@ -369,10 +415,10 @@ export default function ProjectModal({
                           }}
                           aria-label={`Show ${slide.title}`}
                           aria-current={isActive ? "true" : undefined}
-                          className={`relative h-14 w-20 shrink-0 cursor-pointer overflow-hidden rounded-md bg-sky-50 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:bg-slate-800 ${
+                          className={`relative h-14 w-20 shrink-0 cursor-pointer overflow-hidden rounded-md border-2 bg-sky-50 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:bg-slate-800 ${
                             isActive
-                              ? "border-2 border-sky-600 dark:border-sky-400"
-                              : "border border-sky-200 hover:border-sky-400 hover:bg-sky-100 dark:border-slate-600 dark:hover:border-slate-500 dark:hover:bg-slate-700"
+                              ? "border-sky-600 dark:border-sky-400"
+                              : "border-transparent hover:border-sky-300 dark:hover:border-slate-500"
                           }`}
                         >
                           <Image

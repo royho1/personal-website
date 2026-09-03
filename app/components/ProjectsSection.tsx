@@ -640,7 +640,10 @@ export default function ProjectsSection() {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  onClick={() => setSelectedIndex(galleryIndex)}
+                  onClick={() => {
+                    if (galleryIndex < 0) return;
+                    setSelectedIndex(galleryIndex);
+                  }}
                   aria-label={`Open ${project.title} details`}
                   className="group relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-sky-200 bg-white p-0 text-left font-inherit shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-[transform,border-color,box-shadow] duration-150 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50 dark:hover:border-slate-500 dark:hover:shadow-black/60"
                 >
@@ -717,7 +720,10 @@ export default function ProjectsSection() {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    onClick={() => setSelectedIndex(galleryIndex)}
+                    onClick={() => {
+                    if (galleryIndex < 0) return;
+                    setSelectedIndex(galleryIndex);
+                  }}
                     aria-label={`Open ${project.name} details`}
                     className="group relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-lg border border-sky-200 bg-sky-50/90 p-0 text-left font-inherit shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-[transform,border-color,box-shadow] duration-150 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50 dark:hover:border-slate-500"
                   >
@@ -745,14 +751,7 @@ export default function ProjectsSection() {
                       </p>
                       <div className="mt-3 flex min-h-[1.25rem] items-center">
                         <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-sky-700 transition-colors group-hover:text-sky-900 dark:text-sky-300 dark:group-hover:text-sky-200">
-                          {project.githubHref ? (
-                            <>
-                              <FaGithub className="h-3.5 w-3.5" aria-hidden />
-                              View project
-                            </>
-                          ) : (
-                            "View project"
-                          )}
+                          View project
                         </span>
                       </div>
                     </div>
