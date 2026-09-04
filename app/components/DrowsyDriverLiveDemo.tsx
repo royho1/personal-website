@@ -77,6 +77,7 @@ export default function DrowsyDriverLiveDemo() {
   const rafRef = useRef<number | null>(null);
   const closedFramesRef = useRef(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const runningRef = useRef(false);
 
   const [status, setStatus] = useState<DemoStatus>("idle");
   const [ear, setEar] = useState<number | null>(null);
@@ -85,6 +86,7 @@ export default function DrowsyDriverLiveDemo() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const stop = useCallback(() => {
+    runningRef.current = false;
     if (rafRef.current != null) {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
@@ -107,6 +109,7 @@ export default function DrowsyDriverLiveDemo() {
   useEffect(() => () => stop(), [stop]);
 
   const playAlert = useCallback(() => {
+    if (!runningRef.current) return;
     try {
       if (!audioRef.current) {
         audioRef.current = new Audio(ALERT_SOUND);
@@ -125,6 +128,7 @@ export default function DrowsyDriverLiveDemo() {
 
   const drawFrame = useCallback(
     (positions: Point[] | null, isAlert: boolean, currentEar: number | null) => {
+      if (!runningRef.current) return;
       const video = videoRef.current;
       const canvas = canvasRef.current;
       if (!video || !canvas) return;
@@ -185,9 +189,12 @@ export default function DrowsyDriverLiveDemo() {
   );
 
   const loop = useCallback(async () => {
+    if (!runningRef.current) return;
+
     const video = videoRef.current;
     const faceapi = faceapiRef.current;
     if (!video || !faceapi || video.readyState < 2) {
+      if (!runningRef.current) return;
       rafRef.current = requestAnimationFrame(() => {
         void loop();
       });
@@ -198,6 +205,8 @@ export default function DrowsyDriverLiveDemo() {
       const detection = await faceapi
         .detectSingleFace(video, detectOptsRef.current)
         .withFaceLandmarks(true);
+
+      if (!runningRef.current) return;
 
       if (!detection?.landmarks?.positions) {
         closedFramesRef.current = 0;
@@ -229,9 +238,11 @@ export default function DrowsyDriverLiveDemo() {
         drawFrame(positions, isAlert, currentEar);
       }
     } catch {
+      if (!runningRef.current) return;
       drawFrame(null, false, null);
     }
 
+    if (!runningRef.current) return;
     rafRef.current = requestAnimationFrame(() => {
       void loop();
     });
@@ -247,6 +258,7 @@ export default function DrowsyDriverLiveDemo() {
     setStatus("starting");
     setErrorMessage(null);
     stop();
+    runningRef.current = true;
 
     try {
       if (!faceapiRef.current) {
@@ -255,16 +267,20 @@ export default function DrowsyDriverLiveDemo() {
           /* turbopackIgnore: true */
           "https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.15/dist/face-api.esm.js"
         )) as FaceApiModule;
+        if (!runningRef.current) return;
         await Promise.all([
           faceapi.nets.tinyFaceDetector.loadFromUri(FACE_API_MODEL_URL),
           faceapi.nets.faceLandmark68TinyNet.loadFromUri(FACE_API_MODEL_URL),
         ]);
+        if (!runningRef.current) return;
         faceapiRef.current = faceapi;
         detectOptsRef.current = new faceapi.TinyFaceDetectorOptions({
           inputSize: 320,
           scoreThreshold: 0.5,
         });
       }
+
+      if (!runningRef.current) return;
 
       let stream: MediaStream;
       try {
@@ -277,6 +293,7 @@ export default function DrowsyDriverLiveDemo() {
           },
         });
       } catch (err) {
+        if (!runningRef.current) return;
         const name = err instanceof DOMException ? err.name : "";
         if (name === "NotAllowedError" || name === "SecurityError") {
           setStatus("denied");
@@ -286,6 +303,11 @@ export default function DrowsyDriverLiveDemo() {
             err instanceof Error ? err.message : "Could not open the camera.",
           );
         }
+        return;
+      }
+
+      if (!runningRef.current) {
+        stream.getTracks().forEach((t) => t.stop());
         return;
       }
 
@@ -300,11 +322,16 @@ export default function DrowsyDriverLiveDemo() {
 
       video.srcObject = stream;
       await video.play();
+      if (!runningRef.current) {
+        stop();
+        return;
+      }
       setStatus("running");
       rafRef.current = requestAnimationFrame(() => {
         void loop();
       });
     } catch (err) {
+      if (!runningRef.current) return;
       stop();
       setStatus("error");
       setErrorMessage(

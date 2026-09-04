@@ -439,7 +439,7 @@ function ProjectCardMedia({
 
   return (
     <div
-      className={`relative flex w-full items-center justify-center overflow-hidden bg-gradient-to-br ${gradient} ${heightClass} dark:opacity-95`}
+      className={`relative flex w-full items-center justify-center overflow-hidden bg-gradient-to-br ${gradient} ${heightClass} dark:from-slate-800 dark:via-slate-900 dark:to-slate-800`}
     >
       {fallback}
     </div>

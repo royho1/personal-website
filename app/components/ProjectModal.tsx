@@ -335,17 +335,17 @@ export default function ProjectModal({
 
             {/* Media / live demo */}
             <div
-              className={`relative w-full shrink min-h-0 overflow-hidden bg-sky-50 dark:bg-slate-800 ${
+              className={`relative w-full min-h-0 shrink overflow-hidden bg-sky-50 dark:bg-slate-800 ${
                 hasLiveDemo
-                  ? "max-h-[48vh] sm:max-h-[52vh]"
-                  : "max-h-[35vh] sm:max-h-[45vh]"
+                  ? "max-h-[min(42vh,20rem)] sm:max-h-[52vh]"
+                  : "max-h-[min(30vh,14rem)] sm:max-h-[45vh]"
               }`}
             >
               <div
-                className={`relative w-full ${
+                className={`relative h-full w-full ${
                   hasLiveDemo
-                    ? "aspect-[4/3] max-h-[48vh] sm:max-h-[52vh]"
-                    : "aspect-[16/10] max-h-[35vh] sm:max-h-[45vh]"
+                    ? "aspect-[4/3] max-h-[min(42vh,20rem)] sm:max-h-[52vh]"
+                    : "aspect-[16/10] max-h-[min(30vh,14rem)] sm:max-h-[45vh]"
                 }`}
               >
                 {hasLiveDemo && project.liveDemo === "drowsy-driver" ? (
