@@ -121,15 +121,9 @@ export default function AboutSection() {
                 <span className="font-semibold text-sky-800 dark:text-sky-300">
                   machine learning
                 </span>
-                . I&apos;m currently pursuing roles in{" "}
-                <span className="font-semibold text-sky-800 dark:text-sky-300">
-                  data analytics
-                </span>{" "}
-                and{" "}
-                <span className="font-semibold text-sky-800 dark:text-sky-300">
-                  data engineering
-                </span>
-                .
+                . My background sits at the intersection of statistics and
+                software, and I&apos;m looking for technical roles where I can
+                apply both.
               </p>
             </motion.div>
 
