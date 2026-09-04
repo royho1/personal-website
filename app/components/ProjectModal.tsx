@@ -297,7 +297,7 @@ export default function ProjectModal({
                   </p>
                 </div>
 
-                <div className="flex shrink-0 items-center gap-2 self-end sm:self-start">
+                <div className="flex max-w-full shrink-0 flex-wrap items-center gap-2 self-end sm:self-start">
                   {project.demoHref && (
                     <a
                       href={project.demoHref}
@@ -317,7 +317,8 @@ export default function ProjectModal({
                       className={linkChipClassName}
                     >
                       <FaGithub className="h-3.5 w-3.5" aria-hidden />
-                      View on GitHub
+                      <span className="sm:hidden">GitHub</span>
+                      <span className="hidden sm:inline">View on GitHub</span>
                     </a>
                   )}
                   <button

@@ -96,7 +96,7 @@ export default function ContactCard() {
   };
 
   return (
-    <div className="relative mx-auto mt-12 w-full max-w-[620px]">
+    <div className="relative mx-auto mt-8 w-full max-w-[620px] md:mt-12">
       {/* Stacked-paper edges peeking out from behind the top sheet. */}
       <div
         aria-hidden

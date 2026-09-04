@@ -35,7 +35,7 @@ export default function Home() {
           className="border-t border-sky-200/80 bg-sky-100 dark:border-slate-800 dark:bg-slate-900"
           aria-labelledby="experience-heading"
         >
-          <div className="mx-auto max-w-[820px] px-6 py-20 md:px-8 md:py-28">
+          <div className="mx-auto max-w-[820px] px-6 py-14 md:px-8 md:py-28">
             <h2
               id="experience-heading"
               className="mx-auto block w-max max-w-full cursor-default text-center text-[28px] font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold dark:text-sky-100"
@@ -238,7 +238,7 @@ export default function Home() {
           className="border-t border-sky-200/80 bg-sky-50 dark:border-slate-800 dark:bg-slate-900/80"
           aria-labelledby="hobbies-heading"
         >
-          <div className="mx-auto max-w-5xl px-6 py-20 text-center md:px-8 md:py-28">
+          <div className="mx-auto max-w-5xl px-6 py-14 text-center md:px-8 md:py-28">
             <h2
               id="hobbies-heading"
               className="mx-auto inline-block w-max max-w-full cursor-default text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"
@@ -260,7 +260,7 @@ export default function Home() {
           className="border-t border-sky-200/80 bg-white dark:border-slate-800 dark:bg-slate-950"
           aria-labelledby="ask-atlas-heading"
         >
-          <div className="mx-auto max-w-2xl px-6 py-20 text-center md:px-8 md:py-28">
+          <div className="mx-auto max-w-2xl px-6 py-14 text-center md:px-8 md:py-28">
             <div className="mx-auto flex w-max max-w-full items-center justify-center gap-2.5">
               <AtlasDog size={44} />
               <h2
@@ -297,7 +297,7 @@ export default function Home() {
           className="border-t border-sky-200/80 bg-sky-100 dark:border-slate-800 dark:bg-slate-900"
           aria-labelledby="contact-heading"
         >
-          <div className="mx-auto max-w-2xl px-6 py-20 md:px-8 md:py-28">
+          <div className="mx-auto max-w-2xl px-6 py-14 md:px-8 md:py-28">
             <h2
               id="contact-heading"
               className="mx-auto block w-max max-w-full cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"

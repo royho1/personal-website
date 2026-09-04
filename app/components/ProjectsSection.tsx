@@ -587,7 +587,7 @@ export default function ProjectsSection() {
       className="border-t border-sky-200/80 bg-white dark:border-slate-800 dark:bg-slate-950"
       aria-labelledby="projects-heading"
     >
-      <div className="mx-auto max-w-6xl px-6 py-20 md:px-8 md:py-28">
+      <div className="mx-auto max-w-6xl px-6 py-14 md:px-8 md:py-28">
         <div className="flex items-center justify-center gap-3">
           <h2
             id="projects-heading"
@@ -609,7 +609,7 @@ export default function ProjectsSection() {
         <div
           role="tablist"
           aria-label="Filter projects by topic"
-          className="mx-auto mt-8 flex max-w-3xl flex-wrap items-center justify-center gap-2 sm:gap-3"
+          className="mx-auto mt-6 flex max-w-3xl flex-wrap items-center justify-center gap-2 md:mt-8 sm:gap-3"
         >
           {FILTERS.map((option) => {
             const isActive = option === filter;
@@ -621,7 +621,7 @@ export default function ProjectsSection() {
                 aria-selected={isActive}
                 aria-pressed={isActive}
                 onClick={() => applyFilter(option)}
-                className={`cursor-pointer rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all duration-200 ease-out sm:text-sm ${
+                className={`min-h-9 cursor-pointer rounded-full border px-3.5 py-2 text-xs font-medium transition-all duration-200 ease-out sm:py-1.5 sm:text-sm ${
                   isActive
                     ? "border-sky-600 bg-sky-600 text-white shadow-sm shadow-sky-600/30 hover:-translate-y-0.5 hover:bg-sky-700 dark:border-sky-400 dark:bg-sky-500 dark:shadow-sky-950/40 dark:hover:bg-sky-400"
                     : "border-sky-200 bg-white text-slate-600 hover:-translate-y-0.5 hover:border-sky-300 hover:bg-sky-50 hover:text-sky-900 dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-700 dark:hover:text-sky-200"
@@ -633,7 +633,7 @@ export default function ProjectsSection() {
           })}
         </div>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <div className="mt-8 grid gap-5 md:mt-12 md:grid-cols-3 md:gap-8">
           <AnimatePresence mode="popLayout">
             {visibleFeatured.map((project) => {
               const fallback = (
@@ -675,7 +675,7 @@ export default function ProjectsSection() {
                     size="featured"
                   />
 
-                  <div className="flex flex-1 flex-col p-6">
+                  <div className="flex flex-1 flex-col p-5 md:p-6">
                     <h3 className="text-lg font-semibold text-sky-950 dark:text-sky-100">
                       {project.title}
                     </h3>
@@ -695,7 +695,7 @@ export default function ProjectsSection() {
           </AnimatePresence>
         </div>
 
-        <div className="mt-16">
+        <div className="mt-12 md:mt-16">
           <div className="flex items-center justify-center gap-3">
             <h3 className="cursor-default text-center text-xl font-semibold tracking-tight text-sky-950 md:text-2xl dark:text-sky-100">
               Additional Projects
