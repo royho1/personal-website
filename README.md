@@ -1,6 +1,5 @@
 # Personal Website
-
-Portfolio site for a UC Davis Statistical Data Science graduate (CS minor). Showcases projects across data analytics, machine learning, and data engineering. Built with Next.js, a sky-blue light theme, full dark mode, and small polished interactions.
+My personal website! Showcases my projects across data analytics, machine learning, and data engineering, resume, experiences, and more! Built with Next.js, a sky-blue light theme, full dark mode, and small polished interactions.
 
 **Live site:** [royho-career.com](https://royho-career.com) (Vercel)
 
