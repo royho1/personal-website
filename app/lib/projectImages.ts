@@ -8,7 +8,7 @@ export const PROJECT_IMAGE_FILES = {
   sfRestaurantSafetyMap: "sf-restaurant-safety-map/citywide-map.jpg",
   jobMarketAnalyticsDashboard: "job-market-analytics-dashboard/overview.png",
   drowsyDriverDetection: "drowsy-driver-detection.webp",
-  solstice: "solstice.webp",
+  solstice: "solstice/logo.png",
   heartStrokeRiskPrediction: "heart-stroke-risk-prediction.webp",
   wineQualityClassification: "wine-quality-classification.webp",
   stockTradingAlgorithm: "stock-trading-algorithm.webp",
@@ -76,6 +76,15 @@ export const SF_RESTAURANT_SAFETY_MAP_MEDIA: ProjectMediaSlide[] = [
     title: "Insights Panel",
     description:
       "Citywide pass rate, rating breakdown, and places that need attention.",
+  },
+];
+
+export const SOLSTICE_MEDIA: ProjectMediaSlide[] = [
+  {
+    src: "/projects/solstice/logo.png",
+    title: "Logo",
+    description:
+      "Orange sun mark with a white S — the Solstice brand icon.",
   },
 ];
 

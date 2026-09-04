@@ -35,6 +35,7 @@ import {
   JOB_MARKET_ANALYTICS_DASHBOARD_MEDIA,
   PROJECT_IMAGE_FILES,
   SF_RESTAURANT_SAFETY_MAP_MEDIA,
+  SOLSTICE_MEDIA,
   projectMedia,
   type ProjectMediaSlide,
 } from "../lib/projectImages";
@@ -133,10 +134,7 @@ const additionalProjects: AdditionalProject[] = [
     iconVariant: "sparkles",
     gradient:
       "from-violet-100 via-white to-sky-100 dark:from-violet-900 dark:via-violet-950 dark:to-sky-900",
-    ...projectMedia(
-      PROJECT_IMAGE_FILES.solstice,
-      "Preview of the Solstice sneaker analytics concept",
-    ),
+    media: SOLSTICE_MEDIA,
   },
   {
     name: "Heart Stroke Risk Prediction",
