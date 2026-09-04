@@ -82,6 +82,11 @@ export default function HeroSection() {
             </p>
           </motion.div>
 
+          <div
+            aria-hidden
+            className="h-px w-full shrink-0 bg-sky-200/50 dark:bg-sky-500/25"
+          />
+
           {/* Zone 2 — Status */}
           <motion.div
             variants={itemVariants}
@@ -98,6 +103,11 @@ export default function HeroSection() {
               projects.
             </p>
           </motion.div>
+
+          <div
+            aria-hidden
+            className="h-px w-full shrink-0 bg-sky-200/50 dark:bg-sky-500/25"
+          />
 
           {/* Zone 3 — Contact + socials */}
           <motion.div
