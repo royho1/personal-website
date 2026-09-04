@@ -42,19 +42,20 @@ export default function Home() {
             >
               Experience
             </h2>
-            <ol className="relative mt-10 space-y-8">
+            <ol className="relative mt-10 space-y-8 overflow-hidden">
               {/* JAIKE — current */}
               <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
-                <span
-                  aria-hidden
-                  className="absolute left-[8px] top-[50px] bottom-[calc(-2rem-50px)] w-0.5 -translate-x-1/2 bg-sky-200 dark:bg-slate-700"
-                />
-                <span
-                  aria-hidden
-                  className="absolute left-[8px] top-[50px] z-10 h-[18px] w-[18px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-sky-600 bg-white dark:border-sky-500 dark:bg-slate-900"
-                />
                 <article className="overflow-hidden rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
-                  <div className="flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
+                  <div className="relative flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
+                    <span
+                      aria-hidden
+                      className="absolute left-[calc(-2.5rem)] top-1/2 z-10 h-[18px] w-[18px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-sky-600 bg-white max-sm:left-[calc(-1.5rem)] dark:border-sky-500 dark:bg-slate-900"
+                    />
+                    <span
+                      aria-hidden
+                      className="absolute left-[calc(-2.5rem)] top-1/2 z-0 w-0.5 -translate-x-1/2 bg-sky-200 max-sm:left-[calc(-1.5rem)] dark:bg-slate-700"
+                      style={{ bottom: "calc(-100vh)" }}
+                    />
                     <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
                       <Image
                         src={jaikeLogoSrc}
@@ -109,16 +110,17 @@ export default function Home() {
 
               {/* TechSprint */}
               <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
-                <span
-                  aria-hidden
-                  className="absolute left-[8px] top-[50px] bottom-[calc(-2rem-50px)] w-0.5 -translate-x-1/2 bg-sky-200 dark:bg-slate-700"
-                />
-                <span
-                  aria-hidden
-                  className="absolute left-[8px] top-[50px] z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-600 dark:bg-sky-500"
-                />
                 <article className="overflow-hidden rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
-                  <div className="flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
+                  <div className="relative flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
+                    <span
+                      aria-hidden
+                      className="absolute left-[calc(-2.5rem)] top-1/2 z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-600 max-sm:left-[calc(-1.5rem)] dark:bg-sky-500"
+                    />
+                    <span
+                      aria-hidden
+                      className="absolute left-[calc(-2.5rem)] top-1/2 z-0 w-0.5 -translate-x-1/2 bg-sky-200 max-sm:left-[calc(-1.5rem)] dark:bg-slate-700"
+                      style={{ bottom: "calc(-100vh)" }}
+                    />
                     <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
                       <span className="inline-flex shrink-0 rounded bg-white p-2">
                         <Image
@@ -166,14 +168,14 @@ export default function Home() {
                 </article>
               </li>
 
-              {/* AISC — last entry, line stops at circle */}
+              {/* AISC — last entry, line stops at circle via ol overflow clip */}
               <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
-                <span
-                  aria-hidden
-                  className="absolute left-[8px] top-[50px] z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-600 dark:bg-sky-500"
-                />
                 <article className="overflow-hidden rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
-                  <div className="flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
+                  <div className="relative flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
+                    <span
+                      aria-hidden
+                      className="absolute left-[calc(-2.5rem)] top-1/2 z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-600 max-sm:left-[calc(-1.5rem)] dark:bg-sky-500"
+                    />
                     <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
                       <Image
                         src={aiscLogoSrc}
