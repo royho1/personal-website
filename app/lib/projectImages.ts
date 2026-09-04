@@ -83,8 +83,7 @@ export const SOLSTICE_MEDIA: ProjectMediaSlide[] = [
   {
     src: "/projects/solstice/logo.png",
     title: "Logo",
-    description:
-      "Orange sun mark with a white S — the Solstice brand icon.",
+    description: "Solstice logo. Orange sun mark with a white S.",
   },
 ];
 
