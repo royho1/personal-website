@@ -569,6 +569,7 @@ export default function ProjectsSection() {
     visibleFeatured.length > 0 || visibleAdditional.length > 0;
 
   return (
+    <>
     <FadeInSection
       as="section"
       id="projects"
@@ -768,16 +769,17 @@ export default function ProjectsSection() {
           </p>
         )}
       </div>
-
-      <ProjectModal
-        project={selected?.modal ?? null}
-        onClose={closeModal}
-        fallback={selected?.fallback ?? null}
-        onPrev={showPrev}
-        onNext={showNext}
-        position={selectedIndex != null ? selectedIndex + 1 : undefined}
-        total={gallery.length}
-      />
     </FadeInSection>
+
+    <ProjectModal
+      project={selected?.modal ?? null}
+      onClose={closeModal}
+      fallback={selected?.fallback ?? null}
+      onPrev={showPrev}
+      onNext={showNext}
+      position={selectedIndex != null ? selectedIndex + 1 : undefined}
+      total={gallery.length}
+    />
+    </>
   );
 }

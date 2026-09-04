@@ -8,6 +8,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ExternalLink, X } from "lucide-react";
@@ -53,6 +54,7 @@ export default function ProjectModal({
   const dialogRef = useRef<HTMLDivElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
   const prefersReducedMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
   const open = project !== null;
   const media = project?.media ?? [];
   const hasMediaCarousel = media.length > 1;
@@ -94,6 +96,10 @@ export default function ProjectModal({
   showNextMediaRef.current = showNextMedia;
   hasMediaCarouselRef.current = hasMediaCarousel;
   canNavigateProjectsRef.current = canNavigateProjects;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     setMediaIndex(0);
@@ -222,11 +228,13 @@ export default function ProjectModal({
     }),
   };
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {project && (
         <motion.div
-          className="fixed inset-0 z-[60] flex items-end justify-center p-3 sm:items-center sm:p-4"
+          className="fixed inset-0 z-[100] flex items-end justify-center p-3 sm:items-center sm:p-4"
           initial={prefersReducedMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={prefersReducedMotion ? undefined : { opacity: 0 }}
@@ -484,7 +492,8 @@ export default function ProjectModal({
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }
 
