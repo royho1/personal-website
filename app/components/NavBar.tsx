@@ -25,7 +25,7 @@ const navLinks = [
 /** Shared base classes for the top-level nav link text so the Projects
  * trigger lines up perfectly with the sibling anchors. */
 function navLinkClasses(isActive: boolean) {
-  return `relative inline-block origin-center font-medium transition-all duration-200 ease-out hover:scale-105 hover:font-bold hover:text-sky-900 dark:hover:text-sky-200 ${
+  return `relative inline-block origin-center cursor-pointer font-medium transition-all duration-200 ease-out hover:scale-105 hover:font-bold hover:text-sky-900 dark:hover:text-sky-200 ${
     isActive
       ? "font-semibold text-sky-900 dark:text-sky-200"
       : "text-slate-600 dark:text-slate-300"
@@ -108,7 +108,7 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
           aria-label={isOpen ? "Hide project filters" : "Show project filters"}
           aria-haspopup="menu"
           aria-expanded={isOpen}
-          className="inline-flex h-6 w-6 items-center justify-center rounded-full text-slate-500 transition-colors hover:text-sky-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:text-slate-400 dark:hover:text-sky-200"
+          className="inline-flex h-6 w-6 cursor-pointer items-center justify-center rounded-full text-slate-500 transition-colors hover:text-sky-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:text-slate-400 dark:hover:text-sky-200"
         >
           <ChevronDown
             className={`h-4 w-4 transition-transform duration-200 ${
@@ -143,7 +143,7 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
                       href="/#projects"
                       role="menuitem"
                       onClick={() => chooseFilter(option)}
-                      className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${
+                      className={`flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${
                         isSelected
                           ? "bg-sky-100 font-semibold text-sky-900 dark:bg-sky-500/15 dark:text-sky-200"
                           : "text-slate-600 hover:bg-sky-50 hover:text-sky-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-sky-200"
@@ -211,7 +211,7 @@ export default function NavBar() {
       >
         <a
           href="/"
-          className="text-base font-semibold tracking-tight text-sky-950 dark:text-sky-100"
+          className="cursor-pointer text-base font-semibold tracking-tight text-sky-950 dark:text-sky-100"
         >
           Roy Ho
         </a>

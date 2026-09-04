@@ -13,7 +13,7 @@ export const ATLAS_KNOWLEDGE = `
 - Available immediately for full-time roles; actively looking in the Bay Area
 - LinkedIn-style positioning: Data Analyst | Aspiring Data Engineer | Python, SQL, Excel, Machine Learning | UC Davis Graduate — this is flavor for how he often presents himself, not a limit on what he will consider
 - Interested in building data-driven solutions using Python, R, SQL, and Excel, with a focus on machine learning, data pipelines, dashboards, and analytics tools
-- Stats: 13+ Projects, 15+ Core Tools, 29 Page AI Research Paper
+- Stats: 13+ Projects, 16+ Core Tools, 29 Page AI Research Paper
 - Certification: NVIDIA, Fundamentals of Deep Learning, October 2025
 
 ## Target Roles (loose — not a rigid allowlist)

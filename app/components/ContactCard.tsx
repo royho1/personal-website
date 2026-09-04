@@ -41,7 +41,7 @@ const GRAIN_SVG_MARKUP =
 const GRAIN_DATA_URL = `data:image/svg+xml,${encodeURIComponent(GRAIN_SVG_MARKUP)}`;
 
 const iconLinkBase =
-  "inline-flex h-6 w-6 items-center justify-center transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2A2724]";
+  "inline-flex h-6 w-6 cursor-pointer items-center justify-center transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2A2724]";
 
 const linkedInIconClass = BRAND_COLOR_ICONS
   ? "text-[#0A66C2]"
@@ -176,7 +176,7 @@ export default function ContactCard() {
               href="/roy-ho.vcf"
               download="roy-ho.vcf"
               onClick={handleSaveClick}
-              className={`inline-flex w-[200px] items-center justify-center gap-2 whitespace-nowrap rounded-[2px] border border-[rgba(42,39,36,0.25)] bg-transparent px-6 py-2.5 text-[0.9rem] text-[#2A2724] tracking-[0.1em] transition-colors duration-200 hover:border-[rgba(42,39,36,0.4)] hover:bg-[rgba(42,39,36,0.06)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2A2724] md:w-[220px] md:text-[1rem] ${SMALL_CAPS} ${DEBOSS}`}
+              className={`inline-flex w-[200px] cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-[2px] border border-[rgba(42,39,36,0.25)] bg-transparent px-6 py-2.5 text-[0.9rem] text-[#2A2724] tracking-[0.1em] transition-colors duration-200 hover:border-[rgba(42,39,36,0.4)] hover:bg-[rgba(42,39,36,0.06)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2A2724] md:w-[220px] md:text-[1rem] ${SMALL_CAPS} ${DEBOSS}`}
             >
               <ContactRound
                 className="h-[1em] w-[1em] shrink-0 text-current"
@@ -190,7 +190,7 @@ export default function ContactCard() {
               type="button"
               onClick={handleCopyClick}
               aria-live="polite"
-              className={`mt-3 rounded-sm text-xs text-[rgba(42,39,36,0.65)] transition-colors duration-200 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2A2724] ${DEBOSS}`}
+              className={`mt-3 cursor-pointer rounded-sm text-xs text-[rgba(42,39,36,0.65)] transition-colors duration-200 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2A2724] ${DEBOSS}`}
             >
               {copied ? "Copied" : "or copy email"}
             </button>

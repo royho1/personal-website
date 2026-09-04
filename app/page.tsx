@@ -35,40 +35,53 @@ export default function Home() {
           className="border-t border-sky-200/80 bg-sky-100 dark:border-slate-800 dark:bg-slate-900"
           aria-labelledby="experience-heading"
         >
-          <div className="mx-auto max-w-5xl px-6 py-20 md:px-8 md:py-28">
+          <div className="mx-auto max-w-[820px] px-6 py-20 md:px-8 md:py-28">
             <h2
               id="experience-heading"
-              className="mx-auto block w-max max-w-full cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"
+              className="mx-auto block w-max max-w-full cursor-default text-center text-[28px] font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold dark:text-sky-100"
             >
               Experience
             </h2>
-            <div className="mt-10 space-y-8">
-              <div className="group rounded-2xl border border-sky-200 bg-white/90 p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-300/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:p-8 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50">
-                <div className="grid items-start gap-8 md:grid-cols-[minmax(260px,320px)_minmax(0,1fr)] md:gap-10">
-                  <div className="relative min-h-[18rem] w-full overflow-hidden rounded-2xl border border-sky-200 bg-white p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/70 md:min-h-[26rem] md:p-8 dark:border-slate-700 dark:bg-slate-100 dark:shadow-black/40 dark:ring-slate-700/50">
-                    <Image
-                      src={jaikeLogoSrc}
-                      alt="JAIKE logo"
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-                      sizes="(max-width: 768px) 100vw, 320px"
-                    />
-                  </div>
-
-                  <div>
-                    <h3 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl dark:text-sky-100">
-                      JAIKE
-                    </h3>
-                    <p className="mt-1 text-sm leading-snug text-slate-500 md:text-base dark:text-slate-400">
-                      Journal of Artificial Intelligence and Knowledge Engineering
-                    </p>
-                    <p className="mt-2 text-sm font-medium uppercase tracking-[0.15em] text-sky-800 md:text-base dark:text-sky-300">
+            <ol className="relative mt-10 space-y-8">
+              {/* JAIKE — current */}
+              <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
+                <span
+                  aria-hidden
+                  className="absolute left-[8px] top-[50px] bottom-[calc(-2rem-50px)] w-0.5 -translate-x-1/2 bg-sky-200 dark:bg-slate-700"
+                />
+                <span
+                  aria-hidden
+                  className="absolute left-[8px] top-[50px] z-10 h-[18px] w-[18px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-sky-600 bg-white dark:border-sky-500 dark:bg-slate-900"
+                />
+                <article className="overflow-hidden rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
+                  <div className="flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
+                    <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
+                      <Image
+                        src={jaikeLogoSrc}
+                        alt=""
+                        width={240}
+                        height={60}
+                        className="h-[60px] w-auto max-w-[min(240px,42vw)] shrink-0 object-contain max-sm:h-10"
+                      />
+                      <div className="min-w-0">
+                        <h3 className="text-[20px] font-medium tracking-tight text-slate-900 dark:text-sky-100">
+                          JAIKE
+                        </h3>
+                        <p className="text-[13px] leading-snug text-slate-500 dark:text-slate-400">
+                          Journal of Artificial Intelligence and Knowledge
+                          Engineering
+                        </p>
+                      </div>
+                    </div>
+                    <p className="shrink-0 text-right text-[12px] font-medium uppercase tracking-[0.05em] text-sky-600 max-sm:text-left dark:text-sky-400">
                       January 2025 &ndash; Present
                     </p>
-                    <h4 className="mt-3 text-lg font-semibold tracking-tight text-slate-900 md:text-xl dark:text-slate-100">
+                  </div>
+                  <div className="p-6">
+                    <h4 className="mb-3.5 text-[15px] font-medium tracking-tight text-slate-900 dark:text-slate-100">
                       Artificial Intelligence Researcher
                     </h4>
-                    <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-slate-900 marker:text-slate-900 md:text-base dark:text-slate-300 dark:marker:text-slate-500">
+                    <ul className="list-disc space-y-2 pl-[1.15em] text-[14px] leading-[1.6] text-slate-900 marker:text-slate-900 dark:text-slate-300 dark:marker:text-slate-500">
                       <li>
                         Conducted research on LLM-based automation covering
                         API-driven system design, agent orchestration frameworks,
@@ -91,32 +104,46 @@ export default function Home() {
                       </li>
                     </ul>
                   </div>
-                </div>
-              </div>
+                </article>
+              </li>
 
-              <div className="group rounded-2xl border border-sky-200 bg-white/90 p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-300/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:p-8 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50">
-                <div className="grid items-start gap-8 md:grid-cols-[minmax(260px,320px)_minmax(0,1fr)] md:gap-10">
-                  <div className="relative min-h-[18rem] w-full overflow-hidden rounded-2xl border border-sky-100 bg-white shadow-sm shadow-sky-900/10 md:min-h-[26rem] dark:border-slate-700 dark:bg-slate-100 dark:shadow-black/40">
-                    <Image
-                      src={techSprintLogoSrc}
-                      alt="TechSprint Innovators logo"
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-                      sizes="(max-width: 768px) 100vw, 320px"
-                    />
-                  </div>
-
-                  <div>
-                    <h3 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl dark:text-sky-100">
-                      TechSprint Innovators
-                    </h3>
-                    <p className="mt-2 text-sm font-medium uppercase tracking-[0.15em] text-sky-800 md:text-base dark:text-sky-300">
+              {/* TechSprint */}
+              <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
+                <span
+                  aria-hidden
+                  className="absolute left-[8px] top-[50px] bottom-[calc(-2rem-50px)] w-0.5 -translate-x-1/2 bg-sky-200 dark:bg-slate-700"
+                />
+                <span
+                  aria-hidden
+                  className="absolute left-[8px] top-[50px] z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-600 dark:bg-sky-500"
+                />
+                <article className="overflow-hidden rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
+                  <div className="flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
+                    <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
+                      <span className="inline-flex shrink-0 rounded bg-white p-2">
+                        <Image
+                          src={techSprintLogoSrc}
+                          alt=""
+                          width={240}
+                          height={60}
+                          className="h-[60px] w-auto max-w-[min(240px,42vw)] shrink-0 object-contain max-sm:h-10"
+                        />
+                      </span>
+                      <div className="min-w-0">
+                        <h3 className="text-[20px] font-medium tracking-tight text-slate-900 dark:text-sky-100">
+                          TechSprint Innovators
+                        </h3>
+                      </div>
+                    </div>
+                    <p className="shrink-0 text-right text-[12px] font-medium uppercase tracking-[0.05em] text-sky-600 max-sm:text-left dark:text-sky-400">
                       March 2024 &ndash; September 2025
                     </p>
-                    <h4 className="mt-3 text-lg font-semibold tracking-tight text-slate-900 md:text-xl dark:text-slate-100">
+                  </div>
+                  <div className="p-6">
+                    <h4 className="mb-3.5 text-[15px] font-medium tracking-tight text-slate-900 dark:text-slate-100">
                       Head of Data Engineering
                     </h4>
-                    <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-slate-900 marker:text-slate-900 md:text-base dark:text-slate-300 dark:marker:text-slate-500">
+                    <ul className="list-disc space-y-2 pl-[1.15em] text-[14px] leading-[1.6] text-slate-900 marker:text-slate-900 dark:text-slate-300 dark:marker:text-slate-500">
                       <li>
                         Built a multi-factor stock screening model using
                         fundamental, technical, and NLP-based sentiment features
@@ -136,35 +163,43 @@ export default function Home() {
                       </li>
                     </ul>
                   </div>
-                </div>
-              </div>
+                </article>
+              </li>
 
-              <div className="group rounded-2xl border border-sky-200 bg-white/90 p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-300/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:p-8 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50">
-                <div className="grid items-start gap-8 md:grid-cols-[minmax(260px,320px)_minmax(0,1fr)] md:gap-10">
-                  <div className="relative min-h-[18rem] w-full overflow-hidden rounded-2xl border border-sky-200 bg-white p-10 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/70 md:min-h-[26rem] md:p-14 dark:border-slate-700 dark:bg-slate-100 dark:shadow-black/40 dark:ring-slate-700/50">
-                    <Image
-                      src={aiscLogoSrc}
-                      alt="AI Student Collective logo"
-                      fill
-                      className="object-contain transition-transform duration-500 group-hover:scale-[1.01]"
-                      sizes="(max-width: 768px) 100vw, 320px"
-                    />
-                  </div>
-
-                  <div>
-                    <h3 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl dark:text-sky-100">
-                      AISC
-                    </h3>
-                    <p className="mt-1 text-sm leading-snug text-slate-500 md:text-base dark:text-slate-400">
-                      AI Student Collective
-                    </p>
-                    <p className="mt-2 text-sm font-medium uppercase tracking-[0.15em] text-sky-800 md:text-base dark:text-sky-300">
+              {/* AISC — last entry, line stops at circle */}
+              <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
+                <span
+                  aria-hidden
+                  className="absolute left-[8px] top-[50px] z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-600 dark:bg-sky-500"
+                />
+                <article className="overflow-hidden rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
+                  <div className="flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
+                    <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
+                      <Image
+                        src={aiscLogoSrc}
+                        alt=""
+                        width={240}
+                        height={60}
+                        className="h-[60px] w-auto max-w-[min(240px,42vw)] shrink-0 object-contain max-sm:h-10"
+                      />
+                      <div className="min-w-0">
+                        <h3 className="text-[20px] font-medium tracking-tight text-slate-900 dark:text-sky-100">
+                          AISC
+                        </h3>
+                        <p className="text-[13px] leading-snug text-slate-500 dark:text-slate-400">
+                          AI Student Collective
+                        </p>
+                      </div>
+                    </div>
+                    <p className="shrink-0 text-right text-[12px] font-medium uppercase tracking-[0.05em] text-sky-600 max-sm:text-left dark:text-sky-400">
                       September 2024 &ndash; April 2025
                     </p>
-                    <h4 className="mt-3 text-lg font-semibold tracking-tight text-slate-900 md:text-xl dark:text-slate-100">
+                  </div>
+                  <div className="p-6">
+                    <h4 className="mb-3.5 text-[15px] font-medium tracking-tight text-slate-900 dark:text-slate-100">
                       General Member
                     </h4>
-                    <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-slate-900 marker:text-slate-900 md:text-base dark:text-slate-300 dark:marker:text-slate-500">
+                    <ul className="list-disc space-y-2 pl-[1.15em] text-[14px] leading-[1.6] text-slate-900 marker:text-slate-900 dark:text-slate-300 dark:marker:text-slate-500">
                       <li>
                         Built machine learning models for stroke risk prediction
                         and real-time drowsy driver detection within structured
@@ -182,9 +217,9 @@ export default function Home() {
                       </li>
                     </ul>
                   </div>
-                </div>
-              </div>
-            </div>
+                </article>
+              </li>
+            </ol>
           </div>
         </FadeInSection>
 
@@ -231,7 +266,7 @@ export default function Home() {
             <p className="mt-4 text-base leading-relaxed text-slate-600 md:text-lg dark:text-slate-300">
               Atlas is my AI assistant. Ask it anything you&apos;d want
               to know about my background, projects, or experience before
-              reaching out.
+              reaching out!
             </p>
             <div className="mt-8 flex justify-center">
               <Link

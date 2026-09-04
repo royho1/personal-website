@@ -15,7 +15,7 @@ export default function ThemeToggle() {
       onClick={toggle}
       aria-label={label}
       title={label}
-      className="relative inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-sky-200 bg-white/80 text-sky-900 shadow-sm shadow-sky-900/10 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-sky-50 hover:text-sky-950 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:border-slate-700 dark:bg-slate-800/80 dark:text-sky-200 dark:shadow-black/30 dark:hover:bg-slate-700 dark:hover:text-sky-100"
+      className="relative inline-flex h-9 w-9 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-sky-200 bg-white/80 text-sky-900 shadow-sm shadow-sky-900/10 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-sky-50 hover:text-sky-950 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:border-slate-700 dark:bg-slate-800/80 dark:text-sky-200 dark:shadow-black/30 dark:hover:bg-slate-700 dark:hover:text-sky-100"
     >
       <AnimatePresence initial={false} mode="wait">
         {isDark ? (
