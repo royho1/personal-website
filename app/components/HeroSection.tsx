@@ -79,7 +79,7 @@ export default function HeroSection() {
             >
               Roy Ho
             </h1>
-            <p className="text-[15px] leading-snug text-sky-800/90 dark:text-sky-300">
+            <p className="text-[17px] leading-snug text-sky-800/90 dark:text-sky-300">
               UC Davis Graduate | B.S. Statistical Data Science, Minor in
               Computer Science
             </p>
