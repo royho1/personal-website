@@ -14,9 +14,6 @@ const profileImageHeight = 1123;
 const primaryCtaClassName =
   "inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-sky-600 px-5 text-sm font-medium text-white transition-colors hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:bg-sky-500 dark:hover:bg-sky-400";
 
-const tagline =
-  "I build data pipelines, dashboards, and analytics tools with Python, SQL, R, and Excel.";
-
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const containerVariants: Variants = {
@@ -85,15 +82,7 @@ export default function HeroSection() {
             </p>
           </motion.div>
 
-          {/* Zone 2 — Tagline */}
-          <motion.p
-            variants={itemVariants}
-            className="text-[17px] leading-relaxed text-slate-800 dark:text-slate-200"
-          >
-            {tagline}
-          </motion.p>
-
-          {/* Zone 3 — Status */}
+          {/* Zone 2 — Status */}
           <motion.div
             variants={itemVariants}
             className="max-w-[36rem] rounded-lg border-l-4 border-sky-600 bg-sky-50/95 px-4 py-3 shadow-sm shadow-sky-900/5 ring-1 ring-sky-200/70 dark:border-sky-400 dark:bg-slate-800/90 dark:shadow-black/20 dark:ring-slate-600/50"
@@ -110,7 +99,7 @@ export default function HeroSection() {
             </p>
           </motion.div>
 
-          {/* Zone 4 — Contact + socials */}
+          {/* Zone 3 — Contact + socials */}
           <motion.div
             variants={itemVariants}
             className="flex flex-wrap items-center gap-y-3"
@@ -175,7 +164,7 @@ export default function HeroSection() {
             </div>
           </motion.div>
 
-          {/* Zone 5 — Actions */}
+          {/* Zone 4 — Actions */}
           <motion.div
             variants={itemVariants}
             className="flex flex-wrap items-center gap-x-6 gap-y-3"
