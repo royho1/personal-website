@@ -41,9 +41,9 @@ export default function HeroSection() {
       className="bg-white dark:bg-slate-950"
       aria-labelledby="hero-heading"
     >
-      <div className="mx-auto flex max-w-[1120px] flex-col items-center gap-10 px-6 pb-8 pt-12 md:flex-row md:items-center md:gap-16 md:px-8 md:pb-10 md:pt-16 lg:pt-20">
-        <div className="w-full max-w-[380px] shrink-0">
-          <div className="relative mx-auto w-full max-w-[380px] md:mx-0">
+      <div className="mx-auto flex max-w-[1120px] flex-col items-center gap-8 px-6 pb-6 pt-8 md:flex-row md:items-center md:gap-16 md:px-8 md:pb-10 md:pt-16 lg:pt-20">
+        <div className="w-full max-w-[min(280px,72vw)] shrink-0 md:max-w-[380px]">
+          <div className="relative mx-auto w-full max-w-[min(280px,72vw)] md:mx-0 md:max-w-[380px]">
             <span
               aria-hidden
               className="pointer-events-none absolute -inset-4 rounded-[1.75rem] bg-sky-400 opacity-20 blur-2xl dark:bg-sky-500 dark:opacity-25"
@@ -66,10 +66,10 @@ export default function HeroSection() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex w-full min-w-0 flex-1 flex-col gap-7"
+          className="flex w-full min-w-0 flex-1 flex-col gap-5 md:gap-7"
         >
           {/* Zone 1 — Identity */}
-          <motion.div variants={itemVariants} className="flex flex-col gap-5">
+          <motion.div variants={itemVariants} className="flex flex-col gap-4 md:gap-5">
             <h1
               id="hero-heading"
               className="text-4xl font-bold leading-none tracking-tight text-sky-950 md:text-5xl lg:text-6xl dark:text-sky-100"
@@ -201,7 +201,7 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      <div className="flex justify-center pb-6 pt-10 md:pb-8 md:pt-14">
+      <div className="flex justify-center pb-5 pt-8 md:pb-8 md:pt-14">
         <a
           href="#about"
           aria-label="Scroll to explore"

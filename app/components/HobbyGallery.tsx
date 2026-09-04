@@ -67,7 +67,7 @@ export default function HobbyGallery() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div className="mt-12 grid items-start gap-7 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+    <div className="mt-8 grid items-start gap-6 sm:mt-12 sm:grid-cols-2 sm:gap-7 lg:grid-cols-2 xl:grid-cols-3">
       {hobbyPhotos.map((photo, index) => {
         const tilt = TILTS[index % TILTS.length];
         const captionTilt = CAPTION_TILTS[index % CAPTION_TILTS.length];

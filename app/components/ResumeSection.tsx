@@ -27,7 +27,7 @@ export default function ResumeSection({
       className="border-t border-sky-200/80 bg-white dark:border-slate-800 dark:bg-slate-950"
       aria-labelledby="resume-heading"
     >
-      <div className="mx-auto max-w-3xl px-6 py-20 text-center md:px-8 md:py-28">
+      <div className="mx-auto max-w-3xl px-6 py-14 text-center md:px-8 md:py-28">
         <Title
           id="resume-heading"
           className="inline-block w-max max-w-full cursor-default text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"
@@ -59,11 +59,12 @@ export default function ResumeSection({
           </a>
         </div>
 
-        <div className="mt-12 w-full">
-          <p className="mb-4 text-center text-sm font-medium text-slate-500 dark:text-slate-400">
+        <div className="mt-8 w-full md:mt-12">
+          <p className="mb-4 hidden text-center text-sm font-medium text-slate-500 md:block dark:text-slate-400">
             Preview
           </p>
-          <div className="overflow-hidden rounded-xl border border-sky-200 bg-sky-100/50 shadow-sm ring-1 ring-sky-300/25 dark:border-slate-700 dark:bg-slate-800/50 dark:ring-slate-700/50">
+          {/* Inline PDF preview is unreliable on many mobile browsers (esp. iOS). */}
+          <div className="hidden overflow-hidden rounded-xl border border-sky-200 bg-sky-100/50 shadow-sm ring-1 ring-sky-300/25 md:block dark:border-slate-700 dark:bg-slate-800/50 dark:ring-slate-700/50">
             <iframe
               title="Roy Ho resume PDF preview"
               src={resumePdfPath}
@@ -71,6 +72,9 @@ export default function ResumeSection({
               loading="lazy"
             />
           </div>
+          <p className="text-center text-sm leading-relaxed text-slate-500 md:hidden dark:text-slate-400">
+            On mobile, use View Resume or Download above to open the PDF.
+          </p>
         </div>
       </div>
     </FadeInSection>

@@ -21,7 +21,7 @@ export default function AskPage() {
           className="border-t border-sky-200/80 bg-white dark:border-slate-800 dark:bg-slate-950"
           aria-labelledby="ask-heading"
         >
-          <div className="mx-auto max-w-3xl px-6 py-20 text-center md:px-8 md:py-28">
+          <div className="mx-auto max-w-3xl px-6 py-14 text-center md:px-8 md:py-28">
             <div className="mx-auto flex w-max max-w-full items-center justify-center gap-2.5">
               <AtlasDog size={52} />
               <h1

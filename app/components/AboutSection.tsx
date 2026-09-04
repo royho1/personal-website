@@ -83,11 +83,11 @@ export default function AboutSection() {
       aria-labelledby="about-heading"
     >
       <motion.div
-        className="mx-auto max-w-6xl px-6 py-20 md:px-8 md:py-28"
+        className="mx-auto max-w-6xl px-6 py-14 md:px-8 md:py-28"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: "some" }}
       >
         <motion.h2
           id="about-heading"
@@ -159,7 +159,7 @@ export default function AboutSection() {
                   <div className="text-2xl font-bold text-sky-900 md:text-3xl dark:text-sky-200">
                     {stat.value}
                   </div>
-                  <div className="mt-1 text-[0.7rem] font-medium uppercase tracking-wide text-sky-800 sm:text-xs dark:text-sky-300">
+                  <div className="mt-1 text-[0.65rem] font-medium uppercase leading-snug tracking-wide text-sky-800 sm:text-xs dark:text-sky-300">
                     {stat.label}
                   </div>
                 </div>
