@@ -418,9 +418,9 @@ export default function ProjectModal({
                   Live webcam demo
                 </p>
                 <p className="mt-0.5 text-[13px] leading-snug text-slate-600 dark:text-slate-400">
-                  Enable the camera, then close your eyes for about a second —
-                  an alarm will sound when drowsiness is detected. Video never
-                  leaves your browser.
+                  Enable the camera, then close your eyes for about a second.
+                  An alarm will sound when drowsiness is detected (eyes are
+                  closed), so be warned! Video never leaves your browser.
                 </p>
               </div>
             ) : media.length > 0 ? (

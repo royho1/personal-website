@@ -90,7 +90,8 @@ const featuredProjects: FeaturedProject[] = [
     tech: "Python, SQL, Flask, React, Mapbox, ETL, Docker, SQLite",
     githubHref: "https://github.com/royho1/sf-restaurant-safety-map",
     iconVariant: "mapPin",
-    gradient: "from-teal-100 via-white to-cyan-100",
+    gradient:
+      "from-teal-100 via-white to-cyan-100 dark:from-teal-900 dark:via-teal-950 dark:to-cyan-900",
     tags: ["Python", "SQL", "Data Visualization"],
     media: SF_RESTAURANT_SAFETY_MAP_MEDIA,
   },
@@ -101,7 +102,8 @@ const featuredProjects: FeaturedProject[] = [
     tech: "Python, Flask, scikit-learn, TF-IDF, Selenium, JobSpy",
     githubHref: "https://github.com/royho1/job-market-analysis-dashboard",
     iconVariant: "bars",
-    gradient: "from-emerald-100 via-white to-sky-100",
+    gradient:
+      "from-emerald-100 via-white to-sky-100 dark:from-emerald-900 dark:via-emerald-950 dark:to-sky-900",
     tags: ["Python", "NLP", "Data Visualization", "Machine Learning"],
     media: JOB_MARKET_ANALYTICS_DASHBOARD_MEDIA,
   },
@@ -112,7 +114,8 @@ const featuredProjects: FeaturedProject[] = [
     tech: "Python, OpenCV, dlib, scipy, pygame",
     githubHref: "https://github.com/royho1/drowsy-driver-detection",
     iconVariant: "eye",
-    gradient: "from-sky-100 via-white to-cyan-100",
+    gradient:
+      "from-sky-100 via-white to-cyan-100 dark:from-sky-900 dark:via-sky-950 dark:to-cyan-900",
     award: "Award Winner: Best Execution",
     tags: ["Python", "Machine Learning"],
     liveDemo: "drowsy-driver",
@@ -128,7 +131,8 @@ const additionalProjects: AdditionalProject[] = [
     tags: ["Python", "SQL", "Machine Learning"],
     status: "In Progress",
     iconVariant: "sparkles",
-    gradient: "from-violet-100 via-white to-sky-100",
+    gradient:
+      "from-violet-100 via-white to-sky-100 dark:from-violet-900 dark:via-violet-950 dark:to-sky-900",
     ...projectMedia(
       PROJECT_IMAGE_FILES.solstice,
       "Preview of the Solstice sneaker analytics concept",
@@ -142,7 +146,8 @@ const additionalProjects: AdditionalProject[] = [
     tags: ["Python", "Machine Learning"],
     githubHref: "https://github.com/royho1/heart-stroke-risk-prediction",
     iconVariant: "heart",
-    gradient: "from-rose-100 via-white to-orange-100",
+    gradient:
+      "from-rose-100 via-white to-orange-100 dark:from-rose-900 dark:via-rose-950 dark:to-orange-900",
     ...projectMedia(
       PROJECT_IMAGE_FILES.heartStrokeRiskPrediction,
       "Screenshot of the heart stroke risk Streamlit app",
@@ -156,7 +161,8 @@ const additionalProjects: AdditionalProject[] = [
     tags: ["Python", "Machine Learning"],
     githubHref: "https://github.com/royho1/wine-quality-classification",
     iconVariant: "wine",
-    gradient: "from-purple-100 via-white to-rose-100",
+    gradient:
+      "from-purple-100 via-white to-rose-100 dark:from-purple-900 dark:via-purple-950 dark:to-rose-900",
     ...projectMedia(
       PROJECT_IMAGE_FILES.wineQualityClassification,
       "Chart from the Portuguese wine classification project",
@@ -169,7 +175,8 @@ const additionalProjects: AdditionalProject[] = [
     tech: "Python, scikit-learn, NLP, ETL",
     tags: ["Python", "NLP", "Machine Learning"],
     iconVariant: "trending",
-    gradient: "from-emerald-100 via-white to-lime-100",
+    gradient:
+      "from-emerald-100 via-white to-lime-100 dark:from-emerald-900 dark:via-emerald-950 dark:to-lime-900",
     ...projectMedia(
       PROJECT_IMAGE_FILES.stockTradingAlgorithm,
       "Chart from the stock trading algorithm project",
@@ -183,7 +190,8 @@ const additionalProjects: AdditionalProject[] = [
     tags: ["Python", "Machine Learning"],
     githubHref: "https://github.com/royho1/nba-player-prediction",
     iconVariant: "chart",
-    gradient: "from-orange-100 via-white to-amber-100",
+    gradient:
+      "from-orange-100 via-white to-amber-100 dark:from-orange-900 dark:via-orange-950 dark:to-amber-900",
     ...projectMedia(
       PROJECT_IMAGE_FILES.nbaPlayerPrediction,
       "Model results from the NBA player performance project",
@@ -197,7 +205,8 @@ const additionalProjects: AdditionalProject[] = [
     tags: ["Python", "NLP", "Machine Learning", "Data Visualization"],
     githubHref: "https://github.com/royho1/movie-reviews-analysis",
     iconVariant: "clapperboard",
-    gradient: "from-slate-100 via-white to-sky-100",
+    gradient:
+      "from-slate-100 via-white to-sky-100 dark:from-slate-800 dark:via-slate-900 dark:to-sky-900",
     ...projectMedia(
       PROJECT_IMAGE_FILES.movieReviewsAnalysis,
       "Visualization from the movie reviews analysis project",
@@ -211,7 +220,8 @@ const additionalProjects: AdditionalProject[] = [
     tags: ["R", "Data Visualization"],
     githubHref: "https://github.com/royho1/drake-time-series-project",
     iconVariant: "trending",
-    gradient: "from-sky-100 via-white to-indigo-100",
+    gradient:
+      "from-sky-100 via-white to-indigo-100 dark:from-sky-900 dark:via-sky-950 dark:to-indigo-900",
     ...projectMedia(
       PROJECT_IMAGE_FILES.drakeTimeSeries,
       "Forecast plot from the Drake time series analysis",
@@ -225,7 +235,8 @@ const additionalProjects: AdditionalProject[] = [
     tags: ["R", "Data Visualization", "Machine Learning"],
     githubHref: "https://github.com/royho1/nba-salary-analysis",
     iconVariant: "chart",
-    gradient: "from-amber-100 via-white to-orange-100",
+    gradient:
+      "from-amber-100 via-white to-orange-100 dark:from-amber-900 dark:via-amber-950 dark:to-orange-900",
     ...projectMedia(
       PROJECT_IMAGE_FILES.nbaSalaryAnalysis,
       "ggplot output from the NBA salary analysis",
@@ -240,7 +251,8 @@ const additionalProjects: AdditionalProject[] = [
     githubHref:
       "https://github.com/royho1/socioeconomic-predictors-of-crime-rates",
     iconVariant: "scale",
-    gradient: "from-stone-100 via-white to-sky-100",
+    gradient:
+      "from-stone-100 via-white to-sky-100 dark:from-stone-800 dark:via-stone-900 dark:to-sky-900",
     ...projectMedia(
       PROJECT_IMAGE_FILES.socioeconomicCrimeRates,
       "Regression plot from the socioeconomic crime rates project",
@@ -254,7 +266,8 @@ const additionalProjects: AdditionalProject[] = [
     tags: ["Python"],
     githubHref: "https://github.com/royho1/six-degrees-kevin-bacon",
     iconVariant: "network",
-    gradient: "from-cyan-100 via-white to-teal-100",
+    gradient:
+      "from-cyan-100 via-white to-teal-100 dark:from-cyan-900 dark:via-cyan-950 dark:to-teal-900",
     ...projectMedia(
       PROJECT_IMAGE_FILES.sixDegreesKevinBacon,
       "Graph traversal output from the Kevin Bacon project",
@@ -439,7 +452,7 @@ function ProjectCardMedia({
 
   return (
     <div
-      className={`relative flex w-full items-center justify-center overflow-hidden bg-gradient-to-br ${gradient} ${heightClass} dark:from-slate-800 dark:via-slate-900 dark:to-slate-800`}
+      className={`relative flex w-full items-center justify-center overflow-hidden bg-gradient-to-br ${gradient} ${heightClass}`}
     >
       {fallback}
     </div>
