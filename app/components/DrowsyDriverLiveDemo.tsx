@@ -11,9 +11,17 @@ import { Camera, CameraOff, Loader2 } from "lucide-react";
 const LEFT_EYE = [36, 37, 38, 39, 40, 41] as const;
 const RIGHT_EYE = [42, 43, 44, 45, 46, 47] as const;
 
-/** Same defaults as SourceCode.py: EAR < 0.25 for 20 consecutive frames. */
-const EAR_THRESH = 0.25;
-const FRAME_CHECK = 20;
+/**
+ * Browser landmarks (face-api tiny) are noisier than dlib and often keep a
+ * slightly open-eye shape when lids close, so we use a softer threshold than
+ * SourceCode.py (0.25) and a rolling window instead of a brittle consecutive streak.
+ */
+const EAR_THRESH = 0.28;
+const WINDOW_SIZE = 48;
+/** Need this many closed samples inside the window to fire an alert (~2.5–3.5s). */
+const CLOSED_NEEDED = 28;
+/** Tolerate brief detector misses without wiping the window. */
+const MISS_GRACE = 10;
 
 const FACE_API_MODEL_URL =
   "https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.15/model";
@@ -75,15 +83,68 @@ export default function DrowsyDriverLiveDemo() {
   const faceapiRef = useRef<FaceApiModule | null>(null);
   const detectOptsRef = useRef<unknown>(null);
   const rafRef = useRef<number | null>(null);
-  const closedFramesRef = useRef(0);
+  const closedWindowRef = useRef<boolean[]>([]);
+  const missStreakRef = useRef(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const alertActiveRef = useRef(false);
   const runningRef = useRef(false);
 
   const [status, setStatus] = useState<DemoStatus>("idle");
   const [ear, setEar] = useState<number | null>(null);
   const [alerting, setAlerting] = useState(false);
   const [faceFound, setFaceFound] = useState(false);
+  const [closedCount, setClosedCount] = useState(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const ensureAudio = useCallback(() => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio(ALERT_SOUND);
+      audioRef.current.preload = "auto";
+    }
+    return audioRef.current;
+  }, []);
+
+  const stopAlertSound = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.loop = false;
+    audio.pause();
+    try {
+      audio.currentTime = 0;
+    } catch {
+      // Ignore seek errors on freshly created elements.
+    }
+  }, []);
+
+  const startAlertSound = useCallback(() => {
+    if (!runningRef.current) return;
+    try {
+      const audio = ensureAudio();
+      audio.loop = true;
+      try {
+        audio.currentTime = 0;
+      } catch {
+        // Ignore seek errors; play() still attempts.
+      }
+      void audio.play().catch(() => {
+        // Autoplay policies can block audio; visual alert still works.
+      });
+    } catch {
+      // Visual alert still works if audio fails.
+    }
+  }, [ensureAudio]);
+
+  const endAlertEpisode = useCallback(() => {
+    if (!alertActiveRef.current) return;
+    alertActiveRef.current = false;
+    stopAlertSound();
+  }, [stopAlertSound]);
+
+  const resetClosedWindow = useCallback(() => {
+    closedWindowRef.current = [];
+    missStreakRef.current = 0;
+    setClosedCount(0);
+  }, []);
 
   const stop = useCallback(() => {
     runningRef.current = false;
@@ -96,35 +157,18 @@ export default function DrowsyDriverLiveDemo() {
     if (videoRef.current) {
       videoRef.current.srcObject = null;
     }
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-    closedFramesRef.current = 0;
+    endAlertEpisode();
+    resetClosedWindow();
     setAlerting(false);
     setEar(null);
     setFaceFound(false);
-  }, []);
+  }, [endAlertEpisode, resetClosedWindow]);
 
-  useEffect(() => () => stop(), [stop]);
-
-  const playAlert = useCallback(() => {
-    if (!runningRef.current) return;
-    try {
-      if (!audioRef.current) {
-        audioRef.current = new Audio(ALERT_SOUND);
-        audioRef.current.preload = "auto";
-      }
-      const audio = audioRef.current;
-      if (!audio.paused && !audio.ended) return;
-      audio.currentTime = 0;
-      void audio.play().catch(() => {
-        // Autoplay policies can block audio; visual alert still works.
-      });
-    } catch {
-      // Visual alert still works if audio fails.
-    }
-  }, []);
+  // Unmount-only cleanup. Do not depend on `stop` identity — that would kill a
+  // live session whenever the callback is recreated mid-start.
+  const stopRef = useRef(stop);
+  stopRef.current = stop;
+  useEffect(() => () => stopRef.current(), []);
 
   const drawFrame = useCallback(
     (positions: Point[] | null, isAlert: boolean, currentEar: number | null) => {
@@ -209,33 +253,51 @@ export default function DrowsyDriverLiveDemo() {
       if (!runningRef.current) return;
 
       if (!detection?.landmarks?.positions) {
-        closedFramesRef.current = 0;
-        setFaceFound(false);
-        setAlerting(false);
-        setEar(null);
-        drawFrame(null, false, null);
+        missStreakRef.current += 1;
+        if (missStreakRef.current > MISS_GRACE) {
+          resetClosedWindow();
+          endAlertEpisode();
+          setFaceFound(false);
+          setEar(null);
+          setAlerting(false);
+        }
+        drawFrame(null, alertActiveRef.current, null);
       } else {
+        missStreakRef.current = 0;
         const positions = detection.landmarks.positions;
         const leftEye = pointsForEye(positions, LEFT_EYE);
         const rightEye = pointsForEye(positions, RIGHT_EYE);
-        const currentEar =
-          (eyeAspectRatio(leftEye) + eyeAspectRatio(rightEye)) / 2.0;
-
-        let isAlert = false;
-        if (currentEar < EAR_THRESH) {
-          closedFramesRef.current += 1;
-          if (closedFramesRef.current >= FRAME_CHECK) {
-            isAlert = true;
-            playAlert();
-          }
+        if (leftEye.length < 6 || rightEye.length < 6) {
+          drawFrame(positions, alertActiveRef.current, null);
         } else {
-          closedFramesRef.current = 0;
-        }
+          const currentEar =
+            (eyeAspectRatio(leftEye) + eyeAspectRatio(rightEye)) / 2.0;
+          const eyesClosed = currentEar < EAR_THRESH;
 
-        setFaceFound(true);
-        setEar(currentEar);
-        setAlerting(isAlert);
-        drawFrame(positions, isAlert, currentEar);
+          const window = closedWindowRef.current;
+          window.push(eyesClosed);
+          if (window.length > WINDOW_SIZE) window.shift();
+          const closedInWindow = window.filter(Boolean).length;
+          setClosedCount((prev) =>
+            prev === closedInWindow ? prev : closedInWindow,
+          );
+
+          let isAlert = false;
+          if (closedInWindow >= CLOSED_NEEDED) {
+            isAlert = true;
+            if (!alertActiveRef.current) {
+              alertActiveRef.current = true;
+              startAlertSound();
+            }
+          } else {
+            endAlertEpisode();
+          }
+
+          setFaceFound(true);
+          setEar(currentEar);
+          setAlerting(isAlert);
+          drawFrame(positions, isAlert, currentEar);
+        }
       }
     } catch {
       if (!runningRef.current) return;
@@ -246,7 +308,7 @@ export default function DrowsyDriverLiveDemo() {
     rafRef.current = requestAnimationFrame(() => {
       void loop();
     });
-  }, [drawFrame, playAlert]);
+  }, [drawFrame, endAlertEpisode, resetClosedWindow, startAlertSound]);
 
   const start = useCallback(async () => {
     if (typeof window === "undefined") return;
@@ -259,6 +321,24 @@ export default function DrowsyDriverLiveDemo() {
     setErrorMessage(null);
     stop();
     runningRef.current = true;
+
+    // Unlock audio during the user gesture so later alert play() is allowed.
+    try {
+      const audio = ensureAudio();
+      audio.muted = true;
+      void audio
+        .play()
+        .then(() => {
+          audio.pause();
+          audio.currentTime = 0;
+          audio.muted = false;
+        })
+        .catch(() => {
+          audio.muted = false;
+        });
+    } catch {
+      // Visual alert still works if unlock fails.
+    }
 
     try {
       if (!faceapiRef.current) {
@@ -275,8 +355,8 @@ export default function DrowsyDriverLiveDemo() {
         if (!runningRef.current) return;
         faceapiRef.current = faceapi;
         detectOptsRef.current = new faceapi.TinyFaceDetectorOptions({
-          inputSize: 320,
-          scoreThreshold: 0.5,
+          inputSize: 416,
+          scoreThreshold: 0.4,
         });
       }
 
@@ -340,12 +420,18 @@ export default function DrowsyDriverLiveDemo() {
           : "Could not load the face-landmark model.",
       );
     }
-  }, [loop, stop]);
+  }, [ensureAudio, loop, stop]);
 
   return (
     <div className="relative flex h-full w-full flex-col bg-slate-950">
       <div className="relative min-h-0 flex-1 overflow-hidden">
-        <video ref={videoRef} playsInline muted className="hidden" />
+        <video
+          ref={videoRef}
+          playsInline
+          muted
+          // Keep the element painted so browsers keep decoding frames; canvas is the UI.
+          className="pointer-events-none absolute h-px w-px opacity-0"
+        />
         <canvas
           ref={canvasRef}
           className={`h-full w-full object-contain ${
@@ -415,7 +501,7 @@ export default function DrowsyDriverLiveDemo() {
               ? "Look at the camera"
               : alerting
                 ? "Eyes closed long enough — alert"
-                : `Tracking · EAR ${ear?.toFixed(3) ?? "—"} (thresh ${EAR_THRESH})`}
+                : `Tracking · EAR ${ear?.toFixed(3) ?? "—"} · closed ${closedCount}/${CLOSED_NEEDED}`}
           </span>
           <button
             type="button"

@@ -9,6 +9,11 @@ Durable agent memory for this repository. Not a README. Capture only what future
 
 ## Learnings
 
+### 2026-09-03 — Drowsy live demo alert audio must be rising-edge
+- **Learning:** Calling `audio.play()` / `currentTime = 0` every closed-eye frame raced with itself; first alert worked, later streaks often stayed silent (errors swallowed). Fix: start sound only when entering an alert episode, `loop = true` while active, pause+reset when eyes open / face lost / Stop. Also: consecutive EAR frames are too brittle with face-api (missed faces + EAR flicker); use a rolling closed-eye window, miss grace, softer thresh (~0.28), unlock audio on Enable click, and never put `stop` in a useEffect dep array (recreates kill the live session).
+- **Why it matters:** Visitors (and Roy) interpret “no second beep” / “no alert” as broken detection even when EAR tracking is fine — or the session was silently stopped.
+- **Implication:** Keep alert audio episode-based and detection window-based in `DrowsyDriverLiveDemo.tsx`; unmount-only cleanup via stopRef.
+
 ### 2026-09-03 — Wine project is R, not Python
 - **Learning:** `wine-quality-classification` is an R multivariate stats project (tidyverse, caret, MASS, pROC). Site + Atlas briefly mislabeled it as Python/scikit-learn.
 - **Why it matters:** Easy to reintroduce from muscle memory (other ML cards are Python) or from old copy.
