@@ -45,8 +45,8 @@ export default function Home() {
             <ol className="relative mt-10 space-y-8 overflow-hidden">
               {/* JAIKE — current */}
               <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
-                <article className="overflow-hidden rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
-                  <div className="relative flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
+                <article className="rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
+                  <div className="relative flex h-[100px] items-center gap-5 rounded-t-xl border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
                     <span
                       aria-hidden
                       className="absolute left-[calc(-2.5rem)] top-1/2 z-10 h-[18px] w-[18px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-sky-600 bg-white max-sm:left-[calc(-1.5rem)] dark:border-sky-500 dark:bg-slate-900"
@@ -78,7 +78,7 @@ export default function Home() {
                       January 2025 &ndash; Present
                     </p>
                   </div>
-                  <div className="p-6">
+                  <div className="rounded-b-xl p-6">
                     <h4 className="mb-3.5 text-[15px] font-medium tracking-tight text-slate-900 dark:text-slate-100">
                       Artificial Intelligence Researcher
                     </h4>
@@ -110,8 +110,8 @@ export default function Home() {
 
               {/* TechSprint */}
               <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
-                <article className="overflow-hidden rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
-                  <div className="relative flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
+                <article className="rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
+                  <div className="relative flex h-[100px] items-center gap-5 rounded-t-xl border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
                     <span
                       aria-hidden
                       className="absolute left-[calc(-2.5rem)] top-1/2 z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-600 max-sm:left-[calc(-1.5rem)] dark:bg-sky-500"
@@ -141,7 +141,7 @@ export default function Home() {
                       March 2024 &ndash; September 2025
                     </p>
                   </div>
-                  <div className="p-6">
+                  <div className="rounded-b-xl p-6">
                     <h4 className="mb-3.5 text-[15px] font-medium tracking-tight text-slate-900 dark:text-slate-100">
                       Head of Data Engineering
                     </h4>
@@ -168,13 +168,18 @@ export default function Home() {
                 </article>
               </li>
 
-              {/* AISC — last entry, line stops at circle via ol overflow clip */}
+              {/* AISC — last entry; cover hides line below this circle */}
               <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
-                <article className="overflow-hidden rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
-                  <div className="relative flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
+                <article className="rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
+                  <div className="relative flex h-[100px] items-center gap-5 rounded-t-xl border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
                     <span
                       aria-hidden
                       className="absolute left-[calc(-2.5rem)] top-1/2 z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-600 max-sm:left-[calc(-1.5rem)] dark:bg-sky-500"
+                    />
+                    <span
+                      aria-hidden
+                      className="absolute left-[calc(-2.5rem)] top-1/2 z-[1] w-0.5 -translate-x-1/2 bg-sky-100 max-sm:left-[calc(-1.5rem)] dark:bg-slate-900"
+                      style={{ bottom: "calc(-100vh)" }}
                     />
                     <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
                       <Image
@@ -197,7 +202,7 @@ export default function Home() {
                       September 2024 &ndash; April 2025
                     </p>
                   </div>
-                  <div className="p-6">
+                  <div className="rounded-b-xl p-6">
                     <h4 className="mb-3.5 text-[15px] font-medium tracking-tight text-slate-900 dark:text-slate-100">
                       General Member
                     </h4>
