@@ -55,13 +55,13 @@ export default function Home() {
                 />
                 <article className="overflow-hidden rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
                   <div className="flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
-                    <div className="flex min-w-0 flex-1 items-center gap-5">
+                    <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
                       <Image
                         src={jaikeLogoSrc}
                         alt=""
                         width={240}
                         height={60}
-                        className="h-[60px] w-auto max-w-none shrink-0 object-contain"
+                        className="h-[60px] w-auto max-w-[min(240px,42vw)] shrink-0 object-contain max-sm:h-10"
                       />
                       <div className="min-w-0">
                         <h3 className="text-[20px] font-medium tracking-tight text-slate-900 dark:text-sky-100">
@@ -119,14 +119,14 @@ export default function Home() {
                 />
                 <article className="overflow-hidden rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
                   <div className="flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
-                    <div className="flex min-w-0 flex-1 items-center gap-5">
+                    <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
                       <span className="inline-flex shrink-0 rounded bg-white p-2">
                         <Image
                           src={techSprintLogoSrc}
                           alt=""
                           width={240}
                           height={60}
-                          className="h-[60px] w-auto max-w-none shrink-0 object-contain"
+                          className="h-[60px] w-auto max-w-[min(240px,42vw)] shrink-0 object-contain max-sm:h-10"
                         />
                       </span>
                       <div className="min-w-0">
@@ -174,13 +174,13 @@ export default function Home() {
                 />
                 <article className="overflow-hidden rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
                   <div className="flex h-[100px] items-center gap-5 border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
-                    <div className="flex min-w-0 flex-1 items-center gap-5">
+                    <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
                       <Image
                         src={aiscLogoSrc}
                         alt=""
                         width={240}
                         height={60}
-                        className="h-[60px] w-auto max-w-none shrink-0 object-contain"
+                        className="h-[60px] w-auto max-w-[min(240px,42vw)] shrink-0 object-contain max-sm:h-10"
                       />
                       <div className="min-w-0">
                         <h3 className="text-[20px] font-medium tracking-tight text-slate-900 dark:text-sky-100">
