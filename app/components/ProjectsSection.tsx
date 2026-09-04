@@ -27,6 +27,7 @@ import StatusBadge from "./StatusBadge";
 import {
   FILTERS,
   emitProjectsFilter,
+  getProjectsFilter,
   subscribeToProjectsFilter,
   type Filter,
   type Tag,
@@ -528,9 +529,13 @@ export default function ProjectsSection() {
   const [filter, setFilter] = useState<Filter>("All");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  // Mirror external filter requests (e.g. from the NavBar dropdown) into
-  // local state so this section and any other dispatcher stay in sync.
-  useEffect(() => subscribeToProjectsFilter(setFilter), []);
+  // Hydrate from the shared bus (incl. sessionStorage) then stay in sync with
+  // NavBar / other dispatchers. Avoid reading storage in useState to prevent
+  // SSR/client hydration mismatches.
+  useEffect(() => {
+    setFilter(getProjectsFilter());
+    return subscribeToProjectsFilter(setFilter);
+  }, []);
 
   const closeModal = useCallback(() => setSelectedIndex(null), []);
 

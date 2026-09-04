@@ -9,9 +9,13 @@ import ThemeToggle from "./ThemeToggle";
 import {
   FILTERS,
   emitProjectsFilter,
+  getProjectsFilter,
   subscribeToProjectsFilter,
   type Filter,
 } from "./projectsFilterBus";
+
+/** Inline desktop nav needs ~1024px; keep the hamburger until then. */
+const DESKTOP_NAV_MQ = "(min-width: 1024px)";
 
 const navLinks = [
   { label: "About", href: "/#about", id: "about" },
@@ -57,7 +61,10 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
 
   // Keep the dropdown's highlighted option in sync with the
   // ProjectsSection, regardless of which surface changed the filter.
-  useEffect(() => subscribeToProjectsFilter(setActiveFilter), []);
+  useEffect(() => {
+    setActiveFilter(getProjectsFilter());
+    return subscribeToProjectsFilter(setActiveFilter);
+  }, []);
 
   // Close when focus/pointer moves outside (covers taps elsewhere on
   // touch devices, which don't fire mouseleave).
@@ -176,7 +183,7 @@ function DesktopNavLinks({
   pathname: string;
 }) {
   return (
-    <ul className="hidden items-center justify-end gap-6 text-sm text-slate-600 md:flex md:gap-8 dark:text-slate-300">
+    <ul className="hidden items-center justify-end gap-6 text-sm text-slate-600 lg:flex lg:gap-8 dark:text-slate-300">
       {navLinks.map((link) => {
         const isActive = activeId === link.id;
         const item =
@@ -236,7 +243,10 @@ function MobileNavPanel({
   const [activeFilter, setActiveFilter] = useState<Filter>("All");
   const [filtersOpen, setFiltersOpen] = useState(false);
 
-  useEffect(() => subscribeToProjectsFilter(setActiveFilter), []);
+  useEffect(() => {
+    setActiveFilter(getProjectsFilter());
+    return subscribeToProjectsFilter(setActiveFilter);
+  }, []);
 
   useEffect(() => {
     if (!open) {
@@ -278,7 +288,7 @@ function MobileNavPanel({
             key="mobile-nav-backdrop"
             type="button"
             aria-label="Close menu"
-            className="fixed inset-0 z-[60] bg-slate-950/40 backdrop-blur-[1px] md:hidden dark:bg-black/55"
+            className="fixed inset-0 z-[60] bg-slate-950/40 backdrop-blur-[1px] lg:hidden dark:bg-black/55"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -291,7 +301,7 @@ function MobileNavPanel({
             role="dialog"
             aria-modal="true"
             aria-label="Site navigation"
-            className="fixed inset-x-0 top-[calc(env(safe-area-inset-top,0px)+3.75rem)] z-[70] max-h-[min(80vh,calc(100dvh-4.5rem))] overflow-y-auto border-b border-sky-200/80 bg-sky-50/98 px-4 py-3 shadow-lg shadow-sky-900/10 backdrop-blur-md md:hidden dark:border-slate-800 dark:bg-slate-950/98 dark:shadow-black/40"
+            className="fixed inset-x-0 top-[calc(env(safe-area-inset-top,0px)+3.75rem)] z-[70] max-h-[min(80vh,calc(100dvh-4.5rem))] overflow-y-auto border-b border-sky-200/80 bg-sky-50/98 px-4 py-3 shadow-lg shadow-sky-900/10 backdrop-blur-md lg:hidden dark:border-slate-800 dark:bg-slate-950/98 dark:shadow-black/40"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -472,6 +482,19 @@ export default function NavBar() {
     setMobileOpen(false);
   }, [pathname]);
 
+  // If the menu is open and the viewport grows into the desktop nav range,
+  // close it so body scroll lock + hidden panel cannot strand the page.
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia(DESKTOP_NAV_MQ);
+    const handleChange = () => {
+      if (mq.matches) setMobileOpen(false);
+    };
+    handleChange();
+    mq.addEventListener("change", handleChange);
+    return () => mq.removeEventListener("change", handleChange);
+  }, []);
+
   return (
     <header className="sticky top-0 z-50 border-b border-sky-200/80 bg-sky-50/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/80">
       <nav
@@ -484,12 +507,12 @@ export default function NavBar() {
         >
           Roy Ho
         </a>
-        <div className="flex items-center justify-end gap-3 md:gap-8">
+        <div className="flex items-center justify-end gap-3 lg:gap-8">
           <DesktopNavLinks activeId={activeId} pathname={pathname} />
           <ThemeToggle />
           <button
             type="button"
-            className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-sky-200 bg-white/80 text-sky-900 shadow-sm shadow-sky-900/10 transition-colors hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 md:hidden dark:border-slate-700 dark:bg-slate-800/80 dark:text-sky-200 dark:hover:bg-slate-700"
+            className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-sky-200 bg-white/80 text-sky-900 shadow-sm shadow-sky-900/10 transition-colors hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 lg:hidden dark:border-slate-700 dark:bg-slate-800/80 dark:text-sky-200 dark:hover:bg-slate-700"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls={mobilePanelId}
