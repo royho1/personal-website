@@ -12,7 +12,7 @@ export const ATLAS_KNOWLEDGE = `
 - Could see himself living in San Diego, New York, or Texas further down the road
 - Available immediately for full-time roles in data, analytics, and engineering
 - Interested in building data-driven solutions using Python, R, SQL, and Excel, with a focus on machine learning
-- Stats: 13+ Projects, 15+ Core Tools, 29 Page AI Research Paper
+- Stats: 13+ Projects, 16+ Core Tools, 29 Page AI Research Paper
 - Certification: NVIDIA, Fundamentals of Deep Learning, October 2025
 
 ## Current Focus
@@ -137,7 +137,7 @@ Right now Roy is available immediately for full-time roles in data, analytics, a
 
 ## Skills
 
-Python, SQL, Tableau, Power BI, Excel, R, Pandas, Scikit-learn, Docker, Git, Flask, React, PyTorch, Data Visualization, Machine Learning
+Python, SQL, Tableau, Power BI, Excel, R, Pandas, Scikit-learn, Docker, Git, GitHub, Flask, React, PyTorch, Data Visualization, Machine Learning
 
 Roy has been using Python for about four years, starting in college and continuing through his projects and professional work. He has been using SQL for about two years. He is still actively deepening both, and applies them in current work like Solstice and the SF Restaurant Safety Map.
 

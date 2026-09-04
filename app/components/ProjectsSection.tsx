@@ -32,6 +32,7 @@ import {
   type Tag,
 } from "./projectsFilterBus";
 import {
+  JOB_MARKET_ANALYTICS_DASHBOARD_MEDIA,
   PROJECT_IMAGE_FILES,
   SF_RESTAURANT_SAFETY_MAP_MEDIA,
   projectMedia,
@@ -56,6 +57,7 @@ type ProjectMediaFields = {
   demoHref?: string;
   /** Modal-only screenshots; card front always uses the icon fallback. */
   media?: ProjectMediaSlide[];
+  liveDemo?: "drowsy-driver";
 };
 
 type FeaturedProject = ProjectMediaFields & {
@@ -101,25 +103,19 @@ const featuredProjects: FeaturedProject[] = [
     iconVariant: "bars",
     gradient: "from-emerald-100 via-white to-sky-100",
     tags: ["Python", "NLP", "Data Visualization", "Machine Learning"],
-    ...projectMedia(
-      PROJECT_IMAGE_FILES.jobMarketAnalyticsDashboard,
-      "Screenshot of the Job Market Analytics Dashboard",
-    ),
+    media: JOB_MARKET_ANALYTICS_DASHBOARD_MEDIA,
   },
   {
     title: "Drowsy Driver Detection",
     description:
-      "Built a real-time drowsiness detection system using dlib facial landmarks and Eye Aspect Ratio thresholding, with an OpenCV pipeline and a pygame audio alert.",
+      "Built a real-time drowsiness detection system using dlib facial landmarks and Eye Aspect Ratio thresholding, with an OpenCV pipeline and a pygame audio alert. Open this card to try a browser version of the same EAR alert loop.",
     tech: "Python, OpenCV, dlib, scipy, pygame",
     githubHref: "https://github.com/royho1/drowsy-driver-detection",
     iconVariant: "eye",
     gradient: "from-sky-100 via-white to-cyan-100",
     award: "Award Winner: Best Execution",
     tags: ["Python", "Machine Learning"],
-    ...projectMedia(
-      PROJECT_IMAGE_FILES.drowsyDriverDetection,
-      "Screenshot of the drowsy driver detection system",
-    ),
+    liveDemo: "drowsy-driver",
   },
 ];
 
@@ -489,6 +485,7 @@ function featuredToGalleryItem(project: FeaturedProject): GalleryItem {
       imageSrc: project.imageSrc,
       imageAlt: project.imageAlt,
       media: project.media,
+      liveDemo: project.liveDemo,
       award: project.award,
     },
     fallback: <FeaturedProjectIcon variant={project.iconVariant} size="lg" />,
@@ -507,6 +504,7 @@ function additionalToGalleryItem(project: AdditionalProject): GalleryItem {
       imageSrc: project.imageSrc,
       imageAlt: project.imageAlt,
       media: project.media,
+      liveDemo: project.liveDemo,
       status: project.status,
     },
     fallback: (

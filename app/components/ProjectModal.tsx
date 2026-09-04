@@ -14,6 +14,14 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ExternalLink, X } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import type { ProjectMediaSlide } from "../lib/projectImages";
+import dynamic from "next/dynamic";
+
+const DrowsyDriverLiveDemo = dynamic(
+  () => import("./DrowsyDriverLiveDemo"),
+  { ssr: false },
+);
+
+export type ProjectLiveDemo = "drowsy-driver";
 
 export type ProjectModalData = {
   title: string;
@@ -24,6 +32,8 @@ export type ProjectModalData = {
   imageSrc?: string;
   imageAlt?: string;
   media?: ProjectMediaSlide[];
+  /** In-modal interactive demo (camera stays on-device). */
+  liveDemo?: ProjectLiveDemo;
   award?: string;
   status?: string;
 };
@@ -57,7 +67,8 @@ export default function ProjectModal({
   const [mounted, setMounted] = useState(false);
   const open = project !== null;
   const media = project?.media ?? [];
-  const hasMediaCarousel = media.length > 1;
+  const hasLiveDemo = project?.liveDemo != null;
+  const hasMediaCarousel = !hasLiveDemo && media.length > 1;
   const [mediaIndex, setMediaIndex] = useState(0);
   /** 1 = next/right, -1 = previous/left — drives slide enter/exit direction. */
   const [slideDirection, setSlideDirection] = useState(1);
@@ -322,37 +333,55 @@ export default function ProjectModal({
               </div>
             </header>
 
-            {/* Image */}
-            <div className="relative max-h-[35vh] w-full shrink min-h-0 overflow-hidden bg-sky-50 dark:bg-slate-800 sm:max-h-[45vh]">
-              <div className="relative aspect-[16/10] max-h-[35vh] w-full sm:max-h-[45vh]">
-                <AnimatePresence
-                  mode="wait"
-                  initial={false}
-                  custom={slideDirection}
-                >
-                  <motion.div
-                    key={activeSlide?.src ?? project.title}
-                    className="absolute inset-0"
+            {/* Media / live demo */}
+            <div
+              className={`relative w-full shrink min-h-0 overflow-hidden bg-sky-50 dark:bg-slate-800 ${
+                hasLiveDemo
+                  ? "max-h-[48vh] sm:max-h-[52vh]"
+                  : "max-h-[35vh] sm:max-h-[45vh]"
+              }`}
+            >
+              <div
+                className={`relative w-full ${
+                  hasLiveDemo
+                    ? "aspect-[4/3] max-h-[48vh] sm:max-h-[52vh]"
+                    : "aspect-[16/10] max-h-[35vh] sm:max-h-[45vh]"
+                }`}
+              >
+                {hasLiveDemo && project.liveDemo === "drowsy-driver" ? (
+                  <div className="absolute inset-0">
+                    <DrowsyDriverLiveDemo />
+                  </div>
+                ) : (
+                  <AnimatePresence
+                    mode="wait"
+                    initial={false}
                     custom={slideDirection}
-                    variants={slideVariants}
-                    initial={prefersReducedMotion ? false : "enter"}
-                    animate="center"
-                    exit={prefersReducedMotion ? undefined : "exit"}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
                   >
-                    {activeSlide ? (
-                      <ModalImage
-                        src={activeSlide.src}
-                        alt={activeSlide.title}
-                        fallback={fallback}
-                      />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center">
-                        {fallback}
-                      </div>
-                    )}
-                  </motion.div>
-                </AnimatePresence>
+                    <motion.div
+                      key={activeSlide?.src ?? project.title}
+                      className="absolute inset-0"
+                      custom={slideDirection}
+                      variants={slideVariants}
+                      initial={prefersReducedMotion ? false : "enter"}
+                      animate="center"
+                      exit={prefersReducedMotion ? undefined : "exit"}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                    >
+                      {activeSlide ? (
+                        <ModalImage
+                          src={activeSlide.src}
+                          alt={activeSlide.title}
+                          fallback={fallback}
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center">
+                          {fallback}
+                        </div>
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                )}
 
                 {showMediaNav && (
                   <>
@@ -383,8 +412,18 @@ export default function ProjectModal({
               </div>
             </div>
 
-            {/* Active caption + thumbnails (fixed; not in scroll region) */}
-            {media.length > 0 && (
+            {hasLiveDemo && project.liveDemo === "drowsy-driver" ? (
+              <div className="shrink-0 px-4 pt-3 sm:px-5">
+                <p className="text-sm font-medium text-sky-950 dark:text-sky-100">
+                  Live webcam demo
+                </p>
+                <p className="mt-0.5 text-[13px] leading-snug text-slate-600 dark:text-slate-400">
+                  Enable the camera, then close your eyes for about a second —
+                  an alarm will sound when drowsiness is detected. Video never
+                  leaves your browser.
+                </p>
+              </div>
+            ) : media.length > 0 ? (
               <div className="shrink-0 px-4 pt-3 sm:px-5">
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div
@@ -443,7 +482,7 @@ export default function ProjectModal({
                   </div>
                 )}
               </div>
-            )}
+            ) : null}
 
             {/* Scrollable description only */}
             <div className="min-h-0 flex-1 overflow-y-auto px-4 py-3 sm:px-5">

@@ -35,156 +35,164 @@ export default function Home() {
           className="border-t border-sky-200/80 bg-sky-100 dark:border-slate-800 dark:bg-slate-900"
           aria-labelledby="experience-heading"
         >
-          <div className="mx-auto max-w-5xl px-6 py-20 md:px-8 md:py-28">
+          <div className="mx-auto max-w-[820px] px-6 py-20 md:px-8 md:py-28">
             <h2
               id="experience-heading"
-              className="mx-auto block w-max max-w-full cursor-default text-center text-2xl font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold md:text-3xl dark:text-sky-100"
+              className="mx-auto block w-max max-w-full cursor-default text-center text-[28px] font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold dark:text-sky-100"
             >
               Experience
             </h2>
-            <div className="mt-10 space-y-8">
-              <div className="group rounded-2xl border border-sky-200 bg-white/90 p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-300/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:p-8 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50">
-                <div className="grid items-start gap-8 md:grid-cols-[minmax(260px,320px)_minmax(0,1fr)] md:gap-10">
-                  <div className="relative min-h-[18rem] w-full overflow-hidden rounded-2xl border border-sky-200 bg-white p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/70 md:min-h-[26rem] md:p-8 dark:border-slate-700 dark:bg-slate-100 dark:shadow-black/40 dark:ring-slate-700/50">
-                    <Image
-                      src={jaikeLogoSrc}
-                      alt="JAIKE logo"
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-                      sizes="(max-width: 768px) 100vw, 320px"
-                    />
-                  </div>
-
-                  <div>
-                    <h3 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl dark:text-sky-100">
-                      JAIKE
-                    </h3>
-                    <p className="mt-1 text-sm leading-snug text-slate-500 md:text-base dark:text-slate-400">
-                      Journal of Artificial Intelligence and Knowledge Engineering
-                    </p>
-                    <p className="mt-2 text-sm font-medium uppercase tracking-[0.15em] text-sky-800 md:text-base dark:text-sky-300">
-                      January 2025 &ndash; Present
-                    </p>
-                    <h4 className="mt-3 text-lg font-semibold tracking-tight text-slate-900 md:text-xl dark:text-slate-100">
-                      Artificial Intelligence Researcher
-                    </h4>
-                    <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-slate-900 marker:text-slate-900 md:text-base dark:text-slate-300 dark:marker:text-slate-500">
-                      <li>
-                        Conducted research on LLM-based automation covering
-                        API-driven system design, agent orchestration frameworks,
-                        retrieval-augmented generation (RAG), and a consolidated
-                        threat model spanning prompt injection, data leakage, and
-                        unintended action execution.
-                      </li>
-                      <li>
-                        First-authored a 29-page, 36-source review introducing a
-                        two-axis framework for LLM agent autonomy and oversight,
-                        plus a cost model pricing oversight against productivity
-                        gains; revise-and-resubmit with publication recommended.
-                      </li>
-                      <li>
-                        Served as a peer reviewer for JAIKE, evaluating submissions
-                        on retrieval methods in large language models, reasoning
-                        performance in extended tasks, and large-scale model
-                        architectures for methodological rigor and evaluation
-                        quality.
-                      </li>
-                    </ul>
-                  </div>
+            <ol className="relative mt-10 space-y-10">
+              {/* JAIKE — current */}
+              <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
+                <span
+                  aria-hidden
+                  className="absolute left-[8px] top-[13px] bottom-[calc(-2.5rem-13px)] w-0.5 -translate-x-1/2 bg-sky-200 dark:bg-slate-700"
+                />
+                <span
+                  aria-hidden
+                  className="absolute left-[8px] top-[5px] z-10 h-4 w-4 -translate-x-1/2 rounded-full border-[3px] border-sky-600 bg-white dark:border-sky-500 dark:bg-slate-900"
+                />
+                <div className="flex items-center gap-2.5">
+                  <Image
+                    src={jaikeLogoSrc}
+                    alt=""
+                    width={52}
+                    height={26}
+                    className="h-[26px] w-auto object-contain"
+                  />
+                  <h3 className="text-[19px] font-medium tracking-tight text-slate-900 dark:text-sky-100">
+                    JAIKE
+                  </h3>
                 </div>
-              </div>
+                <p className="mt-1 text-[14px] leading-snug text-slate-500 dark:text-slate-400">
+                  Journal of Artificial Intelligence and Knowledge Engineering
+                </p>
+                <p className="mt-2 text-[12px] font-medium uppercase tracking-[0.05em] text-sky-600 dark:text-sky-400">
+                  January 2025 &ndash; Present
+                </p>
+                <h4 className="mt-2 text-[15px] font-medium tracking-tight text-slate-900 dark:text-slate-100">
+                  Artificial Intelligence Researcher
+                </h4>
+                <ul className="mt-4 list-disc space-y-2 pl-[1.15em] text-[14px] leading-[1.6] text-slate-900 marker:text-slate-900 dark:text-slate-300 dark:marker:text-slate-500">
+                  <li>
+                    Conducted research on LLM-based automation covering
+                    API-driven system design, agent orchestration frameworks,
+                    retrieval-augmented generation (RAG), and a consolidated
+                    threat model spanning prompt injection, data leakage, and
+                    unintended action execution.
+                  </li>
+                  <li>
+                    First-authored a 29-page, 36-source review introducing a
+                    two-axis framework for LLM agent autonomy and oversight,
+                    plus a cost model pricing oversight against productivity
+                    gains; revise-and-resubmit with publication recommended.
+                  </li>
+                  <li>
+                    Served as a peer reviewer for JAIKE, evaluating submissions
+                    on retrieval methods in large language models, reasoning
+                    performance in extended tasks, and large-scale model
+                    architectures for methodological rigor and evaluation
+                    quality.
+                  </li>
+                </ul>
+              </li>
 
-              <div className="group rounded-2xl border border-sky-200 bg-white/90 p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-300/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:p-8 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50">
-                <div className="grid items-start gap-8 md:grid-cols-[minmax(260px,320px)_minmax(0,1fr)] md:gap-10">
-                  <div className="relative min-h-[18rem] w-full overflow-hidden rounded-2xl border border-sky-100 bg-white shadow-sm shadow-sky-900/10 md:min-h-[26rem] dark:border-slate-700 dark:bg-slate-100 dark:shadow-black/40">
-                    <Image
-                      src={techSprintLogoSrc}
-                      alt="TechSprint Innovators logo"
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-                      sizes="(max-width: 768px) 100vw, 320px"
-                    />
-                  </div>
-
-                  <div>
-                    <h3 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl dark:text-sky-100">
-                      TechSprint Innovators
-                    </h3>
-                    <p className="mt-2 text-sm font-medium uppercase tracking-[0.15em] text-sky-800 md:text-base dark:text-sky-300">
-                      March 2024 &ndash; September 2025
-                    </p>
-                    <h4 className="mt-3 text-lg font-semibold tracking-tight text-slate-900 md:text-xl dark:text-slate-100">
-                      Head of Data Engineering
-                    </h4>
-                    <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-slate-900 marker:text-slate-900 md:text-base dark:text-slate-300 dark:marker:text-slate-500">
-                      <li>
-                        Built a multi-factor stock screening model using
-                        fundamental, technical, and NLP-based sentiment features
-                        (FinBERT).
-                      </li>
-                      <li>
-                        Developed and evaluated a supervised classification model
-                        in scikit-learn to predict price appreciation, performing
-                        feature selection, model tuning, and performance
-                        validation on historical market data.
-                      </li>
-                      <li>
-                        Engineered and automated a daily ETL data pipeline
-                        (Python, yfinance, Alpaca API) running on a Raspberry Pi
-                        to filter equities, generate structured CSV outputs, and
-                        deliver real-time investment signals via Discord webhook.
-                      </li>
-                    </ul>
-                  </div>
+              {/* TechSprint */}
+              <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
+                <span
+                  aria-hidden
+                  className="absolute left-[8px] top-[13px] bottom-[calc(-2.5rem-13px)] w-0.5 -translate-x-1/2 bg-sky-200 dark:bg-slate-700"
+                />
+                <span
+                  aria-hidden
+                  className="absolute left-[8px] top-[7px] z-10 h-3 w-3 -translate-x-1/2 rounded-full bg-sky-600 dark:bg-sky-500"
+                />
+                <div className="flex items-center gap-2.5">
+                  <Image
+                    src={techSprintLogoSrc}
+                    alt=""
+                    width={52}
+                    height={26}
+                    className="h-[26px] w-auto object-contain"
+                  />
+                  <h3 className="text-[19px] font-medium tracking-tight text-slate-900 dark:text-sky-100">
+                    TechSprint Innovators
+                  </h3>
                 </div>
-              </div>
+                <p className="mt-2 text-[12px] font-medium uppercase tracking-[0.05em] text-sky-600 dark:text-sky-400">
+                  March 2024 &ndash; September 2025
+                </p>
+                <h4 className="mt-2 text-[15px] font-medium tracking-tight text-slate-900 dark:text-slate-100">
+                  Head of Data Engineering
+                </h4>
+                <ul className="mt-4 list-disc space-y-2 pl-[1.15em] text-[14px] leading-[1.6] text-slate-900 marker:text-slate-900 dark:text-slate-300 dark:marker:text-slate-500">
+                  <li>
+                    Built a multi-factor stock screening model using
+                    fundamental, technical, and NLP-based sentiment features
+                    (FinBERT).
+                  </li>
+                  <li>
+                    Developed and evaluated a supervised classification model
+                    in scikit-learn to predict price appreciation, performing
+                    feature selection, model tuning, and performance
+                    validation on historical market data.
+                  </li>
+                  <li>
+                    Engineered and automated a daily ETL data pipeline
+                    (Python, yfinance, Alpaca API) running on a Raspberry Pi
+                    to filter equities, generate structured CSV outputs, and
+                    deliver real-time investment signals via Discord webhook.
+                  </li>
+                </ul>
+              </li>
 
-              <div className="group rounded-2xl border border-sky-200 bg-white/90 p-6 shadow-sm shadow-sky-900/10 ring-1 ring-sky-300/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-md md:p-8 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50">
-                <div className="grid items-start gap-8 md:grid-cols-[minmax(260px,320px)_minmax(0,1fr)] md:gap-10">
-                  <div className="relative min-h-[18rem] w-full overflow-hidden rounded-2xl border border-sky-200 bg-white p-10 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/70 md:min-h-[26rem] md:p-14 dark:border-slate-700 dark:bg-slate-100 dark:shadow-black/40 dark:ring-slate-700/50">
-                    <Image
-                      src={aiscLogoSrc}
-                      alt="AI Student Collective logo"
-                      fill
-                      className="object-contain transition-transform duration-500 group-hover:scale-[1.01]"
-                      sizes="(max-width: 768px) 100vw, 320px"
-                    />
-                  </div>
-
-                  <div>
-                    <h3 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl dark:text-sky-100">
-                      AISC
-                    </h3>
-                    <p className="mt-1 text-sm leading-snug text-slate-500 md:text-base dark:text-slate-400">
-                      AI Student Collective
-                    </p>
-                    <p className="mt-2 text-sm font-medium uppercase tracking-[0.15em] text-sky-800 md:text-base dark:text-sky-300">
-                      September 2024 &ndash; April 2025
-                    </p>
-                    <h4 className="mt-3 text-lg font-semibold tracking-tight text-slate-900 md:text-xl dark:text-slate-100">
-                      General Member
-                    </h4>
-                    <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-slate-900 marker:text-slate-900 md:text-base dark:text-slate-300 dark:marker:text-slate-500">
-                      <li>
-                        Built machine learning models for stroke risk prediction
-                        and real-time drowsy driver detection within structured
-                        project cycles.
-                      </li>
-                      <li>
-                        Performed data preprocessing, feature engineering, model
-                        development, evaluation, and project presentations.
-                      </li>
-                      <li>
-                        Worked within quarter-long sprint cycles with defined
-                        milestones, code reviews, and final project demos,
-                        following structured machine learning development
-                        workflows from ideation to deployment.
-                      </li>
-                    </ul>
-                  </div>
+              {/* AISC — last entry, line stops at circle */}
+              <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
+                <span
+                  aria-hidden
+                  className="absolute left-[8px] top-[7px] z-10 h-3 w-3 -translate-x-1/2 rounded-full bg-sky-600 dark:bg-sky-500"
+                />
+                <div className="flex items-center gap-2.5">
+                  <Image
+                    src={aiscLogoSrc}
+                    alt=""
+                    width={52}
+                    height={26}
+                    className="h-[26px] w-auto object-contain"
+                  />
+                  <h3 className="text-[19px] font-medium tracking-tight text-slate-900 dark:text-sky-100">
+                    AISC
+                  </h3>
                 </div>
-              </div>
-            </div>
+                <p className="mt-1 text-[14px] leading-snug text-slate-500 dark:text-slate-400">
+                  AI Student Collective
+                </p>
+                <p className="mt-2 text-[12px] font-medium uppercase tracking-[0.05em] text-sky-600 dark:text-sky-400">
+                  September 2024 &ndash; April 2025
+                </p>
+                <h4 className="mt-2 text-[15px] font-medium tracking-tight text-slate-900 dark:text-slate-100">
+                  General Member
+                </h4>
+                <ul className="mt-4 list-disc space-y-2 pl-[1.15em] text-[14px] leading-[1.6] text-slate-900 marker:text-slate-900 dark:text-slate-300 dark:marker:text-slate-500">
+                  <li>
+                    Built machine learning models for stroke risk prediction
+                    and real-time drowsy driver detection within structured
+                    project cycles.
+                  </li>
+                  <li>
+                    Performed data preprocessing, feature engineering, model
+                    development, evaluation, and project presentations.
+                  </li>
+                  <li>
+                    Worked within quarter-long sprint cycles with defined
+                    milestones, code reviews, and final project demos,
+                    following structured machine learning development
+                    workflows from ideation to deployment.
+                  </li>
+                </ul>
+              </li>
+            </ol>
           </div>
         </FadeInSection>
 
@@ -231,7 +239,7 @@ export default function Home() {
             <p className="mt-4 text-base leading-relaxed text-slate-600 md:text-lg dark:text-slate-300">
               Atlas is my AI assistant. Ask it anything you&apos;d want
               to know about my background, projects, or experience before
-              reaching out.
+              reaching out!
             </p>
             <div className="mt-8 flex justify-center">
               <Link

@@ -6,7 +6,7 @@
  */
 export const PROJECT_IMAGE_FILES = {
   sfRestaurantSafetyMap: "sf-restaurant-safety-map/citywide-map.jpg",
-  jobMarketAnalyticsDashboard: "job-market-analytics-dashboard.webp",
+  jobMarketAnalyticsDashboard: "job-market-analytics-dashboard/overview.png",
   drowsyDriverDetection: "drowsy-driver-detection.webp",
   solstice: "solstice.webp",
   heartStrokeRiskPrediction: "heart-stroke-risk-prediction.webp",
@@ -76,5 +76,45 @@ export const SF_RESTAURANT_SAFETY_MAP_MEDIA: ProjectMediaSlide[] = [
     title: "Insights Panel",
     description:
       "Citywide pass rate, rating breakdown, and places that need attention.",
+  },
+];
+
+export const JOB_MARKET_ANALYTICS_DASHBOARD_MEDIA: ProjectMediaSlide[] = [
+  {
+    src: "/projects/job-market-analytics-dashboard/overview.png",
+    title: "Overview",
+    description:
+      "Landing hub for salaries, skills, trends, and resume-matched postings.",
+  },
+  {
+    src: "/projects/job-market-analytics-dashboard/methodology.png",
+    title: "Methodology",
+    description:
+      "How JobSpy, Selenium, spaCy, and TF-IDF resume matching fit together.",
+  },
+  {
+    src: "/projects/job-market-analytics-dashboard/dashboard-overview.png",
+    title: "Dashboard Overview",
+    description: "Salary distribution and top skills across the scraped market.",
+  },
+  {
+    src: "/projects/job-market-analytics-dashboard/posting-trends.png",
+    title: "Job Posting Trends",
+    description: "Posting volume over time to spot hiring spikes.",
+  },
+  {
+    src: "/projects/job-market-analytics-dashboard/salary-analysis.png",
+    title: "Salary Analysis",
+    description: "Filter salary distributions by location and job title.",
+  },
+  {
+    src: "/projects/job-market-analytics-dashboard/skills-analysis.png",
+    title: "Skills Analysis",
+    description: "Most-requested skills, filterable by location and role.",
+  },
+  {
+    src: "/projects/job-market-analytics-dashboard/recommended-jobs.png",
+    title: "Recommended Jobs",
+    description: "Resume-matched postings ranked by TF-IDF similarity score.",
   },
 ];
