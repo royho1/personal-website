@@ -8,9 +8,9 @@ export const ATLAS_KNOWLEDGE = `
 
 - Name: Roy Ho
 - UC Davis graduate with a B.S. in Statistical Data Science and a minor in Computer Science
-- Currently based in San Francisco, CA, and planning to stay in the Bay Area for the time being
+- Currently based in San Francisco, CA
 - Could see himself living in San Diego, New York, or Texas further down the road
-- Available immediately for full-time roles; actively looking in the Bay Area
+- Available immediately for full-time roles; actively looking for Analyst or Engineering-family roles (see Target Roles)
 - LinkedIn-style positioning: Data Analyst | Aspiring Data Engineer | Python, SQL, Excel, Machine Learning | UC Davis Graduate — this is flavor for how he often presents himself, not a limit on what he will consider
 - Interested in building data-driven solutions using Python, R, SQL, and Excel
 - Also works with data pipelines, dashboards, and analytics tools
@@ -47,7 +47,7 @@ Roy ships end-to-end: data pipelines, ML models, and full-stack analytics apps (
 
 ## Current Focus
 
-Right now Roy is available immediately and looking for Analyst or Engineering-family roles in the Bay Area (see Target Roles — list is loose; open to paths toward data science and AI). He is also finishing his first-authored AI research paper, building Solstice (sneaker resale analytics; in progress; see Projects), and maintaining this portfolio site.
+Right now Roy is available immediately and looking for Analyst or Engineering-family roles (see Target Roles — list is loose; open to paths toward data science and AI). He is also finishing his first-authored AI research paper, building Solstice (sneaker resale analytics; in progress; see Projects), and maintaining this portfolio site.
 
 ## Education
 
@@ -124,18 +124,6 @@ Curated courses (name — code):
 
 ### Featured Projects
 
-**Solstice** (in progress, 2026)
-- Sneaker resale analytics tool that identifies shoes from photos, grades condition, and tracks resale market prices over time. Currently in design and early build.
-- Tech: Python, FastAPI, PostgreSQL, React, TypeScript
-
-**Personal Portfolio Website**
-- This site (royho-career.com). Fully responsive portfolio built with Next.js 16, React 19, TypeScript, and Tailwind CSS 4.
-- Features interactive project filtering by skill, a dark mode toggle with smooth theme transitions, and custom Framer Motion SVG animations, including a multi-stage sequence on the Drowsy Driver project card that blinks, sleeps, alerts, and wakes to illustrate the project's concept.
-- Also home to Atlas, the AI assistant answering these questions, built on the Anthropic API with a grounded knowledge base.
-- Deployed on Vercel with continuous deployment from GitHub and a custom domain with automated SSL.
-- Tech: Next.js, React, TypeScript, Tailwind CSS, Framer Motion, Vercel
-- GitHub: https://github.com/royho1/personal-website
-
 **SF Restaurant Safety Map** (April – May 2026)
 - Full-stack web app mapping 20,000+ health inspections across 7,700+ San Francisco restaurants from the DataSF public feed (current 2024-present feed; not the retired DataSF dataset).
 - A Python ETL pipeline (pandas, geopy) normalizes inspection records into a 3-table SQLite schema with cached geocoding, served through a 7-endpoint Flask REST API to a React and Mapbox frontend with debounced search, neighborhood typeahead, geolocation-based Near Me centering, and an Insights panel surfacing per-neighborhood rankings via SQL window functions.
@@ -161,6 +149,18 @@ Curated courses (name — code):
 
 ### Additional Projects
 
+**Solstice** (in progress, 2026)
+- Sneaker resale analytics tool that identifies shoes from photos, grades condition, and tracks resale market prices over time. Currently in design and early build.
+- Tech: Python, FastAPI, PostgreSQL, React, TypeScript
+
+**Personal Portfolio Website**
+- This site (royho-career.com). Fully responsive portfolio built with Next.js 16, React 19, TypeScript, and Tailwind CSS 4.
+- Features interactive project filtering by skill, a dark mode toggle with smooth theme transitions, and custom Framer Motion SVG animations, including a multi-stage sequence on the Drowsy Driver project card that blinks, sleeps, alerts, and wakes to illustrate the project's concept.
+- Also home to Atlas, the AI assistant answering these questions, built on the Anthropic API with a grounded knowledge base.
+- Deployed on Vercel with continuous deployment from GitHub and a custom domain with automated SSL.
+- Tech: Next.js, React, TypeScript, Tailwind CSS, Framer Motion, Vercel
+- GitHub: https://github.com/royho1/personal-website
+
 **Heart Stroke Risk Prediction**
 - Supervised ML pipeline predicting stroke risk from health and lifestyle inputs like age, BMI, and lifestyle indicators. Roy led data preprocessing and feature engineering. The team compared logistic regression and random forest with cross-validation, selecting the final model on ROC-AUC and F1. Team project through UC Davis.
 - Tech: Python, scikit-learn, Streamlit
@@ -168,7 +168,7 @@ Curated courses (name — code):
 
 **Portuguese Wine Type and Quality Prediction**
 - Classified red vs. white Portuguese wines and predicted quality ratings from chemical properties across 600 wines. Reached 98.3% accuracy (AUC 0.996) on wine type with total sulfur dioxide, chlorides, and free sulfur dioxide as top predictors, and 80% accuracy (AUC 0.864) on high-quality prediction with alcohol, density, and citric acid as top indicators. Used logistic regression, LDA, MANOVA, and Hotelling's T squared, with PCA showing roughly 82% of variance explained by the first five components, and cross-validation to handle class imbalance.
-- Tech: Python, scikit-learn, PCA
+- Tech: R, tidyverse, caret, PCA
 - GitHub: https://github.com/royho1/wine-quality-classification
 
 **Stock Trading Algorithm**
@@ -192,7 +192,7 @@ Curated courses (name — code):
 - GitHub: https://github.com/royho1/drake-time-series-project
 
 **NBA Player Salary Analysis**
-- Analyzed the relationship between player performance metrics and salary structures using regression and clustering.
+- Analyzed how direct stats (PPG, RPG, APG) vs. advanced metrics (PER, eFG%, Win Shares) predict NBA player salaries using linear regression.
 - Tech: R, tidyverse, ggplot2
 - GitHub: https://github.com/royho1/nba-salary-analysis
 

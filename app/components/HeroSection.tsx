@@ -104,9 +104,9 @@ export default function HeroSection() {
                 strokeWidth={2}
                 aria-hidden
               />
-              Currently looking for Analyst or Engineering roles in the Bay Area
-              while finishing a first-authored AI research paper and building
-              side projects.
+              Currently looking for Analyst or Engineering roles while
+              finishing a first-authored AI research paper and building side
+              projects.
             </p>
           </motion.div>
 

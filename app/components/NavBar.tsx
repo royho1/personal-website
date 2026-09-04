@@ -246,7 +246,7 @@ export default function NavBar() {
                         aria-current={isAskActive ? "page" : undefined}
                         className={navLinkClasses(isAskActive)}
                       >
-                        Ask About Me
+                        Ask Atlas
                         <ActiveUnderline isActive={isAskActive} />
                       </Link>
                     </li>

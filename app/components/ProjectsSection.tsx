@@ -157,8 +157,8 @@ const additionalProjects: AdditionalProject[] = [
     name: "Portuguese Wine Type and Quality Prediction",
     description:
       "Classified red vs. white wines at 98.3% accuracy and predicted quality ratings using logistic regression, LDA, MANOVA, and PCA on chemical properties.",
-    tech: "Python, scikit-learn, PCA",
-    tags: ["Python", "Machine Learning"],
+    tech: "R, tidyverse, caret, PCA",
+    tags: ["R", "Machine Learning"],
     githubHref: "https://github.com/royho1/wine-quality-classification",
     iconVariant: "wine",
     gradient:
@@ -230,7 +230,7 @@ const additionalProjects: AdditionalProject[] = [
   {
     name: "NBA Player Salary Analysis",
     description:
-      "Analyzed the relationship between player performance metrics and salary structures using regression and clustering.",
+      "Analyzed how direct stats (PPG, RPG, APG) vs. advanced metrics (PER, eFG%, Win Shares) predict NBA player salaries using linear regression.",
     tech: "R, tidyverse, ggplot2",
     tags: ["R", "Data Visualization", "Machine Learning"],
     githubHref: "https://github.com/royho1/nba-salary-analysis",

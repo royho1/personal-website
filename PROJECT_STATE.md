@@ -9,6 +9,11 @@ Durable agent memory for this repository. Not a README. Capture only what future
 
 ## Learnings
 
+### 2026-09-03 — Wine project is R, not Python
+- **Learning:** `wine-quality-classification` is an R multivariate stats project (tidyverse, caret, MASS, pROC). Site + Atlas briefly mislabeled it as Python/scikit-learn.
+- **Why it matters:** Easy to reintroduce from muscle memory (other ML cards are Python) or from old copy.
+- **Implication:** Keep wine tech/tags as R (+ Machine Learning). Do not retag as Python.
+
 ### 2026-09-03 — Keep Atlas knowledge in sync with site copy
 - **Learning:** When About, bio, projects, experience, education, or other visitor-facing facts change, also update `app/lib/atlasKnowledge.ts` in the same change. User explicitly wants this pattern kept.
 - **Why it matters:** Atlas answers from that string; stale knowledge drifts from the live site.
