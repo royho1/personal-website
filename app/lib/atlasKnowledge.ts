@@ -8,16 +8,45 @@ export const ATLAS_KNOWLEDGE = `
 
 - Name: Roy Ho
 - UC Davis graduate with a B.S. in Statistical Data Science and a minor in Computer Science
-- Currently based in San Francisco, CA, and planning to stay there for the time being
+- Currently based in San Francisco, CA, and planning to stay in the Bay Area for the time being
 - Could see himself living in San Diego, New York, or Texas further down the road
-- Available immediately for full-time roles in data, analytics, and engineering
-- Interested in building data-driven solutions using Python, R, SQL, and Excel, with a focus on machine learning
+- Available immediately for full-time roles; actively looking in the Bay Area
+- LinkedIn-style positioning: Data Analyst | Aspiring Data Engineer | Python, SQL, Excel, Machine Learning | UC Davis Graduate — this is flavor for how he often presents himself, not a limit on what he will consider
+- Interested in building data-driven solutions using Python, R, SQL, and Excel, with a focus on machine learning, data pipelines, dashboards, and analytics tools
 - Stats: 13+ Projects, 16+ Core Tools, 29 Page AI Research Paper
 - Certification: NVIDIA, Fundamentals of Deep Learning, October 2025
 
+## Target Roles (loose — not a rigid allowlist)
+
+Roy is actively applying across a wide set of titles. These are **loose**. He is open to other routes and titles as long as the role progresses his career toward **data science, AI, and related work**.
+
+When asked if he is a good fit for a role, answer by family when possible (for example: "yes — that sits in his analytics / AI application set"), note that his list is flexible, and say yes for close variants or adjacent titles that clearly build toward data science or AI. Do **not** dump the full title list unless the visitor asks what he is applying to or wants the complete set.
+
+### Core data / analytics
+Data Analyst, Business Analyst, Business Intelligence Analyst, BI Developer, Reporting Analyst, Product Analyst, Operations Analyst, Research Analyst, Database Analyst, Growth Analyst, Marketing Analyst, Pricing Analyst
+
+### Data engineering / analytics eng
+Data Engineer, Analytics Engineer, Database Developer, Integration Engineer
+
+### Science / ML / AI
+Data Scientist, Quantitative Analyst, Machine Learning Engineer, AI Engineer, Applied AI Engineer, AI Automation Engineer, AI Test Engineer, LLM Engineer, Prompt Engineer, Model Evaluation Analyst, AI Product Analyst, Research Engineer
+
+### Software / solutions
+Software Engineer, Solutions Architect, Solutions Engineer, Sales Engineer, Deployment Strategist
+
+### Customer / delivery technical
+Technical Account Manager, Forward Deployed Engineer, Implementation Engineer, Implementation Consultant, Customer Success Engineer, Professional Services Consultant, Technical Support Engineer
+
+### Ops / GTM / strategy
+Revenue Operations Analyst, Sales Operations Analyst, GTM Operations Analyst, Business Operations Analyst, Strategy and Operations Analyst, Account Strategist, Partner Operations Analyst, Customer Operations Analyst
+
+## Strengths / Fit
+
+Roy ships end-to-end: data pipelines, ML models, and full-stack analytics apps (ETL → APIs → dashboards and maps). He combines statistical training with practical engineering — Python, SQL, R, Excel — and has research experience on LLM agents (first-authored 29-page review) plus team and solo delivery. He is strongest where analytical rigor meets building tools people can actually use.
+
 ## Current Focus
 
-Right now Roy is available immediately for full-time roles in data, analytics, and engineering. He is also building Solstice, a sneaker resale analytics tool (in progress; see Projects), and maintaining this portfolio site.
+Right now Roy is available immediately and looking for Analyst or Engineering-family roles in the Bay Area (see Target Roles — list is loose; open to paths toward data science and AI). He is also finishing his first-authored AI research paper, building Solstice (sneaker resale analytics; in progress; see Projects), and maintaining this portfolio site.
 
 ## Education
 
@@ -26,6 +55,46 @@ Right now Roy is available immediately for full-time roles in data, analytics, a
 - University of California, Davis — B.S. Statistical Data Science, Minor in Computer Science, September 2022 to March 2026
 - Certification: NVIDIA, Fundamentals of Deep Learning, October 2025
 - Resume PDF available at /Roy_Ho_Resume.pdf (view or download experience, education, and skills)
+
+### Coursework (recruiter reference — names and codes only)
+
+Purpose: answer recruiters who ask what courses Roy took that are **relevant** to data, analytics, engineering, ML/AI, etc. Do **not** volunteer a full academic dump in every bio answer. Do **not** lead with coursework in "tell me about Roy" unless asked.
+
+Hard rules:
+- Share **course names and codes only**.
+- **Never** mention GPA, letter grades, term GPAs, units, student ID, or any transcript performance detail — even if asked. Refuse politely and point to relevant course names or the resume.
+- Prefer this curated list; do not invent courses.
+
+Answer style:
+- Default: pick **relevant** courses for the role they ask about (e.g. Data Analyst → regression, ANOVA, STA 141A/B, data & web technologies; ML roles → Statistical Learning, multivariate, probability/math stats, algorithms; DE/SWE → data structures, algorithms, networks, programming, STA 141C).
+- Summarize by theme first (stats/ML, computing, math), then name a short set of strong matches.
+- Only list the **full** curated set if the visitor asks for everything / a complete course list.
+
+Curated courses (name — code):
+- Algorithm Design & Analysis — ECS 122A
+- Analysis of Variance — STA 106
+- Applied Linear Algebra — MAT 167
+- Applied Statistical Methods: Regression Analysis — STA 108
+- Applied Time Series Analysis — STA 137
+- Big Data & High Performance Statistical Computing — STA 141C
+- Calculus — MAT 021C
+- Computer Networks — ECS 115
+- Data & Web Technologies for Data Analysis — STA 141B
+- Data Structures — ECS 032B
+- Discrete Math for Computer Science — ECS 020
+- Internship in Computer Science — ECS 192
+- Intro to Programming — ECS 032A
+- Introduction to Abstract Mathematics — MAT 108
+- Linear Algebra — MAT 022A
+- Linear Algebra Computer Laboratory — MAT 022AL
+- Mathematical Statistics — STA 131B
+- Multivariate Data Analysis — STA 135
+- Practice in Statistical Data Science — STA 160
+- Probability Theory — STA 131A
+- Statistical Data Science — STA 141A
+- Statistical Learning I — STA 142A
+- Theory of Games & Strategic Behavior — ECN 122
+- Vector Analysis — MAT 021D
 
 ## Experience
 
@@ -66,7 +135,7 @@ Right now Roy is available immediately for full-time roles in data, analytics, a
 - Tech: Next.js, React, TypeScript, Tailwind CSS, Framer Motion, Vercel
 - GitHub: https://github.com/royho1/personal-website
 
-**SF Restaurant Safety Map**
+**SF Restaurant Safety Map** (April – May 2026)
 - Full-stack web app mapping 20,000+ health inspections across 7,700+ San Francisco restaurants from the DataSF public feed (current 2024-present feed; not the retired DataSF dataset).
 - A Python ETL pipeline (pandas, geopy) normalizes inspection records into a 3-table SQLite schema with cached geocoding, served through a 7-endpoint Flask REST API to a React and Mapbox frontend with debounced search, neighborhood typeahead, geolocation-based Near Me centering, and an Insights panel surfacing per-neighborhood rankings via SQL window functions.
 - API and frontend are containerized with Docker Compose using a multi-stage Node-to-nginx build.
@@ -74,17 +143,18 @@ Right now Roy is available immediately for full-time roles in data, analytics, a
 - Tech: Python, SQL, Flask, React, Mapbox, ETL, Docker, SQLite
 - GitHub: https://github.com/royho1/sf-restaurant-safety-map
 
-**Job Market Analytics Dashboard**
+**Job Market Analytics Dashboard** (September – December 2025)
 - Group capstone dashboard analyzing the tech job market. Roy owned the data acquisition layer, writing JobSpy and Selenium scrapers that collected 23,000+ job posting records across seven role families in CA, NY, and TX, deduplicated to 6,800+ unique postings from 2,300+ companies.
-- Built the resume-to-job matching engine as a weighted ranking model combining TF-IDF cosine similarity, skill overlap against a 366-term taxonomy, and an experience-proximity bonus, plus eligibility pre-filters that stripped senior-level titles and regex-extracted required years of experience to drop postings above the candidate's level.
-- Tech: Python, Flask, scikit-learn, TF-IDF, Selenium, JobSpy
+- Built the resume-to-job matching engine as a weighted ranking model combining TF-IDF cosine similarity, skill overlap against a 366-term taxonomy, and an experience-proximity bonus, plus eligibility pre-filters that stripped senior-level titles and regex-extracted required years of experience to drop postings above the candidate's level. Methodology also used spaCy in the skills/taxonomy pipeline.
+- Tech: Python, Flask, scikit-learn, TF-IDF, Selenium, JobSpy, spaCy
 - GitHub: https://github.com/royho1/job-market-analysis-dashboard
 
-**Drowsy Driver Detection**
+**Drowsy Driver Detection** (January – March 2025)
 - Real-time drowsiness detection system, awarded Best Execution for the AISC Winter 2025 cycle.
 - Roy owned the eye-state detection layer, computing Eye Aspect Ratio from dlib's 68-point facial landmark model and frontal face detector via scipy Euclidean distance, flagging drowsiness when EAR held below a 0.25 threshold across 20 consecutive frames.
 - Integrated into an OpenCV pipeline with grayscale preprocessing, convex hull eye overlays, a pygame audio alert, and graceful failure handling when model assets are missing.
 - Five-person team project through the AI Student Collective (AISC).
+- This portfolio also includes a **live in-browser demo** of the same EAR → alert loop (68-point eye landmarks → Eye Aspect Ratio → alert after eyes stay closed); nothing is uploaded. The project card also uses a Framer Motion SVG animation that blinks, sleeps, alerts, and wakes to illustrate the concept.
 - Tech: Python, OpenCV, dlib, scipy, pygame
 - GitHub: https://github.com/royho1/drowsy-driver-detection
 
@@ -137,7 +207,14 @@ Right now Roy is available immediately for full-time roles in data, analytics, a
 
 ## Skills
 
-Python, SQL, Tableau, Power BI, Excel, R, Pandas, Scikit-learn, Docker, Git, GitHub, Flask, React, PyTorch, Data Visualization, Machine Learning
+Core / site-highlighted: Python, SQL, Tableau, Power BI, Excel, R, Pandas, Scikit-learn, Docker, Git, GitHub, Flask, React, PyTorch, Data Visualization, Machine Learning
+
+Also used across projects and work (fine to confirm if asked "does he know X?"):
+- Languages / web: JavaScript, TypeScript, HTML, CSS
+- Python ecosystem: NumPy, spaCy, SQLAlchemy, Matplotlib, Jupyter, BeautifulSoup, JobSpy, Selenium, OpenCV, dlib, scipy, Streamlit, FastAPI, PyTorch
+- Modeling: logistic regression, Lasso, Ridge, LDA, QDA, random forests, gradient boosting, PCA, CNNs (via deep learning coursework/cert and projects), TF-IDF, NLP (FinBERT, VADER, RoBERTa)
+- Data / infra: PostgreSQL, SQLite, Mapbox / Mapbox GL JS, Docker Compose, Raspberry Pi, Vite, Excel (advanced formulas, pivots, VLOOKUP)
+- Tools: VS Code, Cursor
 
 Roy has been using Python for about four years, starting in college and continuing through his projects and professional work. He has been using SQL for about two years. He is still actively deepening both, and applies them in current work like Solstice and the SF Restaurant Safety Map.
 
@@ -145,7 +222,9 @@ Roy has been using Python for about four years, starting in college and continui
 
 Outside of work, Roy enjoys thrifting, bass fishing, spending time outdoors, and playing golf. He's also big into fashion. Music is a constant for him, with Drake, Malcolm Todd, Steve Lacy, and Baby Keem among his favorites. He follows Bay Area sports, rooting for the Warriors, Giants, and 49ers.
 
-Roy is active and plays a lot of sports. He runs and works out regularly, and plays pickleball, spikeball, basketball, and golf.
+Roy is active and plays a lot of sports. He runs and works out regularly, and plays pickleball, spikeball, basketball, and golf. He also wake surfs (including Clear Lake, CA).
+
+Outdoor / photo places that show up in his site hobby gallery (fine to mention when asked about hobbies, outdoors, or travel): Lake Tahoe, Yosemite National Park, Baker Beach in San Francisco, bass fishing at Lake Lagunitas, CA, and a horse photo from time outdoors.
 
 He also loves coffee chats and meeting new people, and is always happy to connect with someone new over coffee.
 
