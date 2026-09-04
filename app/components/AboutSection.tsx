@@ -117,13 +117,9 @@ export default function AboutSection() {
               </p>
               <p>
                 I&apos;m interested in building data-driven solutions using
-                Python, R, SQL, and Excel, with a focus on{" "}
-                <span className="font-semibold text-sky-800 dark:text-sky-300">
-                  machine learning
-                </span>
-                . My background sits at the intersection of statistics and
-                software, and I&apos;m looking for technical roles where I can
-                apply both.
+                Python, R, SQL, and Excel. My background sits at the
+                intersection of statistics and software, and I&apos;m looking
+                for technical roles where I can apply both.
               </p>
             </motion.div>
 
