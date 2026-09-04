@@ -1,0 +1,12 @@
+---
+description: Keep Atlas knowledge aligned when site content changes
+alwaysApply: true
+---
+
+# Atlas knowledge sync
+
+When changing visitor-facing facts about Roy (About copy, bio, projects, experience, education, location, availability, tools, certifications, or similar), update `app/lib/atlasKnowledge.ts` in the **same** change.
+
+- Atlas injects that string as its source of truth; site UI and Atlas must not drift.
+- Do not leave Atlas updates as a follow-up unless the user asks to skip them.
+- Prefer concise factual bullets that match the new site wording.

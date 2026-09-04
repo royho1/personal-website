@@ -9,6 +9,11 @@ Durable agent memory for this repository. Not a README. Capture only what future
 
 ## Learnings
 
+### 2026-09-03 — Keep Atlas knowledge in sync with site copy
+- **Learning:** When About, bio, projects, experience, education, or other visitor-facing facts change, also update `app/lib/atlasKnowledge.ts` in the same change. User explicitly wants this pattern kept.
+- **Why it matters:** Atlas answers from that string; stale knowledge drifts from the live site.
+- **Implication:** Treat `atlasKnowledge.ts` as part of the content surface, not a separate follow-up.
+
 ### 2026-09-03 — Project card media dark gradients
 - **Learning:** `ProjectCardMedia` used to force `dark:from-slate-800 dark:via-slate-900 dark:to-slate-800`, which wiped per-project hue. Each project’s `gradient` string now includes matching `dark:from-*` / `dark:via-*` / `dark:to-*` classes; do not reintroduce a global slate dark override.
 - **Why it matters:** Dark mode looked colorless even though light mode had distinct card colors.
