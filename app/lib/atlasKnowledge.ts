@@ -154,7 +154,7 @@ Curated courses (name — code):
 - Roy owned the eye-state detection layer, computing Eye Aspect Ratio from dlib's 68-point facial landmark model and frontal face detector via scipy Euclidean distance, flagging drowsiness when EAR held below a 0.25 threshold across 20 consecutive frames.
 - Integrated into an OpenCV pipeline with grayscale preprocessing, convex hull eye overlays, a pygame audio alert, and graceful failure handling when model assets are missing.
 - Five-person team project through the AI Student Collective (AISC).
-- On this portfolio, the Drowsy Driver project card uses a Framer Motion SVG animation that blinks, sleeps, alerts, and wakes to illustrate the project's concept (not a live camera demo).
+- This portfolio also includes a **live in-browser demo** of the same EAR → alert loop (68-point eye landmarks → Eye Aspect Ratio → alert after eyes stay closed); nothing is uploaded. The project card also uses a Framer Motion SVG animation that blinks, sleeps, alerts, and wakes to illustrate the concept.
 - Tech: Python, OpenCV, dlib, scipy, pygame
 - GitHub: https://github.com/royho1/drowsy-driver-detection
 
