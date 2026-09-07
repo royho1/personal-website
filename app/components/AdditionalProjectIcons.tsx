@@ -206,7 +206,7 @@ function TrendingUpIcon({
         pathLength={1}
         strokeDasharray={reducedMotion ? undefined : "1"}
         strokeDashoffset={reducedMotion ? undefined : 1}
-        d="m22 7-8.5 8.5-5-5L2 17"
+        d="M2 17l6.5-6.5 5 5L22 7"
       />
     </svg>
   );
