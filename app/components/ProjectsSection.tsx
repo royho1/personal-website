@@ -66,6 +66,8 @@ type AdditionalProject = ProjectMediaFields & {
   githubHref?: string;
   status?: string;
   iconVariant: AdditionalProjectIconVariant;
+  /** Seconds; used to desync paired icons (trending / basketball). */
+  iconAnimationDelay?: number;
   gradient: string;
 };
 
@@ -145,6 +147,7 @@ const additionalProjects: AdditionalProject[] = [
     tags: ["R", "Machine Learning"],
     githubHref: "https://github.com/royho1/wine-quality-classification",
     iconVariant: "wine",
+    iconAnimationDelay: 0.85,
     gradient:
       "from-purple-100 via-white to-rose-100 dark:from-purple-900 dark:via-purple-950 dark:to-rose-900",
     ...projectMedia(
@@ -204,6 +207,7 @@ const additionalProjects: AdditionalProject[] = [
     tags: ["R", "Data Visualization"],
     githubHref: "https://github.com/royho1/drake-time-series-project",
     iconVariant: "trending",
+    iconAnimationDelay: 0.5,
     gradient:
       "from-sky-100 via-white to-indigo-100 dark:from-sky-900 dark:via-sky-950 dark:to-indigo-900",
     ...projectMedia(
@@ -219,6 +223,7 @@ const additionalProjects: AdditionalProject[] = [
     tags: ["R", "Data Visualization", "Machine Learning"],
     githubHref: "https://github.com/royho1/nba-salary-analysis",
     iconVariant: "basketball",
+    iconAnimationDelay: 0.3,
     gradient:
       "from-amber-100 via-white to-orange-100 dark:from-amber-900 dark:via-amber-950 dark:to-orange-900",
     ...projectMedia(
@@ -428,6 +433,7 @@ function additionalToGalleryItem(project: AdditionalProject): GalleryItem {
       <AdditionalProjectIcon
         variant={project.iconVariant}
         size="lg"
+        animationDelay={project.iconAnimationDelay}
       />
     ),
   };
@@ -628,6 +634,7 @@ export default function ProjectsSection() {
                   <AdditionalProjectIcon
                     variant={project.iconVariant}
                     size="sm"
+                    animationDelay={project.iconAnimationDelay}
                   />
                 );
                 const galleryIndex = gallery.findIndex(
