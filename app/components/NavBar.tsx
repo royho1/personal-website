@@ -102,14 +102,14 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
   };
 
   const featuredItemClass = (isSelected: boolean) =>
-    `flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${
+    `flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm font-normal transition-colors ${
       isSelected
         ? "bg-sky-100 font-semibold text-sky-900 dark:bg-sky-500/15 dark:text-sky-200"
         : "text-slate-600 hover:bg-sky-50 hover:text-sky-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-sky-200"
     }`;
 
   const viewAllClass = (isSelected: boolean) =>
-    `flex cursor-pointer items-center rounded-lg px-3 py-2 text-xs font-bold transition-colors ${
+    `flex cursor-pointer items-center rounded-lg px-3 py-2 text-sm font-bold transition-colors ${
       isSelected
         ? "bg-sky-100 text-sky-900 dark:bg-sky-500/15 dark:text-sky-200"
         : "text-slate-500 hover:bg-sky-50 hover:text-sky-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-sky-200"
@@ -164,9 +164,9 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
             role="menu"
             aria-label="Featured projects"
           >
-            <ul className="min-w-[18rem] overflow-hidden rounded-xl border border-sky-200 bg-white/95 p-1 shadow-lg shadow-sky-900/10 ring-1 ring-sky-200/80 backdrop-blur-md dark:border-slate-700 dark:bg-slate-900/95 dark:shadow-black/40 dark:ring-slate-700/60">
+            <ul className="min-w-[18rem] overflow-hidden rounded-xl border border-sky-200 bg-white p-1 shadow-lg shadow-sky-900/10 ring-1 ring-sky-200/80 dark:border-slate-700 dark:bg-slate-900 dark:shadow-black/40 dark:ring-slate-700/60">
               <li role="presentation" className="px-3 pb-1.5 pt-2">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                <span className="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                   Featured Projects
                 </span>
               </li>
@@ -427,7 +427,7 @@ function MobileNavPanel({
                             aria-label="Featured projects"
                           >
                             <li role="presentation" className="px-3 pb-1 pt-2">
-                              <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                              <span className="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                                 Featured Projects
                               </span>
                             </li>
@@ -439,7 +439,7 @@ function MobileNavPanel({
                                     href={`/#${item.id}`}
                                     role="menuitem"
                                     onClick={() => chooseTarget(item.id)}
-                                    className={`flex cursor-pointer items-center justify-between rounded-lg px-3 py-2.5 text-sm transition-colors ${
+                                    className={`flex cursor-pointer items-center justify-between rounded-lg px-3 py-2.5 text-sm font-normal transition-colors ${
                                       isSelected
                                         ? "bg-sky-100 font-semibold text-sky-900 dark:bg-sky-500/15 dark:text-sky-200"
                                         : "text-slate-600 hover:bg-sky-50 hover:text-sky-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-sky-200"
@@ -466,7 +466,7 @@ function MobileNavPanel({
                                 href="/#projects"
                                 role="menuitem"
                                 onClick={() => chooseTarget("projects")}
-                                className={`flex cursor-pointer items-center rounded-lg px-3 py-2.5 text-xs font-bold transition-colors ${
+                                className={`flex cursor-pointer items-center rounded-lg px-3 py-2.5 text-sm font-bold transition-colors ${
                                   activeFocus === "projects"
                                     ? "bg-sky-100 text-sky-900 dark:bg-sky-500/15 dark:text-sky-200"
                                     : "text-slate-500 hover:bg-sky-50 hover:text-sky-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-sky-200"
