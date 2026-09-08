@@ -276,9 +276,59 @@ html {
   opacity: 0.75;
 }
 
+/* Explicit utilities so Turbopack/Tailwind cannot drop these loops. */
+.animate-sparkle-twinkle-1 {
+  animation: sparkle-twinkle 2.5s ease-in-out infinite;
+}
+.animate-sparkle-twinkle-2 {
+  animation: sparkle-twinkle 2.5s ease-in-out infinite 0.4s;
+}
+.animate-sparkle-twinkle-3 {
+  animation: sparkle-twinkle 2.5s ease-in-out infinite 0.8s;
+}
+.animate-addl-heartbeat {
+  animation: addl-heartbeat 1.6s ease-in-out infinite;
+}
+.animate-ecg-trace {
+  animation: ecg-trace 1.6s ease-in-out infinite;
+}
+.animate-trend-line {
+  animation: trend-line 3s ease-in-out var(--icon-delay, 0s) infinite;
+}
+.animate-trend-arrow {
+  animation: trend-arrow 3s ease-in-out var(--icon-delay, 0s) infinite;
+}
 .animate-basketball-bounce {
+  animation: basketball-bounce 1s infinite;
   transform-box: view-box;
   transform-origin: center 21px;
+}
+.animate-clapper-snap {
+  animation: clapper-snap 2s ease-in-out infinite;
+}
+.animate-scale-beam {
+  animation: scale-beam 4s ease-in-out infinite;
+}
+.animate-scale-pan-left {
+  animation: scale-pan-left 4s ease-in-out infinite;
+}
+.animate-scale-pan-right {
+  animation: scale-pan-right 4s ease-in-out infinite;
+}
+.animate-network-node-1 {
+  animation: network-node 3s ease-in-out infinite;
+}
+.animate-network-node-2 {
+  animation: network-node 3s ease-in-out infinite 0.7s;
+}
+.animate-network-node-3 {
+  animation: network-node 3s ease-in-out infinite 1.4s;
+}
+.animate-network-edge-1 {
+  animation: network-edge 3s ease-in-out infinite 0.15s;
+}
+.animate-network-edge-2 {
+  animation: network-edge 3s ease-in-out infinite 0.85s;
 }
 
 /* Trend line draws in ~1.2s, arrow fades/scales in, brief hold, reset. */
