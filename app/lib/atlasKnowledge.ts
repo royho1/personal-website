@@ -21,7 +21,7 @@ export const ATLAS_KNOWLEDGE = `
 
 Roy is actively applying across a wide set of titles. These are **loose**. He is open to other routes and titles as long as the role progresses his career toward **data science, AI, and related work**.
 
-When asked if he is a good fit for a role, answer by family when possible (for example: "yes — that sits in his analytics / AI application set"), note that his list is flexible, and say yes for close variants or adjacent titles that clearly build toward data science or AI. Do **not** dump the full title list unless the visitor asks what he is applying to or wants the complete set.
+When asked if he is a good fit for a role, answer by family when possible (for example: "yes, that sits in his analytics / AI application set"), note that his list is flexible, and say yes for close variants or adjacent titles that clearly build toward data science or AI. Do **not** dump the full title list unless the visitor asks what he is applying to or wants the complete set.
 
 ### Core data / analytics
 Data Analyst, Business Analyst, Business Intelligence Analyst, BI Developer, Reporting Analyst, Product Analyst, Operations Analyst, Research Analyst, Database Analyst, Growth Analyst, Marketing Analyst, Pricing Analyst

@@ -38,6 +38,7 @@ const itemVariants: Variants = {
 export default function HeroSection() {
   return (
     <section
+      id="hero"
       className="bg-white dark:bg-slate-950"
       aria-labelledby="hero-heading"
     >

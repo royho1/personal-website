@@ -6,18 +6,20 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import { emitProjectsFilter } from "./projectsFilterBus";
 import {
-  FILTERS,
-  emitProjectsFilter,
-  getProjectsFilter,
-  subscribeToProjectsFilter,
-  type Filter,
-} from "./projectsFilterBus";
+  PROJECT_NAV_ITEMS,
+  emitProjectsFocus,
+  getProjectsFocus,
+  subscribeToProjectsFocus,
+  type ProjectNavId,
+} from "./projectsFocusBus";
 
 /** Inline desktop nav needs ~1024px; keep the hamburger until then. */
 const DESKTOP_NAV_MQ = "(min-width: 1024px)";
 
 const navLinks = [
+  { label: "Home", href: "/#hero", id: "hero" },
   { label: "About", href: "/#about", id: "about" },
   { label: "Projects", href: "/#projects", id: "projects" },
   { label: "Experience", href: "/#experience", id: "experience" },
@@ -47,23 +49,27 @@ function ActiveUnderline({ isActive }: { isActive: boolean }) {
   );
 }
 
+function chooseProjectsNavTarget(focusId: ProjectNavId) {
+  // Reset skill filters so the target featured card is always visible.
+  emitProjectsFilter("All");
+  emitProjectsFocus(focusId);
+}
+
 /**
  * The "Projects" nav entry: the label still links to #projects, but now it
- * also exposes a dropdown of filter options. The dropdown opens on hover
+ * also exposes a dropdown of featured projects. The dropdown opens on hover
  * (desktop) and via the adjacent chevron button (touch). Choosing any
- * option dispatches a shared filter event that the ProjectsSection picks
- * up, then the browser handles the smooth hash-scroll.
+ * option resets the skill filter to All, records the focus target, and
+ * scrolls to that project card (or the section for All Projects).
  */
 function ProjectsNavItem({ isActive }: { isActive: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeFilter, setActiveFilter] = useState<Filter>("All");
+  const [activeFocus, setActiveFocus] = useState<ProjectNavId>("projects");
   const containerRef = useRef<HTMLLIElement>(null);
 
-  // Keep the dropdown's highlighted option in sync with the
-  // ProjectsSection, regardless of which surface changed the filter.
   useEffect(() => {
-    setActiveFilter(getProjectsFilter());
-    return subscribeToProjectsFilter(setActiveFilter);
+    setActiveFocus(getProjectsFocus());
+    return subscribeToProjectsFocus(setActiveFocus);
   }, []);
 
   // Close when focus/pointer moves outside (covers taps elsewhere on
@@ -87,8 +93,8 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
     };
   }, [isOpen]);
 
-  const chooseFilter = (filter: Filter) => {
-    emitProjectsFilter(filter);
+  const chooseTarget = (focusId: ProjectNavId) => {
+    chooseProjectsNavTarget(focusId);
     setIsOpen(false);
   };
 
@@ -103,7 +109,7 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
         <a
           href="/#projects"
           aria-current={isActive ? "page" : undefined}
-          onClick={() => emitProjectsFilter("All")}
+          onClick={() => chooseProjectsNavTarget("projects")}
           className={navLinkClasses(isActive)}
         >
           Projects
@@ -112,7 +118,7 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
         <button
           type="button"
           onClick={() => setIsOpen((open) => !open)}
-          aria-label={isOpen ? "Hide project filters" : "Show project filters"}
+          aria-label={isOpen ? "Hide project list" : "Show project list"}
           aria-haspopup="menu"
           aria-expanded={isOpen}
           className="inline-flex h-6 w-6 cursor-pointer items-center justify-center rounded-full text-slate-500 transition-colors hover:text-sky-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:text-slate-400 dark:hover:text-sky-200"
@@ -139,27 +145,27 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
             // without triggering mouseleave.
             className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2"
             role="menu"
-            aria-label="Project filters"
+            aria-label="Featured projects"
           >
-            <ul className="min-w-[12rem] overflow-hidden rounded-xl border border-sky-200 bg-white/95 p-1 shadow-lg shadow-sky-900/10 ring-1 ring-sky-200/80 backdrop-blur-md dark:border-slate-700 dark:bg-slate-900/95 dark:shadow-black/40 dark:ring-slate-700/60">
-              {FILTERS.map((option) => {
-                const isSelected = activeFilter === option;
+            <ul className="min-w-[18rem] overflow-hidden rounded-xl border border-sky-200 bg-white/95 p-1 shadow-lg shadow-sky-900/10 ring-1 ring-sky-200/80 backdrop-blur-md dark:border-slate-700 dark:bg-slate-900/95 dark:shadow-black/40 dark:ring-slate-700/60">
+              {PROJECT_NAV_ITEMS.map((item) => {
+                const isSelected = activeFocus === item.id;
                 return (
-                  <li key={option} role="none">
+                  <li key={item.id} role="none">
                     <a
-                      href="/#projects"
+                      href={`/#${item.id}`}
                       role="menuitem"
-                      onClick={() => chooseFilter(option)}
+                      onClick={() => chooseTarget(item.id)}
                       className={`flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${
                         isSelected
                           ? "bg-sky-100 font-semibold text-sky-900 dark:bg-sky-500/15 dark:text-sky-200"
                           : "text-slate-600 hover:bg-sky-50 hover:text-sky-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-sky-200"
                       }`}
                     >
-                      <span>{option}</span>
+                      <span>{item.label}</span>
                       {isSelected && (
                         <span
-                          className="ml-3 h-1.5 w-1.5 rounded-full bg-sky-600 dark:bg-sky-300"
+                          className="ml-3 h-1.5 w-1.5 shrink-0 rounded-full bg-sky-600 dark:bg-sky-300"
                           aria-hidden
                         />
                       )}
@@ -240,12 +246,12 @@ function MobileNavPanel({
   pathname: string;
   panelId: string;
 }) {
-  const [activeFilter, setActiveFilter] = useState<Filter>("All");
+  const [activeFocus, setActiveFocus] = useState<ProjectNavId>("projects");
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
-    setActiveFilter(getProjectsFilter());
-    return subscribeToProjectsFilter(setActiveFilter);
+    setActiveFocus(getProjectsFocus());
+    return subscribeToProjectsFocus(setActiveFocus);
   }, []);
 
   useEffect(() => {
@@ -268,8 +274,8 @@ function MobileNavPanel({
     };
   }, [open, onClose]);
 
-  const chooseFilter = (filter: Filter) => {
-    emitProjectsFilter(filter);
+  const chooseTarget = (focusId: ProjectNavId) => {
+    chooseProjectsNavTarget(focusId);
     onClose();
   };
 
@@ -348,7 +354,7 @@ function MobileNavPanel({
                           aria-current={isActive ? "page" : undefined}
                           className={`${mobileLinkClass(isActive)} flex-1`}
                           onClick={() => {
-                            emitProjectsFilter("All");
+                            chooseProjectsNavTarget("projects");
                             onClose();
                           }}
                         >
@@ -361,8 +367,8 @@ function MobileNavPanel({
                           aria-controls={`${panelId}-project-filters`}
                           aria-label={
                             filtersOpen
-                              ? "Hide project filters"
-                              : "Show project filters"
+                              ? "Hide project list"
+                              : "Show project list"
                           }
                           className="inline-flex w-11 shrink-0 cursor-pointer items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-sky-50 hover:text-sky-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-sky-200"
                         >
@@ -385,26 +391,26 @@ function MobileNavPanel({
                             transition={{ duration: 0.18, ease: "easeOut" }}
                             className="overflow-hidden pl-2"
                             role="menu"
-                            aria-label="Project filters"
+                            aria-label="Featured projects"
                           >
-                            {FILTERS.map((option) => {
-                              const isSelected = activeFilter === option;
+                            {PROJECT_NAV_ITEMS.map((item) => {
+                              const isSelected = activeFocus === item.id;
                               return (
-                                <li key={option} role="none">
+                                <li key={item.id} role="none">
                                   <a
-                                    href="/#projects"
+                                    href={`/#${item.id}`}
                                     role="menuitem"
-                                    onClick={() => chooseFilter(option)}
+                                    onClick={() => chooseTarget(item.id)}
                                     className={`flex cursor-pointer items-center justify-between rounded-lg px-3 py-2.5 text-sm transition-colors ${
                                       isSelected
                                         ? "bg-sky-100 font-semibold text-sky-900 dark:bg-sky-500/15 dark:text-sky-200"
                                         : "text-slate-600 hover:bg-sky-50 hover:text-sky-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-sky-200"
                                     }`}
                                   >
-                                    <span>{option}</span>
+                                    <span>{item.label}</span>
                                     {isSelected && (
                                       <span
-                                        className="ml-3 h-1.5 w-1.5 rounded-full bg-sky-600 dark:bg-sky-300"
+                                        className="ml-3 h-1.5 w-1.5 shrink-0 rounded-full bg-sky-600 dark:bg-sky-300"
                                         aria-hidden
                                       />
                                     )}
@@ -502,8 +508,8 @@ export default function NavBar() {
         aria-label="Primary"
       >
         <a
-          href="/"
-          className="cursor-pointer text-base font-semibold tracking-tight text-sky-950 dark:text-sky-100"
+          href="/#hero"
+          className="cursor-pointer text-base font-semibold tracking-tight text-sky-950 no-underline hover:no-underline dark:text-sky-100"
         >
           Roy Ho
         </a>
