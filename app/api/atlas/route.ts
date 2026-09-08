@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { ATLAS_KNOWLEDGE } from "@/app/lib/atlasKnowledge";
+import { appendAtlasQuestion } from "@/app/lib/atlasLog";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
@@ -150,6 +151,17 @@ export async function POST(request: Request) {
     const validatedMessages = (messages as ChatMessage[]).slice(
       -MAX_HISTORY_MESSAGES,
     );
+
+    // Log the newest user question for the private inbox. Never block chat
+    // on logging failures (missing Redis, network blips, etc.).
+    const newestUserMessage = [...validatedMessages]
+      .reverse()
+      .find((message) => message.role === "user");
+    if (newestUserMessage) {
+      void appendAtlasQuestion(newestUserMessage.content).catch((error) => {
+        console.error("Atlas question log failed", error);
+      });
+    }
 
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
