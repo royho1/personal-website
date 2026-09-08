@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { ATLAS_KNOWLEDGE } from "@/app/lib/atlasKnowledge";
+import { appendAtlasQuestion } from "@/app/lib/atlasLog";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
@@ -150,6 +151,23 @@ export async function POST(request: Request) {
     const validatedMessages = (messages as ChatMessage[]).slice(
       -MAX_HISTORY_MESSAGES,
     );
+
+    // Log the newest user question for the private inbox. Use after() so the
+    // Redis write can finish after the response without being dropped when the
+    // serverless invocation freezes. Chat failures never depend on logging.
+    const newestUserMessage = [...validatedMessages]
+      .reverse()
+      .find((message) => message.role === "user");
+    if (newestUserMessage) {
+      const question = newestUserMessage.content;
+      after(async () => {
+        try {
+          await appendAtlasQuestion(question);
+        } catch (error) {
+          console.error("Atlas question log failed", error);
+        }
+      });
+    }
 
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
