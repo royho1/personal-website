@@ -39,7 +39,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="bg-white dark:bg-slate-950"
+      className="scroll-mt-28 bg-white dark:bg-slate-950"
       aria-labelledby="hero-heading"
     >
       <div className="mx-auto flex max-w-[1120px] flex-col items-center gap-8 px-6 pb-6 pt-8 md:flex-row md:items-center md:gap-16 md:px-8 md:pb-10 md:pt-16 lg:pt-20">
