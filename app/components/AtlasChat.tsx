@@ -260,7 +260,7 @@ export default function AtlasChat() {
               )}
               <div ref={bottomRef} />
             </>
-          ) : null}
+          )}
         </div>
 
         <div className="border-t border-sky-200/80 bg-sky-50/60 p-4 dark:border-slate-700 dark:bg-slate-900/50 sm:p-5">
