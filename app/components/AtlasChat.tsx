@@ -50,6 +50,9 @@ export default function AtlasChat() {
   const messagesRef = useRef<ChatMessage[]>([]);
 
   useEffect(() => {
+    // Only pin to the latest message once a conversation has started.
+    // Scrolling on the empty welcome state clips the bubble at the top.
+    if (messages.length === 0 && !isLoading) return;
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
 
@@ -135,9 +138,9 @@ export default function AtlasChat() {
       <div className="flex h-[min(70vh,36rem)] flex-col overflow-hidden rounded-2xl border border-sky-200 bg-white/90 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50">
         <div className="flex-1 space-y-4 overflow-y-auto px-4 py-5 sm:px-6">
           {messages.length === 0 && !isLoading ? (
-            // min-h-full (not h-full) so justify-center cannot clip the top
-            // padding when the empty state is taller than the chat pane.
-            <div className="flex min-h-full flex-col items-center justify-center gap-6 px-2 py-8 text-center">
+            // safe center keeps even top/bottom space when content fits, and
+            // falls back to start when it overflows so the bubble is not clipped.
+            <div className="flex min-h-full flex-col items-center justify-[safe_center] gap-5 px-2 py-6 text-center sm:gap-6">
               <div
                 className="relative z-10 mx-auto w-full max-w-sm rounded-2xl border border-[var(--bubble-border)] bg-[var(--bubble-fill)] px-4 py-3 text-sm leading-relaxed text-slate-600 shadow-sm shadow-sky-900/5 sm:text-base dark:text-slate-300 dark:shadow-black/20 [--bubble-fill:rgb(240_249_255/0.9)] [--bubble-border:rgb(186_230_253/0.8)] dark:[--bubble-fill:rgb(30_41_59/0.4)] dark:[--bubble-border:rgb(71_85_105)]"
               >
@@ -255,9 +258,9 @@ export default function AtlasChat() {
                   </div>
                 </motion.div>
               )}
+              <div ref={bottomRef} />
             </>
-          )}
-          <div ref={bottomRef} />
+          ) : null}
         </div>
 
         <div className="border-t border-sky-200/80 bg-sky-50/60 p-4 dark:border-slate-700 dark:bg-slate-900/50 sm:p-5">
