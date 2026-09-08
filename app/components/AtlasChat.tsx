@@ -10,9 +10,9 @@ export const ASSISTANT_NAME = "Atlas";
 type ChatMessage = { id: string; role: "user" | "assistant"; content: string };
 
 const SUGGESTIONS = [
-  "What's Roy's experience with SQL and Python?",
-  "Tell me about Solstice.",
-  "Is Roy a good fit for a data analyst role?",
+  "Walk me through the SF Restaurant Safety Map.",
+  "What has Roy built with Python and SQL?",
+  "What kind of roles is Roy targeting?",
   "What does Roy do outside of work?",
 ] as const;
 
