@@ -8,18 +8,13 @@ import {
   type Variants,
 } from "framer-motion";
 import {
-  ChartColumn,
-  Clapperboard,
   HeartPulse,
   MapPin,
-  Network,
-  Scale,
-  Sparkles,
   Star,
-  TrendingUp,
-  Wine,
 } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
+import { AdditionalProjectIcon } from "./AdditionalProjectIcons";
+import type { AdditionalProjectIconVariant } from "./AdditionalProjectIcons";
 import DrowsyEyeIcon from "./DrowsyEyeIcon";
 import FadeInSection from "./FadeInSection";
 import ProjectModal, { type ProjectModalData } from "./ProjectModal";
@@ -42,16 +37,6 @@ import {
 } from "../lib/projectImages";
 
 type FeaturedProjectIconVariant = "eye" | "bars" | "heart" | "mapPin";
-
-type AdditionalProjectIconVariant =
-  | "sparkles"
-  | "heart"
-  | "wine"
-  | "trending"
-  | "chart"
-  | "clapperboard"
-  | "network"
-  | "scale";
 
 type ProjectMediaFields = {
   imageSrc?: string;
@@ -81,6 +66,8 @@ type AdditionalProject = ProjectMediaFields & {
   githubHref?: string;
   status?: string;
   iconVariant: AdditionalProjectIconVariant;
+  /** Seconds; used to desync paired icons (trending / basketball). */
+  iconAnimationDelay?: number;
   gradient: string;
 };
 
@@ -160,6 +147,7 @@ const additionalProjects: AdditionalProject[] = [
     tags: ["R", "Machine Learning"],
     githubHref: "https://github.com/royho1/wine-quality-classification",
     iconVariant: "wine",
+    iconAnimationDelay: 0.85,
     gradient:
       "from-purple-100 via-white to-rose-100 dark:from-purple-900 dark:via-purple-950 dark:to-rose-900",
     ...projectMedia(
@@ -188,7 +176,7 @@ const additionalProjects: AdditionalProject[] = [
     tech: "Python, Random Forest, Gradient Boosting",
     tags: ["Python", "Machine Learning"],
     githubHref: "https://github.com/royho1/nba-player-prediction",
-    iconVariant: "chart",
+    iconVariant: "basketball",
     gradient:
       "from-orange-100 via-white to-amber-100 dark:from-orange-900 dark:via-orange-950 dark:to-amber-900",
     ...projectMedia(
@@ -219,6 +207,7 @@ const additionalProjects: AdditionalProject[] = [
     tags: ["R", "Data Visualization"],
     githubHref: "https://github.com/royho1/drake-time-series-project",
     iconVariant: "trending",
+    iconAnimationDelay: 0.5,
     gradient:
       "from-sky-100 via-white to-indigo-100 dark:from-sky-900 dark:via-sky-950 dark:to-indigo-900",
     ...projectMedia(
@@ -233,7 +222,8 @@ const additionalProjects: AdditionalProject[] = [
     tech: "R, tidyverse, ggplot2",
     tags: ["R", "Data Visualization", "Machine Learning"],
     githubHref: "https://github.com/royho1/nba-salary-analysis",
-    iconVariant: "chart",
+    iconVariant: "basketball",
+    iconAnimationDelay: 0.3,
     gradient:
       "from-amber-100 via-white to-orange-100 dark:from-amber-900 dark:via-amber-950 dark:to-orange-900",
     ...projectMedia(
@@ -358,86 +348,6 @@ function FeaturedProjectIcon({
   return <DrowsyEyeIcon />;
 }
 
-function AdditionalProjectIcon({
-  variant,
-  size = "sm",
-}: {
-  variant: AdditionalProjectIconVariant;
-  size?: "sm" | "lg";
-}) {
-  const iconClass = size === "lg" ? "h-14 w-14" : "h-9 w-9";
-  const stroke = 1.75;
-
-  switch (variant) {
-    case "sparkles":
-      return (
-        <Sparkles
-          className={`${iconClass} text-violet-500 dark:text-violet-400`}
-          strokeWidth={stroke}
-          aria-hidden
-        />
-      );
-    case "heart":
-      return (
-        <HeartPulse
-          className={`${iconClass} origin-center text-rose-600 animate-heartbeat dark:text-rose-400`}
-          strokeWidth={stroke}
-          aria-hidden
-        />
-      );
-    case "wine":
-      return (
-        <Wine
-          className={`${iconClass} text-purple-600 dark:text-purple-400`}
-          strokeWidth={stroke}
-          aria-hidden
-        />
-      );
-    case "trending":
-      return (
-        <TrendingUp
-          className={`${iconClass} text-emerald-600 dark:text-emerald-400`}
-          strokeWidth={stroke}
-          aria-hidden
-        />
-      );
-    case "chart":
-      return (
-        <ChartColumn
-          className={`${iconClass} text-amber-600 dark:text-amber-400`}
-          strokeWidth={stroke}
-          aria-hidden
-        />
-      );
-    case "clapperboard":
-      return (
-        <Clapperboard
-          className={`${iconClass} text-slate-600 dark:text-slate-300`}
-          strokeWidth={stroke}
-          aria-hidden
-        />
-      );
-    case "network":
-      return (
-        <Network
-          className={`${iconClass} text-cyan-600 dark:text-cyan-400`}
-          strokeWidth={stroke}
-          aria-hidden
-        />
-      );
-    case "scale":
-      return (
-        <Scale
-          className={`${iconClass} text-stone-600 dark:text-stone-300`}
-          strokeWidth={stroke}
-          aria-hidden
-        />
-      );
-    default:
-      return null;
-  }
-}
-
 function ProjectCardMedia({
   gradient,
   fallback,
@@ -520,7 +430,11 @@ function additionalToGalleryItem(project: AdditionalProject): GalleryItem {
       status: project.status,
     },
     fallback: (
-      <AdditionalProjectIcon variant={project.iconVariant} size="lg" />
+      <AdditionalProjectIcon
+        variant={project.iconVariant}
+        size="lg"
+        animationDelay={project.iconAnimationDelay}
+      />
     ),
   };
 }
@@ -720,6 +634,7 @@ export default function ProjectsSection() {
                   <AdditionalProjectIcon
                     variant={project.iconVariant}
                     size="sm"
+                    animationDelay={project.iconAnimationDelay}
                   />
                 );
                 const galleryIndex = gallery.findIndex(
