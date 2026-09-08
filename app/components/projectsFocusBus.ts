@@ -10,7 +10,6 @@
  */
 
 export const PROJECT_NAV_ITEMS = [
-  { id: "projects", label: "All Projects" },
   {
     id: "project-sf-restaurant-safety-map",
     label: "SF Restaurant Safety Map",
@@ -23,7 +22,13 @@ export const PROJECT_NAV_ITEMS = [
     id: "project-drowsy-driver-detection",
     label: "Drowsy Driver Detection System",
   },
+  { id: "projects", label: "All Projects" },
 ] as const;
+
+/** Featured cards only; "All Projects" is listed separately below the divider. */
+export const FEATURED_PROJECT_NAV_ITEMS = PROJECT_NAV_ITEMS.filter(
+  (item) => item.id !== "projects",
+);
 
 export type ProjectNavId = (typeof PROJECT_NAV_ITEMS)[number]["id"];
 
