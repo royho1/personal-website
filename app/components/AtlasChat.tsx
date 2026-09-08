@@ -234,11 +234,13 @@ export default function AtlasChat() {
               </div>
 
               <div className="atlas-idle-float relative z-20 mt-5 sm:mt-6">
-                <AtlasDog size={MASCOT_PX} pettable />
+                <div className="inline-block cursor-pointer motion-safe:transition-transform motion-safe:duration-150 motion-safe:ease-out motion-safe:hover:scale-[1.03]">
+                  <AtlasDog size={MASCOT_PX} pettable />
+                </div>
               </div>
 
               <p className="mt-2 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
-                Feel free to pet Atlas!
+                Click to pet Atlas!
               </p>
             </div>
 
