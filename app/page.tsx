@@ -92,7 +92,7 @@ export default function Home() {
                       </li>
                       <li>
                         First-authored a 29-page, 36-source review with Dr.
-                        Biren Prasad as co-author, introducing a two-axis
+                        Biren (Brian) Prasad as co-author, introducing a two-axis
                         framework for LLM agent autonomy and oversight, plus a
                         cost model pricing oversight against productivity
                         gains; revise-and-resubmit with publication recommended.
