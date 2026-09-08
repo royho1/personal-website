@@ -11,6 +11,7 @@ import {
 type LogEntry = {
   id: string;
   question: string;
+  reply?: string;
   at: string;
 };
 
@@ -118,8 +119,8 @@ export default function AtlasInboxClient() {
       <div className="mx-auto max-w-2xl">
         <h1 className="text-2xl font-semibold tracking-tight">Atlas inbox</h1>
         <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-          Private log of questions visitors ask Atlas. Not linked from the
-          public site.
+          Private log of visitor questions and Atlas replies. Not linked from
+          the public site.
         </p>
 
         {!unlocked ? (
@@ -180,11 +181,11 @@ export default function AtlasInboxClient() {
               </p>
             ) : null}
 
-            <ul className="mt-6 space-y-4">
+            <ul className="mt-6 space-y-6">
               {entries.map((entry) => (
                 <li
                   key={entry.id}
-                  className="border-b border-slate-200 pb-4 last:border-b-0 dark:border-slate-800"
+                  className="border-b border-slate-200 pb-6 last:border-b-0 dark:border-slate-800"
                 >
                   <time
                     dateTime={entry.at}
@@ -192,9 +193,30 @@ export default function AtlasInboxClient() {
                   >
                     {formatWhen(entry.at)}
                   </time>
-                  <p className="mt-1 whitespace-pre-wrap text-sm leading-relaxed">
-                    {entry.question}
-                  </p>
+                  <div className="mt-3 space-y-3">
+                    <div>
+                      <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                        Visitor
+                      </p>
+                      <p className="mt-1 whitespace-pre-wrap text-sm leading-relaxed">
+                        {entry.question}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                        Atlas
+                      </p>
+                      {entry.reply ? (
+                        <p className="mt-1 whitespace-pre-wrap text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                          {entry.reply}
+                        </p>
+                      ) : (
+                        <p className="mt-1 text-sm italic text-slate-500 dark:text-slate-400">
+                          Reply was not stored for this older entry.
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </li>
               ))}
             </ul>

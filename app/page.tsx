@@ -91,9 +91,10 @@ export default function Home() {
                         unintended action execution.
                       </li>
                       <li>
-                        First-authored a 29-page, 36-source review introducing a
-                        two-axis framework for LLM agent autonomy and oversight,
-                        plus a cost model pricing oversight against productivity
+                        First-authored a 29-page, 36-source review with Dr.
+                        Biren Prasad as co-author, introducing a two-axis
+                        framework for LLM agent autonomy and oversight, plus a
+                        cost model pricing oversight against productivity
                         gains; revise-and-resubmit with publication recommended.
                       </li>
                       <li>

@@ -1,5 +1,5 @@
 /**
- * Persistent log of visitor questions to Atlas.
+ * Persistent log of Atlas visitor exchanges (question + reply).
  * Uses Upstash Redis REST when configured; no-ops otherwise so local
  * and preview deploys still work without Redis.
  */
@@ -7,11 +7,14 @@
 export type AtlasQuestionEntry = {
   id: string;
   question: string;
+  /** Atlas reply when available. Older entries may omit this. */
+  reply?: string;
   at: string;
 };
 
 const LIST_KEY = "atlas:questions";
 const MAX_ENTRIES = 200;
+const MAX_REPLY_CHARS = 8000;
 
 function redisCredentials(): { url: string; token: string } | null {
   // Prefer complete credential pairs so a leftover KV_* value cannot mix with
@@ -75,17 +78,20 @@ async function redisPipeline(
   return payload;
 }
 
-export async function appendAtlasQuestion(
-  question: string,
-): Promise<void> {
+export async function appendAtlasExchange(input: {
+  question: string;
+  reply: string;
+}): Promise<void> {
   if (!redisConfigured()) return;
 
-  const trimmed = question.trim();
-  if (!trimmed) return;
+  const question = input.question.trim();
+  const reply = input.reply.trim();
+  if (!question || !reply) return;
 
   const entry: AtlasQuestionEntry = {
     id: `q-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-    question: trimmed.slice(0, 4000),
+    question: question.slice(0, 4000),
+    reply: reply.slice(0, MAX_REPLY_CHARS),
     at: new Date().toISOString(),
   };
 
@@ -122,6 +128,9 @@ export async function listAtlasQuestions(
           id: parsed.id,
           question: parsed.question,
           at: parsed.at,
+          ...(typeof parsed.reply === "string" && parsed.reply.length > 0
+            ? { reply: parsed.reply }
+            : {}),
         });
       }
     } catch {

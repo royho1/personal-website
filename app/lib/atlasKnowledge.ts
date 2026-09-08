@@ -43,7 +43,7 @@ Revenue Operations Analyst, Sales Operations Analyst, GTM Operations Analyst, Bu
 
 ## Strengths / Fit
 
-Roy ships end-to-end: data pipelines, ML models, and full-stack analytics apps (ETL → APIs → dashboards and maps). He combines statistical training with practical engineering — Python, SQL, R, Excel — and has research experience on LLM agents (first-authored 29-page review) plus team and solo delivery. He is strongest where analytical rigor meets building tools people can actually use.
+Roy ships end-to-end: data pipelines, ML models, and full-stack analytics apps (ETL → APIs → dashboards and maps). He combines statistical training with practical engineering — Python, SQL, R, Excel — and has research experience on LLM agents (first-authored 29-page review with Dr. Biren Prasad as co-author) plus team and solo delivery. He is strongest where analytical rigor meets building tools people can actually use.
 
 ## Current Focus
 
@@ -103,7 +103,7 @@ Curated courses (name — code):
 - Dates: January 2025 – Present
 - Title: Artificial Intelligence Researcher
 - Conducted research on LLM-based automation covering API-driven system design, agent orchestration frameworks, retrieval-augmented generation (RAG), and a consolidated threat model spanning prompt injection, data leakage, and unintended action execution.
-- First-authored a 29-page, 36-source review introducing a two-axis framework for LLM agent autonomy and oversight, plus a cost model pricing oversight against productivity gains; revise-and-resubmit with publication recommended.
+- First-authored a 29-page, 36-source review with Dr. Biren Prasad as co-author, introducing a two-axis framework for LLM agent autonomy and oversight, plus a cost model pricing oversight against productivity gains; revise-and-resubmit with publication recommended.
 - Served as a peer reviewer for JAIKE, evaluating submissions on retrieval methods in large language models, reasoning performance in extended tasks, and large-scale model architectures for methodological rigor and evaluation quality.
 
 ### TechSprint Innovators
