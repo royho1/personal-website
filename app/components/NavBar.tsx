@@ -28,6 +28,16 @@ const ADDITIONAL_PROJECTS_HASH = "additional-projects";
 /** Smooth-scroll to Additional Projects when already on the home page. */
 function goToAdditionalProjects(event: MouseEvent<HTMLAnchorElement>, pathname: string) {
   if (pathname !== "/") return;
+  // Keep Ctrl/Cmd/Shift/middle-click as normal browser navigation.
+  if (
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey
+  ) {
+    return;
+  }
   event.preventDefault();
   const el = document.getElementById(ADDITIONAL_PROJECTS_HASH);
   if (!el) return;
