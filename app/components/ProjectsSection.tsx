@@ -28,6 +28,14 @@ import {
   type Tag,
 } from "./projectsFilterBus";
 import {
+  FEATURED_PROJECT_DOM_IDS,
+  emitProjectsFocus,
+  isProjectNavId,
+  scrollToProjectsFocus,
+  subscribeToProjectsFocus,
+  type ProjectNavId,
+} from "./projectsFocusBus";
+import {
   JOB_MARKET_ANALYTICS_DASHBOARD_MEDIA,
   PROJECT_IMAGE_FILES,
   SF_RESTAURANT_SAFETY_MAP_MEDIA,
@@ -451,6 +459,29 @@ export default function ProjectsSection() {
     return subscribeToProjectsFilter(setFilter);
   }, []);
 
+  // When the nav asks to focus a featured project, ensure the skill filter is
+  // All (so the card is mounted) then scroll/focus once the node exists.
+  useEffect(() => {
+    const focusTarget = (focusId: ProjectNavId) => {
+      setFilter("All");
+      emitProjectsFilter("All");
+      scrollToProjectsFocus(focusId);
+    };
+
+    const unsub = subscribeToProjectsFocus(focusTarget);
+
+    const hashId =
+      typeof window !== "undefined"
+        ? window.location.hash.replace(/^#/, "")
+        : "";
+    if (isProjectNavId(hashId)) {
+      // Landing with a projects hash (e.g. from /ask): sync indicator + scroll.
+      emitProjectsFocus(hashId);
+    }
+
+    return unsub;
+  }, []);
+
   const closeModal = useCallback(() => setSelectedIndex(null), []);
 
   const applyFilter = (next: Filter) => {
@@ -501,7 +532,7 @@ export default function ProjectsSection() {
     <FadeInSection
       as="section"
       id="projects"
-      className="border-t border-sky-200/80 bg-white dark:border-slate-800 dark:bg-slate-950"
+      className="scroll-mt-28 border-t border-sky-200/80 bg-white dark:border-slate-800 dark:bg-slate-950"
       aria-labelledby="projects-heading"
     >
       <div className="mx-auto max-w-6xl px-6 py-14 md:px-8 md:py-28">
@@ -559,22 +590,28 @@ export default function ProjectsSection() {
               const galleryIndex = gallery.findIndex(
                 (item) => item.id === project.title,
               );
+              const domId =
+                FEATURED_PROJECT_DOM_IDS[
+                  project.title as keyof typeof FEATURED_PROJECT_DOM_IDS
+                ];
 
               return (
                 <motion.button
                   key={project.title}
+                  id={domId}
                   type="button"
                   layout
                   variants={cardVariants}
                   initial="hidden"
                   animate="visible"
                   exit="exit"
+                  tabIndex={0}
                   onClick={() => {
                     if (galleryIndex < 0) return;
                     setSelectedIndex(galleryIndex);
                   }}
                   aria-label={`Open ${project.title} details`}
-                  className="group relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-sky-200 bg-white p-0 text-left font-inherit shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-[transform,border-color,box-shadow] duration-150 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50 dark:hover:border-slate-500 dark:hover:shadow-black/60"
+                  className="group relative flex h-full w-full cursor-pointer scroll-mt-28 flex-col overflow-hidden rounded-xl border border-sky-200 bg-white p-0 text-left font-inherit shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-[transform,border-color,box-shadow] duration-150 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50 dark:hover:border-slate-500 dark:hover:shadow-black/60"
                 >
                   {project.award && (
                     <span className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1 rounded-full border border-amber-300 bg-amber-50/95 px-2 py-0.5 text-[10px] font-semibold text-amber-800 shadow-sm shadow-amber-900/10 backdrop-blur-sm dark:border-amber-400/40 dark:bg-amber-500/10 dark:text-amber-200">

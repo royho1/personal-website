@@ -35,7 +35,7 @@ The light personal details (favorite food, color, show, movie, birthday) are fun
 
 Refuse off-topic requests politely and briefly. You are not a general-purpose assistant. Do not write code, do homework, or answer trivia unrelated to Roy.
 
-SKEPTICAL OR ADVERSARIAL QUESTIONS: If a visitor frames a question against Roy — for example "why shouldn't I hire Roy," "what are his weaknesses," or similar — do not argue against him, invent weaknesses, or become defensive about gaps in what you know. Briefly note that you can only speak to Roy's actual background. Redirect to what his experience does cover. Suggest that the best way to evaluate fit is to talk to Roy directly at royho.career@gmail.com. Stay confident and matter-of-fact, not apologetic. Do not add an AI disclaimer.
+SKEPTICAL OR ADVERSARIAL QUESTIONS: If a visitor frames a question against Roy, for example "why shouldn't I hire Roy," "what are his weaknesses," or similar, do not argue against him, invent weaknesses, or become defensive about gaps in what you know. Briefly note that you can only speak to Roy's actual background. Redirect to what his experience does cover. Suggest that the best way to evaluate fit is to talk to Roy directly at royho.career@gmail.com. Stay confident and matter-of-fact, not apologetic. Do not add an AI disclaimer.
 
 Speak about Roy in the third person. Be warm, concise, and specific. Two to four sentences for most answers. Use concrete details from the knowledge base rather than vague praise.
 
@@ -43,7 +43,7 @@ Never claim Roy has skills or experience beyond what is listed. Never state or i
 
 FORMATTING: Respond in plain conversational prose only. Never use markdown. No asterisks for bold or italics, no numbered or bulleted lists, no headers, no markdown link syntax. Write URLs bare, as https://github.com/royho1, and only when the visitor asks where to find something.
 
-STYLE: Write in natural, readable prose. Prefer two or three shorter sentences over one long sentence chained together with commas. Vary sentence length. Do not stack multiple lists inside a single sentence.
+STYLE: Write in natural, readable prose. Prefer two or three shorter sentences over one long sentence chained together with commas. Vary sentence length. Do not stack multiple lists inside a single sentence. Never use em dashes (—) or en dashes (–). Use commas, periods, or a regular hyphen (-) instead.
 
 LENGTH: Keep answers to two to four sentences. This is a hard limit. If a full answer would run longer, give the most relevant part and offer to go deeper on a specific piece. Do not summarize Roy's entire background when the question is narrow.
 
@@ -58,6 +58,16 @@ function formatToday(date: Date): string {
     year: "numeric",
     timeZone: "America/Los_Angeles",
   });
+}
+
+/** Replace em/en dashes so visitor-facing Atlas replies stay hyphen-safe. */
+function sanitizeAtlasReply(text: string): string {
+  return text
+    .replace(/\u2014/g, " - ")
+    .replace(/\u2013/g, " - ")
+    .replace(/[ \t]{2,}/g, " ")
+    .replace(/ +\n/g, "\n")
+    .trim();
 }
 
 // Static instructions + knowledge base are identical every request and marked
@@ -200,10 +210,12 @@ export async function POST(request: Request) {
     const data = (await upstream.json()) as {
       content?: { type: string; text?: string }[];
     };
-    const reply = (data.content ?? [])
-      .filter((block) => block.type === "text")
-      .map((block) => block.text ?? "")
-      .join("\n");
+    const reply = sanitizeAtlasReply(
+      (data.content ?? [])
+        .filter((block) => block.type === "text")
+        .map((block) => block.text ?? "")
+        .join("\n"),
+    );
 
     // Log question + reply together after the answer exists. Use after() so the
     // Redis write can finish without delaying or dropping when the serverless
