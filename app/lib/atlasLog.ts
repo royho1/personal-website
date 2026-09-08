@@ -32,7 +32,7 @@ function redisConfigured(): boolean {
 
 async function redisPipeline(
   commands: unknown[][],
-): Promise<{ result?: unknown }[]> {
+): Promise<{ result?: unknown; error?: string }[]> {
   const credentials = redisCredentials();
   if (!credentials) {
     throw new Error("Upstash Redis is not configured.");
@@ -54,7 +54,20 @@ async function redisPipeline(
     throw new Error(`Upstash error ${response.status}: ${body}`);
   }
 
-  return (await response.json()) as { result?: unknown }[];
+  const payload = (await response.json()) as {
+    result?: unknown;
+    error?: string;
+  }[];
+
+  // Upstash can return HTTP 200 with per-command error objects. Treat those
+  // as failures so callers log/502 instead of silently dropping writes.
+  for (const [index, entry] of payload.entries()) {
+    if (entry && typeof entry.error === "string" && entry.error.length > 0) {
+      throw new Error(`Upstash command ${index} failed: ${entry.error}`);
+    }
+  }
+
+  return payload;
 }
 
 export async function appendAtlasQuestion(
