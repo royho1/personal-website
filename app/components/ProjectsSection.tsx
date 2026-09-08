@@ -651,7 +651,10 @@ export default function ProjectsSection() {
 
         <div className="mt-12 md:mt-16">
           <div className="flex items-center justify-center gap-3">
-            <h3 className="cursor-default text-center text-xl font-semibold tracking-tight text-sky-950 md:text-2xl dark:text-sky-100">
+            <h3
+              id="additional-projects"
+              className="scroll-mt-28 cursor-default text-center text-xl font-semibold tracking-tight text-sky-950 md:text-2xl dark:text-sky-100"
+            >
               Additional Projects
             </h3>
             <a
