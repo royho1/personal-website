@@ -29,6 +29,7 @@ import {
 } from "./projectsFilterBus";
 import {
   FEATURED_PROJECT_DOM_IDS,
+  emitProjectsFocus,
   isProjectNavId,
   scrollToProjectsFocus,
   subscribeToProjectsFocus,
