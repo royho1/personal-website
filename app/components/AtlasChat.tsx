@@ -135,7 +135,9 @@ export default function AtlasChat() {
       <div className="flex h-[min(70vh,36rem)] flex-col overflow-hidden rounded-2xl border border-sky-200 bg-white/90 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50">
         <div className="flex-1 space-y-4 overflow-y-auto px-4 py-5 sm:px-6">
           {messages.length === 0 && !isLoading ? (
-            <div className="flex h-full flex-col items-center justify-center gap-6 px-2 text-center">
+            // min-h-full (not h-full) so justify-center cannot clip the top
+            // padding when the empty state is taller than the chat pane.
+            <div className="flex min-h-full flex-col items-center justify-center gap-6 px-2 py-8 text-center">
               <div
                 className="relative z-10 mx-auto w-full max-w-sm rounded-2xl border border-[var(--bubble-border)] bg-[var(--bubble-fill)] px-4 py-3 text-sm leading-relaxed text-slate-600 shadow-sm shadow-sky-900/5 sm:text-base dark:text-slate-300 dark:shadow-black/20 [--bubble-fill:rgb(240_249_255/0.9)] [--bubble-border:rgb(186_230_253/0.8)] dark:[--bubble-fill:rgb(30_41_59/0.4)] dark:[--bubble-border:rgb(71_85_105)]"
               >
