@@ -1,6 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useState, type FormEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type FormEvent,
+} from "react";
 
 type LogEntry = {
   id: string;
@@ -29,8 +35,11 @@ export default function AtlasInboxClient() {
   const [entries, setEntries] = useState<LogEntry[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  // Bumped on Lock so in-flight Refresh/Unlock fetches cannot reopen the inbox.
+  const loadGenerationRef = useRef(0);
 
   const loadEntries = useCallback(async (token: string) => {
+    const generation = ++loadGenerationRef.current;
     setLoading(true);
     setError(null);
     try {
@@ -42,6 +51,8 @@ export default function AtlasInboxClient() {
         entries?: LogEntry[];
         error?: string;
       };
+
+      if (generation !== loadGenerationRef.current) return;
 
       if (!response.ok) {
         setUnlocked(false);
@@ -58,11 +69,14 @@ export default function AtlasInboxClient() {
         // sessionStorage may be unavailable; ignore.
       }
     } catch {
+      if (generation !== loadGenerationRef.current) return;
       setUnlocked(false);
       setEntries([]);
       setError("Could not reach the inbox API.");
     } finally {
-      setLoading(false);
+      if (generation === loadGenerationRef.current) {
+        setLoading(false);
+      }
     }
   }, []);
 
@@ -86,10 +100,12 @@ export default function AtlasInboxClient() {
   };
 
   const onLock = () => {
+    loadGenerationRef.current += 1;
     setUnlocked(false);
     setEntries([]);
     setSecret("");
     setError(null);
+    setLoading(false);
     try {
       sessionStorage.removeItem(SECRET_STORAGE_KEY);
     } catch {

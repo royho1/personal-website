@@ -14,16 +14,21 @@ const LIST_KEY = "atlas:questions";
 const MAX_ENTRIES = 200;
 
 function redisCredentials(): { url: string; token: string } | null {
-  // Vercel Marketplace Upstash uses KV_REST_API_*; direct Upstash
-  // dashboards often use UPSTASH_REDIS_REST_*.
-  const url =
-    process.env.KV_REST_API_URL?.trim() ||
-    process.env.UPSTASH_REDIS_REST_URL?.trim();
-  const token =
-    process.env.KV_REST_API_TOKEN?.trim() ||
-    process.env.UPSTASH_REDIS_REST_TOKEN?.trim();
-  if (!url || !token) return null;
-  return { url, token };
+  // Prefer complete credential pairs so a leftover KV_* value cannot mix with
+  // an Upstash token (or the reverse) and look "configured" while auth fails.
+  const kvUrl = process.env.KV_REST_API_URL?.trim();
+  const kvToken = process.env.KV_REST_API_TOKEN?.trim();
+  if (kvUrl && kvToken) {
+    return { url: kvUrl, token: kvToken };
+  }
+
+  const upstashUrl = process.env.UPSTASH_REDIS_REST_URL?.trim();
+  const upstashToken = process.env.UPSTASH_REDIS_REST_TOKEN?.trim();
+  if (upstashUrl && upstashToken) {
+    return { url: upstashUrl, token: upstashToken };
+  }
+
+  return null;
 }
 
 function redisConfigured(): boolean {
