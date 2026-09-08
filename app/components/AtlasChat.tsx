@@ -17,6 +17,8 @@ const SUGGESTIONS = [
 ] as const;
 
 const AVATAR_PX = 34;
+const MASCOT_PX = 152;
+const TEXTAREA_MAX_HEIGHT_PX = 132;
 
 function AssistantAvatar({ visible }: { visible: boolean }) {
   if (!visible) {
@@ -45,9 +47,20 @@ export default function AtlasChat() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const isLoadingRef = useRef(false);
   const messageIdRef = useRef(0);
   const messagesRef = useRef<ChatMessage[]>([]);
+
+  const resizeTextarea = () => {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    const nextHeight = Math.min(el.scrollHeight, TEXTAREA_MAX_HEIGHT_PX);
+    el.style.height = `${nextHeight}px`;
+    el.style.overflowY =
+      el.scrollHeight > TEXTAREA_MAX_HEIGHT_PX ? "auto" : "hidden";
+  };
 
   useEffect(() => {
     // Only pin to the latest message once a conversation has started.
@@ -55,6 +68,10 @@ export default function AtlasChat() {
     if (messages.length === 0 && !isLoading) return;
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
+
+  useEffect(() => {
+    resizeTextarea();
+  }, [input]);
 
   const sendMessage = async (rawText: string) => {
     const content = rawText.trim();
@@ -135,38 +152,39 @@ export default function AtlasChat() {
   const isEmpty = messages.length === 0 && !isLoading;
 
   const composer = (
-    <div className="border-t border-sky-200/80 bg-sky-50/60 p-4 dark:border-slate-700 dark:bg-slate-900/50 sm:p-5">
+    <div className="shrink-0 border-t border-slate-100 px-4 pb-4 pt-3 dark:border-slate-700/80 sm:px-6 sm:pb-5 sm:pt-4">
       {error && (
         <p
           role="alert"
-          className="mb-3 text-sm text-rose-600 dark:text-rose-400"
+          className="mb-3 text-left text-sm text-rose-600 dark:text-rose-400"
         >
           {error}
         </p>
       )}
       <div className="flex items-end gap-3">
         <textarea
+          ref={textareaRef}
           value={input}
           onChange={(event) => setInput(event.target.value)}
           onKeyDown={handleKeyDown}
-          rows={2}
+          rows={1}
           maxLength={500}
           disabled={isLoading}
           placeholder={`Ask ${ASSISTANT_NAME} about Roy…`}
           aria-label={`Message ${ASSISTANT_NAME}`}
-          className="min-h-[2.75rem] flex-1 resize-none rounded-xl border border-sky-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm shadow-sky-900/5 outline-none transition-colors placeholder:text-slate-400 focus:border-sky-400 focus:ring-2 focus:ring-sky-200 disabled:opacity-60 dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-sky-500 dark:focus:ring-sky-900/40 sm:text-base"
+          className="max-h-[132px] min-h-[2.5rem] flex-1 resize-none overflow-y-hidden rounded-xl border border-sky-200 bg-white px-4 py-2.5 text-sm leading-snug text-slate-900 outline-none transition-colors placeholder:text-slate-400 focus:border-sky-400 focus:ring-2 focus:ring-sky-200 disabled:opacity-60 dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-sky-500 dark:focus:ring-sky-900/40 sm:text-base"
         />
         <button
           type="button"
           onClick={() => void sendMessage(input)}
           disabled={!canSend}
           aria-label={`Send message to ${ASSISTANT_NAME}`}
-          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sky-600 text-white shadow-sm shadow-sky-600/25 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-sky-700 disabled:pointer-events-none disabled:opacity-40 dark:bg-sky-500 dark:shadow-sky-950/40 dark:hover:bg-sky-400"
+          className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl !bg-[#E8A33D] text-white transition-colors duration-200 ease-out hover:enabled:!bg-[#C8891F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33D]/55 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:!bg-[#E8A33D] disabled:opacity-55 dark:focus-visible:ring-offset-slate-900"
         >
-          <Send className="h-4 w-4" aria-hidden />
+          <Send className="h-4 w-4 text-white" aria-hidden strokeWidth={2.25} />
         </button>
       </div>
-      <p className="mt-3 text-center text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+      <p className="mt-1.5 text-left text-xs leading-relaxed text-slate-500 dark:text-slate-400">
         {ASSISTANT_NAME} is an AI and can make mistakes. For anything
         important, email{" "}
         <a
@@ -181,69 +199,57 @@ export default function AtlasChat() {
   );
 
   return (
-    <div className="mt-10 w-full text-left">
+    <div className="mt-8 w-full text-left md:mt-10">
       <div
-        className={`flex flex-col rounded-2xl border border-sky-200 bg-white/90 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50 ${
-          isEmpty
-            ? "h-auto overflow-visible"
-            : "h-[min(70vh,36rem)] overflow-hidden"
+        className={`flex flex-col overflow-hidden rounded-2xl bg-white shadow-[0_4px_24px_rgba(15,40,70,0.08)] dark:bg-slate-800/70 dark:shadow-[0_4px_24px_rgba(0,0,0,0.35)] ${
+          isEmpty ? "" : "h-[min(70vh,36rem)] md:h-auto md:min-h-[480px]"
         }`}
       >
         {isEmpty ? (
-          <div className="flex min-h-[min(52vh,28rem)] flex-col items-center justify-center gap-5 px-4 py-6 text-center sm:gap-6 sm:px-6">
-            <div
-              className="relative z-10 mx-auto w-full max-w-sm rounded-2xl border border-[var(--bubble-border)] bg-[var(--bubble-fill)] px-4 py-3 text-sm leading-relaxed text-slate-600 shadow-sm shadow-sky-900/5 sm:text-base dark:text-slate-300 dark:shadow-black/20 [--bubble-fill:rgb(240_249_255/0.9)] [--bubble-border:rgb(186_230_253/0.8)] dark:[--bubble-fill:rgb(30_41_59/0.4)] dark:[--bubble-border:rgb(71_85_105)]"
-            >
-              <p className="relative z-10">
-                Ask me anything about Roy&apos;s background, projects, or
-                experience.
-              </p>
-              {/* Slim curved comic tail — anchored ~60%, tip over Atlas */}
-              <svg
-                aria-hidden
-                viewBox="0 0 40 16"
-                width="40"
-                height="16"
-                overflow="visible"
-                className="pointer-events-none absolute left-[60%] top-full z-0 -translate-x-[75%]"
-              >
-                <path
-                  d="M 26 0
+          <div className="flex flex-col px-4 pb-[88px] pt-6 sm:px-6 sm:pt-8">
+            <div className="flex flex-col items-center text-center">
+              <div className="relative z-10 mx-auto w-fit max-w-[18rem] rounded-2xl bg-[var(--bubble-fill)] px-2.5 py-2 text-sm leading-relaxed text-slate-600 sm:max-w-xs sm:text-[0.9375rem] dark:text-slate-300 [--bubble-fill:#F0F9FF] dark:[--bubble-fill:rgb(14_165_233/0.12)]">
+                <p className="relative z-10">
+                  Ask me anything about Roy&apos;s background, projects, or
+                  experience.
+                </p>
+                <svg
+                  aria-hidden
+                  viewBox="0 0 40 16"
+                  width="36"
+                  height="14"
+                  overflow="visible"
+                  className="pointer-events-none absolute left-[60%] top-full z-0 -translate-x-[75%]"
+                >
+                  <path
+                    d="M 26 0
                        C 24 4, 19 8, 14 12
                        C 11 14, 9 15, 8 15.5
                        C 12 13, 22 7, 30 3
                        C 32 1.5, 33 0.5, 34 0
                        Z"
-                  fill="var(--bubble-fill)"
-                />
-                <path
-                  d="M 26 0
-                       C 24 4, 19 8, 14 12
-                       C 11 14, 9 15, 8 15.5
-                       C 12 13, 22 7, 30 3
-                       C 32 1.5, 33 0.5, 34 0"
-                  fill="none"
-                  stroke="var(--bubble-border)"
-                  strokeWidth="1.25"
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                />
-              </svg>
+                    fill="var(--bubble-fill)"
+                  />
+                </svg>
+              </div>
+
+              <div className="atlas-idle-float relative z-20 mt-5 sm:mt-6">
+                <AtlasDog size={MASCOT_PX} pettable />
+              </div>
+
+              <p className="mt-2 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+                Feel free to pet Atlas!
+              </p>
             </div>
-            <div className="relative z-20">
-              <AtlasDog size={96} pettable />
-            </div>
-            <p className="text-xs leading-relaxed text-slate-500 dark:text-slate-400">
-              Feel free to pet Atlas!
-            </p>
-            <div className="mx-auto grid w-full max-w-md grid-cols-1 gap-2 sm:max-w-xl sm:grid-cols-2 sm:gap-3">
+
+            <div className="mx-auto mt-8 grid w-full max-w-2xl grid-cols-1 gap-2.5 sm:mt-10 sm:grid-cols-2 sm:gap-2.5">
               {SUGGESTIONS.map((suggestion) => (
                 <button
                   key={suggestion}
                   type="button"
                   onClick={() => void sendMessage(suggestion)}
                   disabled={isLoading}
-                  className="rounded-full border border-sky-200 bg-white px-3.5 py-1.5 text-xs font-medium text-slate-600 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-sky-300 hover:bg-sky-50 hover:text-sky-900 sm:text-sm dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-700 dark:hover:text-sky-200"
+                  className="flex min-h-[3.75rem] w-full items-center rounded-lg bg-sky-50 px-3 py-2 text-left text-xs font-medium leading-snug text-sky-950 transition-colors duration-200 ease-out hover:bg-[#FFF3E2] hover:shadow-[0_0_0_1px_rgba(232,163,61,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A33D]/35 focus-visible:ring-offset-2 disabled:opacity-60 sm:min-h-[4.25rem] sm:text-sm dark:bg-sky-950/40 dark:text-sky-100 dark:hover:bg-[#E8A33D]/15 dark:hover:shadow-[0_0_0_1px_rgba(232,163,61,0.35)] dark:focus-visible:ring-offset-slate-900"
                 >
                   {suggestion}
                 </button>

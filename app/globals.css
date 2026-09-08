@@ -480,6 +480,21 @@ html {
   }
 }
 
+/* Ask Atlas page mascot — subtle idle float (presentation only). */
+@keyframes atlas-idle-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.atlas-idle-float {
+  animation: atlas-idle-float 3.5s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-sparkle-twinkle-1,
   .animate-sparkle-twinkle-2,
@@ -504,7 +519,8 @@ html {
   .animate-heartbeat,
   .animate-bar-grow-1,
   .animate-bar-grow-2,
-  .animate-bar-grow-3 {
+  .animate-bar-grow-3,
+  .atlas-idle-float {
     animation: none !important;
   }
 }
