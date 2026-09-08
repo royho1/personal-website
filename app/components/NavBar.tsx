@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, Fragment, type MouseEvent } from "react";
+import { useEffect, useId, useRef, useState, Fragment } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
@@ -9,7 +9,6 @@ import ThemeToggle from "./ThemeToggle";
 import { emitProjectsFilter } from "./projectsFilterBus";
 import {
   FEATURED_PROJECT_NAV_ITEMS,
-  PROJECT_NAV_ITEMS,
   emitProjectsFocus,
   getProjectsFocus,
   subscribeToProjectsFocus,
@@ -19,31 +18,8 @@ import {
 /** Inline desktop nav needs ~1024px; keep the hamburger until then. */
 const DESKTOP_NAV_MQ = "(min-width: 1024px)";
 
-const ALL_PROJECTS_NAV_ITEM = PROJECT_NAV_ITEMS.find(
-  (item) => item.id === "projects",
-)!;
-
-const ADDITIONAL_PROJECTS_HASH = "additional-projects";
-
-/** Smooth-scroll to Additional Projects when already on the home page. */
-function goToAdditionalProjects(event: MouseEvent<HTMLAnchorElement>, pathname: string) {
-  if (pathname !== "/") return;
-  // Keep Ctrl/Cmd/Shift/middle-click as normal browser navigation.
-  if (
-    event.button !== 0 ||
-    event.metaKey ||
-    event.ctrlKey ||
-    event.shiftKey ||
-    event.altKey
-  ) {
-    return;
-  }
-  event.preventDefault();
-  const el = document.getElementById(ADDITIONAL_PROJECTS_HASH);
-  if (!el) return;
-  el.scrollIntoView({ behavior: "smooth", block: "start" });
-  window.history.replaceState(null, "", `/#${ADDITIONAL_PROJECTS_HASH}`);
-}
+/** Portfolio size shown beside View All Projects (no extra data fetch). */
+const PROJECTS_COUNT_LABEL = "13+";
 
 const navLinks = [
   { label: "Home", href: "/#hero", id: "hero" },
@@ -76,7 +52,7 @@ function ActiveUnderline({ isActive }: { isActive: boolean }) {
   );
 }
 
-function chooseProjectsNavTarget(focusId: ProjectNavId) {
+function chooseProjectsNavTarget(focusId: ProjectNavId | null) {
   // Reset skill filters so the target featured card is always visible.
   emitProjectsFilter("All");
   emitProjectsFocus(focusId);
@@ -87,13 +63,12 @@ function chooseProjectsNavTarget(focusId: ProjectNavId) {
  * also exposes a dropdown of featured projects. The dropdown opens on hover
  * (desktop) and via the adjacent chevron button (touch). Choosing any
  * option resets the skill filter to All, records the focus target, and
- * scrolls to that project card (or the section for All Projects).
+ * scrolls to that project card (or the section for View All Projects).
  */
 function ProjectsNavItem({ isActive }: { isActive: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeFocus, setActiveFocus] = useState<ProjectNavId>("projects");
+  const [activeFocus, setActiveFocus] = useState<ProjectNavId | null>(null);
   const containerRef = useRef<HTMLLIElement>(null);
-  const pathname = usePathname();
 
   useEffect(() => {
     setActiveFocus(getProjectsFocus());
@@ -133,10 +108,10 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
         : "text-slate-600 hover:bg-sky-50 hover:text-sky-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-sky-200"
     }`;
 
-  const navUtilityItemClass = (isSelected: boolean) =>
-    `flex cursor-pointer items-center rounded-lg px-3 py-2 text-xs transition-colors ${
+  const viewAllClass = (isSelected: boolean) =>
+    `flex cursor-pointer items-center rounded-lg px-3 py-2 text-xs font-bold transition-colors ${
       isSelected
-        ? "bg-sky-100 font-semibold text-sky-900 dark:bg-sky-500/15 dark:text-sky-200"
+        ? "bg-sky-100 text-sky-900 dark:bg-sky-500/15 dark:text-sky-200"
         : "text-slate-500 hover:bg-sky-50 hover:text-sky-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-sky-200"
     }`;
 
@@ -151,7 +126,7 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
         <a
           href="/#projects"
           aria-current={isActive ? "page" : undefined}
-          onClick={() => chooseProjectsNavTarget("projects")}
+          onClick={() => chooseProjectsNavTarget(null)}
           className={navLinkClasses(isActive)}
         >
           Projects
@@ -190,6 +165,11 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
             aria-label="Featured projects"
           >
             <ul className="min-w-[18rem] overflow-hidden rounded-xl border border-sky-200 bg-white/95 p-1 shadow-lg shadow-sky-900/10 ring-1 ring-sky-200/80 backdrop-blur-md dark:border-slate-700 dark:bg-slate-900/95 dark:shadow-black/40 dark:ring-slate-700/60">
+              <li role="presentation" className="px-3 pb-1.5 pt-2">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  Featured Projects
+                </span>
+              </li>
               {FEATURED_PROJECT_NAV_ITEMS.map((item) => {
                 const isSelected = activeFocus === item.id;
                 return (
@@ -218,27 +198,12 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
               />
               <li role="none">
                 <a
-                  href={`/#${ALL_PROJECTS_NAV_ITEM.id}`}
+                  href="/#projects"
                   role="menuitem"
-                  onClick={() => chooseTarget(ALL_PROJECTS_NAV_ITEM.id)}
-                  className={navUtilityItemClass(
-                    activeFocus === ALL_PROJECTS_NAV_ITEM.id,
-                  )}
+                  onClick={() => chooseTarget("projects")}
+                  className={viewAllClass(activeFocus === "projects")}
                 >
-                  {ALL_PROJECTS_NAV_ITEM.label}
-                </a>
-              </li>
-              <li role="none">
-                <a
-                  href={`/#${ADDITIONAL_PROJECTS_HASH}`}
-                  role="menuitem"
-                  onClick={(event) => {
-                    goToAdditionalProjects(event, pathname);
-                    setIsOpen(false);
-                  }}
-                  className={navUtilityItemClass(false)}
-                >
-                  Additional Projects
+                  View all {PROJECTS_COUNT_LABEL} projects
                 </a>
               </li>
             </ul>
@@ -314,7 +279,7 @@ function MobileNavPanel({
   pathname: string;
   panelId: string;
 }) {
-  const [activeFocus, setActiveFocus] = useState<ProjectNavId>("projects");
+  const [activeFocus, setActiveFocus] = useState<ProjectNavId | null>(null);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
@@ -422,7 +387,7 @@ function MobileNavPanel({
                           aria-current={isActive ? "page" : undefined}
                           className={`${mobileLinkClass(isActive)} flex-1`}
                           onClick={() => {
-                            chooseProjectsNavTarget("projects");
+                            chooseProjectsNavTarget(null);
                             onClose();
                           }}
                         >
@@ -461,6 +426,11 @@ function MobileNavPanel({
                             role="menu"
                             aria-label="Featured projects"
                           >
+                            <li role="presentation" className="px-3 pb-1 pt-2">
+                              <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                                Featured Projects
+                              </span>
+                            </li>
                             {FEATURED_PROJECT_NAV_ITEMS.map((item) => {
                               const isSelected = activeFocus === item.id;
                               return (
@@ -493,31 +463,16 @@ function MobileNavPanel({
                             />
                             <li role="none">
                               <a
-                                href={`/#${ALL_PROJECTS_NAV_ITEM.id}`}
+                                href="/#projects"
                                 role="menuitem"
-                                onClick={() =>
-                                  chooseTarget(ALL_PROJECTS_NAV_ITEM.id)
-                                }
-                                className={`flex cursor-pointer items-center rounded-lg px-3 py-2.5 text-xs transition-colors ${
-                                  activeFocus === ALL_PROJECTS_NAV_ITEM.id
-                                    ? "bg-sky-100 font-semibold text-sky-900 dark:bg-sky-500/15 dark:text-sky-200"
+                                onClick={() => chooseTarget("projects")}
+                                className={`flex cursor-pointer items-center rounded-lg px-3 py-2.5 text-xs font-bold transition-colors ${
+                                  activeFocus === "projects"
+                                    ? "bg-sky-100 text-sky-900 dark:bg-sky-500/15 dark:text-sky-200"
                                     : "text-slate-500 hover:bg-sky-50 hover:text-sky-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-sky-200"
                                 }`}
                               >
-                                {ALL_PROJECTS_NAV_ITEM.label}
-                              </a>
-                            </li>
-                            <li role="none">
-                              <a
-                                href={`/#${ADDITIONAL_PROJECTS_HASH}`}
-                                role="menuitem"
-                                onClick={(event) => {
-                                  goToAdditionalProjects(event, pathname);
-                                  onClose();
-                                }}
-                                className="flex cursor-pointer items-center rounded-lg px-3 py-2.5 text-xs text-slate-500 transition-colors hover:bg-sky-50 hover:text-sky-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-sky-200"
-                              >
-                                Additional Projects
+                                View all {PROJECTS_COUNT_LABEL} projects
                               </a>
                             </li>
                           </motion.ul>

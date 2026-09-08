@@ -462,7 +462,8 @@ export default function ProjectsSection() {
   // When the nav asks to focus a featured project, ensure the skill filter is
   // All (so the card is mounted) then scroll/focus once the node exists.
   useEffect(() => {
-    const focusTarget = (focusId: ProjectNavId) => {
+    const focusTarget = (focusId: ProjectNavId | null) => {
+      if (focusId == null) return;
       setFilter("All");
       emitProjectsFilter("All");
       scrollToProjectsFocus(focusId);
@@ -474,8 +475,9 @@ export default function ProjectsSection() {
       typeof window !== "undefined"
         ? window.location.hash.replace(/^#/, "")
         : "";
-    if (isProjectNavId(hashId)) {
-      // Landing with a projects hash (e.g. from /ask): sync indicator + scroll.
+    // Only restore a dropdown highlight for a specific featured project hash.
+    // Bare #projects should not pre-select "View all".
+    if (isProjectNavId(hashId) && hashId !== "projects") {
       emitProjectsFocus(hashId);
     }
 

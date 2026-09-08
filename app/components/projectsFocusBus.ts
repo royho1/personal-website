@@ -42,9 +42,10 @@ export const FEATURED_PROJECT_DOM_IDS = {
 const EVENT_NAME = "projects:focus-change";
 const STORAGE_KEY = "projects:focus";
 
-type FocusEventDetail = { focusId: ProjectNavId };
+type FocusEventDetail = { focusId: ProjectNavId | null };
 
-let currentFocus: ProjectNavId = "projects";
+/** null = no dropdown row selected (fresh visit / Projects label click). */
+let currentFocus: ProjectNavId | null = null;
 
 function isProjectNavId(value: string | null): value is ProjectNavId {
   return (
@@ -55,10 +56,14 @@ function isProjectNavId(value: string | null): value is ProjectNavId {
 
 export { isProjectNavId };
 
-export function getProjectsFocus(): ProjectNavId {
+export function getProjectsFocus(): ProjectNavId | null {
   if (typeof window !== "undefined") {
     try {
       const stored = sessionStorage.getItem(STORAGE_KEY);
+      if (stored === "") {
+        currentFocus = null;
+        return null;
+      }
       if (isProjectNavId(stored)) {
         currentFocus = stored;
         return stored;
@@ -70,11 +75,15 @@ export function getProjectsFocus(): ProjectNavId {
   return currentFocus;
 }
 
-export function emitProjectsFocus(focusId: ProjectNavId): void {
+export function emitProjectsFocus(focusId: ProjectNavId | null): void {
   currentFocus = focusId;
   if (typeof window === "undefined") return;
   try {
-    sessionStorage.setItem(STORAGE_KEY, focusId);
+    if (focusId == null) {
+      sessionStorage.removeItem(STORAGE_KEY);
+    } else {
+      sessionStorage.setItem(STORAGE_KEY, focusId);
+    }
   } catch {
     // Ignore quota / privacy errors; in-memory + event still work.
   }
@@ -86,12 +95,12 @@ export function emitProjectsFocus(focusId: ProjectNavId): void {
 }
 
 export function subscribeToProjectsFocus(
-  handler: (focusId: ProjectNavId) => void,
+  handler: (focusId: ProjectNavId | null) => void,
 ): () => void {
   if (typeof window === "undefined") return () => {};
   const listener = (event: Event) => {
     const detail = (event as CustomEvent<FocusEventDetail>).detail;
-    if (detail?.focusId) handler(detail.focusId);
+    if (detail && "focusId" in detail) handler(detail.focusId);
   };
   window.addEventListener(EVENT_NAME, listener);
   return () => window.removeEventListener(EVENT_NAME, listener);
