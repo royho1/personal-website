@@ -136,25 +136,26 @@ export const HEART_STROKE_RISK_PREDICTION_MEDIA: ProjectMediaSlide[] = [
       "Interactive Streamlit form where visitors enter health features and get a risk prediction.",
   },
   {
+    src: "/projects/heart-stroke-risk-prediction/model-metrics.png",
+    title: "Model metrics",
+    description:
+      "Held-out accuracy, precision, recall, and F1 for Balanced RF vs RF + SMOTE.",
+  },
+  {
+    src: "/projects/heart-stroke-risk-prediction/confusion-matrix.png",
+    title: "Confusion matrix",
+    description: "Test-set confusion matrix for the deployed RF + SMOTE model.",
+  },
+  {
     src: "/projects/heart-stroke-risk-prediction/ui-graphs-heatmap.png",
     title: "Graphs page",
     description:
       "Full Streamlit graphs view with the correlation heatmap selected.",
   },
   {
-    src: "/projects/heart-stroke-risk-prediction/plot-correlation.png",
-    title: "Correlation heatmap",
-    description: "Close-up of feature correlations from the healthcare dataset.",
-  },
-  {
-    src: "/projects/heart-stroke-risk-prediction/ui-graphs-age.png",
-    title: "Age exploration",
-    description: "Streamlit graphs page filtered to stroke rate by age range.",
-  },
-  {
     src: "/projects/heart-stroke-risk-prediction/plot-age-range.png",
     title: "Age range chart",
-    description: "Clean plot of stroke proportion across age groups.",
+    description: "Stroke proportion across age groups from the healthcare dataset.",
   },
 ];
 
@@ -221,14 +222,25 @@ export const MOVIE_REVIEWS_ANALYSIS_MEDIA: ProjectMediaSlide[] = [
     description: "Average professional vs user sentiment across five genres.",
   },
   {
-    src: "/projects/movie-reviews-analysis/distributions-and-correlations.png",
-    title: "Distributions",
-    description: "Sentiment distributions and rating correlations by genre.",
+    src: "/projects/movie-reviews-analysis/roberta-vs-vader.png",
+    title: "RoBERTa vs VADER",
+    description:
+      "Reported true positive and negative-class error rates. RoBERTa outperforms VADER.",
   },
   {
-    src: "/projects/movie-reviews-analysis/rating-compare.png",
-    title: "Rating comparison",
-    description: "Side-by-side professional and user rating patterns.",
+    src: "/projects/movie-reviews-analysis/distributions-adventure-comedy.png",
+    title: "Adventure and comedy",
+    description: "Sentiment distributions and rating correlations for two genres.",
+  },
+  {
+    src: "/projects/movie-reviews-analysis/distributions-crime-horror.png",
+    title: "Crime and horror",
+    description: "Sentiment distributions and rating correlations for two genres.",
+  },
+  {
+    src: "/projects/movie-reviews-analysis/distributions-superhero.png",
+    title: "Superhero",
+    description: "Sentiment distribution and rating correlation for superhero films.",
   },
 ];
 
