@@ -178,7 +178,8 @@ export const WINE_QUALITY_CLASSIFICATION_MEDIA: ProjectMediaSlide[] = [
   {
     src: "/projects/wine-quality-classification/roc-high-quality.png",
     title: "High-quality ROC",
-    description: "ROC for classifying highest-quality wines vs the rest.",
+    description:
+      "ROC for classifying highest-quality wines vs the rest (AUC 0.864).",
   },
   {
     src: "/projects/wine-quality-classification/correlation-matrix.png",
@@ -206,12 +207,14 @@ export const NBA_PLAYER_PREDICTION_MEDIA: ProjectMediaSlide[] = [
   {
     src: "/projects/nba-player-prediction/classification-accuracy.png",
     title: "Peak-season classification",
-    description: "Accuracy for predicting whether season 5 is a player's peak.",
+    description:
+      "Held-out accuracy for LDA, QDA, and random forest on peak-season labels.",
   },
   {
     src: "/projects/nba-player-prediction/classification-confusion.png",
     title: "Confusion matrix",
-    description: "Best classifier confusion matrix on the held-out test set.",
+    description:
+      "Random forest confusion matrix on the held-out test set (about 65% accuracy).",
   },
 ];
 
