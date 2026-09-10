@@ -55,7 +55,7 @@ const skillsWithIcons: { name: string; Icon: IconType; color: string }[] = [
 const stats = [
   { label: "Projects", value: "13+" },
   { label: "Core Tools", value: `${skillsWithIcons.length}+` },
-  { label: "Page AI Research Paper", value: "29" },
+  { label: "Page AI Research Paper", value: "30" },
 ];
 
 const containerVariants: Variants = {
