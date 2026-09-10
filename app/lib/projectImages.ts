@@ -225,7 +225,7 @@ export const MOVIE_REVIEWS_ANALYSIS_MEDIA: ProjectMediaSlide[] = [
     src: "/projects/movie-reviews-analysis/roberta-vs-vader.png",
     title: "RoBERTa vs VADER",
     description:
-      "Reported true positive and negative-class error rates. RoBERTa outperforms VADER.",
+      "True positive rate on the same review-classification task. RoBERTa 0.849 vs VADER 0.784.",
   },
   {
     src: "/projects/movie-reviews-analysis/distributions-adventure-comedy.png",
@@ -265,6 +265,12 @@ export const DRAKE_TIME_SERIES_MEDIA: ProjectMediaSlide[] = [
     title: "Forecast",
     description: "12-month ARMA forecast of upcoming trend values.",
   },
+  {
+    src: "/projects/drake-time-series/arma-vs-arima.png",
+    title: "ARMA vs ARIMA",
+    description:
+      "AIC and BIC for the hand-specified ARMA(1,0,1) vs auto.arima ARIMA(3,1,2).",
+  },
 ];
 
 export const NBA_SALARY_ANALYSIS_MEDIA: ProjectMediaSlide[] = [
@@ -277,6 +283,12 @@ export const NBA_SALARY_ANALYSIS_MEDIA: ProjectMediaSlide[] = [
     src: "/projects/nba-salary-analysis/advanced-stats.png",
     title: "Advanced stats",
     description: "PER, eFG%, and win shares vs average salary.",
+  },
+  {
+    src: "/projects/nba-salary-analysis/r2-comparison.png",
+    title: "Model R² comparison",
+    description:
+      "Untransformed-salary R². Direct multivariate model 0.446 vs advanced 0.388.",
   },
   {
     src: "/projects/nba-salary-analysis/salary-by-position.png",
@@ -295,6 +307,12 @@ export const SOCIOECONOMIC_CRIME_RATES_MEDIA: ProjectMediaSlide[] = [
     src: "/projects/socioeconomic-crime-rates/poverty-scatter.png",
     title: "Poverty scatter",
     description: "Total crimes vs percent below poverty level.",
+  },
+  {
+    src: "/projects/socioeconomic-crime-rates/model-selection.png",
+    title: "Model selection",
+    description:
+      "AIC and BIC across eight candidate regressions. Lower values are preferred.",
   },
   {
     src: "/projects/socioeconomic-crime-rates/fitted-vs-actual.png",
