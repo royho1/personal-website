@@ -36,11 +36,17 @@ import {
   type ProjectNavId,
 } from "./projectsFocusBus";
 import {
+  DRAKE_TIME_SERIES_MEDIA,
+  HEART_STROKE_RISK_PREDICTION_MEDIA,
   JOB_MARKET_ANALYTICS_DASHBOARD_MEDIA,
-  PROJECT_IMAGE_FILES,
+  MOVIE_REVIEWS_ANALYSIS_MEDIA,
+  NBA_PLAYER_PREDICTION_MEDIA,
+  NBA_SALARY_ANALYSIS_MEDIA,
   SF_RESTAURANT_SAFETY_MAP_MEDIA,
+  SIX_DEGREES_KEVIN_BACON_MEDIA,
+  SOCIOECONOMIC_CRIME_RATES_MEDIA,
   SOLSTICE_MEDIA,
-  projectMedia,
+  WINE_QUALITY_CLASSIFICATION_MEDIA,
   type ProjectMediaSlide,
 } from "../lib/projectImages";
 
@@ -142,10 +148,7 @@ const additionalProjects: AdditionalProject[] = [
     iconVariant: "heart",
     gradient:
       "from-rose-100 via-white to-orange-100 dark:from-rose-900 dark:via-rose-950 dark:to-orange-900",
-    ...projectMedia(
-      PROJECT_IMAGE_FILES.heartStrokeRiskPrediction,
-      "Screenshot of the heart stroke risk Streamlit app",
-    ),
+    media: HEART_STROKE_RISK_PREDICTION_MEDIA,
   },
   {
     name: "Portuguese Wine Type and Quality Prediction",
@@ -158,10 +161,7 @@ const additionalProjects: AdditionalProject[] = [
     iconAnimationDelay: 0.85,
     gradient:
       "from-purple-100 via-white to-rose-100 dark:from-purple-900 dark:via-purple-950 dark:to-rose-900",
-    ...projectMedia(
-      PROJECT_IMAGE_FILES.wineQualityClassification,
-      "Chart from the Portuguese wine classification project",
-    ),
+    media: WINE_QUALITY_CLASSIFICATION_MEDIA,
   },
   {
     name: "Stock Trading Algorithm",
@@ -172,10 +172,6 @@ const additionalProjects: AdditionalProject[] = [
     iconVariant: "trending",
     gradient:
       "from-emerald-100 via-white to-lime-100 dark:from-emerald-900 dark:via-emerald-950 dark:to-lime-900",
-    ...projectMedia(
-      PROJECT_IMAGE_FILES.stockTradingAlgorithm,
-      "Chart from the stock trading algorithm project",
-    ),
   },
   {
     name: "NBA Player Performance Prediction",
@@ -187,10 +183,7 @@ const additionalProjects: AdditionalProject[] = [
     iconVariant: "basketball",
     gradient:
       "from-orange-100 via-white to-amber-100 dark:from-orange-900 dark:via-orange-950 dark:to-amber-900",
-    ...projectMedia(
-      PROJECT_IMAGE_FILES.nbaPlayerPrediction,
-      "Model results from the NBA player performance project",
-    ),
+    media: NBA_PLAYER_PREDICTION_MEDIA,
   },
   {
     name: "Analyzing Movie Reviews Across Genres",
@@ -202,10 +195,7 @@ const additionalProjects: AdditionalProject[] = [
     iconVariant: "clapperboard",
     gradient:
       "from-slate-100 via-white to-sky-100 dark:from-slate-800 dark:via-slate-900 dark:to-sky-900",
-    ...projectMedia(
-      PROJECT_IMAGE_FILES.movieReviewsAnalysis,
-      "Visualization from the movie reviews analysis project",
-    ),
+    media: MOVIE_REVIEWS_ANALYSIS_MEDIA,
   },
   {
     name: "Drake Time Series Analysis",
@@ -218,10 +208,7 @@ const additionalProjects: AdditionalProject[] = [
     iconAnimationDelay: 0.5,
     gradient:
       "from-sky-100 via-white to-indigo-100 dark:from-sky-900 dark:via-sky-950 dark:to-indigo-900",
-    ...projectMedia(
-      PROJECT_IMAGE_FILES.drakeTimeSeries,
-      "Forecast plot from the Drake time series analysis",
-    ),
+    media: DRAKE_TIME_SERIES_MEDIA,
   },
   {
     name: "NBA Player Salary Analysis",
@@ -234,10 +221,7 @@ const additionalProjects: AdditionalProject[] = [
     iconAnimationDelay: 0.3,
     gradient:
       "from-amber-100 via-white to-orange-100 dark:from-amber-900 dark:via-amber-950 dark:to-orange-900",
-    ...projectMedia(
-      PROJECT_IMAGE_FILES.nbaSalaryAnalysis,
-      "ggplot output from the NBA salary analysis",
-    ),
+    media: NBA_SALARY_ANALYSIS_MEDIA,
   },
   {
     name: "Socioeconomic Predictors of Crime Rates",
@@ -250,10 +234,7 @@ const additionalProjects: AdditionalProject[] = [
     iconVariant: "scale",
     gradient:
       "from-stone-100 via-white to-sky-100 dark:from-stone-800 dark:via-stone-900 dark:to-sky-900",
-    ...projectMedia(
-      PROJECT_IMAGE_FILES.socioeconomicCrimeRates,
-      "Regression plot from the socioeconomic crime rates project",
-    ),
+    media: SOCIOECONOMIC_CRIME_RATES_MEDIA,
   },
   {
     name: "Graph-Based Shortest Path Analysis (Six Degrees of Kevin Bacon)",
@@ -265,10 +246,7 @@ const additionalProjects: AdditionalProject[] = [
     iconVariant: "network",
     gradient:
       "from-cyan-100 via-white to-teal-100 dark:from-cyan-900 dark:via-cyan-950 dark:to-teal-900",
-    ...projectMedia(
-      PROJECT_IMAGE_FILES.sixDegreesKevinBacon,
-      "Graph traversal output from the Kevin Bacon project",
-    ),
+    media: SIX_DEGREES_KEVIN_BACON_MEDIA,
   },
 ];
 
