@@ -3,12 +3,13 @@
  * then add the filename to `AVAILABLE_PROJECT_IMAGES` so cards pick them up.
  *
  * Preferred format: WebP (or JPEG/PNG). Aim ~1600px wide, 16:10 crop.
+ * Modal galleries use the `*_MEDIA` arrays below (not the single-file gate).
  */
 export const PROJECT_IMAGE_FILES = {
   sfRestaurantSafetyMap: "sf-restaurant-safety-map/citywide-map.jpg",
   jobMarketAnalyticsDashboard: "job-market-analytics-dashboard/overview.png",
   drowsyDriverDetection: "drowsy-driver-detection.webp",
-  solstice: "solstice/logo.png",
+  solstice: "solstice/cover.png",
   heartStrokeRiskPrediction: "heart-stroke-risk-prediction.webp",
   wineQualityClassification: "wine-quality-classification.webp",
   stockTradingAlgorithm: "stock-trading-algorithm.webp",
@@ -24,8 +25,8 @@ export type ProjectImageFile =
   (typeof PROJECT_IMAGE_FILES)[keyof typeof PROJECT_IMAGE_FILES];
 
 /**
- * Filenames that currently exist under `public/projects/`.
- * Keep this in sync when you add or remove screenshot files.
+ * Filenames that currently exist under `public/projects/` for optional
+ * single-image card fronts. Card fronts stay icon-only; modal slides use `*_MEDIA`.
  */
 export const AVAILABLE_PROJECT_IMAGES = new Set<ProjectImageFile>([
   // Card fronts stay icon-only. Screenshots live on `media` for the modal.
@@ -81,9 +82,9 @@ export const SF_RESTAURANT_SAFETY_MAP_MEDIA: ProjectMediaSlide[] = [
 
 export const SOLSTICE_MEDIA: ProjectMediaSlide[] = [
   {
-    src: "/projects/solstice/logo.png",
-    title: "Logo",
-    description: "Solstice logo. Orange sun mark with a white S.",
+    src: "/projects/solstice/cover.png",
+    title: "Solstice",
+    description: "Solstice Sneaker Analyzer brand cover.",
   },
 ];
 
@@ -124,5 +125,221 @@ export const JOB_MARKET_ANALYTICS_DASHBOARD_MEDIA: ProjectMediaSlide[] = [
     src: "/projects/job-market-analytics-dashboard/recommended-jobs.png",
     title: "Recommended Jobs",
     description: "Resume-matched postings ranked by TF-IDF similarity score.",
+  },
+];
+
+export const HEART_STROKE_RISK_PREDICTION_MEDIA: ProjectMediaSlide[] = [
+  {
+    src: "/projects/heart-stroke-risk-prediction/ui-predictor.png",
+    title: "Stroke Predictor",
+    description:
+      "Interactive Streamlit form where visitors enter health features and get a risk prediction.",
+  },
+  {
+    src: "/projects/heart-stroke-risk-prediction/model-metrics.png",
+    title: "Model metrics",
+    description:
+      "Held-out accuracy, precision, recall, and F1 for Balanced RF vs RF + SMOTE.",
+  },
+  {
+    src: "/projects/heart-stroke-risk-prediction/confusion-matrix.png",
+    title: "Confusion matrix",
+    description: "Test-set confusion matrix for the deployed RF + SMOTE model.",
+  },
+  {
+    src: "/projects/heart-stroke-risk-prediction/ui-graphs-heatmap.png",
+    title: "Graphs page",
+    description:
+      "Full Streamlit graphs view with the correlation heatmap selected.",
+  },
+  {
+    src: "/projects/heart-stroke-risk-prediction/plot-age-range.png",
+    title: "Age range chart",
+    description: "Stroke proportion across age groups from the healthcare dataset.",
+  },
+];
+
+export const WINE_QUALITY_CLASSIFICATION_MEDIA: ProjectMediaSlide[] = [
+  {
+    src: "/projects/wine-quality-classification/pca-separation.png",
+    title: "PCA separation",
+    description: "Red vs white wines separate clearly in PCA space.",
+  },
+  {
+    src: "/projects/wine-quality-classification/lda-separation.png",
+    title: "LDA separation",
+    description: "Linear discriminant projection for red vs white classification.",
+  },
+  {
+    src: "/projects/wine-quality-classification/roc-curve.png",
+    title: "ROC curve",
+    description: "Red vs white classification ROC with held-out AUC.",
+  },
+  {
+    src: "/projects/wine-quality-classification/roc-high-quality.png",
+    title: "High-quality ROC",
+    description:
+      "ROC for classifying highest-quality wines vs the rest (AUC 0.864).",
+  },
+  {
+    src: "/projects/wine-quality-classification/correlation-matrix.png",
+    title: "Feature correlations",
+    description: "Upper-triangle correlation matrix of wine chemical properties.",
+  },
+  {
+    src: "/projects/wine-quality-classification/quality-boxplot.png",
+    title: "Quality vs alcohol",
+    description: "Alcohol level distributions across wine quality ratings.",
+  },
+];
+
+export const NBA_PLAYER_PREDICTION_MEDIA: ProjectMediaSlide[] = [
+  {
+    src: "/projects/nba-player-prediction/model-comparison.png",
+    title: "Regression models",
+    description: "Held-out R² for OLS, Random Forest, and Gradient Boosting.",
+  },
+  {
+    src: "/projects/nba-player-prediction/predicted-vs-actual.png",
+    title: "Predicted vs actual",
+    description: "5th-season points predictions against the test set.",
+  },
+  {
+    src: "/projects/nba-player-prediction/classification-accuracy.png",
+    title: "Peak-season classification",
+    description:
+      "Held-out accuracy for LDA, QDA, and random forest on peak-season labels.",
+  },
+  {
+    src: "/projects/nba-player-prediction/classification-confusion.png",
+    title: "Confusion matrix",
+    description:
+      "Random forest confusion matrix on the held-out test set (about 65% accuracy).",
+  },
+];
+
+export const MOVIE_REVIEWS_ANALYSIS_MEDIA: ProjectMediaSlide[] = [
+  {
+    src: "/projects/movie-reviews-analysis/sentiment-by-genre.png",
+    title: "Sentiment by genre",
+    description: "Average professional vs user sentiment across five genres.",
+  },
+  {
+    src: "/projects/movie-reviews-analysis/roberta-vs-vader.png",
+    title: "RoBERTa vs VADER",
+    description:
+      "True positive rate on the same review-classification task. RoBERTa 0.849 vs VADER 0.784.",
+  },
+  {
+    src: "/projects/movie-reviews-analysis/distributions-adventure-comedy.png",
+    title: "Adventure and comedy",
+    description: "Sentiment distributions and rating correlations for two genres.",
+  },
+  {
+    src: "/projects/movie-reviews-analysis/distributions-crime-horror.png",
+    title: "Crime and horror",
+    description: "Sentiment distributions and rating correlations for two genres.",
+  },
+  {
+    src: "/projects/movie-reviews-analysis/distributions-superhero.png",
+    title: "Superhero",
+    description: "Sentiment distribution and rating correlation for superhero films.",
+  },
+];
+
+export const DRAKE_TIME_SERIES_MEDIA: ProjectMediaSlide[] = [
+  {
+    src: "/projects/drake-time-series/trend-series.png",
+    title: "Trend series",
+    description: "Drake Google Trends interest from 2010 onward.",
+  },
+  {
+    src: "/projects/drake-time-series/decomposition.png",
+    title: "Decomposition",
+    description: "Additive trend, seasonal, and remainder components.",
+  },
+  {
+    src: "/projects/drake-time-series/acf.png",
+    title: "ACF",
+    description: "Autocorrelation structure used to guide ARMA orders.",
+  },
+  {
+    src: "/projects/drake-time-series/forecast.png",
+    title: "Forecast",
+    description: "12-month ARMA forecast of upcoming trend values.",
+  },
+  {
+    src: "/projects/drake-time-series/arma-vs-arima.png",
+    title: "ARMA vs ARIMA",
+    description:
+      "AIC and BIC for the hand-specified ARMA(1,0,1) vs auto.arima ARIMA(3,1,2).",
+  },
+];
+
+export const NBA_SALARY_ANALYSIS_MEDIA: ProjectMediaSlide[] = [
+  {
+    src: "/projects/nba-salary-analysis/basic-stats.png",
+    title: "Basic stats",
+    description: "Points, rebounds, and assists vs average salary.",
+  },
+  {
+    src: "/projects/nba-salary-analysis/advanced-stats.png",
+    title: "Advanced stats",
+    description: "PER, eFG%, and win shares vs average salary.",
+  },
+  {
+    src: "/projects/nba-salary-analysis/r2-comparison.png",
+    title: "Model R² comparison",
+    description:
+      "Untransformed-salary R². Direct multivariate model 0.446 vs advanced 0.388.",
+  },
+  {
+    src: "/projects/nba-salary-analysis/salary-by-position.png",
+    title: "Salary by position",
+    description: "Average salary across the five standard NBA positions.",
+  },
+];
+
+export const SOCIOECONOMIC_CRIME_RATES_MEDIA: ProjectMediaSlide[] = [
+  {
+    src: "/projects/socioeconomic-crime-rates/pairs-plot.png",
+    title: "Pairs plot",
+    description: "Region 1 pairwise relationships across crimes and predictors.",
+  },
+  {
+    src: "/projects/socioeconomic-crime-rates/poverty-scatter.png",
+    title: "Poverty scatter",
+    description: "Total crimes vs percent below poverty level.",
+  },
+  {
+    src: "/projects/socioeconomic-crime-rates/model-selection.png",
+    title: "Model selection",
+    description:
+      "AIC and BIC across eight candidate regressions. Lower values are preferred.",
+  },
+  {
+    src: "/projects/socioeconomic-crime-rates/fitted-vs-actual.png",
+    title: "Fitted vs actual",
+    description: "Multiple regression fitted values against observed crimes.",
+  },
+  {
+    src: "/projects/socioeconomic-crime-rates/residual-diagnostics.png",
+    title: "Residual diagnostics",
+    description: "Standard lm diagnostic plots for the selected crime model.",
+  },
+];
+
+export const SIX_DEGREES_KEVIN_BACON_MEDIA: ProjectMediaSlide[] = [
+  {
+    src: "/projects/six-degrees-kevin-bacon/rdj-bfs-path.png",
+    title: "BFS path",
+    description:
+      "Shortest path from Robert Downey Jr. to Kevin Bacon via shared movies.",
+  },
+  {
+    src: "/projects/six-degrees-kevin-bacon/test-cases.png",
+    title: "Test cases",
+    description:
+      "Sanity checks for minimum paths, valid longer paths, and invalid inputs.",
   },
 ];

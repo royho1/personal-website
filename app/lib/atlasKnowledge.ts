@@ -177,7 +177,7 @@ Curated courses (name — code):
 - Tech: Python, scikit-learn, NLP, ETL
 
 **NBA Player Performance Prediction**
-- Predicted NBA players' fifth-season performance from their first four seasons using a 12,843-row, 22-feature dataset. Compared linear regression, decision trees, random forests, and gradient boosted trees for regression, and LDA, QDA, and tree ensembles for classification, with a tuned random forest reaching about 73% accuracy. Key finding: simple linear models outperformed the complex tree-based ones, showing the predictive strength of prior season performance and draft position.
+- Predicted NBA players' fifth-season performance from their first four seasons using a 12,843-row, 22-feature dataset. Compared linear regression, decision trees, random forests, and gradient boosted trees for regression, and LDA, QDA, and random forest for classification. On peak-season classification, random forest led the compared models at about 65% held-out accuracy. Key finding: simple linear models outperformed the complex tree-based ones for regression, showing the predictive strength of prior season performance and draft position.
 - Tech: Python, Random Forest, Gradient Boosting
 - GitHub: https://github.com/royho1/nba-player-prediction
 
