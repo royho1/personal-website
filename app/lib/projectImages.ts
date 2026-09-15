@@ -266,7 +266,8 @@ export const DRAKE_TIME_SERIES_MEDIA: ProjectMediaSlide[] = [
   {
     src: "/projects/drake-time-series/forecast.png",
     title: "Forecast",
-    description: "12-month ARMA forecast of upcoming trend values.",
+    description:
+      "12-month forecast from auto.arima ARIMA(3,1,2), the lower-AIC/BIC model.",
   },
   {
     src: "/projects/drake-time-series/arma-vs-arima.png",
