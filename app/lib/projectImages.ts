@@ -340,6 +340,6 @@ export const SIX_DEGREES_KEVIN_BACON_MEDIA: ProjectMediaSlide[] = [
     src: "/projects/six-degrees-kevin-bacon/test-cases.png",
     title: "Test cases",
     description:
-      "Sanity checks for minimum paths, valid longer paths, and invalid inputs.",
+      "Sanity checks for minimum paths, valid longer paths, invalid inputs, and a degree-2 Snoop Dogg path.",
   },
 ];
