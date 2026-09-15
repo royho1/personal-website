@@ -46,6 +46,7 @@ import {
   SIX_DEGREES_KEVIN_BACON_MEDIA,
   SOCIOECONOMIC_CRIME_RATES_MEDIA,
   SOLSTICE_MEDIA,
+  STOCK_TRADING_ALGORITHM_MEDIA,
   WINE_QUALITY_CLASSIFICATION_MEDIA,
   type ProjectMediaSlide,
 } from "../lib/projectImages";
@@ -172,6 +173,7 @@ const additionalProjects: AdditionalProject[] = [
     iconVariant: "trending",
     gradient:
       "from-emerald-100 via-white to-lime-100 dark:from-emerald-900 dark:via-emerald-950 dark:to-lime-900",
+    media: STOCK_TRADING_ALGORITHM_MEDIA,
   },
   {
     name: "NBA Player Performance Prediction",

@@ -343,3 +343,12 @@ export const SIX_DEGREES_KEVIN_BACON_MEDIA: ProjectMediaSlide[] = [
       "Sanity checks for minimum paths, valid longer paths, invalid inputs, and a degree-2 Snoop Dogg path.",
   },
 ];
+
+export const STOCK_TRADING_ALGORITHM_MEDIA: ProjectMediaSlide[] = [
+  {
+    src: "/projects/stock-trading-algorithm/local-demo-scan.png",
+    title: "Local demo scan",
+    description:
+      "Mini NASDAQ scanner on 15 tickers with relaxed RSI, then yfinance fundamentals enrichment.",
+  },
+];
