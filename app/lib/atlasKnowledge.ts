@@ -99,26 +99,65 @@ Curated courses (name — code):
 
 ## Experience
 
+The portfolio Experience section has two views. Featured Experience (default) shows JAIKE, TechSprint Innovators, and AISC. Full Timeline shows all roles below in this order.
+
 ### JAIKE (Journal of Artificial Intelligence and Knowledge Engineering)
 - Dates: January 2025 – Present
 - Title: Artificial Intelligence Researcher
+- Featured: yes
 - Conducted research on LLM-based automation covering API-driven system design, agent orchestration frameworks, retrieval-augmented generation (RAG), and a consolidated threat model spanning prompt injection, data leakage, and unintended action execution.
 - First-authored a 30-page, 36-source review with Dr. Biren (Brian) Prasad as co-author, introducing a two-axis framework for LLM agent autonomy and oversight, plus a cost model pricing oversight against productivity gains; revise-and-resubmit with publication recommended.
 - Served as a peer reviewer for JAIKE, evaluating submissions on retrieval methods in large language models, reasoning performance in extended tasks, and large-scale model architectures for methodological rigor and evaluation quality.
 
+### Legarza Sports and More - Director
+- Dates: June 2026 – August 2026
+- Location: San Francisco, CA | On-site
+- Title: Director
+- Featured: no (Full Timeline only)
+- Returned to Legarza Sports and More in 2026 in an expanded leadership role, overseeing daily camp operations and a team of coaches.
+- Managed program logistics and scheduling to maintain a safe, organized experience for campers and families.
+- Mentored coaching staff on camper engagement, safety protocols, and activity leadership across multiple sports groups.
+
 ### TechSprint Innovators
 - Dates: March 2024 – September 2025
 - Title: Head of Data Engineering
+- Featured: yes
 - Built a multi-factor stock screening model using fundamental, technical, and NLP-based sentiment features (FinBERT).
 - Developed and evaluated a supervised classification model in scikit-learn to predict price appreciation, performing feature selection, model tuning, and performance validation on historical market data.
 - Engineered and automated a daily ETL data pipeline (Python, yfinance, Alpaca API) running on a Raspberry Pi to filter equities, generate structured CSV outputs, and deliver real-time investment signals via Discord webhook.
 
+### Legarza Sports and More - Coach
+- Dates: June 2025 – August 2025
+- Location: San Francisco, CA | Part-time, On-site
+- Title: Coach
+- Featured: no (Full Timeline only)
+- Coached and mentored groups of 15-20 children ages 6-12 across basketball, soccer, football, and other team-oriented activities.
+- Adapted activities and communication in fast-paced camp settings to maintain camper safety, engagement, confidence, and inclusion.
+
 ### AISC (AI Student Collective)
 - Dates: September 2024 – April 2025
 - Title: General Member
+- Featured: yes
 - Built machine learning models for stroke risk prediction and real-time drowsy driver detection within structured project cycles.
 - Performed data preprocessing, feature engineering, model development, evaluation, and project presentations.
 - Worked within quarter-long sprint cycles with defined milestones, code reviews, and final project demos, following structured machine learning development workflows from ideation to deployment.
+
+### Hollister Co.
+- Dates: June 2023 – September 2023
+- Location: San Francisco, CA | Full-time, On-site
+- Title: Hollister Brand Representative
+- Featured: no (Full Timeline only)
+- Assisted customers with product selection, purchases, returns, and register transactions while supporting store sales goals.
+- Maintained merchandise displays and inventory through stocking, replenishment, organization, and ongoing store upkeep.
+
+### Youth Leadership Institute
+- Dates: August 2018 – June 2022
+- Location: San Francisco, CA | Internship, On-site
+- Title: Program Officer
+- Featured: no (Full Timeline only)
+- Managed the distribution of over $70,000 in San Francisco public funds annually among youth groups developing projects addressing social justice issues.
+- Worked with funded groups on financially sustainable projects spanning academic improvement, athletics, and rehabilitation programs that reached more than 8,000 youth citywide.
+- Compiled project, financial, demographic, and impact data into reports presented to a board of officers while supporting school outreach and brand marketing campaigns.
 
 ## Projects
 

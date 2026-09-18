@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import AboutSection from "./components/AboutSection";
 import AtlasDog from "./components/AtlasDog";
 import BackToTop from "./components/BackToTop";
 import ContactCard from "./components/ContactCard";
+import ExperienceSection from "./components/ExperienceSection";
 import FadeInSection from "./components/FadeInSection";
 import Footer from "./components/Footer";
 import HeroSection from "./components/HeroSection";
@@ -12,10 +12,6 @@ import HobbyGallery from "./components/HobbyGallery";
 import NavBar from "./components/NavBar";
 import ProjectsSection from "./components/ProjectsSection";
 import ResumeSection from "./components/ResumeSection";
-
-const jaikeLogoSrc = "/experience/JAIKE.png";
-const techSprintLogoSrc = "/experience/TechSprint.png";
-const aiscLogoSrc = "/experience/AISC.jpg";
 
 export default function Home() {
   return (
@@ -29,207 +25,7 @@ export default function Home() {
 
         <ProjectsSection />
 
-        <FadeInSection
-          as="section"
-          id="experience"
-          className="border-t border-sky-200/80 bg-sky-100 dark:border-slate-800 dark:bg-slate-900"
-          aria-labelledby="experience-heading"
-        >
-          <div className="mx-auto max-w-[820px] px-6 py-14 md:px-8 md:py-28">
-            <h2
-              id="experience-heading"
-              className="mx-auto block w-max max-w-full cursor-default text-center text-[28px] font-semibold tracking-tight text-sky-950 transition-[font-weight] duration-300 ease-out hover:font-bold dark:text-sky-100"
-            >
-              Experience
-            </h2>
-            <ol className="relative mt-10 space-y-8 overflow-hidden">
-              {/* JAIKE — current */}
-              <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
-                <article className="rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
-                  <div className="relative flex h-[100px] items-center gap-5 rounded-t-xl border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
-                    <span
-                      aria-hidden
-                      className="absolute left-[calc(-2.5rem)] top-1/2 z-10 h-[18px] w-[18px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-sky-600 bg-white max-sm:left-[calc(-1.5rem)] dark:border-sky-500 dark:bg-slate-900"
-                    />
-                    <span
-                      aria-hidden
-                      className="absolute left-[calc(-2.5rem)] top-1/2 z-0 w-0.5 -translate-x-1/2 bg-sky-200 max-sm:left-[calc(-1.5rem)] dark:bg-slate-700"
-                      style={{ bottom: "calc(-100vh)" }}
-                    />
-                    <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
-                      <Image
-                        src={jaikeLogoSrc}
-                        alt=""
-                        width={240}
-                        height={60}
-                        className="h-[60px] w-auto max-w-[min(240px,42vw)] shrink-0 object-contain max-sm:h-10"
-                      />
-                      <div className="min-w-0">
-                        <h3 className="text-[20px] font-medium tracking-tight text-slate-900 dark:text-sky-100">
-                          JAIKE
-                        </h3>
-                        <p className="text-[13px] leading-snug text-slate-500 dark:text-slate-400">
-                          Journal of Artificial Intelligence and Knowledge
-                          Engineering
-                        </p>
-                      </div>
-                    </div>
-                    <p className="shrink-0 text-right text-[12px] font-medium uppercase tracking-[0.05em] text-sky-600 max-sm:text-left dark:text-sky-400">
-                      January 2025 &ndash; Present
-                    </p>
-                  </div>
-                  <div className="rounded-b-xl p-6">
-                    <h4 className="mb-3.5 text-[15px] font-medium tracking-tight text-slate-900 dark:text-slate-100">
-                      Artificial Intelligence Researcher
-                    </h4>
-                    <ul className="list-disc space-y-2 pl-[1.15em] text-[14px] leading-[1.6] text-slate-900 marker:text-slate-900 dark:text-slate-300 dark:marker:text-slate-500">
-                      <li>
-                        Conducted research on LLM-based automation covering
-                        API-driven system design, agent orchestration frameworks,
-                        retrieval-augmented generation (RAG), and a consolidated
-                        threat model spanning prompt injection, data leakage, and
-                        unintended action execution.
-                      </li>
-                      <li>
-                        First-authored a 30-page, 36-source review with Dr.
-                        Biren (Brian) Prasad as co-author, introducing a two-axis
-                        framework for LLM agent autonomy and oversight, plus a
-                        cost model pricing oversight against productivity
-                        gains; revise-and-resubmit with publication recommended.
-                      </li>
-                      <li>
-                        Served as a peer reviewer for JAIKE, evaluating submissions
-                        on retrieval methods in large language models, reasoning
-                        performance in extended tasks, and large-scale model
-                        architectures for methodological rigor and evaluation
-                        quality.
-                      </li>
-                    </ul>
-                  </div>
-                </article>
-              </li>
-
-              {/* TechSprint */}
-              <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
-                <article className="rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
-                  <div className="relative flex h-[100px] items-center gap-5 rounded-t-xl border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
-                    <span
-                      aria-hidden
-                      className="absolute left-[calc(-2.5rem)] top-1/2 z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-600 max-sm:left-[calc(-1.5rem)] dark:bg-sky-500"
-                    />
-                    <span
-                      aria-hidden
-                      className="absolute left-[calc(-2.5rem)] top-1/2 z-0 w-0.5 -translate-x-1/2 bg-sky-200 max-sm:left-[calc(-1.5rem)] dark:bg-slate-700"
-                      style={{ bottom: "calc(-100vh)" }}
-                    />
-                    <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
-                      <span className="inline-flex shrink-0 rounded bg-white p-2">
-                        <Image
-                          src={techSprintLogoSrc}
-                          alt=""
-                          width={240}
-                          height={60}
-                          className="h-[60px] w-auto max-w-[min(240px,42vw)] shrink-0 object-contain max-sm:h-10"
-                        />
-                      </span>
-                      <div className="min-w-0">
-                        <h3 className="text-[20px] font-medium tracking-tight text-slate-900 dark:text-sky-100">
-                          TechSprint Innovators
-                        </h3>
-                      </div>
-                    </div>
-                    <p className="shrink-0 text-right text-[12px] font-medium uppercase tracking-[0.05em] text-sky-600 max-sm:text-left dark:text-sky-400">
-                      March 2024 &ndash; September 2025
-                    </p>
-                  </div>
-                  <div className="rounded-b-xl p-6">
-                    <h4 className="mb-3.5 text-[15px] font-medium tracking-tight text-slate-900 dark:text-slate-100">
-                      Head of Data Engineering
-                    </h4>
-                    <ul className="list-disc space-y-2 pl-[1.15em] text-[14px] leading-[1.6] text-slate-900 marker:text-slate-900 dark:text-slate-300 dark:marker:text-slate-500">
-                      <li>
-                        Built a multi-factor stock screening model using
-                        fundamental, technical, and NLP-based sentiment features
-                        (FinBERT).
-                      </li>
-                      <li>
-                        Developed and evaluated a supervised classification model
-                        in scikit-learn to predict price appreciation, performing
-                        feature selection, model tuning, and performance
-                        validation on historical market data.
-                      </li>
-                      <li>
-                        Engineered and automated a daily ETL data pipeline
-                        (Python, yfinance, Alpaca API) running on a Raspberry Pi
-                        to filter equities, generate structured CSV outputs, and
-                        deliver real-time investment signals via Discord webhook.
-                      </li>
-                    </ul>
-                  </div>
-                </article>
-              </li>
-
-              {/* AISC — last entry; cover hides line below this circle */}
-              <li className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]">
-                <article className="rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
-                  <div className="relative flex h-[100px] items-center gap-5 rounded-t-xl border-b border-sky-200 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:border-slate-700 dark:bg-sky-950/40">
-                    <span
-                      aria-hidden
-                      className="absolute left-[calc(-2.5rem)] top-1/2 z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-600 max-sm:left-[calc(-1.5rem)] dark:bg-sky-500"
-                    />
-                    <span
-                      aria-hidden
-                      className="absolute left-[calc(-2.5rem)] top-1/2 z-[1] w-0.5 -translate-x-1/2 bg-sky-100 max-sm:left-[calc(-1.5rem)] dark:bg-slate-900"
-                      style={{ bottom: "calc(-100vh)" }}
-                    />
-                    <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
-                      <Image
-                        src={aiscLogoSrc}
-                        alt=""
-                        width={240}
-                        height={60}
-                        className="h-[60px] w-auto max-w-[min(240px,42vw)] shrink-0 object-contain max-sm:h-10"
-                      />
-                      <div className="min-w-0">
-                        <h3 className="text-[20px] font-medium tracking-tight text-slate-900 dark:text-sky-100">
-                          AISC
-                        </h3>
-                        <p className="text-[13px] leading-snug text-slate-500 dark:text-slate-400">
-                          AI Student Collective
-                        </p>
-                      </div>
-                    </div>
-                    <p className="shrink-0 text-right text-[12px] font-medium uppercase tracking-[0.05em] text-sky-600 max-sm:text-left dark:text-sky-400">
-                      September 2024 &ndash; April 2025
-                    </p>
-                  </div>
-                  <div className="rounded-b-xl p-6">
-                    <h4 className="mb-3.5 text-[15px] font-medium tracking-tight text-slate-900 dark:text-slate-100">
-                      General Member
-                    </h4>
-                    <ul className="list-disc space-y-2 pl-[1.15em] text-[14px] leading-[1.6] text-slate-900 marker:text-slate-900 dark:text-slate-300 dark:marker:text-slate-500">
-                      <li>
-                        Built machine learning models for stroke risk prediction
-                        and real-time drowsy driver detection within structured
-                        project cycles.
-                      </li>
-                      <li>
-                        Performed data preprocessing, feature engineering, model
-                        development, evaluation, and project presentations.
-                      </li>
-                      <li>
-                        Worked within quarter-long sprint cycles with defined
-                        milestones, code reviews, and final project demos,
-                        following structured machine learning development
-                        workflows from ideation to deployment.
-                      </li>
-                    </ul>
-                  </div>
-                </article>
-              </li>
-            </ol>
-          </div>
-        </FadeInSection>
+        <ExperienceSection />
 
         <ResumeSection />
 
