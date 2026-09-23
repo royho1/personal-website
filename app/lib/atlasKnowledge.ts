@@ -10,7 +10,7 @@ export const ATLAS_KNOWLEDGE = `
 - UC Davis graduate with a B.S. in Statistical Data Science and a minor in Computer Science
 - Currently based in San Francisco, CA
 - Could see himself living in San Diego, New York, or Texas further down the road
-- Available immediately for full-time roles; actively looking for Analyst or Engineering-family roles (see Target Roles)
+- Available immediately for full-time roles; actively pursuing data, AI, and technical client-facing roles (see Target Roles)
 - LinkedIn-style positioning: Data Analyst | Aspiring Data Engineer | Python, SQL, Excel, Machine Learning | UC Davis Graduate — this is flavor for how he often presents himself, not a limit on what he will consider
 - Interested in building data-driven solutions using Python, R, SQL, and Excel
 - Also works with data pipelines, dashboards, and analytics tools
@@ -47,7 +47,7 @@ Roy ships end-to-end: data pipelines, ML models, and full-stack analytics apps (
 
 ## Current Focus
 
-Right now Roy is available immediately and looking for Analyst or Engineering-family roles (see Target Roles — list is loose; open to paths toward data science and AI). He is also finishing his first-authored AI research paper, building Solstice (sneaker resale analytics; in progress; see Projects), and maintaining this portfolio site.
+Right now Roy is available immediately and pursuing data, AI, and technical client-facing roles (see Target Roles; the list is loose and he is open to paths toward data science and AI). He is also finishing his first-authored AI research paper, building Solstice (sneaker resale analytics; in progress; see Projects), and maintaining this portfolio site.
 
 ## Education
 
