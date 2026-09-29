@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import {
   AnimatePresence,
@@ -46,15 +46,32 @@ const itemVariants: Variants = {
   },
 };
 
+type MarkerState = "future" | "done" | "active";
+
+const MARKER_STATE_CLASS: Record<MarkerState, string> = {
+  future: "bg-white dark:bg-slate-900",
+  done: "bg-sky-600 dark:bg-sky-500",
+  active:
+    "scale-125 bg-sky-600 shadow-[0_0_0_4px_rgba(2,132,199,0.18)] dark:bg-sky-500 dark:shadow-[0_0_0_4px_rgba(14,165,233,0.22)]",
+};
+
+/** Viewport height fraction used as the "reading line" for progress and active card. */
+const ANCHOR = 0.48;
+
 function ExperienceCard({
   entry,
-  isLast,
+  markerState,
+  markerRef,
+  cardRef,
   reduceMotion,
 }: {
   entry: ExperienceEntry;
-  isLast: boolean;
+  markerState: MarkerState;
+  markerRef: (el: HTMLSpanElement | null) => void;
+  cardRef: (el: HTMLElement | null) => void;
   reduceMotion: boolean | null;
 }) {
+  const isActive = markerState === "active";
   const showBody = Boolean(entry.title) || entry.bullets.length > 0;
   const logo = entry.logoSrc ? (
     <Image
@@ -72,7 +89,14 @@ function ExperienceCard({
       variants={reduceMotion ? undefined : itemVariants}
       className="relative pl-[calc(8px+2.5rem)] max-sm:pl-[calc(8px+1.5rem)]"
     >
-      <article className="rounded-xl border border-sky-200 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:border-slate-700 dark:bg-slate-800/70 dark:hover:border-slate-500">
+      <article
+        ref={cardRef}
+        className={`rounded-xl border bg-white transition-[border-color,box-shadow] duration-300 ease-out hover:border-sky-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] motion-reduce:transition-none dark:bg-slate-800/70 dark:hover:border-slate-500 ${
+          isActive
+            ? "border-sky-300 shadow-[0_4px_14px_rgba(2,132,199,0.10)] dark:border-sky-800"
+            : "border-sky-200 shadow-[0_1px_3px_rgba(0,0,0,0.06)] dark:border-slate-700"
+        }`}
+      >
         <div
           className={`relative flex h-[100px] items-center gap-5 bg-sky-50 px-6 max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4 dark:bg-sky-950/40 ${
             showBody
@@ -81,21 +105,9 @@ function ExperienceCard({
           }`}
         >
           <span
+            ref={markerRef}
             aria-hidden
-            className={
-              entry.current
-                ? "absolute left-[calc(-2.5rem)] top-1/2 z-10 h-[18px] w-[18px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-sky-600 bg-white max-sm:left-[calc(-1.5rem)] dark:border-sky-500 dark:bg-slate-900"
-                : "absolute left-[calc(-2.5rem)] top-1/2 z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-600 max-sm:left-[calc(-1.5rem)] dark:bg-sky-500"
-            }
-          />
-          <span
-            aria-hidden
-            className={
-              isLast
-                ? "absolute left-[calc(-2.5rem)] top-1/2 z-[1] w-0.5 -translate-x-1/2 bg-sky-100 max-sm:left-[calc(-1.5rem)] dark:bg-slate-900"
-                : "absolute left-[calc(-2.5rem)] top-1/2 z-0 w-0.5 -translate-x-1/2 bg-sky-200 max-sm:left-[calc(-1.5rem)] dark:bg-slate-700"
-            }
-            style={{ bottom: "calc(-100vh)" }}
+            className={`absolute left-[calc(-2.5rem)] top-1/2 z-10 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-sky-600 transition-all duration-300 ease-out motion-reduce:transition-none max-sm:left-[calc(-1.5rem)] dark:border-sky-500 ${MARKER_STATE_CLASS[markerState]}`}
           />
           <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
             {logo ? (
@@ -166,6 +178,86 @@ export default function ExperienceSection() {
   const [view, setView] = useState<ExperienceView>("featured");
   const reduceMotion = useReducedMotion();
   const visible = useMemo(() => experiencesForView(view), [view]);
+  const [timeline, setTimeline] = useState({ active: 0, filledThrough: 0 });
+  const [timelineEl, setTimelineEl] = useState<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLSpanElement | null>(null);
+  const progressRef = useRef<HTMLSpanElement | null>(null);
+  const markerRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
+
+  useEffect(() => {
+    const count = visible.length;
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const wrapper = timelineEl;
+      const track = trackRef.current;
+      const progressEl = progressRef.current;
+      const markers = markerRefs.current.slice(0, count);
+      const cards = cardRefs.current.slice(0, count);
+      if (!wrapper || !track || !progressEl || count === 0) return;
+      if (markers.some((m) => !m) || cards.some((c) => !c)) return;
+
+      const base = wrapper.getBoundingClientRect().top;
+      const anchorY = window.innerHeight * ANCHOR;
+      const centers = markers.map((m) => {
+        const r = m!.getBoundingClientRect();
+        return r.top + r.height / 2 - base;
+      });
+      const start = centers[0];
+      const length = Math.max(centers[count - 1] - start, 0);
+      const progress = Math.min(Math.max(anchorY - base - start, 0), length);
+
+      track.style.top = progressEl.style.top = `${start}px`;
+      track.style.height = progressEl.style.height = `${length}px`;
+      progressEl.style.transform = `scaleY(${length > 0 ? progress / length : 0})`;
+
+      let active = 0;
+      let best = Infinity;
+      cards.forEach((card, i) => {
+        const r = card!.getBoundingClientRect();
+        const distance = Math.abs(r.top + r.height / 2 - anchorY);
+        if (distance < best) {
+          best = distance;
+          active = i;
+        }
+      });
+
+      let reached = 0;
+      centers.forEach((c, i) => {
+        if (c - start <= progress + 0.5) reached = i;
+      });
+      const filledThrough = Math.max(active, reached);
+
+      setTimeline((prev) =>
+        prev.active === active && prev.filledThrough === filledThrough
+          ? prev
+          : { active, filledThrough },
+      );
+    };
+
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    if (!timelineEl) return;
+    schedule();
+    // Re-measure once the card entrance animation has settled.
+    const settle = window.setTimeout(schedule, 350);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    const resizeObserver = new ResizeObserver(schedule);
+    resizeObserver.observe(timelineEl);
+
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.clearTimeout(settle);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      resizeObserver.disconnect();
+    };
+  }, [visible, timelineEl]);
 
   return (
     <FadeInSection
@@ -228,26 +320,52 @@ export default function ExperienceSection() {
         </div>
 
         <AnimatePresence mode="wait" initial={false}>
-          <motion.ol
+          <motion.div
             key={view}
+            ref={setTimelineEl}
             id="experience-timeline"
             role="tabpanel"
             aria-labelledby={`experience-tab-${view}`}
-            className="relative mt-10 space-y-8 overflow-hidden"
+            className="relative mt-10"
             variants={reduceMotion ? undefined : listVariants}
             initial={reduceMotion ? false : "hidden"}
             animate="visible"
             exit={reduceMotion ? undefined : "exit"}
           >
-            {visible.map((entry: ExperienceEntry, index) => (
-              <ExperienceCard
-                key={entry.id}
-                entry={entry}
-                isLast={index === visible.length - 1}
-                reduceMotion={reduceMotion}
-              />
-            ))}
-          </motion.ol>
+            <span
+              ref={trackRef}
+              aria-hidden
+              className="absolute left-2 w-0.5 -translate-x-1/2 rounded-full bg-sky-200 dark:bg-slate-700"
+            />
+            <span
+              ref={progressRef}
+              aria-hidden
+              className="absolute left-2 w-0.5 origin-top -translate-x-1/2 rounded-full bg-sky-600 will-change-transform dark:bg-sky-500"
+              style={{ transform: "scaleY(0)" }}
+            />
+            <ol className="relative space-y-8">
+              {visible.map((entry: ExperienceEntry, index) => (
+                <ExperienceCard
+                  key={entry.id}
+                  entry={entry}
+                  markerState={
+                    index === timeline.active
+                      ? "active"
+                      : index <= timeline.filledThrough
+                        ? "done"
+                        : "future"
+                  }
+                  markerRef={(el) => {
+                    markerRefs.current[index] = el;
+                  }}
+                  cardRef={(el) => {
+                    cardRefs.current[index] = el;
+                  }}
+                  reduceMotion={reduceMotion}
+                />
+              ))}
+            </ol>
+          </motion.div>
         </AnimatePresence>
       </div>
     </FadeInSection>

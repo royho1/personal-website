@@ -29,6 +29,11 @@ Durable agent memory for this repository. Not a README. Capture only what future
 - **Why it matters:** Dark mode looked colorless even though light mode had distinct card colors.
 - **Implication:** When adding a project, include both light and dark gradient utilities in the same `gradient` field.
 
+### 2026-09-29 — Experience timeline is scroll-driven
+- **Learning:** `ExperienceSection.tsx` renders one shared track + one progress line on the `#experience-timeline` wrapper, positioned from measured marker centers. The old per-card `bottom: -100vh` line segments (with the last one masked in the section bg color) are gone. Active card = card midpoint closest to 48% of viewport height (`ANCHOR`); progress writes `scaleY` straight to the DOM, and React state only updates when the active/filled index changes.
+- **Why it matters:** Re-adding per-card line spans will double-draw the line. The wrapper is keyed by tab view (AnimatePresence), so it is tracked with a callback ref so the effect re-binds on tab switch.
+- **Implication:** Keep markers/cards wired through `markerRef`/`cardRef`; the site uses `scroll-behavior: smooth`, so wait for the scroll to settle when testing states programmatically.
+
 ## Nuances and gotchas
 
 - Workspace path for agents should be `.../personal-website/project`, not the parent folder.
