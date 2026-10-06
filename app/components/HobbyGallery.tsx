@@ -2,7 +2,7 @@
 
 import { type RefObject, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 
 /** Add hobby images under `public/hobbies/` and list them here (width/height = pixel size of each file). */
 const hobbyPhotos: {
@@ -187,80 +187,89 @@ function Polaroid({
   // justify-around puts each item's center at (i + 0.5) / n of the row width.
   const centerX = (rowPosition + 0.5) / rowLength;
   const marginTop = wireY(centerX, sag) + CLIP_GRIP_OFFSET;
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  // Observe a wrapper with no transforms so the entrance drop can't move the
+  // observed box back and forth across the visibility threshold.
+  const inView = useInView(wrapperRef, { once: true, amount: 0.15 });
 
+  // Each layer owns one motion so they never interrupt each other:
+  // entrance (opacity, y) > sway (rotate loop) > hover (relative rotate, lift).
   return (
-    <motion.div
+    <div
+      ref={wrapperRef}
       className={`relative z-10 ${widthClass}`}
-      style={{ marginTop, transformOrigin: "50% 0%" }}
-      initial="hidden"
-      whileInView="visible"
-      // once:false so the prints drop in again every time they re-enter the
-      // viewport, including when scrolling back up.
-      viewport={{ once: false, amount: 0.3 }}
-      variants={{
-        hidden: prefersReducedMotion
-          ? { opacity: 0 }
-          : { opacity: 0, scale: 0.9, y: -48 },
-        visible: prefersReducedMotion
-          ? { opacity: 1 }
-          : { opacity: 1, scale: 1, y: 0 },
-      }}
-      transition={
-        prefersReducedMotion
-          ? { duration: 0.3 }
-          : {
-              type: "spring",
-              stiffness: 260,
-              damping: 18,
-              delay: rowPosition * 0.08,
-            }
-      }
+      style={{ marginTop }}
     >
-      <motion.figure
-        className="relative flex flex-col rounded-md bg-white p-3 shadow-[0_6px_16px_rgba(15,23,42,0.12)] transition-shadow duration-300 hover:shadow-[0_14px_32px_rgba(15,23,42,0.22)] dark:bg-stone-100"
-        style={{ transformOrigin: "50% 0%" }}
-        initial={{ rotate: tilt }}
-        animate={
-          prefersReducedMotion
-            ? { rotate: tilt }
-            : {
-                rotate: [tilt, tilt + SWAY_DEG, tilt, tilt - SWAY_DEG, tilt],
-              }
-        }
+      <motion.div
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={{
+          hidden: prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -48 },
+          visible: prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 },
+        }}
         transition={
           prefersReducedMotion
-            ? undefined
+            ? { duration: 0.3 }
             : {
-                duration: 5 + (index % 3) * 0.8,
-                delay: index * 0.45,
-                repeat: Infinity,
-                ease: "easeInOut",
+                type: "spring",
+                stiffness: 260,
+                damping: 18,
+                delay: rowPosition * 0.08,
               }
         }
-        whileHover={prefersReducedMotion ? undefined : { rotate: 0, y: -6 }}
       >
-        <span
-          aria-hidden="true"
-          className="absolute -top-3.5 left-1/2 h-6 w-3 -translate-x-1/2 rounded-[3px] border border-[#8b5a2b] bg-[#d6b07f] shadow-[0_1px_2px_rgba(0,0,0,0.25)]"
+        <motion.div
+          style={{ transformOrigin: "50% 0%", willChange: "transform" }}
+          initial={{ rotate: prefersReducedMotion ? tilt : tilt - SWAY_DEG }}
+          animate={{ rotate: prefersReducedMotion ? tilt : tilt + SWAY_DEG }}
+          transition={
+            prefersReducedMotion
+              ? undefined
+              : {
+                  // Half of the old full-cycle duration, since mirror plays
+                  // each direction as its own leg.
+                  duration: 2.5 + (index % 3) * 0.4,
+                  delay: index * 0.45,
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  ease: "easeInOut",
+                }
+          }
         >
-          <span className="absolute inset-x-0 top-[40%] h-px bg-[#8b5a2b]/70" />
-        </span>
-        <Image
-          src={photo.src}
-          alt={photo.alt}
-          width={photo.width}
-          height={photo.height}
-          className="block h-auto w-full rounded-sm object-contain"
-          sizes="(max-width: 640px) 72vw, (max-width: 1024px) 40vw, 280px"
-        />
-        <figcaption
-          className="px-2 pb-5 pt-4 text-center font-handwriting text-[1.47rem] font-semibold tracking-wide text-[#262626]"
-          style={{ transform: `rotate(${captionTilt}deg)` }}
-        >
-          {photo.caption}
-        </figcaption>
-      </motion.figure>
-    </motion.div>
+          <motion.div
+            className="group"
+            style={{ transformOrigin: "50% 0%", willChange: "transform" }}
+            // Counter-rotate by the base tilt so it composes with the sway
+            // layer and settles near level wherever the sway currently is.
+            whileHover={prefersReducedMotion ? undefined : { rotate: -tilt, y: -6 }}
+            transition={{ type: "spring", stiffness: 180, damping: 22 }}
+          >
+            <figure className="relative flex flex-col rounded-md bg-white p-3 shadow-[0_6px_16px_rgba(15,23,42,0.12)] transition-shadow duration-300 group-hover:shadow-[0_14px_32px_rgba(15,23,42,0.22)] dark:bg-stone-100">
+              <span
+                aria-hidden="true"
+                className="absolute -top-3.5 left-1/2 h-6 w-3 -translate-x-1/2 rounded-[3px] border border-[#8b5a2b] bg-[#d6b07f] shadow-[0_1px_2px_rgba(0,0,0,0.25)]"
+              >
+                <span className="absolute inset-x-0 top-[40%] h-px bg-[#8b5a2b]/70" />
+              </span>
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                width={photo.width}
+                height={photo.height}
+                className="block h-auto w-full rounded-sm object-contain"
+                sizes="(max-width: 640px) 72vw, (max-width: 1024px) 40vw, 280px"
+              />
+              <figcaption
+                className="px-2 pb-5 pt-4 text-center font-handwriting text-[1.47rem] font-semibold tracking-wide text-[#262626]"
+                style={{ transform: `rotate(${captionTilt}deg)` }}
+              >
+                {photo.caption}
+              </figcaption>
+            </figure>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </div>
   );
 }
 
