@@ -11,6 +11,7 @@ import HeroSection from "./components/HeroSection";
 import HobbyGallery from "./components/HobbyGallery";
 import NavBar from "./components/NavBar";
 import ProjectsSection from "./components/ProjectsSection";
+import RecentMusic from "./components/RecentMusic";
 import ResumeSection from "./components/ResumeSection";
 
 export default function Home() {
@@ -48,6 +49,7 @@ export default function Home() {
               music.
             </p>
             <HobbyGallery />
+            <RecentMusic />
           </div>
         </FadeInSection>
 
