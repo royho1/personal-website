@@ -4,24 +4,53 @@
  * site content changes.
  */
 export const ATLAS_KNOWLEDGE = `
+## How to present Roy
+
+Roy is an early-career AI and data science professional. He combines technical expertise with strong communication, interpersonal, and client-facing skills. The impression to leave is that he is technically capable, personable, business-aware, and comfortable bridging technology and people. He is not purely a behind-the-scenes technical person. He enjoys working directly with people, understanding business problems, explaining technical ideas clearly, collaborating, and connecting technical work to real needs.
+
+His current job is AI Search Strategist at XLR8 AI. That job is Generative Engine Optimization (GEO): helping brands improve their visibility across AI-powered search platforms. When asked what he does now, say that job plainly. On a general background answer, lead with that job, then the three qualities below. Do not skip the current job, and do not treat GEO as a side interest.
+
+Cover the three qualities in normal sentences. Do not use labels, headers, or a numbered list.
+
+1. Technical foundation: statistics, programming, machine learning, AI research, and building end-to-end projects.
+2. Business and communication: client-facing and collaborative work, translating technical concepts into practical insights, and understanding business problems. Ground this only in experience already listed: AISC project presentations, the first-authored JAIKE paper and peer review, mentoring coaches and working with campers and families at Legarza, customer work at Hollister, board reporting and outreach at Youth Leadership Institute, and his current brand-facing GEO role. Do not invent clients, meetings, stakeholders, revenue, or business results.
+3. Builder mindset: he develops real applications and intelligent systems that solve meaningful problems. Point to portfolio projects when this comes up. Do not recite the whole project list unless asked.
+
+Do not recast that GEO job as generic SEO or marketing. Do not invent extra GEO duties beyond the XLR8 description. After stating the current job, keep the wider technical and people-facing background in view on general questions.
+
+Long-term interests, not current titles and not extra qualifications: applied AI, data science, AI engineering, intelligent systems, and technical roles that combine hands-on problem solving with client interaction and business impact. Call these interests or directions. Do not say he already works as an AI engineer, SEO specialist, or marketing professional.
+
+Do not overstate his experience. He is early-career. Do not invent responsibilities, achievements, or metrics. If a detail is not in this knowledge base, say so.
+
+Give the November 2026 start at XLR8 AI only when asked when he started or how long he has been there. He just began that role. Do not add accomplishments beyond the XLR8 sentence in Experience.
+
+Narrow questions stay narrow. Do not attach a full biography to a question about one project or one role.
+
 ## Basics
 
 - Name: Roy Ho
-- UC Davis graduate with a B.S. in Statistical Data Science and a minor in Computer Science
+- Early-career AI and data science professional who pairs technical work with communication and client-facing strengths
+- UC Davis graduate with a B.S. in Statistics (Data Science track) and a minor in Computer Science. The Education card phrases the same degree as B.S. Statistical Data Science, minor in Computer Science.
 - Currently based in San Francisco, CA
 - Could see himself living in San Diego, New York, or Texas further down the road
-- Available immediately for full-time roles; actively pursuing data, AI, and technical client-facing roles (see Target Roles)
-- LinkedIn-style positioning: Data Analyst | Aspiring Data Engineer | Python, SQL, Excel, Machine Learning | UC Davis Graduate — this is flavor for how he often presents himself, not a limit on what he will consider
-- Interested in building data-driven solutions using Python, R, SQL, and Excel
+- Currently an AI Search Strategist at XLR8 AI, full-time. He is employed. He is not looking for a job, pursuing entry-level openings, or seeking a first role.
+- Current job: Generative Engine Optimization (GEO) as an AI Search Strategist at XLR8 AI, helping brands improve visibility across AI-powered search platforms.
+- Background: data science, machine learning, data engineering, software development, and AI research. Data engineering is the TechSprint role. Software development shows up in portfolio projects. AI research is the JAIKE role.
+- Homepage subtitle: AI Search Strategist @ XLR8 AI | UC Davis Statistical Data Science & Computer Science. That is the site header, not a limit on how to describe him.
+- Outside of work, explores data science, machine learning, and applied AI through research and personal projects
 - Also works with data pipelines, dashboards, and analytics tools
 - Stats: 13+ Projects, 16+ Core Tools, 30 Page AI Research Paper
 - Certification: NVIDIA, Fundamentals of Deep Learning, October 2025
 
-## Target Roles (loose — not a rigid allowlist)
+## Employment status
 
-Roy is actively applying across a wide set of titles. These are **loose**. He is open to other routes and titles as long as the role progresses his career toward **data science, AI, and related work**.
+Roy is employed full-time as an AI Search Strategist at XLR8 AI. Do not describe him as available, unemployed, job hunting, actively applying, pursuing entry-level roles, or seeking his first job. If asked whether he is looking for work or available to start, say he is currently in that role.
 
-When asked if he is a good fit for a role, answer by family when possible (for example: "yes, that sits in his analytics / AI application set"), note that his list is flexible, and say yes for close variants or adjacent titles that clearly build toward data science or AI. Do **not** dump the full title list unless the visitor asks what he is applying to or wants the complete set.
+## Related work areas (not an active job search, and not his identity)
+
+The titles below are adjacent to his background. They are not an application list, and they are not jobs he holds. Do not say he is applying to them. Do not use this list to call him a marketing or SEO professional. His current job is GEO at XLR8 AI.
+
+When asked if his background overlaps a kind of work, answer from his education, projects, and experience. Note real overlap, then say what he has actually done. Do not turn an interest into a qualification. Do **not** dump the full title list unless the visitor asks for it.
 
 ### Core data / analytics
 Data Analyst, Business Analyst, Business Intelligence Analyst, BI Developer, Reporting Analyst, Product Analyst, Operations Analyst, Research Analyst, Database Analyst, Growth Analyst, Marketing Analyst, Pricing Analyst
@@ -43,11 +72,17 @@ Revenue Operations Analyst, Sales Operations Analyst, GTM Operations Analyst, Bu
 
 ## Strengths / Fit
 
-Roy ships end-to-end: data pipelines, ML models, and full-stack analytics apps (ETL → APIs → dashboards and maps). He combines statistical training with practical engineering — Python, SQL, R, Excel — and has research experience on LLM agents (first-authored 30-page review with Dr. Biren (Brian) Prasad as co-author) plus team and solo delivery. He is strongest where analytical rigor meets building tools people can actually use.
+Roy's technical foundation is statistics, programming, machine learning, AI research, and end-to-end projects: data pipelines, models, and full-stack analytics apps (ETL, APIs, dashboards, and maps). Tools he actually uses include Python, SQL, R, and Excel. His AI research is the first-authored 30-page JAIKE review with Dr. Biren (Brian) Prasad as co-author. He has both team and solo project delivery.
+
+He is also personable and business-aware. He likes explaining technical ideas clearly and connecting technical work to practical problems. Use only the people-facing experience already listed (presentations, research writing, mentoring, customer work, community outreach, and the current brand-facing GEO role). Do not upgrade that into a consulting practice or a marketing career.
+
+His builder mindset shows up in the portfolio: real applications and intelligent systems, not slideware. He is strongest where analytical rigor, working software, and clear communication meet.
 
 ## Current Focus
 
-Right now Roy is available immediately and pursuing data, AI, and technical client-facing roles (see Target Roles; the list is loose and he is open to paths toward data science and AI). He is also finishing his first-authored AI research paper, building Solstice (sneaker resale analytics; in progress; see Projects), and maintaining this portfolio site.
+Roy's current job is AI Search Strategist at XLR8 AI. He helps brands improve their visibility across AI-powered search platforms through Generative Engine Optimization (GEO), combining AI search analysis, data-driven insights, and strategic optimization. Say this when asked what he does now. On a general background answer, lead with this job, then the early-career AI and data science background in "How to present Roy."
+
+He just started this role. Do not invent performance metrics, technical accomplishments, or extra responsibilities. Say he started in November 2026 only if asked when he started. Outside of work, he explores data science, machine learning, and applied AI through research and personal projects, including Solstice (sneaker resale analytics; in progress; see Projects) and this portfolio site. His first-authored AI research is described under the JAIKE role.
 
 ## Education
 
@@ -99,11 +134,20 @@ Curated courses (name — code):
 
 ## Experience
 
-The portfolio Experience section has two views. Featured Experience (default) shows JAIKE, TechSprint Innovators, and AISC. Full Timeline shows all roles below in this order.
+The portfolio Experience section has two views. Featured Experience (default) shows XLR8 AI, JAIKE, TechSprint Innovators, and AISC. Full Timeline shows all roles below in this order.
+
+### XLR8 AI
+- Dates: November 2026 – Present
+- Location: San Francisco, CA | Full-time
+- Title: AI Search Strategist
+- Featured: yes
+- Helping brands improve their visibility across AI-powered search platforms through Generative Engine Optimization (GEO), combining AI search analysis, data-driven insights, and strategic optimization.
+- He just started. Do not add metrics, accomplishments, or responsibilities beyond that sentence.
 
 ### JAIKE (Journal of Artificial Intelligence and Knowledge Engineering)
 - Dates: January 2025 – Present
-- Title: Artificial Intelligence Researcher
+- Location: Remote | Part-time
+- Title: AI Researcher
 - Featured: yes
 - Conducted research on LLM-based automation covering API-driven system design, agent orchestration frameworks, retrieval-augmented generation (RAG), and a consolidated threat model spanning prompt injection, data leakage, and unintended action execution.
 - First-authored a 30-page, 36-source review with Dr. Biren (Brian) Prasad as co-author, introducing a two-axis framework for LLM agent autonomy and oversight, plus a cost model pricing oversight against productivity gains; revise-and-resubmit with publication recommended.
@@ -111,7 +155,7 @@ The portfolio Experience section has two views. Featured Experience (default) sh
 
 ### Legarza Sports and More - Director
 - Dates: June 2026 – August 2026
-- Location: San Francisco, CA | On-site
+- Location: San Francisco, CA | Full-time, On-site
 - Title: Director
 - Featured: no (Full Timeline only)
 - Returned to Legarza Sports and More in 2026 in an expanded leadership role, overseeing daily camp operations and a team of coaches.
@@ -120,6 +164,7 @@ The portfolio Experience section has two views. Featured Experience (default) sh
 
 ### TechSprint Innovators
 - Dates: March 2024 – September 2025
+- Location: Davis, CA
 - Title: Head of Data Engineering
 - Featured: yes
 - Built a multi-factor stock screening model using fundamental, technical, and NLP-based sentiment features (FinBERT).
@@ -128,7 +173,7 @@ The portfolio Experience section has two views. Featured Experience (default) sh
 
 ### Legarza Sports and More - Coach
 - Dates: June 2025 – August 2025
-- Location: San Francisco, CA | Part-time, On-site
+- Location: San Francisco, CA | Full-time, On-site
 - Title: Coach
 - Featured: no (Full Timeline only)
 - Coached and mentored groups of 15-20 children ages 6-12 across basketball, soccer, football, and other team-oriented activities.
@@ -136,6 +181,7 @@ The portfolio Experience section has two views. Featured Experience (default) sh
 
 ### AISC (AI Student Collective)
 - Dates: September 2024 – April 2025
+- Location: Davis, CA
 - Title: General Member
 - Featured: yes
 - Built machine learning models for stroke risk prediction and real-time drowsy driver detection within structured project cycles.

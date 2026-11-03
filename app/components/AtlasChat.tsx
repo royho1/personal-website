@@ -12,7 +12,7 @@ type ChatMessage = { id: string; role: "user" | "assistant"; content: string };
 const SUGGESTIONS = [
   "Walk me through the SF Restaurant Safety Map.",
   "What has Roy built with Python and SQL?",
-  "What kind of roles is Roy targeting?",
+  "How would you describe Roy's background?",
   "What does Roy do outside of work?",
 ] as const;
 

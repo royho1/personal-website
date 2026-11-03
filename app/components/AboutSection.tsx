@@ -104,22 +104,43 @@ export default function AboutSection() {
               className="space-y-6 text-base leading-relaxed text-slate-900 md:text-lg dark:text-slate-200"
             >
               <p>
-                Hi, my name is Roy Ho, and I am a recent UC Davis graduate with
-                a Bachelor&apos;s degree in{" "}
-                <span className="font-semibold text-sky-800 dark:text-sky-300">
-                  Statistical Data Science
-                </span>{" "}
-                and a minor in{" "}
-                <span className="font-semibold text-sky-800 dark:text-sky-300">
-                  Computer Science
-                </span>
-                .
+                Hi, I&apos;m Roy, a UC Davis graduate with a B.S. in Statistics (<span className="font-semibold text-sky-800 dark:text-sky-300">Data Science</span> track) and a minor in <span className="font-semibold text-sky-800 dark:text-sky-300">Computer Science</span>.
               </p>
               <p>
-                I&apos;m interested in building data-driven solutions using
-                Python, R, SQL, and Excel. My background sits at the
-                intersection of statistics and software, and I&apos;m looking
-                for technical roles where I can apply both.
+                I&apos;m currently an AI Search Strategist at{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  XLR8 AI
+                </span>
+                , where I focus on{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  Generative Engine Optimization
+                </span>{" "}
+                (GEO), helping brands and businesses improve their visibility
+                across AI-powered search platforms.
+              </p>
+              <p>
+                My technical background spans data science,{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  machine learning
+                </span>
+                , and software development, with hands-on experience building
+                data pipelines, analytical tools, and{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  full-stack applications
+                </span>
+                . I&apos;ve also conducted first-authored research exploring{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  LLM agent autonomy
+                </span>
+                , human oversight, and AI reliability.
+              </p>
+              <p>
+                I&apos;m particularly interested in{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  applied AI
+                </span>
+                , data science, and building technical solutions that solve
+                real-world problems.
               </p>
             </motion.div>
 
