@@ -24,25 +24,39 @@ export type ExperienceEntry = {
 
 /**
  * Full Timeline order (index 0 first):
- * 1. JAIKE
- * 2. Legarza Sports and More - Director
- * 3. TechSprint Innovators
- * 4. Legarza Sports and More - Coach
- * 5. AI Student Collective
- * 6. Hollister Co.
- * 7. Youth Leadership Institute
+ * 1. XLR8 AI
+ * 2. JAIKE
+ * 3. Legarza Sports and More - Director
+ * 4. TechSprint Innovators
+ * 5. Legarza Sports and More - Coach
+ * 6. AI Student Collective
+ * 7. Hollister Co.
+ * 8. Youth Leadership Institute
  *
  * Featured view keeps this relative order among `featured: true` entries.
  */
 export const experiences: ExperienceEntry[] = [
   {
+    id: "xlr8",
+    company: "XLR8 AI",
+    dates: "November 2026 – Present",
+    location: "San Francisco, CA | Full-time",
+    title: "AI Search Strategist",
+    logoSrc: "/experience/XLR8.jpg",
+    current: true,
+    featured: true,
+    bullets: [
+      "Helping brands improve their visibility across AI-powered search platforms through Generative Engine Optimization (GEO), combining AI search analysis, data-driven insights, and strategic optimization.",
+    ],
+  },
+  {
     id: "jaike",
     company: "JAIKE",
     companyDetail: "Journal of Artificial Intelligence and Knowledge Engineering",
     dates: "January 2025 – Present",
-    title: "Artificial Intelligence Researcher",
+    location: "Remote | Part-time",
+    title: "AI Researcher",
     logoSrc: "/experience/JAIKE.png",
-    current: true,
     featured: true,
     bullets: [
       "Conducted research on LLM-based automation covering API-driven system design, agent orchestration frameworks, retrieval-augmented generation (RAG), and a consolidated threat model spanning prompt injection, data leakage, and unintended action execution.",
@@ -54,7 +68,7 @@ export const experiences: ExperienceEntry[] = [
     id: "legarza-director",
     company: "Legarza Sports and More",
     dates: "June 2026 – August 2026",
-    location: "San Francisco, CA | On-site",
+    location: "San Francisco, CA | Full-time, On-site",
     title: "Director",
     logoSrc: "/experience/Legarza.jpg",
     featured: false,
@@ -68,6 +82,7 @@ export const experiences: ExperienceEntry[] = [
     id: "techsprint",
     company: "TechSprint Innovators",
     dates: "March 2024 – September 2025",
+    location: "Davis, CA",
     title: "Head of Data Engineering",
     logoSrc: "/experience/TechSprint.png",
     logoOnWhite: true,
@@ -82,7 +97,7 @@ export const experiences: ExperienceEntry[] = [
     id: "legarza-coach",
     company: "Legarza Sports and More",
     dates: "June 2025 – August 2025",
-    location: "San Francisco, CA | Part-time, On-site",
+    location: "San Francisco, CA | Full-time, On-site",
     title: "Coach",
     logoSrc: "/experience/Legarza.jpg",
     featured: false,
@@ -96,6 +111,7 @@ export const experiences: ExperienceEntry[] = [
     company: "AISC",
     companyDetail: "AI Student Collective",
     dates: "September 2024 – April 2025",
+    location: "Davis, CA",
     title: "General Member",
     logoSrc: "/experience/AISC.jpg",
     featured: true,

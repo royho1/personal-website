@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaChevronDown, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, type Variants } from "framer-motion";
-import { Clock, Mail, MapPin } from "lucide-react";
+import { Briefcase, Mail, MapPin } from "lucide-react";
 import AtlasDog from "./AtlasDog";
 
 const profileImageSrc = "/picture.jpeg";
@@ -78,8 +78,8 @@ export default function HeroSection() {
               Roy Ho
             </h1>
             <p className="text-[17px] leading-snug text-sky-800/90 dark:text-sky-300">
-              UC Davis Graduate | B.S. Statistical Data Science, Minor in
-              Computer Science
+              AI Search Strategist @ XLR8 AI | UC Davis Statistical Data
+              Science & Computer Science
             </p>
           </motion.div>
 
@@ -94,14 +94,16 @@ export default function HeroSection() {
             className="max-w-[36rem] rounded-lg border-l-4 border-sky-600 bg-sky-50/95 px-4 py-3 shadow-sm shadow-sky-900/5 ring-1 ring-sky-200/70 dark:border-sky-400 dark:bg-slate-800/90 dark:shadow-black/20 dark:ring-slate-600/50"
           >
             <p className="text-[15px] font-medium leading-snug text-slate-900 dark:text-slate-100">
-              <Clock
+              <Briefcase
                 className="mr-2 inline-block h-[1em] w-[1em] align-[-0.125em] text-sky-700 dark:text-sky-300"
                 strokeWidth={2}
                 aria-hidden
               />
-              Currently pursuing data, AI, and technical client-facing roles
-              while finishing a first-authored AI research paper and building
-              side projects.
+              Currently an AI Search Strategist at XLR8 AI, focusing on
+              Generative Engine Optimization (GEO) to help brands improve their
+              visibility across AI-powered search platforms. Outside of work, I
+              explore data science, machine learning, and applied AI through
+              research and personal projects.
             </p>
           </motion.div>
 

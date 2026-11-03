@@ -21,7 +21,7 @@ Sections: Hero • About • Projects • Experience • Resume • Hobbies • 
 
 - Two-column layout: profile photo with soft sky-blue halo on the left; identity, status, contact, and actions on the right
 - Staggered Framer Motion entrance for name, degree line, status callout, contact/socials, and CTAs
-- Status callout describing current job search and research focus
+- Status callout describing his current AI Search Strategist role at XLR8 AI
 - Contact details (email, San Francisco location) plus LinkedIn and GitHub icons
 - Primary CTAs: **View Projects** and **Resume**, plus an **Ask Atlas!** handwriting-style link with the Atlas dog mark
 - "Scroll to explore" chevron into the About section
@@ -50,6 +50,7 @@ Sections: Hero • About • Projects • Experience • Resume • Hobbies • 
 
 Timeline-style entries with logos:
 
+- **XLR8 AI** (AI Search Strategist)
 - **JAIKE** (AI Researcher)
 - **TechSprint Innovators** (Head of Data Engineering)
 - **AISC / AI Student Collective** (General Member)
