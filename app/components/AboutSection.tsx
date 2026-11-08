@@ -104,27 +104,44 @@ export default function AboutSection() {
               className="space-y-6 text-base leading-relaxed text-slate-900 md:text-lg dark:text-slate-200"
             >
               <p>
-                Hi, I&apos;m Roy, a UC Davis graduate with a B.S. in Statistics (<span className="font-semibold text-sky-800 dark:text-sky-300">Data Science</span> track) and a minor in <span className="font-semibold text-sky-800 dark:text-sky-300">Computer Science</span>.
+                Hi, I&apos;m Roy, a UC Davis graduate with a B.S. in{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  Statistical Data Science
+                </span>{" "}
+                and a minor in{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  Computer Science
+                </span>
+                .
               </p>
               <p>
                 I&apos;m currently an AI Search Strategist at{" "}
                 <span className="font-semibold text-sky-800 dark:text-sky-300">
                   XLR8 AI
                 </span>
-                , where I focus on{" "}
+                , working at the intersection of{" "}
                 <span className="font-semibold text-sky-800 dark:text-sky-300">
-                  Generative Engine Optimization
-                </span>{" "}
-                (GEO), helping brands and businesses improve their visibility
-                across AI-powered search platforms.
+                  AI systems, data analytics, and applied technology
+                </span>
+                . My work involves analyzing how generative AI platforms
+                discover, interpret, and recommend brands, translating technical
+                insights into optimization strategies for clients.
               </p>
               <p>
-                My technical background spans data science,{" "}
+                My technical background spans{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  data science
+                </span>
+                ,{" "}
                 <span className="font-semibold text-sky-800 dark:text-sky-300">
                   machine learning
                 </span>
-                , and software development, with hands-on experience building
-                data pipelines, analytical tools, and{" "}
+                , and{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  software development
+                </span>
+                , with hands-on experience building data pipelines, analytical
+                tools, and{" "}
                 <span className="font-semibold text-sky-800 dark:text-sky-300">
                   full-stack applications
                 </span>
@@ -139,8 +156,12 @@ export default function AboutSection() {
                 <span className="font-semibold text-sky-800 dark:text-sky-300">
                   applied AI
                 </span>
-                , data science, and building technical solutions that solve
-                real-world problems.
+                ,{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  data science
+                </span>
+                , and building technical solutions that solve real-world
+                problems.
               </p>
             </motion.div>
 
