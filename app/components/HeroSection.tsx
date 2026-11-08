@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaChevronDown, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, type Variants } from "framer-motion";
-import { Briefcase, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import AtlasDog from "./AtlasDog";
 
 const profileImageSrc = "/picture.jpeg";
@@ -70,7 +70,7 @@ export default function HeroSection() {
           className="flex w-full min-w-0 flex-1 flex-col gap-5 md:gap-7"
         >
           {/* Zone 1 — Identity */}
-          <motion.div variants={itemVariants} className="flex flex-col gap-4 md:gap-5">
+          <motion.div variants={itemVariants} className="flex flex-col gap-3 md:gap-4">
             <h1
               id="hero-heading"
               className="text-4xl font-bold leading-none tracking-tight text-sky-950 md:text-5xl lg:text-6xl dark:text-sky-100"
@@ -78,8 +78,7 @@ export default function HeroSection() {
               Roy Ho
             </h1>
             <p className="text-[17px] leading-snug text-sky-800/90 dark:text-sky-300">
-              AI Search Strategist @ XLR8 AI | UC Davis Statistical Data
-              Science & Computer Science
+              AI Search Strategist @ XLR8 AI | Data Science & AI
             </p>
           </motion.div>
 
@@ -88,31 +87,24 @@ export default function HeroSection() {
             className="h-px w-full shrink-0 bg-sky-200/50 dark:bg-sky-500/25"
           />
 
-          {/* Zone 2 — Status */}
-          <motion.div
+          <motion.p
             variants={itemVariants}
-            className="max-w-[36rem] rounded-lg border-l-4 border-sky-600 bg-sky-50/95 px-4 py-3 shadow-sm shadow-sky-900/5 ring-1 ring-sky-200/70 dark:border-sky-400 dark:bg-slate-800/90 dark:shadow-black/20 dark:ring-slate-600/50"
+            className="max-w-[36rem] text-base font-normal leading-relaxed text-slate-700 dark:text-slate-300"
           >
-            <p className="text-[15px] font-medium leading-snug text-slate-900 dark:text-slate-100">
-              <Briefcase
-                className="mr-2 inline-block h-[1em] w-[1em] align-[-0.125em] text-sky-700 dark:text-sky-300"
-                strokeWidth={2}
-                aria-hidden
-              />
-              Currently an AI Search Strategist at XLR8 AI, focusing on
-              Generative Engine Optimization (GEO) to help brands improve their
-              visibility across AI-powered search platforms. Outside of work, I
-              explore data science, machine learning, and applied AI through
-              research and personal projects.
-            </p>
-          </motion.div>
+            Currently, I work at{" "}
+            <span className="font-semibold">XLR8 AI</span>, an{" "}
+            <span className="font-semibold">AI startup</span> where I analyze
+            how generative AI systems discover, interpret, and recommend brands.
+            Beyond my role, I build software, explore machine learning, and
+            conduct research in applied AI.
+          </motion.p>
 
           <div
             aria-hidden
             className="h-px w-full shrink-0 bg-sky-200/50 dark:bg-sky-500/25"
           />
 
-          {/* Zone 3 — Contact + socials */}
+          {/* Zone 2 — Contact + socials */}
           <motion.div
             variants={itemVariants}
             className="flex flex-wrap items-center gap-y-3"
@@ -177,7 +169,7 @@ export default function HeroSection() {
             </div>
           </motion.div>
 
-          {/* Zone 4 — Actions */}
+          {/* Zone 3 — Actions */}
           <motion.div
             variants={itemVariants}
             className="flex flex-wrap items-center gap-x-6 gap-y-3"

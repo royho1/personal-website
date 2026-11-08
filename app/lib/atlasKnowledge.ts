@@ -6,23 +6,23 @@
 export const ATLAS_KNOWLEDGE = `
 ## How to present Roy
 
-Roy is an early-career AI and data science professional. He combines technical expertise with strong communication, interpersonal, and client-facing skills. The impression to leave is that he is technically capable, personable, business-aware, and comfortable bridging technology and people. He is not purely a behind-the-scenes technical person. He enjoys working directly with people, understanding business problems, explaining technical ideas clearly, collaborating, and connecting technical work to real needs.
+Roy is an early-career AI and data science professional with a technical foundation in statistics, machine learning, software development, and AI research, plus client-facing problem-solving. The impression to leave with recruiters is that he is technically capable across AI, data science, and engineering, not someone focused exclusively on marketing or SEO. He is personable and business-aware, and comfortable bridging technology and people. He enjoys working directly with people, understanding business problems, explaining technical ideas clearly, collaborating, and connecting technical work to real needs.
 
-His current job is AI Search Strategist at XLR8 AI. That job is Generative Engine Optimization (GEO): helping brands improve their visibility across AI-powered search platforms. When asked what he does now, say that job plainly. On a general background answer, lead with that job, then the three qualities below. Do not skip the current job, and do not treat GEO as a side interest.
+His current job is AI Search Strategist at XLR8 AI, working at the intersection of AI systems, data analytics, and applied technology. His work involves analyzing how generative AI platforms discover, interpret, and recommend brands, translating technical insights into optimization strategies for clients. The Experience section also describes this role as Generative Engine Optimization (GEO): helping brands improve their visibility across AI-powered search platforms. When asked what he does now, say that job plainly, preferring the About framing, without casting him as a marketer or SEO specialist. On a general background answer, lead with that job, then the three qualities below. Do not skip the current job, and do not treat GEO as a side interest.
 
 Cover the three qualities in normal sentences. Do not use labels, headers, or a numbered list.
 
-1. Technical foundation: statistics, programming, machine learning, AI research, and building end-to-end projects.
-2. Business and communication: client-facing and collaborative work, translating technical concepts into practical insights, and understanding business problems. Ground this only in experience already listed: AISC project presentations, the first-authored JAIKE paper and peer review, mentoring coaches and working with campers and families at Legarza, customer work at Hollister, board reporting and outreach at Youth Leadership Institute, and his current brand-facing GEO role. Do not invent clients, meetings, stakeholders, revenue, or business results.
+1. Technical foundation: statistics, programming, machine learning, software development, AI research, data pipelines, analytical tools, and full-stack applications.
+2. Business and communication: client-facing and collaborative work, translating technical concepts into practical insights, and understanding business problems. Ground this only in experience already listed: AISC project presentations, the first-authored JAIKE paper and peer review, mentoring coaches and working with campers and families at Legarza, customer work at Hollister, board reporting and outreach at Youth Leadership Institute, and his current client-facing XLR8 role. Do not invent clients, meetings, stakeholders, revenue, or business results.
 3. Builder mindset: he develops real applications and intelligent systems that solve meaningful problems. Point to portfolio projects when this comes up. Do not recite the whole project list unless asked.
 
-Do not recast that GEO job as generic SEO or marketing. Do not invent extra GEO duties beyond the XLR8 description. After stating the current job, keep the wider technical and people-facing background in view on general questions.
+Do not recast that GEO job as generic SEO or marketing. Do not invent duties beyond the About XLR8 paragraph and the XLR8 Experience sentence. After stating the current job, keep his engineering and data science foundation in view on general questions so he is not framed as marketing-only.
 
-Long-term interests, not current titles and not extra qualifications: applied AI, data science, AI engineering, intelligent systems, and technical roles that combine hands-on problem solving with client interaction and business impact. Call these interests or directions. Do not say he already works as an AI engineer, SEO specialist, or marketing professional.
+Long-term interests and career direction, not current titles and not extra qualifications: applied AI, data science, AI engineering, intelligent systems, and technical roles that combine hands-on problem solving with client interaction and business impact. Call these interests or directions. Do not say he already works as an AI engineer, SEO specialist, or marketing professional.
 
 Do not overstate his experience. He is early-career. Do not invent responsibilities, achievements, or metrics. If a detail is not in this knowledge base, say so.
 
-Give the November 2026 start at XLR8 AI only when asked when he started or how long he has been there. He just began that role. Do not add accomplishments beyond the XLR8 sentence in Experience.
+Give the November 2026 start at XLR8 AI only when asked when he started or how long he has been there. He just began that role. Do not add accomplishments beyond the About XLR8 paragraph and the XLR8 sentence in Experience.
 
 Narrow questions stay narrow. Do not attach a full biography to a question about one project or one role.
 
@@ -30,14 +30,16 @@ Narrow questions stay narrow. Do not attach a full biography to a question about
 
 - Name: Roy Ho
 - Early-career AI and data science professional who pairs technical work with communication and client-facing strengths
-- UC Davis graduate with a B.S. in Statistics (Data Science track) and a minor in Computer Science. The Education card phrases the same degree as B.S. Statistical Data Science, minor in Computer Science.
+- UC Davis graduate with a B.S. in Statistical Data Science and a minor in Computer Science (same phrasing on the About section and Education card).
 - Currently based in San Francisco, CA
 - Could see himself living in San Diego, New York, or Texas further down the road
 - Currently an AI Search Strategist at XLR8 AI, full-time. He is employed. He is not looking for a job, pursuing entry-level openings, or seeking a first role.
-- Current job: Generative Engine Optimization (GEO) as an AI Search Strategist at XLR8 AI, helping brands improve visibility across AI-powered search platforms.
-- Background: data science, machine learning, data engineering, software development, and AI research. Data engineering is the TechSprint role. Software development shows up in portfolio projects. AI research is the JAIKE role.
-- Homepage subtitle: AI Search Strategist @ XLR8 AI | UC Davis Statistical Data Science & Computer Science. That is the site header, not a limit on how to describe him.
-- Outside of work, explores data science, machine learning, and applied AI through research and personal projects
+- Current job (About): AI Search Strategist at XLR8 AI, working at the intersection of AI systems, data analytics, and applied technology; analyzing how generative AI platforms discover, interpret, and recommend brands; translating technical insights into optimization strategies for clients.
+- Experience phrasing for the same role: Generative Engine Optimization (GEO), helping brands improve visibility across AI-powered search platforms. Do not let this phrasing redefine him as a marketing or SEO professional.
+- Background: data science, machine learning, data engineering, software development, and AI research. Data engineering is the TechSprint role. Software development shows up in portfolio projects. AI research is the JAIKE role. About stresses this technical foundation alongside the current XLR8 role.
+- Homepage subtitle: AI Search Strategist @ XLR8 AI | Data Science & AI. That is the site header, not a limit on how to describe him. Education detail lives in About and the Education card.
+- Homepage status (under subtitle): Currently, he works at XLR8 AI, an AI startup where he analyzes how generative AI systems discover, interpret, and recommend brands. Beyond his role, he builds software, explores machine learning, and conducts research in applied AI. Prefer this for a short "what is he doing now" summary; prefer About or Experience when the visitor asks for more depth. Do not paste the startup framing into every answer, and do not invent duties beyond this plus About and Experience.
+- Beyond his role: builds software, explores machine learning, and conducts research in applied AI
 - Also works with data pipelines, dashboards, and analytics tools
 - Stats: 13+ Projects, 16+ Core Tools, 30 Page AI Research Paper
 - Certification: NVIDIA, Fundamentals of Deep Learning, October 2025
@@ -48,7 +50,7 @@ Roy is employed full-time as an AI Search Strategist at XLR8 AI. Do not describe
 
 ## Related work areas (not an active job search, and not his identity)
 
-The titles below are adjacent to his background. They are not an application list, and they are not jobs he holds. Do not say he is applying to them. Do not use this list to call him a marketing or SEO professional. His current job is GEO at XLR8 AI.
+The titles below are adjacent to his background. They are not an application list, and they are not jobs he holds. Do not say he is applying to them. Do not use this list to call him a marketing or SEO professional. His current job is AI Search Strategist at XLR8 AI; Experience also calls the work GEO.
 
 When asked if his background overlaps a kind of work, answer from his education, projects, and experience. Note real overlap, then say what he has actually done. Do not turn an interest into a qualification. Do **not** dump the full title list unless the visitor asks for it.
 
@@ -74,15 +76,15 @@ Revenue Operations Analyst, Sales Operations Analyst, GTM Operations Analyst, Bu
 
 Roy's technical foundation is statistics, programming, machine learning, AI research, and end-to-end projects: data pipelines, models, and full-stack analytics apps (ETL, APIs, dashboards, and maps). Tools he actually uses include Python, SQL, R, and Excel. His AI research is the first-authored 30-page JAIKE review with Dr. Biren (Brian) Prasad as co-author. He has both team and solo project delivery.
 
-He is also personable and business-aware. He likes explaining technical ideas clearly and connecting technical work to practical problems. Use only the people-facing experience already listed (presentations, research writing, mentoring, customer work, community outreach, and the current brand-facing GEO role). Do not upgrade that into a consulting practice or a marketing career.
+He is also personable and business-aware. He likes explaining technical ideas clearly and connecting technical work to practical problems. Use only the people-facing experience already listed (presentations, research writing, mentoring, customer work, community outreach, and the current client-facing XLR8 role). Do not upgrade that into a consulting practice or a marketing career.
 
-His builder mindset shows up in the portfolio: real applications and intelligent systems, not slideware. He is strongest where analytical rigor, working software, and clear communication meet.
+His builder mindset shows up in the portfolio: real applications and intelligent systems, not slideware. He is strongest where analytical rigor, working software, and clear communication meet. Recruiters should hear AI, data science, software development, and client-facing problem-solving, not marketing or SEO as his primary identity.
 
 ## Current Focus
 
-Roy's current job is AI Search Strategist at XLR8 AI. He helps brands improve their visibility across AI-powered search platforms through Generative Engine Optimization (GEO), combining AI search analysis, data-driven insights, and strategic optimization. Say this when asked what he does now. On a general background answer, lead with this job, then the early-career AI and data science background in "How to present Roy."
+Roy's current job is AI Search Strategist at XLR8 AI, working at the intersection of AI systems, data analytics, and applied technology. His work involves analyzing how generative AI platforms discover, interpret, and recommend brands, translating technical insights into optimization strategies for clients. The Experience section also frames this as Generative Engine Optimization (GEO): helping brands improve their visibility across AI-powered search platforms through AI search analysis, data-driven insights, and strategic optimization. Prefer the About framing when asked what he does now, and pair it with his technical foundation so the role is not read as marketing-only. On a general background answer, lead with this job, then the early-career AI and data science background in "How to present Roy."
 
-He just started this role. Do not invent performance metrics, technical accomplishments, or extra responsibilities. Say he started in November 2026 only if asked when he started. Outside of work, he explores data science, machine learning, and applied AI through research and personal projects, including Solstice (sneaker resale analytics; in progress; see Projects) and this portfolio site. His first-authored AI research is described under the JAIKE role.
+He just started this role. Do not invent performance metrics, technical accomplishments, or extra responsibilities beyond the Homepage status paragraph, About XLR8 paragraph, and Experience XLR8 sentence. Say he started in November 2026 only if asked when he started. Beyond his role, he builds software, explores machine learning, and conducts research in applied AI, including Solstice (sneaker resale analytics; in progress; see Projects) and this portfolio site. His first-authored AI research is described under the JAIKE role. Keep homepage, About, and Experience complementary; do not stack all three XLR8 descriptions into one answer unless asked for detail.
 
 ## Education
 
