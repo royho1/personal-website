@@ -8,6 +8,7 @@ import {
   type Variants,
 } from "framer-motion";
 import {
+  ArrowRight,
   HeartPulse,
   MapPin,
   Star,
@@ -372,6 +373,16 @@ const cardVariants: Variants = {
   },
 };
 
+/** Shared card chrome: lift + accent border on hover; lift off under reduced motion. */
+const PROJECT_CARD_SURFACE =
+  "cursor-pointer border border-sky-200 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-[border-color,box-shadow] duration-200 hover:border-hero-accent/40 hover:shadow-md hover:shadow-sky-900/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:border-slate-700 dark:shadow-black/40 dark:ring-slate-700/50 dark:hover:border-hero-accent/40 dark:hover:shadow-black/60";
+
+const VIEW_PROJECT_LINK =
+  "inline-flex items-center gap-1.5 font-medium text-hero-accent underline decoration-transparent underline-offset-4 transition-[text-decoration-color] duration-150 ease-out group-hover:decoration-current group-focus-visible:decoration-current";
+
+const VIEW_PROJECT_ARROW =
+  "transition-transform duration-150 ease-out group-hover:translate-x-1 group-focus-visible:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-focus-visible:translate-x-0";
+
 function projectMatches(tags: readonly Tag[], filter: Filter): boolean {
   if (filter === "All") return true;
   return tags.includes(filter);
@@ -428,8 +439,12 @@ function additionalToGalleryItem(project: AdditionalProject): GalleryItem {
 }
 
 export default function ProjectsSection() {
+  const prefersReducedMotion = useReducedMotion();
   const [filter, setFilter] = useState<Filter>("All");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const cardHoverLift = prefersReducedMotion
+    ? undefined
+    : { y: -4, transition: { duration: 0.2, ease: "easeOut" as const } };
 
   // Hydrate from the shared bus (incl. sessionStorage) then stay in sync with
   // NavBar / other dispatchers. Avoid reading storage in useState to prevent
@@ -587,16 +602,17 @@ export default function ProjectsSection() {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
+                  whileHover={cardHoverLift}
                   tabIndex={0}
                   onClick={() => {
                     if (galleryIndex < 0) return;
                     setSelectedIndex(galleryIndex);
                   }}
                   aria-label={`Open ${project.title} details`}
-                  className="group relative flex h-full w-full cursor-pointer scroll-mt-28 flex-col overflow-hidden rounded-xl border border-sky-200 bg-white p-0 text-left font-inherit shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-[transform,border-color,box-shadow] duration-150 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50 dark:hover:border-slate-500 dark:hover:shadow-black/60"
+                  className={`group relative flex h-full w-full scroll-mt-28 flex-col overflow-hidden rounded-xl bg-white p-0 text-left font-inherit dark:bg-slate-800/70 ${PROJECT_CARD_SURFACE}`}
                 >
                   {project.award && (
-                    <span className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1 rounded-full border border-amber-300 bg-amber-50/95 px-2 py-0.5 text-[10px] font-semibold text-amber-800 shadow-sm shadow-amber-900/10 backdrop-blur-sm dark:border-amber-400/40 dark:bg-amber-500/10 dark:text-amber-200">
+                    <span className="pointer-events-none absolute bottom-3 right-3 z-10 inline-flex items-center gap-1 rounded-full border border-amber-300 bg-amber-50/95 px-2 py-0.5 text-[10px] font-semibold text-amber-800 shadow-sm shadow-amber-900/10 backdrop-blur-sm dark:border-amber-400/40 dark:bg-amber-500/10 dark:text-amber-200">
                       <Star
                         className="h-3 w-3 fill-amber-400 text-amber-500"
                         aria-hidden
@@ -618,11 +634,16 @@ export default function ProjectsSection() {
                     <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
                       {project.description}
                     </p>
-                    <p className="mt-4 text-xs text-slate-500 dark:text-slate-400">
+                    <p className="pointer-events-none mt-4 text-xs text-slate-500 dark:text-slate-400">
                       {project.tech}
                     </p>
-                    <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-sky-700 transition-colors group-hover:text-sky-900 dark:text-sky-300 dark:group-hover:text-sky-200">
+                    <span className={`mt-5 text-sm ${VIEW_PROJECT_LINK}`}>
                       View project
+                      <ArrowRight
+                        className={`h-3.5 w-3.5 ${VIEW_PROJECT_ARROW}`}
+                        strokeWidth={2.25}
+                        aria-hidden
+                      />
                     </span>
                   </div>
                 </motion.button>
@@ -672,15 +693,16 @@ export default function ProjectsSection() {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
+                    whileHover={cardHoverLift}
                     onClick={() => {
-                    if (galleryIndex < 0) return;
-                    setSelectedIndex(galleryIndex);
-                  }}
+                      if (galleryIndex < 0) return;
+                      setSelectedIndex(galleryIndex);
+                    }}
                     aria-label={`Open ${project.name} details`}
-                    className="group relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-lg border border-sky-200 bg-sky-50/90 p-0 text-left font-inherit shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-[transform,border-color,box-shadow] duration-150 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/40 dark:ring-slate-700/50 dark:hover:border-slate-500"
+                    className={`group relative flex h-full w-full flex-col overflow-hidden rounded-lg bg-sky-50/90 p-0 text-left font-inherit dark:bg-slate-800/70 ${PROJECT_CARD_SURFACE}`}
                   >
                     {project.status && (
-                      <StatusBadge className="absolute bottom-3 right-3 z-10">
+                      <StatusBadge className="pointer-events-none absolute bottom-3 right-3 z-10">
                         {project.status}
                       </StatusBadge>
                     )}
@@ -698,12 +720,17 @@ export default function ProjectsSection() {
                       <p className="mt-2 flex-1 text-xs leading-relaxed text-slate-600 dark:text-slate-300">
                         {project.description}
                       </p>
-                      <p className="mt-3 text-[11px] font-medium text-slate-500 dark:text-slate-400">
+                      <p className="pointer-events-none mt-3 text-[11px] font-medium text-slate-500 dark:text-slate-400">
                         {project.tech}
                       </p>
                       <div className="mt-3 flex min-h-[1.25rem] items-center">
-                        <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-sky-700 transition-colors group-hover:text-sky-900 dark:text-sky-300 dark:group-hover:text-sky-200">
+                        <span className={`text-[11px] ${VIEW_PROJECT_LINK}`}>
                           View project
+                          <ArrowRight
+                            className={`h-3 w-3 ${VIEW_PROJECT_ARROW}`}
+                            strokeWidth={2.25}
+                            aria-hidden
+                          />
                         </span>
                       </div>
                     </div>

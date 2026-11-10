@@ -690,6 +690,68 @@ body {
   color: #e0f2fe;
 }
 
+/* Education card glare. EducationCard sets the position and opacity vars
+ * only on fine-pointer hover with motion allowed, so this stays invisible
+ * on touch devices and under prefers-reduced-motion. */
+.edu-card-glare {
+  background: radial-gradient(
+    circle at var(--glare-x, 50%) var(--glare-y, 50%),
+    rgb(255 255 255 / 0.4),
+    rgb(255 255 255 / 0) 55%
+  );
+  opacity: var(--glare-opacity, 0);
+  transition: opacity 400ms ease-out;
+}
+
+.dark .edu-card-glare {
+  background: radial-gradient(
+    circle at var(--glare-x, 50%) var(--glare-y, 50%),
+    rgb(255 255 255 / 0.1),
+    rgb(255 255 255 / 0) 55%
+  );
+}
+
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .edu-card-glare {
+    display: none;
+  }
+}
+
+@keyframes cert-lightbox-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cert-lightbox-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.cert-lightbox {
+  animation: cert-lightbox-fade 200ms ease-out;
+}
+
+.cert-lightbox-panel {
+  animation: cert-lightbox-scale 200ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-lightbox,
+  .cert-lightbox-panel {
+    animation: none;
+  }
+}
+
 /* Smooth color/background transitions across the whole site when the
  * theme changes. Individual components can opt out via `transition-none`. */
 html.theme-transition,
