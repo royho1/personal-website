@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, Fragment } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
@@ -22,29 +22,43 @@ const DESKTOP_NAV_MQ = "(min-width: 1024px)";
 const PROJECTS_COUNT_LABEL = "13+";
 
 const navLinks = [
-  { label: "Home", href: "/#hero", id: "hero" },
   { label: "About", href: "/#about", id: "about" },
   { label: "Projects", href: "/#projects", id: "projects" },
   { label: "Experience", href: "/#experience", id: "experience" },
-  { label: "Resume", href: "/#resume", id: "resume" },
   { label: "Hobbies", href: "/#hobbies", id: "hobbies" },
   { label: "Contact", href: "/#contact", id: "contact" },
 ] as const;
 
+const RESUME_HREF = "/#resume";
+const ASK_ATLAS_HREF = "/ask";
+
+/** Sections the scroll-spy watches. Hero and Resume have no center link but
+ * still need to clear the active state when they are in view. */
+const OBSERVED_SECTION_IDS = ["hero", ...navLinks.map(({ id }) => id), "resume"];
+
+const FOCUS_RING =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:focus-visible:outline-sky-400";
+
 /** Shared base classes for the top-level nav link text so the Projects
  * trigger lines up perfectly with the sibling anchors. */
 function navLinkClasses(isActive: boolean) {
-  return `relative inline-block origin-center cursor-pointer font-medium transition-all duration-200 ease-out hover:scale-105 hover:font-bold hover:text-sky-900 dark:hover:text-sky-200 ${
+  return `relative inline-block cursor-pointer rounded-sm text-base font-medium transition-colors duration-200 ease-out hover:text-[#0F2A47] dark:hover:text-white ${FOCUS_RING} ${
     isActive
-      ? "font-semibold text-sky-900 dark:text-sky-200"
-      : "text-slate-600 dark:text-slate-300"
+      ? "text-[#0F2A47] dark:text-white"
+      : "text-[#48607A] dark:text-slate-300"
   }`;
 }
+
+const PILL_BASE = `inline-flex h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full px-[18px] text-[15px] font-semibold transition-colors duration-200 ${FOCUS_RING}`;
+
+const ASK_ATLAS_PILL = `${PILL_BASE} border border-[#C9D6E4] bg-transparent text-[#0F2A47] hover:border-[#0F2A47] dark:border-slate-600 dark:text-slate-100 dark:hover:border-slate-300`;
+
+const RESUME_PILL = `${PILL_BASE} bg-[#0F2A47] text-white hover:bg-[#1A3B5E] dark:bg-slate-100 dark:text-[#0F2A47] dark:hover:bg-white`;
 
 function ActiveUnderline({ isActive }: { isActive: boolean }) {
   return (
     <span
-      className={`pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full origin-left rounded-full bg-sky-700 transition-transform duration-300 ease-out dark:bg-sky-300 ${
+      className={`pointer-events-none absolute -bottom-1.5 left-0 h-[2px] w-full origin-left rounded-full bg-[#0F2A47] transition-transform duration-300 ease-out dark:bg-white ${
         isActive ? "scale-x-100" : "scale-x-0"
       }`}
       aria-hidden
@@ -138,7 +152,7 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
           aria-label={isOpen ? "Hide project list" : "Show project list"}
           aria-haspopup="menu"
           aria-expanded={isOpen}
-          className="inline-flex h-6 w-6 cursor-pointer items-center justify-center rounded-full text-slate-500 transition-colors hover:text-sky-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:text-slate-400 dark:hover:text-sky-200"
+          className={`inline-flex h-6 w-6 cursor-pointer items-center justify-center rounded-full text-[#48607A] transition-colors hover:text-[#0F2A47] dark:text-slate-400 dark:hover:text-white ${FOCUS_RING}`}
         >
           <ChevronDown
             className={`h-4 w-4 transition-transform duration-200 ${
@@ -214,53 +228,25 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
   );
 }
 
-function DesktopNavLinks({
-  activeId,
-  pathname,
-}: {
-  activeId: string;
-  pathname: string;
-}) {
+function DesktopNavLinks({ activeId }: { activeId: string }) {
   return (
-    <ul className="hidden items-center justify-end gap-6 text-sm text-slate-600 lg:flex lg:gap-8 dark:text-slate-300">
+    <ul className="hidden items-center gap-9 lg:flex">
       {navLinks.map((link) => {
         const isActive = activeId === link.id;
-        const item =
-          link.id === "projects" ? (
-            <ProjectsNavItem key={link.href} isActive={isActive} />
-          ) : (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                aria-current={isActive ? "page" : undefined}
-                className={navLinkClasses(isActive)}
-              >
-                {link.label}
-                <ActiveUnderline isActive={isActive} />
-              </a>
-            </li>
-          );
-
-        if (link.id === "about") {
-          const isAskActive = pathname === "/ask";
-          return (
-            <Fragment key={link.href}>
-              {item}
-              <li>
-                <Link
-                  href="/ask"
-                  aria-current={isAskActive ? "page" : undefined}
-                  className={navLinkClasses(isAskActive)}
-                >
-                  Ask Atlas
-                  <ActiveUnderline isActive={isAskActive} />
-                </Link>
-              </li>
-            </Fragment>
-          );
-        }
-
-        return item;
+        return link.id === "projects" ? (
+          <ProjectsNavItem key={link.href} isActive={isActive} />
+        ) : (
+          <li key={link.href}>
+            <a
+              href={link.href}
+              aria-current={isActive ? "page" : undefined}
+              className={navLinkClasses(isActive)}
+            >
+              {link.label}
+              <ActiveUnderline isActive={isActive} />
+            </a>
+          </li>
+        );
       })}
     </ul>
   );
@@ -313,10 +299,19 @@ function MobileNavPanel({
   };
 
   const mobileLinkClass = (isActive: boolean) =>
-    `flex w-full items-center rounded-lg px-3 py-3 text-base font-medium transition-colors ${
+    `flex min-h-12 w-full items-center rounded-lg px-3 py-3 text-base font-medium transition-colors ${FOCUS_RING} ${
       isActive
-        ? "bg-sky-100 text-sky-900 dark:bg-sky-500/15 dark:text-sky-200"
-        : "text-slate-700 hover:bg-sky-50 hover:text-sky-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-sky-200"
+        ? "bg-[#EEF3F8] text-[#0F2A47] dark:bg-slate-800 dark:text-white"
+        : "text-[#48607A] hover:bg-[#F4F7FA] hover:text-[#0F2A47] dark:text-slate-300 dark:hover:bg-slate-800/70 dark:hover:text-white"
+    }`;
+
+  const mobileSubLinkClass = (isSelected: boolean, emphasis: boolean) =>
+    `flex min-h-11 cursor-pointer items-center justify-between rounded-lg px-3 py-2.5 text-sm transition-colors ${FOCUS_RING} ${
+      emphasis ? "font-bold" : "font-normal"
+    } ${
+      isSelected
+        ? "bg-[#EEF3F8] font-semibold text-[#0F2A47] dark:bg-slate-800 dark:text-white"
+        : "text-[#48607A] hover:bg-[#F4F7FA] hover:text-[#0F2A47] dark:text-slate-300 dark:hover:bg-slate-800/70 dark:hover:text-white"
     }`;
 
   return (
@@ -340,7 +335,7 @@ function MobileNavPanel({
             role="dialog"
             aria-modal="true"
             aria-label="Site navigation"
-            className="fixed inset-x-0 top-[calc(env(safe-area-inset-top,0px)+3.75rem)] z-[70] max-h-[min(80vh,calc(100dvh-4.5rem))] overflow-y-auto border-b border-sky-200/80 bg-sky-50/98 px-4 py-3 shadow-lg shadow-sky-900/10 backdrop-blur-md lg:hidden dark:border-slate-800 dark:bg-slate-950/98 dark:shadow-black/40"
+            className="fixed inset-x-0 top-[calc(env(safe-area-inset-top,0px)+4rem)] z-[70] max-h-[min(80vh,calc(100dvh-4.5rem))] overflow-y-auto border-b border-[#E3EAF2] bg-white px-4 py-3 shadow-lg shadow-[#0F2A47]/10 dark:border-slate-800 dark:bg-background dark:shadow-black/40"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -349,34 +344,6 @@ function MobileNavPanel({
             <ul className="flex flex-col gap-1">
               {navLinks.map((link) => {
                 const isActive = activeId === link.id;
-
-                if (link.id === "about") {
-                  const isAskActive = pathname === "/ask";
-                  return (
-                    <Fragment key={link.href}>
-                      <li>
-                        <a
-                          href={link.href}
-                          aria-current={isActive ? "page" : undefined}
-                          className={mobileLinkClass(isActive)}
-                          onClick={onClose}
-                        >
-                          {link.label}
-                        </a>
-                      </li>
-                      <li>
-                        <Link
-                          href="/ask"
-                          aria-current={isAskActive ? "page" : undefined}
-                          className={mobileLinkClass(isAskActive)}
-                          onClick={onClose}
-                        >
-                          Ask Atlas
-                        </Link>
-                      </li>
-                    </Fragment>
-                  );
-                }
 
                 if (link.id === "projects") {
                   return (
@@ -403,7 +370,7 @@ function MobileNavPanel({
                               ? "Hide project list"
                               : "Show project list"
                           }
-                          className="inline-flex w-11 shrink-0 cursor-pointer items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-sky-50 hover:text-sky-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-sky-200"
+                          className={`inline-flex min-h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-lg text-[#48607A] transition-colors hover:bg-[#F4F7FA] hover:text-[#0F2A47] dark:text-slate-400 dark:hover:bg-slate-800/70 dark:hover:text-white ${FOCUS_RING}`}
                         >
                           <ChevronDown
                             className={`h-5 w-5 transition-transform duration-200 ${
@@ -439,16 +406,15 @@ function MobileNavPanel({
                                     href={`/#${item.id}`}
                                     role="menuitem"
                                     onClick={() => chooseTarget(item.id)}
-                                    className={`flex cursor-pointer items-center justify-between rounded-lg px-3 py-2.5 text-sm font-normal transition-colors ${
-                                      isSelected
-                                        ? "bg-sky-100 font-semibold text-sky-900 dark:bg-sky-500/15 dark:text-sky-200"
-                                        : "text-slate-600 hover:bg-sky-50 hover:text-sky-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-sky-200"
-                                    }`}
+                                    className={mobileSubLinkClass(
+                                      isSelected,
+                                      false,
+                                    )}
                                   >
                                     <span>{item.label}</span>
                                     {isSelected && (
                                       <span
-                                        className="ml-3 h-1.5 w-1.5 shrink-0 rounded-full bg-sky-600 dark:bg-sky-300"
+                                        className="ml-3 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0F2A47] dark:bg-white"
                                         aria-hidden
                                       />
                                     )}
@@ -466,11 +432,10 @@ function MobileNavPanel({
                                 href="/#projects"
                                 role="menuitem"
                                 onClick={() => chooseTarget("projects")}
-                                className={`flex cursor-pointer items-center rounded-lg px-3 py-2.5 text-sm font-bold transition-colors ${
-                                  activeFocus === "projects"
-                                    ? "bg-sky-100 text-sky-900 dark:bg-sky-500/15 dark:text-sky-200"
-                                    : "text-slate-500 hover:bg-sky-50 hover:text-sky-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-sky-200"
-                                }`}
+                                className={mobileSubLinkClass(
+                                  activeFocus === "projects",
+                                  true,
+                                )}
                               >
                                 View all {PROJECTS_COUNT_LABEL} projects
                               </a>
@@ -495,7 +460,23 @@ function MobileNavPanel({
                   </li>
                 );
               })}
+              <li>
+                <Link
+                  href={ASK_ATLAS_HREF}
+                  aria-current={pathname === ASK_ATLAS_HREF ? "page" : undefined}
+                  className={mobileLinkClass(pathname === ASK_ATLAS_HREF)}
+                  onClick={onClose}
+                >
+                  Ask Atlas
+                </Link>
+              </li>
             </ul>
+            <div className="mt-2 flex min-h-12 items-center justify-between border-t border-[#E3EAF2] px-3 pt-3 dark:border-slate-800">
+              <span className="text-base font-medium text-[#48607A] dark:text-slate-300">
+                Theme
+              </span>
+              <ThemeToggle size="lg" />
+            </div>
           </motion.div>
         </>
       )}
@@ -510,8 +491,8 @@ export default function NavBar() {
   const mobilePanelId = useId();
 
   useEffect(() => {
-    const sections = navLinks
-      .map(({ id }) => document.getElementById(id))
+    const sections = OBSERVED_SECTION_IDS
+      .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
 
     if (sections.length === 0) {
@@ -559,23 +540,43 @@ export default function NavBar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-sky-200/80 bg-sky-50/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/80">
+    <header className="sticky top-0 z-50 w-full border-b border-[#E3EAF2] bg-white dark:border-slate-800 dark:bg-background">
       <nav
-        className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-4 md:gap-8 md:px-8 md:py-5"
+        className="flex h-16 w-full items-center justify-between gap-4 px-6 lg:h-[88px] xl:px-24"
         aria-label="Primary"
       >
         <a
           href="/#hero"
-          className="cursor-pointer text-base font-semibold tracking-tight text-sky-950 no-underline hover:no-underline dark:text-sky-100"
+          className={`inline-flex min-h-11 shrink-0 items-center rounded-sm text-xl font-bold tracking-[-0.01em] text-[#0F2A47] no-underline hover:no-underline dark:text-slate-100 ${FOCUS_RING}`}
         >
           Roy Ho
         </a>
-        <div className="flex items-center justify-end gap-3 lg:gap-8">
-          <DesktopNavLinks activeId={activeId} pathname={pathname} />
-          <ThemeToggle />
+
+        <DesktopNavLinks activeId={activeId} />
+
+        <div className="flex shrink-0 items-center gap-3">
+          <div className="hidden lg:flex">
+            <Link
+              href={ASK_ATLAS_HREF}
+              aria-current={pathname === ASK_ATLAS_HREF ? "page" : undefined}
+              className={ASK_ATLAS_PILL}
+            >
+              Ask Atlas
+            </Link>
+          </div>
+          <a
+            href={RESUME_HREF}
+            aria-current={activeId === "resume" ? "page" : undefined}
+            className={RESUME_PILL}
+          >
+            Resume
+          </a>
+          <div className="hidden lg:flex">
+            <ThemeToggle />
+          </div>
           <button
             type="button"
-            className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-sky-200 bg-white/80 text-sky-900 shadow-sm shadow-sky-900/10 transition-colors hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 lg:hidden dark:border-slate-700 dark:bg-slate-800/80 dark:text-sky-200 dark:hover:bg-slate-700"
+            className={`inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-[#C9D6E4] text-[#0F2A47] transition-colors hover:bg-[#F4F7FA] lg:hidden dark:border-slate-600 dark:text-slate-100 dark:hover:bg-slate-800 ${FOCUS_RING}`}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls={mobilePanelId}

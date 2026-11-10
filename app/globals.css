@@ -6,13 +6,19 @@
 
 html {
   scroll-behavior: smooth;
-  /* Single-row sticky header on mobile (~3.75rem) + desktop (~5rem). */
+  /* Single-row sticky header on mobile (4rem) + desktop (88px from lg). */
   scroll-padding-top: 4.5rem;
 }
 
 @media (min-width: 768px) {
   html {
     scroll-padding-top: 5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    scroll-padding-top: 5.5rem;
   }
 }
 
