@@ -702,5 +702,24 @@ html.theme-transition *::after {
     color 500ms ease,
     fill 500ms ease,
     stroke 500ms ease,
-    box-shadow 500ms ease;
+    box-shadow 500ms ease,
+    text-decoration-color 500ms ease,
+    --tw-gradient-from 500ms ease,
+    --tw-gradient-via 500ms ease,
+    --tw-gradient-to 500ms ease;
+}
+
+/* Preferred path: the ThemeProvider wraps the switch in a view transition,
+ * so the old and new themes crossfade as whole-page snapshots. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 450ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
 }

@@ -109,7 +109,7 @@ function ExperienceCard({
             aria-hidden
             className={`absolute left-[calc(-2.5rem)] top-1/2 z-10 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-sky-600 transition-all duration-300 ease-out motion-reduce:transition-none max-sm:left-[calc(-1.5rem)] dark:border-sky-500 ${MARKER_STATE_CLASS[markerState]}`}
           />
-          <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:gap-3">
+          <div className="flex min-w-0 flex-1 items-center gap-5 max-sm:w-full max-sm:flex-wrap max-sm:gap-3">
             {logo ? (
               entry.logoOnWhite ? (
                 <span className="inline-flex shrink-0 rounded bg-white p-2">
@@ -119,7 +119,7 @@ function ExperienceCard({
                 logo
               )
             ) : null}
-            <div className="min-w-0">
+            <div className="min-w-0 max-sm:flex-1 max-sm:basis-32">
               <h3 className="text-[20px] font-medium tracking-tight text-slate-900 dark:text-sky-100">
                 {entry.company}
               </h3>
