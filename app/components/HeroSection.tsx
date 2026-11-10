@@ -162,7 +162,7 @@ export default function HeroSection() {
               href="#contact"
               className={`${BUTTON_BASE} border-[1.5px] border-hero-text bg-transparent text-hero-text hover:bg-hero-accent-tint`}
             >
-              Get in touch
+              Contact
             </a>
           </motion.div>
         </motion.div>
