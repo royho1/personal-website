@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { Caveat, Geist, Geist_Mono, Inter_Tight } from "next/font/google";
+import { Caveat, Geist_Mono, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "./components/ThemeProvider";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -29,9 +24,9 @@ const siteUrl = "https://www.royho-career.com";
 const ogDescription =
   "UC Davis graduate in Statistical Data Science with a minor in Computer Science.";
 const ogImage = {
-  url: `${siteUrl}/picture.jpeg`,
-  width: 799,
-  height: 1123,
+  url: `${siteUrl}/roy-ho-headshot.jpg`,
+  width: 728,
+  height: 1024,
   alt: "Roy Ho",
 } as const;
 
@@ -64,7 +59,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} ${interTight.variable} h-full antialiased`}
+      className={`${geistMono.variable} ${caveat.variable} ${interTight.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans text-slate-800 antialiased dark:text-slate-200">
         <ThemeProvider>{children}</ThemeProvider>

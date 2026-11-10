@@ -123,7 +123,7 @@ html {
   --color-hero-pill-border: var(--hero-pill-border);
   --color-hero-bg: var(--hero-bg);
   --font-display: var(--font-inter-tight), system-ui, sans-serif;
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter-tight), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
   --font-handwriting: var(--font-caveat), "Bradley Hand", "Segoe Script", cursive;
 
@@ -674,7 +674,7 @@ html {
 body {
   background: var(--body-gradient);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
   transition:
     background 500ms ease,
     color 500ms ease;

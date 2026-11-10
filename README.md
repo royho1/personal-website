@@ -121,7 +121,7 @@ app/
 
 public/
 ├── Roy_Ho_Resume.pdf
-├── picture.jpeg         Hero profile photo
+├── roy-ho-headshot.jpg  Hero profile photo
 ├── hobbies/             Hobby photos
 └── experience/          Logos (JAIKE, TechSprint, AISC)
 ```

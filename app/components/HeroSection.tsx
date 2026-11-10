@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FiMail, FiMapPin } from "react-icons/fi";
 
-const profileImageSrc = "/picture.jpeg";
+const profileImageSrc = "/roy-ho-headshot.jpg";
 const EMAIL = "royho.career@gmail.com";
 const LINKEDIN_URL = "https://www.linkedin.com/in/royho1/";
 const GITHUB_URL = "https://github.com/royho1";
