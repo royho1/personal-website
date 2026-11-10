@@ -97,7 +97,7 @@ export default function CertificationsCard() {
           onKeyDown={onCardKeyDown}
           aria-haspopup="dialog"
           aria-expanded={open}
-          className="flex w-full cursor-pointer items-center gap-3 rounded-xl border border-sky-200 bg-white px-4 py-3 text-left shadow-sm shadow-sky-200/30 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-sky-300 hover:bg-sky-50 hover:shadow-md hover:shadow-sky-300/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/30 dark:hover:border-slate-600 dark:hover:bg-slate-700/70 dark:hover:shadow-black/50"
+          className="flex w-full cursor-pointer items-center gap-4 rounded-xl border border-sky-200 bg-white px-5 py-5 text-left shadow-sm shadow-sky-200/30 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-sky-300 hover:bg-sky-50 hover:shadow-md hover:shadow-sky-300/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:border-slate-700 dark:bg-slate-800/70 dark:shadow-black/30 dark:hover:border-slate-600 dark:hover:bg-slate-700/70 dark:hover:shadow-black/50"
         >
           <span className="shrink-0 dark:rounded-[6px] dark:bg-white dark:p-[6px]">
             <Image
@@ -105,7 +105,7 @@ export default function CertificationsCard() {
               alt="NVIDIA logo"
               width={600}
               height={337}
-              className="h-10 w-auto"
+              className="h-11 w-auto"
             />
           </span>
           <span className="min-w-0 flex-1">
