@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import type { ComponentType, SVGProps } from "react";
 import {
@@ -172,15 +173,28 @@ export default function AboutSection() {
               <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500 sm:text-sm dark:text-slate-400">
                 Education
               </h3>
-              <p className="mt-3 text-base font-semibold text-sky-950 dark:text-sky-100">
-                University of California, Davis
-              </p>
-              <p className="mt-1 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-                B.S. Statistical Data Science, Minor in Computer Science
-              </p>
-              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                September 2022 to March 2026
-              </p>
+              <div className="mt-3 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                <div className="shrink-0 dark:rounded-lg dark:bg-white dark:p-2">
+                  <Image
+                    src="/logos/ucdavis.png"
+                    alt="UC Davis logo"
+                    width={1008}
+                    height={168}
+                    className="h-auto w-20 sm:w-24"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-base font-semibold text-sky-950 dark:text-sky-100">
+                    University of California, Davis
+                  </p>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                    B.S. Statistical Data Science, Minor in Computer Science
+                  </p>
+                  <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    September 2022 to March 2026
+                  </p>
+                </div>
+              </div>
               <p className="mt-4 border-t border-sky-100 pt-4 text-sm leading-relaxed text-slate-700 dark:border-slate-700 dark:text-slate-300">
                 <span className="font-semibold text-sky-900 dark:text-sky-200">
                   Certification:

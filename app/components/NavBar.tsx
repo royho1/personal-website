@@ -42,23 +42,21 @@ const FOCUS_RING =
 /** Shared base classes for the top-level nav link text so the Projects
  * trigger lines up perfectly with the sibling anchors. */
 function navLinkClasses(isActive: boolean) {
-  return `relative inline-block cursor-pointer rounded-sm text-base font-medium transition-colors duration-200 ease-out hover:text-[#0F2A47] dark:hover:text-white ${FOCUS_RING} ${
-    isActive
-      ? "text-[#0F2A47] dark:text-white"
-      : "text-[#48607A] dark:text-slate-300"
+  return `relative inline-block cursor-pointer rounded-sm text-base font-medium transition-colors duration-200 ease-out hover:text-hero-text ${FOCUS_RING} ${
+    isActive ? "text-hero-text" : "text-hero-muted"
   }`;
 }
 
 const PILL_BASE = `inline-flex h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full px-[18px] text-[15px] font-semibold transition-colors duration-200 ${FOCUS_RING}`;
 
-const ASK_ATLAS_PILL = `${PILL_BASE} border border-[#C9D6E4] bg-transparent text-[#0F2A47] hover:border-[#0F2A47] dark:border-slate-600 dark:text-slate-100 dark:hover:border-slate-300`;
+const ASK_ATLAS_PILL = `${PILL_BASE} border border-hero-pill-border bg-transparent text-hero-text hover:border-hero-text`;
 
-const RESUME_PILL = `${PILL_BASE} bg-[#0F2A47] text-white hover:bg-[#1A3B5E] dark:bg-slate-100 dark:text-[#0F2A47] dark:hover:bg-white`;
+const RESUME_PILL = `${PILL_BASE} bg-hero-text text-hero-bg hover:opacity-90`;
 
 function ActiveUnderline({ isActive }: { isActive: boolean }) {
   return (
     <span
-      className={`pointer-events-none absolute -bottom-1.5 left-0 h-[2px] w-full origin-left rounded-full bg-[#0F2A47] transition-transform duration-300 ease-out dark:bg-white ${
+      className={`pointer-events-none absolute -bottom-1.5 left-0 h-[2px] w-full origin-left rounded-full bg-hero-text transition-transform duration-300 ease-out ${
         isActive ? "scale-x-100" : "scale-x-0"
       }`}
       aria-hidden
@@ -152,7 +150,7 @@ function ProjectsNavItem({ isActive }: { isActive: boolean }) {
           aria-label={isOpen ? "Hide project list" : "Show project list"}
           aria-haspopup="menu"
           aria-expanded={isOpen}
-          className={`inline-flex h-6 w-6 cursor-pointer items-center justify-center rounded-full text-[#48607A] transition-colors hover:text-[#0F2A47] dark:text-slate-400 dark:hover:text-white ${FOCUS_RING}`}
+          className={`inline-flex h-6 w-6 cursor-pointer items-center justify-center rounded-full text-hero-muted transition-colors hover:text-hero-text ${FOCUS_RING}`}
         >
           <ChevronDown
             className={`h-4 w-4 transition-transform duration-200 ${
@@ -301,8 +299,8 @@ function MobileNavPanel({
   const mobileLinkClass = (isActive: boolean) =>
     `flex min-h-12 w-full items-center rounded-lg px-3 py-3 text-base font-medium transition-colors ${FOCUS_RING} ${
       isActive
-        ? "bg-[#EEF3F8] text-[#0F2A47] dark:bg-slate-800 dark:text-white"
-        : "text-[#48607A] hover:bg-[#F4F7FA] hover:text-[#0F2A47] dark:text-slate-300 dark:hover:bg-slate-800/70 dark:hover:text-white"
+        ? "bg-hero-accent-tint text-hero-text"
+        : "text-hero-muted hover:bg-hero-accent-tint/60 hover:text-hero-text"
     }`;
 
   const mobileSubLinkClass = (isSelected: boolean, emphasis: boolean) =>
@@ -310,8 +308,8 @@ function MobileNavPanel({
       emphasis ? "font-bold" : "font-normal"
     } ${
       isSelected
-        ? "bg-[#EEF3F8] font-semibold text-[#0F2A47] dark:bg-slate-800 dark:text-white"
-        : "text-[#48607A] hover:bg-[#F4F7FA] hover:text-[#0F2A47] dark:text-slate-300 dark:hover:bg-slate-800/70 dark:hover:text-white"
+        ? "bg-hero-accent-tint font-semibold text-hero-text"
+        : "text-hero-muted hover:bg-hero-accent-tint/60 hover:text-hero-text"
     }`;
 
   return (
@@ -335,7 +333,7 @@ function MobileNavPanel({
             role="dialog"
             aria-modal="true"
             aria-label="Site navigation"
-            className="fixed inset-x-0 top-[calc(env(safe-area-inset-top,0px)+4rem)] z-[70] max-h-[min(80vh,calc(100dvh-4.5rem))] overflow-y-auto border-b border-[#E3EAF2] bg-white px-4 py-3 shadow-lg shadow-[#0F2A47]/10 dark:border-slate-800 dark:bg-background dark:shadow-black/40"
+            className="fixed inset-x-0 top-[calc(env(safe-area-inset-top,0px)+4rem)] z-[70] max-h-[min(80vh,calc(100dvh-4.5rem))] overflow-y-auto border-b border-hero-border bg-hero-bg px-4 py-3 shadow-lg shadow-sky-900/10 dark:shadow-black/40"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -370,7 +368,7 @@ function MobileNavPanel({
                               ? "Hide project list"
                               : "Show project list"
                           }
-                          className={`inline-flex min-h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-lg text-[#48607A] transition-colors hover:bg-[#F4F7FA] hover:text-[#0F2A47] dark:text-slate-400 dark:hover:bg-slate-800/70 dark:hover:text-white ${FOCUS_RING}`}
+                          className={`inline-flex min-h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-lg text-hero-muted transition-colors hover:bg-hero-accent-tint/60 hover:text-hero-text ${FOCUS_RING}`}
                         >
                           <ChevronDown
                             className={`h-5 w-5 transition-transform duration-200 ${
@@ -414,7 +412,7 @@ function MobileNavPanel({
                                     <span>{item.label}</span>
                                     {isSelected && (
                                       <span
-                                        className="ml-3 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0F2A47] dark:bg-white"
+                                        className="ml-3 h-1.5 w-1.5 shrink-0 rounded-full bg-hero-text"
                                         aria-hidden
                                       />
                                     )}
@@ -471,8 +469,8 @@ function MobileNavPanel({
                 </Link>
               </li>
             </ul>
-            <div className="mt-2 flex min-h-12 items-center justify-between border-t border-[#E3EAF2] px-3 pt-3 dark:border-slate-800">
-              <span className="text-base font-medium text-[#48607A] dark:text-slate-300">
+            <div className="mt-2 flex min-h-12 items-center justify-between border-t border-hero-border px-3 pt-3">
+              <span className="text-base font-medium text-hero-muted">
                 Theme
               </span>
               <ThemeToggle size="lg" />
@@ -540,14 +538,14 @@ export default function NavBar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#E3EAF2] bg-white dark:border-slate-800 dark:bg-background">
+    <header className="sticky top-0 z-50 w-full border-b border-hero-border bg-hero-bg font-display">
       <nav
-        className="flex h-16 w-full items-center justify-between gap-4 px-6 lg:h-[88px] xl:px-24"
+        className="hero-container flex h-16 items-center justify-between gap-4 lg:h-[88px]"
         aria-label="Primary"
       >
         <a
           href="/#hero"
-          className={`inline-flex min-h-11 shrink-0 items-center rounded-sm text-xl font-bold tracking-[-0.01em] text-[#0F2A47] no-underline hover:no-underline dark:text-slate-100 ${FOCUS_RING}`}
+          className={`inline-flex min-h-11 shrink-0 items-center rounded-sm text-xl font-bold tracking-[-0.01em] text-hero-text no-underline hover:no-underline ${FOCUS_RING}`}
         >
           Roy Ho
         </a>
@@ -576,7 +574,7 @@ export default function NavBar() {
           </div>
           <button
             type="button"
-            className={`inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-[#C9D6E4] text-[#0F2A47] transition-colors hover:bg-[#F4F7FA] lg:hidden dark:border-slate-600 dark:text-slate-100 dark:hover:bg-slate-800 ${FOCUS_RING}`}
+            className={`inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-hero-pill-border text-hero-text transition-colors hover:bg-hero-accent-tint/60 lg:hidden ${FOCUS_RING}`}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls={mobilePanelId}

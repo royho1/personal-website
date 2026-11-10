@@ -1,18 +1,26 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { FaChevronDown, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, type Variants } from "framer-motion";
-import { Mail, MapPin } from "lucide-react";
-import AtlasDog from "./AtlasDog";
+import { ArrowRight } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FiMail, FiMapPin } from "react-icons/fi";
 
 const profileImageSrc = "/picture.jpeg";
-const profileImageWidth = 799;
-const profileImageHeight = 1123;
+const EMAIL = "royho.career@gmail.com";
+const LINKEDIN_URL = "https://www.linkedin.com/in/royho1/";
+const GITHUB_URL = "https://github.com/royho1";
+const XLR8_URL = "https://www.tryxlr8.ai";
+const JAIKE_URL = "https://ijaike.org/";
 
-const primaryCtaClassName =
-  "inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-sky-600 px-5 text-sm font-medium text-white transition-colors hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:bg-sky-500 dark:hover:bg-sky-400";
+const FOCUS_RING =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-hero-accent";
+
+const BUTTON_BASE = `inline-flex h-14 w-full items-center justify-center gap-2 whitespace-nowrap rounded-[10px] px-7 text-lg font-semibold transition-colors duration-200 sm:w-auto ${FOCUS_RING}`;
+
+const ROLE_LINK = `rounded-sm font-medium text-hero-accent underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] duration-150 hover:decoration-current focus-visible:decoration-current ${FOCUS_RING}`;
+
+const FOOTER_LINK = `inline-flex min-h-11 items-center gap-2 rounded-sm text-hero-text transition-colors hover:text-hero-accent ${FOCUS_RING}`;
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -20,8 +28,8 @@ const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.08,
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
     },
   },
 };
@@ -39,27 +47,35 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="scroll-mt-28 bg-white dark:bg-slate-950"
       aria-labelledby="hero-heading"
+      className="flex min-h-[calc(100svh-4rem)] flex-col overflow-x-clip bg-hero-bg font-display lg:min-h-[calc(60vh+200px)]"
     >
-      <div className="mx-auto flex max-w-[1120px] flex-col items-center gap-8 px-6 pb-6 pt-8 md:flex-row md:items-center md:gap-16 md:px-8 md:pb-10 md:pt-16 lg:pt-20">
-        <div className="w-full max-w-[min(280px,72vw)] shrink-0 md:max-w-[380px]">
-          <div className="relative mx-auto w-full max-w-[min(280px,72vw)] md:mx-0 md:max-w-[380px]">
-            <span
-              aria-hidden
-              className="pointer-events-none absolute -inset-4 rounded-[1.75rem] bg-sky-400 opacity-20 blur-2xl dark:bg-sky-500 dark:opacity-25"
+      {/* Desktop spare height splits 1:2 above/below so the hero sits high
+          under the nav instead of dead center. The section min-height is
+          tuned to the 524px photo so the top gap stays the same at every
+          viewport height while the bottom gap stays modest. */}
+      <div aria-hidden="true" className="hidden lg:block lg:flex-[1]" />
+      <div className="hero-container flex flex-1 flex-col items-start gap-12 py-12 lg:flex-none lg:flex-row lg:items-center lg:gap-16 lg:pb-4 lg:pt-8 xl:gap-24">
+        {/* Percent offsets keep the accent block's peek proportional when the
+            404x524 wrapper scales down on smaller screens. */}
+        <div className="relative isolate aspect-[404/524] w-[min(300px,100%)] shrink-0 lg:h-[524px] lg:w-[404px]">
+          <div
+            aria-hidden="true"
+            className="hero-photo-glow pointer-events-none absolute -inset-[60px] z-0"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute left-0 top-[4.58%] z-[1] h-[95.42%] w-[94.06%] rounded-[20px] bg-hero-accent"
+          />
+          <div className="absolute left-[5.94%] top-0 z-[2] h-[95.42%] w-[94.06%] overflow-hidden rounded-[20px] shadow-[0_24px_60px_-12px_rgba(8,47,73,0.35)]">
+            <Image
+              src={profileImageSrc}
+              alt="Portrait of Roy Ho"
+              fill
+              priority
+              sizes="(min-width: 1024px) 380px, 280px"
+              className="object-cover object-[50%_20%]"
             />
-            <div className="group relative overflow-hidden rounded-2xl bg-sky-200/80 shadow-sm shadow-sky-900/10 ring-1 ring-sky-200/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-slate-800/60 dark:shadow-black/40 dark:ring-slate-700">
-              <Image
-                src={profileImageSrc}
-                alt="Roy Ho"
-                width={profileImageWidth}
-                height={profileImageHeight}
-                className="block h-auto w-full"
-                sizes="380px"
-                priority
-              />
-            </div>
           </div>
         </div>
 
@@ -67,148 +83,137 @@ export default function HeroSection() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex w-full min-w-0 flex-1 flex-col gap-5 md:gap-7"
+          className="flex w-full min-w-0 flex-1 flex-col gap-7"
         >
-          {/* Zone 1 — Identity */}
-          <motion.div variants={itemVariants} className="flex flex-col gap-3 md:gap-4">
-            <h1
-              id="hero-heading"
-              className="text-4xl font-bold leading-none tracking-tight text-sky-950 md:text-5xl lg:text-6xl dark:text-sky-100"
-            >
-              Roy Ho
-            </h1>
-            <p className="text-[17px] leading-snug text-sky-800/90 dark:text-sky-300">
-              AI Search Strategist @ XLR8 AI | Data Science & AI
-            </p>
-          </motion.div>
+          <motion.p
+            variants={itemVariants}
+            className="flex items-center gap-3 text-[15px] font-semibold uppercase tracking-[0.08em] text-hero-muted"
+          >
+            <span aria-hidden className="h-0.5 w-8 shrink-0 bg-hero-muted" />
+            Data Science &amp; AI · San Francisco
+          </motion.p>
 
-          <div
-            aria-hidden
-            className="h-px w-full shrink-0 bg-sky-200/50 dark:bg-sky-500/25"
-          />
+          <motion.h1
+            variants={itemVariants}
+            id="hero-heading"
+            className="-ml-[0.041em] text-[52px] font-extrabold leading-[0.92] tracking-[-0.045em] text-hero-text sm:text-[64px] lg:text-[104px]"
+          >
+            Roy Ho
+          </motion.h1>
+
+          <motion.ul
+            variants={itemVariants}
+            className="flex flex-col gap-1.5 text-xl font-medium leading-snug text-hero-text-2 lg:text-2xl"
+          >
+            <li className="flex items-start gap-2.5">
+              <span className="flex h-[1lh] shrink-0 items-center">
+                <span aria-hidden="true" className="status-dot" />
+              </span>
+              <span>
+                AI Search Strategist at{" "}
+                <a
+                  href={XLR8_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={ROLE_LINK}
+                >
+                  XLR8 AI
+                </a>
+              </span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="flex h-[1lh] shrink-0 items-center">
+                <span aria-hidden="true" className="status-dot" />
+              </span>
+              <span>
+                Part-time AI Researcher at{" "}
+                <a
+                  href={JAIKE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={ROLE_LINK}
+                >
+                  JAIKE
+                </a>
+              </span>
+            </li>
+          </motion.ul>
 
           <motion.p
             variants={itemVariants}
-            className="max-w-[36rem] text-base font-normal leading-relaxed text-slate-700 dark:text-slate-300"
+            className="max-w-[60ch] text-xl leading-normal text-hero-text-2"
           >
-            Currently, I work at{" "}
-            <span className="font-semibold">XLR8 AI</span>, an{" "}
-            <span className="font-semibold">AI startup</span> where I analyze
-            how generative AI systems discover, interpret, and recommend brands.
-            Beyond my role, I build software, explore machine learning, and
-            conduct research in applied AI.
+            Building at the intersection of software engineering, data science,
+            and AI, finding and developing technical solutions to real problems.
           </motion.p>
 
-          <div
-            aria-hidden
-            className="h-px w-full shrink-0 bg-sky-200/50 dark:bg-sky-500/25"
-          />
-
-          {/* Zone 2 — Contact + socials */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap items-center gap-y-3"
+            className="mt-1 flex flex-col gap-4 sm:flex-row sm:flex-wrap"
           >
-            <div className="flex flex-col gap-1.5 text-sm">
-              <p className="inline-flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
-                <Mail
-                  className="h-3.5 w-3.5 shrink-0 text-slate-500 dark:text-slate-400"
-                  strokeWidth={2}
-                  aria-hidden
-                />
-                <span className="text-slate-400 dark:text-slate-500">Email:</span>
-                <a
-                  href="mailto:royho.career@gmail.com"
-                  className="text-sky-600 underline underline-offset-2 transition-colors hover:text-sky-800 dark:text-sky-400 dark:hover:text-sky-300"
-                >
-                  royho.career@gmail.com
-                </a>
-              </p>
-              <p className="inline-flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
-                <MapPin
-                  className="h-3.5 w-3.5 shrink-0 text-slate-500 dark:text-slate-400"
-                  strokeWidth={2}
-                  aria-hidden
-                />
-                <span className="text-slate-400 dark:text-slate-500">
-                  Location:
-                </span>
-                <span className="text-slate-800 dark:text-slate-200">
-                  San Francisco, CA
-                </span>
-              </p>
-            </div>
-
-            <span
-              aria-hidden
-              className="ml-6 mr-6 hidden h-10 w-px shrink-0 self-center bg-sky-200 sm:inline-block dark:bg-slate-600"
-            />
-
-            <div className="flex items-center gap-3 sm:ml-0">
-              <a
-                href="https://www.linkedin.com/in/royho1/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn profile"
-                className="inline-flex cursor-pointer transition-transform hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
-              >
-                <FaLinkedin className="h-7 w-7 text-[#0A66C2]" aria-hidden />
-              </a>
-              <a
-                href="https://github.com/royho1"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub profile"
-                className="inline-flex cursor-pointer transition-transform hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
-              >
-                <FaGithub
-                  className="h-7 w-7 text-[#181717] dark:text-white"
-                  aria-hidden
-                />
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Zone 3 — Actions */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap items-center gap-x-6 gap-y-3"
-          >
-            <div className="flex flex-wrap items-center gap-2.5">
-              <a href="#projects" className={primaryCtaClassName}>
-                View Projects
-              </a>
-              <a href="#resume" className={primaryCtaClassName}>
-                Resume
-              </a>
-            </div>
-            <Link
-              href="/ask"
-              aria-label="Ask Atlas"
-              className="group inline-flex cursor-pointer items-center gap-2.5 border-0 bg-transparent p-0 text-sky-700 transition-all duration-200 ease-out hover:scale-105 hover:opacity-85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:text-sky-300"
+            <a
+              href="#projects"
+              className={`${BUTTON_BASE} bg-hero-accent text-white hover:opacity-90 dark:text-hero-bg`}
             >
-              <AtlasDog size={44} className="shrink-0" />
-              <span className="font-handwriting -rotate-2 text-2xl leading-none tracking-wide text-sky-700 dark:text-sky-300">
-                Ask Atlas!
-              </span>
-            </Link>
+              View projects
+              <ArrowRight className="h-5 w-5" strokeWidth={2.25} aria-hidden />
+            </a>
+            <a
+              href="#contact"
+              className={`${BUTTON_BASE} border-[1.5px] border-hero-text bg-transparent text-hero-text hover:bg-hero-accent-tint`}
+            >
+              Get in touch
+            </a>
           </motion.div>
         </motion.div>
       </div>
+      <div aria-hidden="true" className="hidden lg:block lg:flex-[2]" />
 
-      <div className="flex justify-center pb-5 pt-8 md:pb-8 md:pt-14">
-        <a
-          href="#about"
-          aria-label="Scroll to explore"
-          className="group flex cursor-pointer flex-col items-center gap-2 text-slate-500 transition-colors hover:text-sky-800 dark:text-slate-400 dark:hover:text-sky-300"
-        >
-          <span className="flex animate-bounce flex-col items-center gap-2 [animation-duration:1.8s]">
-            <span className="text-xs font-medium uppercase tracking-[0.2em] md:text-sm">
-              Scroll to explore
-            </span>
-            <FaChevronDown className="h-5 w-5" aria-hidden />
-          </span>
-        </a>
+      <div className="border-t border-hero-border">
+        <div className="hero-container flex flex-wrap items-center justify-between gap-x-8 gap-y-4 py-4 text-base sm:min-h-20">
+          <ul className="flex flex-wrap items-center gap-x-8 gap-y-4 font-medium">
+            <li>
+              <a href={`mailto:${EMAIL}`} className={FOOTER_LINK}>
+                <FiMail size={20} aria-hidden="true" className="shrink-0" />
+                {EMAIL}
+              </a>
+            </li>
+            <li>
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={FOOTER_LINK}
+              >
+                <FaLinkedin
+                  size={22}
+                  aria-hidden="true"
+                  className="shrink-0 text-[#0A66C2]"
+                />
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={FOOTER_LINK}
+              >
+                <FaGithub
+                  size={22}
+                  aria-hidden="true"
+                  className="shrink-0 text-hero-text"
+                />
+                GitHub
+              </a>
+            </li>
+          </ul>
+          <p className="inline-flex items-center gap-2 text-hero-muted">
+            <FiMapPin size={18} aria-hidden="true" className="shrink-0" />
+            San Francisco, CA
+          </p>
+        </div>
       </div>
     </section>
   );

@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-slate-600 md:flex-row md:px-8 dark:text-slate-400">
         <p>
           © 2026{" "}
-          <span className="font-medium text-sky-950 dark:text-sky-200">Roy Ho</span>.
+          <span className="font-medium text-sky-950 dark:text-sky-200">Roy Ho</span>
         </p>
         <div className="flex items-center gap-5">
           <a

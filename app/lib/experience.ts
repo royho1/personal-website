@@ -112,7 +112,7 @@ export const experiences: ExperienceEntry[] = [
     companyDetail: "AI Student Collective",
     dates: "September 2024 – April 2025",
     location: "Davis, CA",
-    title: "General Member",
+    title: "Software Developer",
     logoSrc: "/experience/AISC.jpg",
     featured: true,
     bullets: [

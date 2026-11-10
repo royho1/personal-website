@@ -53,7 +53,7 @@ Timeline-style entries with logos:
 - **XLR8 AI** (AI Search Strategist)
 - **JAIKE** (AI Researcher)
 - **TechSprint Innovators** (Head of Data Engineering)
-- **AISC / AI Student Collective** (General Member)
+- **AISC / AI Student Collective** (Software Developer)
 
 ### Resume
 

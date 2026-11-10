@@ -22,6 +22,40 @@ html {
   }
 }
 
+/* Shared width for the navbar, hero row, and hero footer strip so their
+ * left and right edges line up. */
+@layer components {
+  .hero-container {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .hero-container {
+      padding-inline: 64px;
+    }
+  }
+
+  .hero-photo-glow {
+    background: radial-gradient(
+      closest-side,
+      rgba(2, 132, 199, 0.3),
+      rgba(2, 132, 199, 0) 100%
+    );
+    filter: blur(40px);
+  }
+
+  .dark .hero-photo-glow {
+    background: radial-gradient(
+      closest-side,
+      rgba(56, 189, 248, 0.35),
+      rgba(56, 189, 248, 0) 100%
+    );
+  }
+}
+
 /* Browsers and some resets leave buttons on the default arrow cursor.
  * Interactive controls should always show a hand pointer. */
 @layer base {
@@ -44,6 +78,17 @@ html {
     #ffffff 52%,
     #f0f9ff 100%
   );
+
+  /* Navbar + hero palette. */
+  /* Sky palette, matching the rest of the site. */
+  --hero-text: #082f49;
+  --hero-text-2: #3b526b;
+  --hero-muted: #48607a;
+  --hero-accent: #0284c7;
+  --hero-accent-tint: #e0f2fe;
+  --hero-border: #e0f2fe;
+  --hero-pill-border: #bae6fd;
+  --hero-bg: #ffffff;
 }
 
 .dark {
@@ -55,11 +100,29 @@ html {
     #0b1220 40%,
     #0f172a 100%
   );
+
+  --hero-text: #e0f2fe;
+  --hero-text-2: #b4c6da;
+  --hero-muted: #8fa6bf;
+  --hero-accent: #38bdf8;
+  --hero-accent-tint: #0b283e;
+  --hero-border: #1e293b;
+  --hero-pill-border: #334155;
+  --hero-bg: #0b1220;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-hero-text: var(--hero-text);
+  --color-hero-text-2: var(--hero-text-2);
+  --color-hero-muted: var(--hero-muted);
+  --color-hero-accent: var(--hero-accent);
+  --color-hero-accent-tint: var(--hero-accent-tint);
+  --color-hero-border: var(--hero-border);
+  --color-hero-pill-border: var(--hero-pill-border);
+  --color-hero-bg: var(--hero-bg);
+  --font-display: var(--font-inter-tight), system-ui, sans-serif;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-handwriting: var(--font-caveat), "Bradley Hand", "Segoe Script", cursive;
@@ -499,6 +562,53 @@ html {
 
 .atlas-idle-float {
   animation: atlas-idle-float 3.5s ease-in-out infinite;
+}
+
+/* Hero "currently working" status dot. The ring expands and fades behind a
+ * static center dot so the dot itself never disappears. */
+.status-dot {
+  --status-dot: #10b981;
+  --status-dot-glow: rgba(16, 185, 129, 0.45);
+  position: relative;
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background: var(--status-dot);
+  box-shadow: 0 0 6px 1px var(--status-dot-glow);
+}
+
+.dark .status-dot {
+  --status-dot: #34d399;
+  --status-dot-glow: rgba(52, 211, 153, 0.4);
+}
+
+.status-dot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--status-dot);
+  animation: status-dot-pulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes status-dot-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  80%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-dot::before {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

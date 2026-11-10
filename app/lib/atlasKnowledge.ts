@@ -184,7 +184,7 @@ The portfolio Experience section has two views. Featured Experience (default) sh
 ### AISC (AI Student Collective)
 - Dates: September 2024 – April 2025
 - Location: Davis, CA
-- Title: General Member
+- Title: Software Developer
 - Featured: yes
 - Built machine learning models for stroke risk prediction and real-time drowsy driver detection within structured project cycles.
 - Performed data preprocessing, feature engineering, model development, evaluation, and project presentations.
