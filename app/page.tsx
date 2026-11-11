@@ -17,7 +17,7 @@ import ResumeSection from "./components/ResumeSection";
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: "/",
+    canonical: "https://www.royho-career.com",
   },
 };
 
