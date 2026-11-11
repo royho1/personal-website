@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Ask Atlas | Roy Ho",
   description:
     "Ask an AI assistant about Roy Ho's background, projects, and experience.",
+  alternates: {
+    canonical: "/ask",
+  },
 };
 
 export default function AskPage() {
