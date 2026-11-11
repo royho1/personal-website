@@ -7,7 +7,10 @@ import ResumeSection from "../components/ResumeSection";
 export const metadata: Metadata = {
   title: "Resume | Roy Ho",
   description:
-    "View or download Roy Ho's resume as a PDF — experience, education, and skills.",
+    "View or download Roy Ho's resume as a PDF - experience, education, and skills.",
+  alternates: {
+    canonical: "/resume",
+  },
 };
 
 export default function ResumePage() {

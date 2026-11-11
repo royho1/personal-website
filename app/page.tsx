@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import AboutSection from "./components/AboutSection";
@@ -13,6 +14,12 @@ import NavBar from "./components/NavBar";
 import ProjectsSection from "./components/ProjectsSection";
 import RecentMusic from "./components/RecentMusic";
 import ResumeSection from "./components/ResumeSection";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function Home() {
   return (
