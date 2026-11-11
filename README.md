@@ -1,7 +1,7 @@
 # Personal Website
 My personal website! Showcases my projects across data analytics, machine learning, and data engineering, resume, experiences, and more! Built with Next.js, a sky-blue light theme, full dark mode, and small polished interactions.
 
-**Live site:** [royho-career.com](https://royho-career.com) (Vercel)
+**Live site:** [www.royho-career.com](https://www.royho-career.com) (Vercel)
 
 Sections: Hero • About • Projects • Experience • Resume • Hobbies • Ask Atlas • Let's Connect.
 
@@ -81,7 +81,7 @@ Timeline-style entries with logos:
 
 ## Viewing the site
 
-- **Online:** [royho-career.com](https://royho-career.com)
+- **Online:** [www.royho-career.com](https://www.royho-career.com)
 - **Locally:** steps below
 
 ## Getting Started (local)
@@ -128,7 +128,7 @@ public/
 
 ## Deployment
 
-Deployed on [Vercel](https://vercel.com) at [royho-career.com](https://royho-career.com). Pushes to `main` trigger `next build` and a production deploy.
+Deployed on [Vercel](https://vercel.com) at [www.royho-career.com](https://www.royho-career.com). Pushes to `main` trigger `next build` and a production deploy.
 
 ## Contact
 

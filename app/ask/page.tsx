@@ -4,12 +4,36 @@ import BackToTop from "../components/BackToTop";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 
+const askTitle = "Ask Atlas | Roy Ho";
+const askDescription =
+  "Ask an AI assistant about Roy Ho's background, projects, and experience.";
+
 export const metadata: Metadata = {
-  title: "Ask Atlas | Roy Ho",
-  description:
-    "Ask an AI assistant about Roy Ho's background, projects, and experience.",
+  title: askTitle,
+  description: askDescription,
   alternates: {
     canonical: "/ask",
+  },
+  openGraph: {
+    title: askTitle,
+    description: askDescription,
+    url: "/ask",
+    siteName: "Roy Ho",
+    type: "website",
+    images: [
+      {
+        url: "/roy-ho-headshot.jpg",
+        width: 728,
+        height: 1024,
+        alt: "Roy Ho",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: askTitle,
+    description: askDescription,
+    images: ["/roy-ho-headshot.jpg"],
   },
 };
 
