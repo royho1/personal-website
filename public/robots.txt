@@ -1,0 +1,10 @@
+# https://www.royho-career.com/robots.txt
+# LLM-oriented site summary: https://www.royho-career.com/llms.txt
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /atlas-inbox
+Disallow: /atlas-inbox/
+
+Sitemap: https://www.royho-career.com/sitemap.xml
