@@ -76,7 +76,7 @@ function ExperienceCard({
   const logo = entry.logoSrc ? (
     <Image
       src={entry.logoSrc}
-      alt=""
+      alt={`${entry.company} logo`}
       width={240}
       height={60}
       className="h-[60px] w-auto max-w-[min(240px,42vw)] shrink-0 object-contain max-sm:h-10"
