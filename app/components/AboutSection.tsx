@@ -121,13 +121,43 @@ export default function AboutSection() {
                 <span className="font-semibold text-sky-800 dark:text-sky-300">
                   XLR8 AI
                 </span>
-                , working at the intersection of{" "}
+                , an early-stage AI startup in San Francisco. In my role, I work
+                on{" "}
                 <span className="font-semibold text-sky-800 dark:text-sky-300">
-                  AI systems, data analytics, and applied technology
+                  Generative Engine Optimization (GEO)
                 </span>
-                . My work involves analyzing how generative AI platforms
-                discover, interpret, and recommend brands, translating technical
-                insights into optimization strategies for clients.
+                , studying how{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  LLMs retrieve and cite sources
+                </span>
+                , designing{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  query sets to evaluate AI search visibility
+                </span>{" "}
+                across models, and implementing technical and content
+                improvements so AI systems can accurately understand and surface
+                our clients.
+              </p>
+              <p>
+                Alongside that, I&apos;m continuing my{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  AI research
+                </span>{" "}
+                part-time with the Journal of Artificial Intelligence and
+                Knowledge Engineering (
+                <a
+                  href="https://ijaike.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-sky-800 dark:text-sky-300"
+                >
+                  JAIKE
+                </a>
+                ), where I first-authored a review on{" "}
+                <span className="font-semibold text-sky-800 dark:text-sky-300">
+                  LLM agent autonomy and oversight
+                </span>{" "}
+                and serve as a peer reviewer.
               </p>
               <p>
                 My technical background spans{" "}
@@ -147,11 +177,7 @@ export default function AboutSection() {
                 <span className="font-semibold text-sky-800 dark:text-sky-300">
                   full-stack applications
                 </span>
-                . I&apos;ve also conducted first-authored research exploring{" "}
-                <span className="font-semibold text-sky-800 dark:text-sky-300">
-                  LLM agent autonomy
-                </span>
-                , human oversight, and AI reliability.
+                .
               </p>
               <p>
                 I&apos;m particularly interested in{" "}
