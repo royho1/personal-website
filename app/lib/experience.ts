@@ -46,7 +46,7 @@ export const experiences: ExperienceEntry[] = [
     current: true,
     featured: true,
     bullets: [
-      "Helping brands improve their visibility across AI-powered search platforms through Generative Engine Optimization (GEO), combining AI search analysis, data-driven insights, and strategic optimization.",
+      "Working on Generative Engine Optimization (GEO) at an early-stage AI startup in San Francisco, focused on how LLMs retrieve, interpret, and cite sources.",
     ],
   },
   {
