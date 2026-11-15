@@ -87,10 +87,15 @@ export default function HeroSection() {
         >
           <motion.p
             variants={itemVariants}
-            className="flex items-center gap-3 text-[15px] font-semibold uppercase tracking-[0.08em] text-hero-muted"
+            className="flex items-start gap-3 text-[15px] font-semibold uppercase tracking-[0.05em] text-hero-muted sm:items-center sm:tracking-[0.08em]"
           >
-            <span aria-hidden className="h-0.5 w-8 shrink-0 bg-hero-muted" />
-            Data Science &amp; AI · San Francisco
+            <span
+              aria-hidden
+              className="mt-[calc((1lh-2px)/2)] h-0.5 w-8 shrink-0 bg-hero-muted sm:mt-0"
+            />
+            <span className="min-w-0">
+              Data Science, Engineering &amp; AI<span className="hidden sm:inline"> · </span><span className="block sm:inline">San Francisco</span>
+            </span>
           </motion.p>
 
           <motion.h1

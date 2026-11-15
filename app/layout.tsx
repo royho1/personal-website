@@ -21,9 +21,9 @@ const interTight = Inter_Tight({
 });
 
 const siteUrl = "https://www.royho-career.com";
-const siteTitle = "Roy Ho | Data Science & AI";
+const siteTitle = "Roy Ho | Data Science, Engineering, & AI";
 const siteDescription =
-  "Portfolio of Roy Ho, a San Francisco data science and AI professional. Projects in data engineering, machine learning, and full-stack data apps.";
+  "Portfolio of Roy Ho, a San Francisco data scientist and engineer working in AI. Projects in data engineering, machine learning, and full-stack data apps.";
 const ogImage = {
   url: `${siteUrl}/roy-ho-headshot.jpg`,
   width: 728,
@@ -76,6 +76,8 @@ const personJsonLd = {
   ],
   knowsAbout: [
     "Data science",
+    "Data engineering",
+    "Software engineering",
     "Artificial intelligence",
     "Machine learning",
     "Statistical data science",
