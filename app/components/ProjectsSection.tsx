@@ -8,12 +8,11 @@ import {
   type Variants,
 } from "framer-motion";
 import {
-  ArrowRight,
   HeartPulse,
   MapPin,
   Star,
 } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
+import { FaExpand, FaGithub } from "react-icons/fa";
 import { AdditionalProjectIcon } from "./AdditionalProjectIcons";
 import type { AdditionalProjectIconVariant } from "./AdditionalProjectIcons";
 import DrowsyEyeIcon from "./DrowsyEyeIcon";
@@ -380,8 +379,8 @@ const PROJECT_CARD_SURFACE =
 const VIEW_PROJECT_LINK =
   "inline-flex items-center gap-1.5 font-medium text-hero-accent underline decoration-transparent underline-offset-4 transition-[text-decoration-color] duration-150 ease-out group-hover:decoration-current group-focus-visible:decoration-current";
 
-const VIEW_PROJECT_ARROW =
-  "transition-transform duration-150 ease-out group-hover:translate-x-1 group-focus-visible:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-focus-visible:translate-x-0";
+const VIEW_PROJECT_ICON =
+  "transition-transform duration-150 ease-out group-hover:scale-110 group-focus-visible:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-focus-visible:scale-100";
 
 function projectMatches(tags: readonly Tag[], filter: Filter): boolean {
   if (filter === "All") return true;
@@ -639,9 +638,8 @@ export default function ProjectsSection() {
                     </p>
                     <span className={`mt-5 text-sm ${VIEW_PROJECT_LINK}`}>
                       View project
-                      <ArrowRight
-                        className={`h-3.5 w-3.5 ${VIEW_PROJECT_ARROW}`}
-                        strokeWidth={2.25}
+                      <FaExpand
+                        className={`h-4 w-4 ${VIEW_PROJECT_ICON}`}
                         aria-hidden
                       />
                     </span>
@@ -726,9 +724,8 @@ export default function ProjectsSection() {
                       <div className="mt-3 flex min-h-[1.25rem] items-center">
                         <span className={`text-[11px] ${VIEW_PROJECT_LINK}`}>
                           View project
-                          <ArrowRight
-                            className={`h-3 w-3 ${VIEW_PROJECT_ARROW}`}
-                            strokeWidth={2.25}
+                          <FaExpand
+                            className={`h-3 w-3 ${VIEW_PROJECT_ICON}`}
                             aria-hidden
                           />
                         </span>
