@@ -31,6 +31,19 @@ const THEME_TRANSITION_MS = 600;
  * re-animate inside the new snapshot on its own timing. */
 const THEME_SWITCHING_CLASS = "theme-switching";
 
+/** True when any `[data-vt-unsafe]` element overlaps the viewport (e.g. a
+ * PDF iframe that View Transitions cannot snapshot). Hidden elements with
+ * zero size, like the mobile-hidden resume preview, do not count. */
+function hasVisibleUnsafeViewTransitionTarget(): boolean {
+  const nodes = document.querySelectorAll<HTMLElement>("[data-vt-unsafe]");
+  for (const node of nodes) {
+    const rect = node.getBoundingClientRect();
+    if (rect.width <= 0 || rect.height <= 0) continue;
+    if (rect.bottom > 0 && rect.top < window.innerHeight) return true;
+  }
+  return false;
+}
+
 /**
  * Provides the current theme and a toggle function. State is kept in memory
  * only (no localStorage) and defaults to `light` on each page load. The
@@ -59,7 +72,11 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
       root.classList.toggle("dark", next === "dark");
     };
 
-    if (typeof document.startViewTransition !== "function") {
+    const useFallback =
+      typeof document.startViewTransition !== "function" ||
+      hasVisibleUnsafeViewTransitionTarget();
+
+    if (useFallback) {
       root.classList.add(THEME_TRANSITION_CLASS);
       apply();
       window.setTimeout(

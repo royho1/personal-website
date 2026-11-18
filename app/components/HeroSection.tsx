@@ -16,7 +16,7 @@ const JAIKE_URL = "https://ijaike.org/";
 const FOCUS_RING =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-hero-accent";
 
-const BUTTON_BASE = `inline-flex h-14 w-full items-center justify-center gap-2 whitespace-nowrap rounded-[10px] px-7 text-lg font-semibold transition-colors duration-200 sm:w-auto ${FOCUS_RING}`;
+const BUTTON_BASE = `inline-flex h-14 w-full items-center justify-center gap-2 whitespace-nowrap rounded-[10px] px-7 text-lg font-semibold transition-[color,background-color,border-color,opacity,box-shadow,transform] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-1 active:translate-y-0 active:scale-[0.97] active:duration-100 motion-reduce:transition-colors motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 sm:w-auto ${FOCUS_RING}`;
 
 const ROLE_LINK = `rounded-sm font-medium text-hero-accent underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] duration-150 hover:decoration-current focus-visible:decoration-current ${FOCUS_RING}`;
 
@@ -158,14 +158,18 @@ export default function HeroSection() {
           >
             <a
               href="#projects"
-              className={`${BUTTON_BASE} bg-hero-accent text-white hover:opacity-90 dark:text-hero-bg`}
+              className={`${BUTTON_BASE} group bg-hero-accent text-white hover:shadow-[0_10px_28px_-8px_rgb(14_165_233/0.55)] dark:text-hero-bg dark:hover:shadow-[0_10px_32px_-6px_rgb(56_189_248/0.5)]`}
             >
               View projects
-              <ArrowRight className="h-5 w-5" strokeWidth={2.25} aria-hidden />
+              <ArrowRight
+                className="h-5 w-5 transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"
+                strokeWidth={2.25}
+                aria-hidden
+              />
             </a>
             <a
               href="#contact"
-              className={`${BUTTON_BASE} border-[1.5px] border-hero-text bg-transparent text-hero-text hover:bg-hero-accent-tint`}
+              className={`${BUTTON_BASE} border-[1.5px] border-hero-text bg-transparent text-hero-text hover:bg-hero-accent-tint hover:shadow-[0_8px_20px_-10px_rgb(15_23_42/0.35)] dark:hover:shadow-[0_8px_24px_-10px_rgb(0_0_0/0.6)]`}
             >
               Contact
             </a>
@@ -214,8 +218,8 @@ export default function HeroSection() {
               </a>
             </li>
           </ul>
-          <p className="inline-flex items-center gap-2 text-hero-muted">
-            <FiMapPin size={18} aria-hidden="true" className="shrink-0" />
+          <p className="inline-flex min-h-11 items-center gap-2 font-medium text-hero-text">
+            <FiMapPin size={20} aria-hidden="true" className="shrink-0" />
             San Francisco, CA
           </p>
         </div>

@@ -1,7 +1,7 @@
 /**
  * Canonical work experience for the Experience section.
- * Featured Experience filters to `featured: true`; Full Timeline shows all.
- * Array order is the Full Timeline display order (explicit; not date-sorted).
+ * Featured entries drive the role-first timeline; non-featured appear under
+ * "Leadership & other roles". Array order is the display order (explicit; not date-sorted).
  */
 
 export type ExperienceEntry = {
@@ -23,24 +23,24 @@ export type ExperienceEntry = {
 };
 
 /**
- * Full Timeline order (index 0 first):
+ * Display order (index 0 first):
  * 1. XLR8 AI
  * 2. JAIKE
  * 3. Legarza Sports and More - Director
  * 4. TechSprint Innovators
  * 5. Legarza Sports and More - Coach
- * 6. AI Student Collective
+ * 6. The AI Collective
  * 7. Hollister Co.
  * 8. Youth Leadership Institute
  *
- * Featured view keeps this relative order among `featured: true` entries.
+ * Featured timeline keeps this relative order among `featured: true` entries.
  */
 export const experiences: ExperienceEntry[] = [
   {
     id: "xlr8",
     company: "XLR8 AI",
     dates: "November 2026 – Present",
-    location: "San Francisco, CA | Full-time",
+    location: "San Francisco, CA | On-site | Full-time",
     title: "AI Search Strategist",
     logoSrc: "/experience/XLR8.jpg",
     current: true,
@@ -59,8 +59,8 @@ export const experiences: ExperienceEntry[] = [
     logoSrc: "/experience/JAIKE.png",
     featured: true,
     bullets: [
-      "Conducted research on LLM-based automation covering API-driven system design, agent orchestration frameworks, retrieval-augmented generation (RAG), and a consolidated threat model spanning prompt injection, data leakage, and unintended action execution.",
       "First-authored a 30-page, 36-source review with Dr. Biren (Brian) Prasad as co-author, introducing a two-axis framework for LLM agent autonomy and oversight, plus a cost model pricing oversight against productivity gains; revise-and-resubmit with publication recommended.",
+      "Conducted research on LLM-based automation covering API-driven system design, agent orchestration frameworks, retrieval-augmented generation (RAG), and a consolidated threat model spanning prompt injection, data leakage, and unintended action execution.",
       "Served as a peer reviewer for JAIKE, evaluating submissions on retrieval methods in large language models, reasoning performance in extended tasks, and large-scale model architectures for methodological rigor and evaluation quality.",
     ],
   },
@@ -88,9 +88,9 @@ export const experiences: ExperienceEntry[] = [
     logoOnWhite: true,
     featured: true,
     bullets: [
+      "Engineered and automated a daily ETL data pipeline (Python, yfinance, Alpaca API) running on a Raspberry Pi to filter equities, generate structured CSV outputs, and deliver real-time investment signals via Discord webhook.",
       "Built a multi-factor stock screening model using fundamental, technical, and NLP-based sentiment features (FinBERT).",
       "Developed and evaluated a supervised classification model in scikit-learn to predict price appreciation, performing feature selection, model tuning, and performance validation on historical market data.",
-      "Engineered and automated a daily ETL data pipeline (Python, yfinance, Alpaca API) running on a Raspberry Pi to filter equities, generate structured CSV outputs, and deliver real-time investment signals via Discord webhook.",
     ],
   },
   {
@@ -108,8 +108,7 @@ export const experiences: ExperienceEntry[] = [
   },
   {
     id: "aisc",
-    company: "AISC",
-    companyDetail: "AI Student Collective",
+    company: "The AI Collective",
     dates: "September 2024 – April 2025",
     location: "Davis, CA",
     title: "Software Developer",
@@ -126,7 +125,7 @@ export const experiences: ExperienceEntry[] = [
     company: "Hollister Co.",
     dates: "June 2023 – September 2023",
     location: "San Francisco, CA | Full-time, On-site",
-    title: "Hollister Brand Representative",
+    title: "Brand Representative",
     logoSrc: "/experience/Hollister.png",
     featured: false,
     bullets: [
@@ -150,11 +149,97 @@ export const experiences: ExperienceEntry[] = [
   },
 ];
 
-export type ExperienceView = "featured" | "full";
+const MONTH_ABBR: Record<string, string> = {
+  january: "Jan",
+  february: "Feb",
+  march: "Mar",
+  april: "Apr",
+  may: "May",
+  june: "Jun",
+  july: "Jul",
+  august: "Aug",
+  september: "Sep",
+  october: "Oct",
+  november: "Nov",
+  december: "Dec",
+};
 
-export function experiencesForView(view: ExperienceView): ExperienceEntry[] {
-  if (view === "featured") {
-    return experiences.filter((entry) => entry.featured);
+const MONTH_INDEX: Record<string, number> = {
+  jan: 0,
+  january: 0,
+  feb: 1,
+  february: 1,
+  mar: 2,
+  march: 2,
+  apr: 3,
+  april: 3,
+  may: 4,
+  jun: 5,
+  june: 5,
+  jul: 6,
+  july: 6,
+  aug: 7,
+  august: 7,
+  sep: 8,
+  september: 8,
+  oct: 9,
+  october: 9,
+  nov: 10,
+  november: 10,
+  dec: 11,
+  december: 11,
+};
+
+function shortenDatePart(part: string): string {
+  const trimmed = part.trim();
+  if (/^present$/i.test(trimmed)) return "Present";
+  const match = trimmed.match(/^([A-Za-z]+)\s+(\d{4})$/);
+  if (!match) return trimmed;
+  const abbr = MONTH_ABBR[match[1].toLowerCase()];
+  return abbr ? `${abbr} ${match[2]}` : trimmed;
+}
+
+/** Split "November 2026 – Present" into abbreviated { start, end }. */
+export function shortDate(dates: string): { start: string; end: string } {
+  const [rawStart = "", rawEnd = ""] = dates.split("–");
+  return {
+    start: shortenDatePart(rawStart),
+    end: shortenDatePart(rawEnd),
+  };
+}
+
+function parseMonthYear(
+  part: string,
+  now: Date,
+): { year: number; month: number } | null {
+  const trimmed = part.trim();
+  if (/^present$/i.test(trimmed)) {
+    return { year: now.getFullYear(), month: now.getMonth() };
   }
-  return experiences;
+  const match = trimmed.match(/^([A-Za-z]+)\s+(\d{4})$/);
+  if (!match) return null;
+  const month = MONTH_INDEX[match[1].toLowerCase()];
+  if (month === undefined) return null;
+  return { year: Number(match[2]), month };
+}
+
+/**
+ * Inclusive month span from start to end ("Present" = current month).
+ * Returns null when under 1 month. Formats as "8 mo", "1 yr", or "1 yr 7 mo".
+ */
+export function duration(dates: string): string | null {
+  const [rawStart = "", rawEnd = ""] = dates.split("–");
+  const now = new Date();
+  const start = parseMonthYear(rawStart, now);
+  const end = parseMonthYear(rawEnd, now);
+  if (!start || !end) return null;
+
+  const months = (end.year - start.year) * 12 + (end.month - start.month) + 1;
+  if (months < 1) return null;
+
+  const years = Math.floor(months / 12);
+  const rem = months % 12;
+  if (years === 0) return `${rem} mo`;
+  if (rem === 0) return `${years} yr`;
+  return `${years} yr ${rem} mo`;
 }

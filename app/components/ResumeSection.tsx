@@ -1,6 +1,8 @@
 "use client";
 
+import { useReducedMotion } from "framer-motion";
 import FadeInSection from "./FadeInSection";
+import Sparkles from "./Sparkles";
 
 const resumePdfPath = "/Roy_Ho_Resume.pdf";
 
@@ -19,6 +21,7 @@ export default function ResumeSection({
   titleElement = "h2",
 }: ResumeSectionProps) {
   const Title = titleElement;
+  const reduceMotion = useReducedMotion();
 
   return (
     <FadeInSection
@@ -64,13 +67,29 @@ export default function ResumeSection({
             Preview
           </p>
           {/* Inline PDF preview is unreliable on many mobile browsers (esp. iOS). */}
-          <div className="hidden overflow-hidden rounded-xl border border-sky-200 bg-sky-100/50 shadow-sm ring-1 ring-sky-300/25 md:block dark:border-slate-700 dark:bg-slate-800/50 dark:ring-slate-700/50">
-            <iframe
-              title="Roy Ho resume PDF preview"
-              src={resumePdfPath}
-              className="h-[min(85vh,56rem)] w-full border-0"
-              loading="lazy"
-            />
+          <div className="relative hidden md:block">
+            {!reduceMotion ? (
+              <div className="pointer-events-none absolute inset-0 z-10">
+                <Sparkles
+                  count={5}
+                  bleed={28}
+                  sizeRange={[28, 40]}
+                  delayRange={[0.2, 1.1]}
+                  durationRange={[1.2, 2]}
+                />
+              </div>
+            ) : null}
+            <div
+              data-vt-unsafe
+              className="overflow-hidden rounded-xl border border-sky-200 bg-sky-100/50 shadow-sm ring-1 ring-sky-300/25 dark:border-slate-700 dark:bg-slate-800/50 dark:ring-slate-700/50"
+            >
+              <iframe
+                title="Roy Ho resume PDF preview"
+                src={resumePdfPath}
+                className="h-[min(85vh,56rem)] w-full border-0"
+                loading="lazy"
+              />
+            </div>
           </div>
           <p className="text-center text-sm leading-relaxed text-slate-500 md:hidden dark:text-slate-400">
             On mobile, use View Resume or Download above to open the PDF.

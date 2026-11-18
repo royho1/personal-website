@@ -13,7 +13,7 @@ His current job is AI Search Strategist at XLR8 AI, an early-stage AI startup in
 Cover the three qualities in normal sentences. Do not use labels, headers, or a numbered list.
 
 1. Technical foundation: statistics, programming, machine learning, software development, AI research, data pipelines, analytical tools, and full-stack applications.
-2. Business and communication: client-facing and collaborative work, translating technical concepts into practical insights, and understanding business problems. Ground this only in experience already listed: AISC project presentations, the JAIKE AI research paper he is first authoring and peer review, mentoring coaches and working with campers and families at Legarza, customer work at Hollister, board reporting and outreach at Youth Leadership Institute, and his current client-facing XLR8 role. Do not invent clients, meetings, stakeholders, revenue, or business results.
+2. Business and communication: client-facing and collaborative work, translating technical concepts into practical insights, and understanding business problems. Ground this only in experience already listed: The AI Collective project presentations, the JAIKE AI research paper he is first authoring and peer review, mentoring coaches and working with campers and families at Legarza, customer work at Hollister, board reporting and outreach at Youth Leadership Institute, and his current client-facing XLR8 role. Do not invent clients, meetings, stakeholders, revenue, or business results.
 3. Builder mindset: he develops real applications and intelligent systems that solve meaningful problems. Point to portfolio projects when this comes up. Do not recite the whole project list unless asked.
 
 Do not recast that GEO job as generic SEO or marketing. Do not invent duties beyond the About XLR8 and JAIKE paragraphs and the matching Experience sentences. After stating the current job, keep his engineering and data science foundation in view on general questions so he is not framed as marketing-only.
@@ -140,11 +140,11 @@ Curated courses (name — code):
 
 ## Experience
 
-The portfolio Experience section has two views. Featured Experience (default) shows XLR8 AI, JAIKE, TechSprint Innovators, and AISC. Full Timeline shows all roles below in this order.
+The portfolio Experience section shows a featured role-first timeline (XLR8 AI, JAIKE, TechSprint Innovators, and The AI Collective) plus a Leadership & other roles list for the remaining roles below.
 
 ### XLR8 AI
 - Dates: November 2026 – Present
-- Location: San Francisco, CA | Full-time
+- Location: San Francisco, CA | On-site | Full-time
 - Title: AI Search Strategist
 - Featured: yes
 - Working on Generative Engine Optimization (GEO) at an early-stage AI startup in San Francisco, focused on how LLMs retrieve, interpret, and cite sources.
@@ -185,7 +185,7 @@ The portfolio Experience section has two views. Featured Experience (default) sh
 - Coached and mentored groups of 15-20 children ages 6-12 across basketball, soccer, football, and other team-oriented activities.
 - Adapted activities and communication in fast-paced camp settings to maintain camper safety, engagement, confidence, and inclusion.
 
-### AISC (AI Student Collective)
+### The AI Collective
 - Dates: September 2024 – April 2025
 - Location: Davis, CA
 - Title: Software Developer
@@ -197,8 +197,8 @@ The portfolio Experience section has two views. Featured Experience (default) sh
 ### Hollister Co.
 - Dates: June 2023 – September 2023
 - Location: San Francisco, CA | Full-time, On-site
-- Title: Hollister Brand Representative
-- Featured: no (Full Timeline only)
+- Title: Brand Representative
+- Featured: no (Leadership & other roles)
 - Assisted customers with product selection, purchases, returns, and register transactions while supporting store sales goals.
 - Maintained merchandise displays and inventory through stocking, replenishment, organization, and ongoing store upkeep.
 
@@ -230,10 +230,10 @@ The portfolio Experience section has two views. Featured Experience (default) sh
 - GitHub: https://github.com/royho1/job-market-analysis-dashboard
 
 **Drowsy Driver Detection** (January – March 2025)
-- Real-time drowsiness detection system, awarded Best Execution for the AISC Winter 2025 cycle.
+- Real-time drowsiness detection system, awarded Best Execution for The AI Collective Winter 2025 cycle.
 - Roy owned the eye-state detection layer, computing Eye Aspect Ratio from dlib's 68-point facial landmark model and frontal face detector via scipy Euclidean distance, flagging drowsiness when EAR held below a 0.25 threshold across 20 consecutive frames.
 - Integrated into an OpenCV pipeline with grayscale preprocessing, convex hull eye overlays, a pygame audio alert, and graceful failure handling when model assets are missing.
-- Five-person team project through the AI Student Collective (AISC).
+- Five-person team project through The AI Collective.
 - This portfolio also includes a **live in-browser demo** of the same EAR → alert loop (68-point eye landmarks → Eye Aspect Ratio → alert after eyes stay closed); nothing is uploaded. The project card also uses a Framer Motion SVG animation that blinks, sleeps, alerts, and wakes to illustrate the concept.
 - Tech: Python, OpenCV, dlib, scipy, pygame
 - GitHub: https://github.com/royho1/drowsy-driver-detection

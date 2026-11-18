@@ -2,9 +2,11 @@
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { Libre_Baskerville } from "next/font/google";
+import { useReducedMotion } from "framer-motion";
 import { ContactRound, Mail, MapPin } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { fireConfettiFromElement } from "../lib/confetti";
+import Sparkles from "./Sparkles";
 
 // Scoped to this card only via libreBaskerville.className below — the rest
 // of the site keeps its sans-serif type. Sturdier x-height and strokes than
@@ -58,6 +60,7 @@ const gitHubIconClass = BRAND_COLOR_ICONS
  * nested inside it.
  */
 export default function ContactCard() {
+  const reduceMotion = useReducedMotion();
   const [saved, setSaved] = useState(false);
   const [copied, setCopied] = useState(false);
   const savedTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -97,6 +100,17 @@ export default function ContactCard() {
 
   return (
     <div className="relative mx-auto mt-8 w-full max-w-[620px] md:mt-12">
+      {!reduceMotion ? (
+        <div className="pointer-events-none absolute inset-0 z-20">
+          <Sparkles
+            count={5}
+            bleed={36}
+            sizeRange={[32, 48]}
+            delayRange={[0.2, 1.1]}
+            durationRange={[1.2, 2]}
+          />
+        </div>
+      ) : null}
       {/* Stacked-paper edges peeking out from behind the top sheet. */}
       <div
         aria-hidden

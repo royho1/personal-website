@@ -21,8 +21,11 @@ type SparkleConfig = {
 };
 
 type SparkleSizeRange = readonly [number, number];
+type SparkleTimeRange = readonly [number, number];
 
 const DEFAULT_SIZE_RANGE: SparkleSizeRange = [20, 32];
+const DEFAULT_DURATION_RANGE: SparkleTimeRange = [1.4, 2.2];
+const DEFAULT_DELAY_RANGE: SparkleTimeRange = [0.35, 1.6];
 
 // Module-level counter so each new config has a unique, stable key that
 // forces the motion.span to remount (and restart its animation) without
@@ -38,11 +41,21 @@ function signedPx(value: number): string {
   return value >= 0 ? `+ ${value}px` : `- ${-value}px`;
 }
 
+type MakeConfigOptions = {
+  sizeRange: SparkleSizeRange;
+  durationRange: SparkleTimeRange;
+  delayRange: SparkleTimeRange;
+};
+
 /** Pick a fresh spot along one of the four edges with a small perpendicular
  * jitter so sparkles feel organic rather than pinned exactly to the border.
  * The jitter is expressed in pixels so the sparkle band stays a predictable
  * thickness regardless of the parent element's size. */
-function makeConfig(sizeRange: SparkleSizeRange): SparkleConfig {
+function makeConfig({
+  sizeRange,
+  durationRange,
+  delayRange,
+}: MakeConfigOptions): SparkleConfig {
   const side = Math.floor(Math.random() * 4);
   const along = Math.random() * 100;
   const jitter = Math.round(randomBetween(-8, 8));
@@ -68,8 +81,8 @@ function makeConfig(sizeRange: SparkleSizeRange): SparkleConfig {
     top,
     left,
     size: Math.round(randomBetween(sizeRange[0], sizeRange[1])),
-    duration: randomBetween(2.2, 3),
-    delay: randomBetween(3, 6),
+    duration: randomBetween(durationRange[0], durationRange[1]),
+    delay: randomBetween(delayRange[0], delayRange[1]),
     rotate: Math.round(randomBetween(-30, 30)),
   };
 }
@@ -88,9 +101,13 @@ function SparkleShape({ size }: { size: number }) {
   );
 }
 
-function Sparkle({ sizeRange }: { sizeRange: SparkleSizeRange }) {
+function Sparkle({
+  sizeRange,
+  durationRange,
+  delayRange,
+}: MakeConfigOptions) {
   const [config, setConfig] = useState<SparkleConfig>(() =>
-    makeConfig(sizeRange),
+    makeConfig({ sizeRange, durationRange, delayRange }),
   );
 
   return (
@@ -124,7 +141,9 @@ function Sparkle({ sizeRange }: { sizeRange: SparkleSizeRange }) {
           times: [0, 0.4, 0.6, 1],
           ease: "easeInOut",
         }}
-        onAnimationComplete={() => setConfig(makeConfig(sizeRange))}
+        onAnimationComplete={() =>
+          setConfig(makeConfig({ sizeRange, durationRange, delayRange }))
+        }
       >
         <SparkleShape size={config.size} />
       </motion.span>
@@ -140,12 +159,18 @@ type SparklesProps = {
   /** Min/max sparkle icon size in pixels. Each sparkle picks a random
    * value from this range each cycle. */
   sizeRange?: SparkleSizeRange;
+  /** Min/max glint duration in seconds. */
+  durationRange?: SparkleTimeRange;
+  /** Min/max idle delay before the next glint in seconds. */
+  delayRange?: SparkleTimeRange;
 };
 
 export default function Sparkles({
   count = 3,
   bleed = 0,
   sizeRange = DEFAULT_SIZE_RANGE,
+  durationRange = DEFAULT_DURATION_RANGE,
+  delayRange = DEFAULT_DELAY_RANGE,
 }: SparklesProps) {
   // Each sparkle's position/size/timing is randomised, which would cause a
   // hydration mismatch if the markup rendered on the server didn't line up
@@ -169,7 +194,12 @@ export default function Sparkles({
     >
       {mounted &&
         Array.from({ length: count }, (_, i) => (
-          <Sparkle key={i} sizeRange={sizeRange} />
+          <Sparkle
+            key={i}
+            sizeRange={sizeRange}
+            durationRange={durationRange}
+            delayRange={delayRange}
+          />
         ))}
     </span>
   );
