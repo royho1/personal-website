@@ -30,6 +30,12 @@ const ogImage = {
   height: 1024,
   alt: "Roy Ho",
 } as const;
+const squareImage = {
+  url: `${siteUrl}/roy-ho-headshot-square.jpg`,
+  width: 728,
+  height: 728,
+  alt: "Roy Ho",
+} as const;
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -37,7 +43,12 @@ const personJsonLd = {
   "@id": `${siteUrl}/#person`,
   name: "Roy Ho",
   url: siteUrl,
-  image: ogImage.url,
+  image: {
+    "@type": "ImageObject",
+    url: squareImage.url,
+    width: squareImage.width,
+    height: squareImage.height,
+  },
   jobTitle: ["AI Search Strategist", "AI Researcher"],
   description:
     "Roy Ho is a San Francisco based data science and AI professional. He works as an AI Search Strategist at XLR8 AI and as an AI researcher and peer reviewer for the Journal of Artificial Intelligence and Knowledge Engineering (JAIKE), where he is first author of a survey paper on LLM agent autonomy and oversight. A UC Davis graduate in Statistical Data Science with a minor in Computer Science, he builds data pipelines, machine learning models, and full-stack data applications, including an interactive map of 20,000+ San Francisco restaurant health inspections.",
@@ -94,7 +105,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "Roy Ho",
     type: "website",
-    images: [ogImage],
+    images: [squareImage, ogImage],
   },
   twitter: {
     card: "summary_large_image",
