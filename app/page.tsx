@@ -100,7 +100,7 @@ export default function Home() {
         <FadeInSection
           as="section"
           id="contact"
-          className="border-t border-sky-200/80 bg-sky-100 dark:border-slate-800 dark:bg-slate-900"
+          className="overflow-x-clip border-t border-sky-200/80 bg-sky-100 dark:border-slate-800 dark:bg-slate-900"
           aria-labelledby="contact-heading"
         >
           <div className="mx-auto max-w-2xl px-6 py-14 md:px-8 md:py-28">
